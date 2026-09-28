@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- ==========================================================================
+     TARJETA PARA COMPARTIR (WhatsApp, LinkedIn, Facebook, correo)
+     WhatsApp NO ejecuta JavaScript: estos datos se escriben aquí, no en el JSON.
+     Edita título y descripción. https://sanoapro.github.io/rackt-piezas/una-hoja/ lo reemplaza
+     _herramientas/preparar.py con la dirección final del sitio (termina en /).
+     ========================================================================== -->
+<title>RACK-T · Sistemas de almacenamiento industrial</title>
+<meta name="description" content="Racks, mezzanines y servicios de ingeniería para almacenes y centros de distribución en todo México.">
+<link rel="canonical" href="https://sanoapro.github.io/rackt-piezas/una-hoja/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RACK-T">
+<meta property="og:locale" content="es_MX">
+<meta property="og:url" content="https://sanoapro.github.io/rackt-piezas/una-hoja/">
+<meta property="og:title" content="RACK-T · Sistemas de almacenamiento industrial">
+<meta property="og:description" content="Racks, mezzanines y servicios de ingeniería para almacenes y centros de distribución en todo México.">
+<meta property="og:image" content="https://sanoapro.github.io/rackt-piezas/una-hoja/og.jpg">
+<meta property="og:image:secure_url" content="https://sanoapro.github.io/rackt-piezas/una-hoja/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="RACK-T · Ingeniería de almacenamiento a la medida">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RACK-T · Sistemas de almacenamiento industrial">
+<meta name="twitter:description" content="Racks, mezzanines y servicios de ingeniería para almacenes y centros de distribución en todo México.">
+<meta name="twitter:image" content="https://sanoapro.github.io/rackt-piezas/una-hoja/og.jpg">
+
+<!-- Íconos (favicon oficial aprobado el 16/09/2026) y apariencia en el celular -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#323131">
+<meta name="format-detection" content="telephone=no">
+<!-- Fuentes de marca: League Gothic (títulos) y Barlow (respaldo web de Bahnschrift, que es fuente de sistema en Windows) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<!-- Tema y movimiento: se deciden ANTES de pintar para que no parpadee -->
+<script>
+  (function () {
+    var tema = null;
+    try { tema = localStorage.getItem('rt-tema'); } catch (e) {}
+    if (tema !== 'light' && tema !== 'dark') {
+      tema = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    document.documentElement.setAttribute('data-theme', tema);
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('animar');
+    }
+  })();
+</script>
+
+<style>
+/* ==========================================================================
+   MODELO UNA HOJA — RACK-T
+   Diseño fijo. El contenido vive en <script id="contenido"> al final.
+   Guía: COMO-USAR.md (misma carpeta).
+   ========================================================================== */
+
+/* ==========================================================================
+   1. TOKENS DE MARCA — el único bloque que se edita para cambiar la marca
+   Fuente: Brand Book RACK-T 2025 (01_INSTITUCIONAL/01_Brand-book-2025.pdf)
+   ========================================================================== */
+:root {
+  /* Colores de marca */
+  --color-primario: #ab0505;          /* Rojo RACK-T · CTA, énfasis, logotipo */
+  --color-secundario: #323131;        /* Grafito · texto y bloques oscuros */
+  --color-neutro: #dfdfdf;            /* Gris · superficies y texto sobre oscuro */
+  --color-acento: #002455;            /* Azul marino · información y foco */
+  --color-destacado: #f8450d;         /* Naranja · SOLO acentos gráficos, nunca texto */
+  --color-exito: #1d6b47;
+  --color-alerta: #9a5c00;
+  --color-blanco: #ffffff;
+
+  /* Tintes derivados (no son colores nuevos de marca) */
+  --color-neutro-claro: #f4f4f4;
+  --color-neutro-medio: #bdbdbd;
+  --color-secundario-medio: #4a4848;
+  --color-secundario-profundo: #242323;
+  --color-secundario-noche: #1a1919;
+
+  /* Variantes para modo oscuro (texto legible sobre grafito) */
+  --color-acento-oscuro: #8fb3e8;
+  --color-exito-oscuro: #62c795;
+  --color-alerta-oscuro: #f0aa4a;
+
+  /* Tipografía: League Gothic solo tiene peso Regular (no se pone en bold) */
+  --fuente-titulos: "League Gothic", "Oswald", "Arial Narrow", Impact, sans-serif;
+  --fuente-cuerpo: "Bahnschrift", "Barlow", "Segoe UI", system-ui, sans-serif;
+  --tracking-titulos: 0.03em;
+  --tracking-etiquetas: 0.14em;
+
+  /* Escala tipográfica */
+  --texto-xs: 0.8rem;
+  --texto-sm: 0.9rem;
+  --texto-base: 1.0625rem;
+  --texto-lg: 1.25rem;
+  --texto-xl: 1.563rem;
+  --texto-2xl: 2rem;
+  --texto-3xl: clamp(2.2rem, 4.5vw, 3.2rem);
+  --texto-4xl: clamp(2.6rem, 6vw, 4.6rem);
+  --texto-hero: clamp(3.1rem, 8.4vw, 7rem);
+
+  /* Espaciado (múltiplos de 4) */
+  --espacio-1: 4px;  --espacio-2: 8px;   --espacio-3: 12px; --espacio-4: 16px;
+  --espacio-6: 24px; --espacio-8: 32px;  --espacio-12: 48px; --espacio-16: 64px;
+  --espacio-24: 96px;
+  --espacio-seccion: clamp(64px, 10vw, 128px);
+  --ancho-max: 1200px;
+  --margen-lateral: clamp(16px, 5vw, 48px);
+  --alto-encabezado: 72px;
+
+  /* Forma: la marca es estructural (postes de rack). Radios pequeños. */
+  --radio-sm: 2px;
+  --radio: 4px;
+  --radio-barra: 999px;
+  --sombra: 0 1px 2px rgb(0 0 0 / .06), 0 6px 18px rgb(0 0 0 / .06);
+  --sombra-alta: 0 2px 4px rgb(0 0 0 / .08), 0 18px 40px rgb(0 0 0 / .16);
+
+  /* Movimiento */
+  --duracion-corta: 200ms;
+  --duracion-media: 400ms;
+  --duracion-larga: 650ms;
+  --curva: cubic-bezier(.2, .7, .2, 1);
+  --escalon: 80ms;
+}
+
+/* ==========================================================================
+   2. ROLES DE COLOR — claro y oscuro (leen los tokens de arriba)
+   Los componentes solo usan estos roles, nunca un hex.
+   ========================================================================== */
+:root {
+  --color-fondo: var(--color-blanco);
+  --color-superficie: var(--color-neutro-claro);
+  --color-superficie-fuerte: var(--color-neutro);
+  --color-texto: var(--color-secundario);
+  --color-texto-suave: var(--color-secundario-medio);
+  --color-borde: var(--color-neutro);
+  --color-marca-texto: var(--color-primario);
+  --color-barra: var(--color-primario);
+  --color-info: var(--color-acento);
+  --color-foco: var(--color-acento);
+  --color-oscuro: var(--color-secundario);
+  --color-oscuro-2: var(--color-secundario-profundo);
+  --color-sobre-oscuro: var(--color-neutro);
+  --color-sobre-oscuro-suave: var(--color-neutro-medio);
+  --color-sobre-primario: var(--color-blanco);
+  --color-exito-texto: var(--color-exito);
+  --color-alerta-texto: var(--color-alerta);
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --color-fondo: var(--color-secundario-profundo);
+  --color-superficie: var(--color-secundario);
+  --color-superficie-fuerte: var(--color-secundario-medio);
+  --color-texto: var(--color-neutro);
+  --color-texto-suave: var(--color-neutro-medio);
+  --color-borde: var(--color-secundario-medio);
+  --color-marca-texto: var(--color-neutro-medio);   /* en oscuro el rojo no se usa como texto */
+  --color-info: var(--color-acento-oscuro);
+  --color-foco: var(--color-neutro);
+  --color-oscuro: var(--color-secundario-noche);
+  --color-oscuro-2: var(--color-secundario-noche);
+  --color-exito-texto: var(--color-exito-oscuro);
+  --color-alerta-texto: var(--color-alerta-oscuro);
+  color-scheme: dark;
+}
+
+/* Bloques con fondo propio: reasignan los roles para que los componentes se adapten */
+.bloque-oscuro {
+  --color-texto: var(--color-sobre-oscuro);
+  --color-texto-suave: var(--color-sobre-oscuro-suave);
+  --color-borde: rgb(255 255 255 / .14);
+  --color-foco: var(--color-neutro);
+  --color-marca-texto: var(--color-sobre-oscuro-suave);
+  background: var(--color-oscuro);
+  color: var(--color-texto);
+}
+.bloque-primario {
+  --color-texto: var(--color-sobre-primario);
+  --color-texto-suave: rgb(255 255 255 / .88);
+  --color-borde: rgb(255 255 255 / .28);
+  --color-foco: var(--color-blanco);
+  --color-marca-texto: var(--color-sobre-primario);
+  --color-barra: var(--color-sobre-primario);
+  background: var(--color-primario);
+  color: var(--color-texto);
+}
+
+/* ==========================================================================
+   3. BASE
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--alto-encabezado) + 16px);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente-cuerpo);
+  font-size: var(--texto-base);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, .titulo {
+  font-family: var(--fuente-titulos);
+  font-weight: 400;
+  letter-spacing: var(--tracking-titulos);
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0;
+  text-wrap: balance;
+}
+p { margin: 0; text-wrap: pretty; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--color-foco); outline-offset: 3px; border-radius: var(--radio-sm); }
+
+.contenedor {
+  width: min(100% - 2 * var(--margen-lateral), var(--ancho-max));
+  margin-inline: auto;
+}
+.solo-lectores {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.saltar {
+  position: fixed; top: 8px; left: 8px; z-index: 100;
+  padding: 10px 16px; background: var(--color-primario); color: var(--color-sobre-primario);
+  font-weight: 600; text-decoration: none; border-radius: var(--radio);
+  transform: translateY(-160%); transition: transform var(--duracion-corta) var(--curva);
+}
+.saltar:focus { transform: none; }
+
+/* ==========================================================================
+   4. COMPONENTES
+   ========================================================================== */
+
+/* --- 4.1 Botones y enlaces --- */
+.boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 12px 22px;
+  font-family: var(--fuente-cuerpo); font-weight: 600; font-size: var(--texto-sm);
+  letter-spacing: .08em; text-transform: uppercase; text-decoration: none;
+  border: 2px solid transparent; border-radius: var(--radio-sm); cursor: pointer;
+  transition: transform var(--duracion-corta) var(--curva), box-shadow var(--duracion-corta) var(--curva),
+              background-color var(--duracion-corta) var(--curva), color var(--duracion-corta) var(--curva);
+}
+.boton svg { width: 18px; height: 18px; transition: transform var(--duracion-corta) var(--curva); }
+.boton:hover { transform: translateY(-2px); box-shadow: var(--sombra-alta); }
+.boton:hover svg { transform: translateX(4px); }
+.boton:active { transform: translateY(0); box-shadow: none; }
+.boton--primario { background: var(--color-primario); color: var(--color-sobre-primario); }
+.boton--secundario { background: transparent; color: var(--color-texto); border-color: currentColor; }
+.boton--secundario:hover { background: var(--color-texto); color: var(--color-fondo); }
+.bloque-oscuro .boton--secundario:hover { color: var(--color-oscuro); }
+.bloque-primario .boton--primario { background: var(--color-blanco); color: var(--color-primario); }
+.bloque-primario .boton--secundario:hover { color: var(--color-primario); }
+.boton--chico { min-height: 40px; padding: 8px 16px; font-size: var(--texto-xs); }
+
+/* Subrayado animado (enlaces de texto y menú) */
+.enlace {
+  text-decoration: none;
+  background: linear-gradient(var(--color-barra), var(--color-barra)) left bottom / 0 2px no-repeat;
+  transition: background-size var(--duracion-media) var(--curva);
+  padding-bottom: 2px;
+}
+.enlace:hover, .enlace:focus-visible, .enlace[aria-current="true"] { background-size: 100% 2px; }
+
+/* Etiqueta de sección: barra roja + número + texto */
+.etiqueta {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: var(--texto-xs); font-weight: 600; line-height: 1.2;
+  letter-spacing: var(--tracking-etiquetas); text-transform: uppercase;
+  color: var(--color-marca-texto);
+}
+.etiqueta::before {
+  content: ""; flex: none; width: 28px; height: 6px;
+  border-radius: var(--radio-barra); background: var(--color-barra);
+}
+.etiqueta .numero { font-family: var(--fuente-titulos); font-size: 1.2rem; letter-spacing: .04em; font-weight: 400; }
+
+/* --- 4.2 Encabezado fijo --- */
+.encabezado {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  height: var(--alto-encabezado);
+  color: var(--color-sobre-oscuro);
+  --color-foco: var(--color-neutro);
+  --color-barra: var(--color-primario);
+  transition: background-color var(--duracion-media) var(--curva), box-shadow var(--duracion-media) var(--curva);
+}
+.encabezado.solido { background: var(--color-oscuro); box-shadow: 0 1px 0 rgb(255 255 255 / .06), 0 8px 24px rgb(0 0 0 / .18); }
+.encabezado .contenedor { height: 100%; display: flex; align-items: center; gap: var(--espacio-6); }
+.encabezado .logo { color: var(--color-sobre-oscuro); flex: none; display: block; }
+.encabezado .logo svg { height: 34px; width: auto; }
+.menu { margin-left: auto; }
+.menu ul { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--espacio-6); }
+.menu a { font-size: var(--texto-sm); font-weight: 500; letter-spacing: .04em; }
+.acciones-encabezado { display: flex; align-items: center; gap: var(--espacio-3); }
+.boton-icono {
+  display: inline-grid; place-items: center; width: 40px; height: 40px;
+  background: transparent; border: 1px solid rgb(255 255 255 / .22); border-radius: var(--radio-sm);
+  color: var(--color-sobre-oscuro); cursor: pointer;
+  transition: background-color var(--duracion-corta) var(--curva), border-color var(--duracion-corta) var(--curva);
+}
+.boton-icono:hover { background: rgb(255 255 255 / .08); border-color: rgb(255 255 255 / .45); }
+.boton-icono svg { width: 20px; height: 20px; }
+.menu-boton { display: none; }
+[data-theme="dark"] .icono-luna, [data-theme="light"] .icono-sol { display: none; }
+
+@media (max-width: 959px) {
+  .menu-boton { display: inline-grid; }
+  .menu {
+    position: absolute; top: var(--alto-encabezado); left: 0; right: 0;
+    background: var(--color-oscuro); border-top: 1px solid rgb(255 255 255 / .08);
+    padding: var(--espacio-4) var(--margen-lateral) var(--espacio-6);
+    display: none;
+  }
+  .encabezado.abierto { background: var(--color-oscuro); }
+  .encabezado.abierto .menu { display: block; }
+  .menu ul { flex-direction: column; gap: 0; }
+  .menu a { display: block; padding: 14px 0; font-size: var(--texto-lg); border-bottom: 1px solid rgb(255 255 255 / .08); background: none; }
+  .acciones-encabezado { margin-left: auto; }
+}
+@media (max-width: 479px) {
+  .acciones-encabezado .boton { display: none; }
+  .encabezado .logo svg { height: 28px; }
+}
+
+/* --- 4.3 Progreso de lectura: poste de rack que se llena de rojo --- */
+.riel {
+  position: fixed; z-index: 40; pointer-events: none;
+  left: 20px; top: calc(var(--alto-encabezado) + 32px); bottom: 32px; width: 10px;
+  background: var(--color-borde);
+  /* perforaciones del poste */
+  -webkit-mask: repeating-linear-gradient(to bottom, #000 0 10px, transparent 10px 15px);
+          mask: repeating-linear-gradient(to bottom, #000 0 10px, transparent 10px 15px);
+}
+.riel span {
+  position: absolute; inset: 0; background: var(--color-primario);
+  transform-origin: top; transform: scaleY(var(--progreso, 0));
+}
+@media (max-width: 1319px) {
+  .riel {
+    left: 0; right: 0; bottom: auto; top: var(--alto-encabezado); width: auto; height: 4px;
+    -webkit-mask: repeating-linear-gradient(to right, #000 0 22px, transparent 22px 26px);
+            mask: repeating-linear-gradient(to right, #000 0 22px, transparent 22px 26px);
+    background: transparent;
+  }
+  .riel span { transform-origin: left; transform: scaleX(var(--progreso, 0)); }
+}
+
+/* --- 4.4 Secciones --- */
+.seccion { padding-block: var(--espacio-seccion); position: relative; }
+.seccion--superficie { background: var(--color-superficie); }
+.cabeza { display: grid; gap: var(--espacio-4); max-width: 780px; margin-bottom: var(--espacio-12); }
+.cabeza h2 { font-size: var(--texto-4xl); }
+.cabeza .intro { font-size: var(--texto-lg); color: var(--color-texto-suave); max-width: 62ch; }
+.cabeza--centro { margin-inline: auto; text-align: center; justify-items: center; }
+
+/* --- 4.5 Hero --- */
+.hero {
+  position: relative; overflow: hidden; isolation: isolate;
+  min-height: min(100svh, 900px);
+  display: flex; align-items: center;
+  padding-block: calc(var(--alto-encabezado) + var(--espacio-12)) var(--espacio-16);
+}
+.hero::before {                         /* patrón de barras de la marca, deriva muy lenta */
+  content: ""; position: absolute; inset: -40px 0 -40px 52%; z-index: -1;
+  background-image: repeating-linear-gradient(to bottom, var(--color-primario) 0 14px, transparent 14px 34px);
+  opacity: .10;
+  -webkit-mask: linear-gradient(to right, transparent, #000 40%);
+          mask: linear-gradient(to right, transparent, #000 40%);
+}
+.animar .hero::before { animation: deriva 24s linear infinite; }
+@keyframes deriva { to { transform: translateY(34px); } }
+.hero .contenedor { display: grid; gap: var(--espacio-12); align-items: center; }
+@media (min-width: 900px) { .hero .contenedor { grid-template-columns: 1.15fr .85fr; } }
+.hero h1 { font-size: var(--texto-hero); line-height: .94; margin-block: var(--espacio-6); }
+.resaltado {
+  background: var(--color-primario); color: var(--color-sobre-primario);
+  padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+}
+.hero .subtitulo { font-size: clamp(1.1rem, 1.6vw, 1.3rem); color: var(--color-texto-suave); max-width: 56ch; }
+.botones { display: flex; flex-wrap: wrap; gap: var(--espacio-4); margin-top: var(--espacio-8); }
+.hero-visual { position: relative; }
+.hero-visual .foto { aspect-ratio: 4 / 5; }
+
+/* Ilustración de rack (se usa mientras no haya foto) */
+.ilustracion { width: 100%; height: auto; max-width: 520px; margin-inline: auto; }
+.ilus-poste { fill: var(--color-sobre-oscuro-suave); }
+.ilus-perfo { fill: var(--color-oscuro); }
+.ilus-viga { fill: var(--color-primario); }
+.ilus-tarima { fill: var(--color-secundario-medio); }
+.ilus-carga { fill: rgb(255 255 255 / .06); stroke: var(--color-sobre-oscuro-suave); stroke-width: 1.5; }
+.ilus-carga--acento { fill: var(--color-destacado); stroke: none; }
+.ilus-piso { stroke: var(--color-sobre-oscuro-suave); stroke-width: 2; }
+.ilus-cota { stroke: var(--color-acento-oscuro); stroke-width: 1.5; fill: none; }
+.animar .ilustracion .ilus-viga { transform-box: fill-box; transform-origin: left; transform: scaleX(0); }
+.animar .ilustracion .ilus-bulto { opacity: 0; transform: translateY(-12px); }
+.animar .ilustracion.visible .ilus-viga {
+  transform: scaleX(1);
+  transition: transform var(--duracion-larga) var(--curva) calc(var(--i, 0) * 90ms);
+}
+.animar .ilustracion.visible .ilus-bulto {
+  opacity: 1; transform: none;
+  transition: opacity var(--duracion-media) var(--curva) calc(400ms + var(--i, 0) * 60ms),
+              transform var(--duracion-media) var(--curva) calc(400ms + var(--i, 0) * 60ms);
+}
+
+/* Foto: blanco y negro con acento rojo (dirección del brand book) */
+.foto { position: relative; margin: 0; overflow: hidden; border-radius: var(--radio); background: var(--color-superficie-fuerte); }
+.foto img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.foto--color img { filter: none; }
+.foto::after { content: ""; position: absolute; left: 0; bottom: 0; width: 38%; height: 8px; background: var(--color-primario); }
+
+/* --- 4.6 Cifras clave --- */
+.cifras { display: grid; gap: var(--espacio-8); grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.cifra { display: grid; gap: var(--espacio-2); align-content: start; }
+.cifra::before { content: ""; width: 56px; height: 8px; border-radius: var(--radio-barra); background: var(--color-barra); margin-bottom: var(--espacio-3); }
+.cifra-valor {
+  font-family: var(--fuente-titulos); font-size: clamp(3.2rem, 6vw, 5rem); line-height: .95;
+  letter-spacing: .02em; font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.cifra-afijo { font-size: .5em; letter-spacing: .04em; }
+.cifra-etiqueta { font-weight: 600; font-size: var(--texto-base); }
+.cifra-nota { font-size: var(--texto-sm); color: var(--color-texto-suave); }
+
+/* --- 4.7 Tarjetas de beneficios --- */
+.rejilla { display: grid; gap: var(--espacio-6); grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr)); }
+.tarjeta {
+  position: relative; display: grid; gap: var(--espacio-4); align-content: start;
+  padding: var(--espacio-8) var(--espacio-6) var(--espacio-8);
+  background: var(--color-fondo); border: 1px solid var(--color-borde); border-radius: var(--radio);
+  transition: transform var(--duracion-media) var(--curva), box-shadow var(--duracion-media) var(--curva), border-color var(--duracion-media) var(--curva);
+}
+.seccion--superficie .tarjeta { background: var(--color-fondo); }
+.tarjeta::after {
+  content: ""; position: absolute; left: -1px; right: -1px; bottom: -1px; height: 4px;
+  background: var(--color-primario); transform: scaleX(0); transform-origin: left;
+  transition: transform var(--duracion-media) var(--curva);
+}
+.tarjeta:hover, .tarjeta:focus-within { transform: translateY(-4px); box-shadow: var(--sombra-alta); border-color: transparent; }
+.tarjeta:hover::after, .tarjeta:focus-within::after { transform: scaleX(1); }
+.icono-caja {
+  display: grid; place-items: center; width: 52px; height: 52px;
+  background: var(--color-oscuro); color: var(--color-sobre-oscuro); border-radius: var(--radio-sm);
+}
+.icono-caja svg { width: 26px; height: 26px; }
+.tarjeta h3 { font-size: var(--texto-2xl); }
+.tarjeta p { color: var(--color-texto-suave); }
+
+/* Tarjeta con foto: la foto va a sangre arriba y el ícono se monta en su borde.
+   En reposo la foto está en blanco y negro (brand book); al pasar el cursor recupera el color. */
+.tarjeta--foto { padding-top: 0; overflow: hidden; }
+.tarjeta--foto .tarjeta-foto { margin: 0 calc(-1 * var(--espacio-6)); aspect-ratio: 16 / 10; border-radius: var(--radio) var(--radio) 0 0; }
+.tarjeta--foto .tarjeta-foto::after { height: 6px; }
+.tarjeta--foto .icono-caja { position: relative; z-index: 1; margin-top: calc(-26px - var(--espacio-4)); box-shadow: 0 0 0 4px var(--color-fondo); }
+.foto img { transition: filter var(--duracion-larga) var(--curva), transform 700ms var(--curva); }
+.tarjeta--foto:hover .foto img, .tarjeta--foto:focus-within .foto img { filter: none; transform: scale(1.04); }
+
+/* --- 4.7b Galería de proyectos --- */
+.galeria {
+  display: grid; gap: var(--espacio-3);
+  grid-template-columns: repeat(4, 1fr); grid-auto-rows: clamp(170px, 17vw, 230px);
+}
+.galeria-item { position: relative; margin: 0; overflow: hidden; border-radius: var(--radio); grid-column: span var(--c4, 1); }
+.galeria-item--grande { grid-row: span 2; }
+.galeria-item .foto { height: 100%; border-radius: 0; }
+.galeria-item .foto::after { display: none; }                  /* el acento rojo va en la leyenda */
+.galeria-item figcaption {
+  position: absolute; inset: auto 0 0 0; padding: var(--espacio-12) var(--espacio-4) var(--espacio-4);
+  display: grid; gap: 2px; color: var(--color-neutro);
+  background: linear-gradient(to top, rgb(26 25 25 / .88), rgb(26 25 25 / 0));
+}
+.galeria-item figcaption strong {
+  font-family: var(--fuente-titulos); font-weight: 400; font-size: 1.5rem; line-height: 1;
+  letter-spacing: .04em; text-transform: uppercase; display: flex; align-items: center; gap: 10px;
+}
+.galeria-item figcaption strong::before { content: ""; width: 18px; height: 6px; border-radius: var(--radio-barra); background: var(--color-primario); flex: none; }
+.galeria-item--grande figcaption strong { font-size: 2.2rem; }
+.galeria-item figcaption span { font-size: var(--texto-sm); color: var(--color-neutro-medio); }
+.galeria-item:hover .foto img { filter: none; transform: scale(1.05); }
+.galeria-nota { margin-top: var(--espacio-6); font-size: var(--texto-sm); color: var(--color-texto-suave); }
+@media (max-width: 959px) {
+  .galeria { grid-template-columns: repeat(2, 1fr); grid-auto-rows: clamp(150px, 30vw, 220px); }
+  .galeria-item { grid-column: span var(--c2, 1); }
+}
+@media (max-width: 479px) {
+  .galeria { grid-template-columns: 1fr; grid-auto-rows: 220px; }
+  .galeria-item, .galeria-item--grande { grid-column: auto; grid-row: auto; }
+}
+
+/* --- 4.8 Cómo funciona: línea de tiempo --- */
+.pasos { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--espacio-8); position: relative; }
+.paso { position: relative; display: grid; gap: var(--espacio-3); padding-left: 72px; }
+.paso-numero {
+  position: absolute; left: 0; top: 0; width: 52px; height: 52px; display: grid; place-items: center;
+  font-family: var(--fuente-titulos); font-size: 1.7rem; letter-spacing: .02em;
+  background: var(--color-fondo); color: var(--color-texto); border: 2px solid var(--color-texto); border-radius: var(--radio-sm);
+  transition: background-color var(--duracion-media) var(--curva), color var(--duracion-media) var(--curva), border-color var(--duracion-media) var(--curva);
+}
+.paso.visible .paso-numero, html:not(.animar) .paso-numero { background: var(--color-primario); border-color: var(--color-primario); color: var(--color-sobre-primario); }
+.paso h3 { font-size: var(--texto-2xl); padding-top: 10px; }
+.paso p { color: var(--color-texto-suave); }
+.pasos::before {                       /* la viga que une los pasos */
+  content: ""; position: absolute; left: 25px; top: 8px; bottom: 8px; width: 2px; background: var(--color-borde);
+}
+@media (min-width: 900px) {
+  .pasos { grid-template-columns: repeat(var(--n, 4), 1fr); gap: var(--espacio-6); }
+  .paso { padding-left: 0; padding-top: 76px; }
+  .pasos::before { left: 26px; right: 26px; top: 25px; bottom: auto; width: auto; height: 2px; }
+}
+
+/* --- 4.9 Planes o paquetes --- */
+.planes { display: grid; gap: var(--espacio-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); align-items: stretch; }
+.plan {
+  position: relative; display: flex; flex-direction: column; gap: var(--espacio-4);
+  padding: var(--espacio-8); background: var(--color-fondo);
+  border: 1px solid var(--color-borde); border-top: 6px solid var(--color-borde); border-radius: var(--radio);
+  transition: transform var(--duracion-media) var(--curva), box-shadow var(--duracion-media) var(--curva);
+}
+.plan:hover { transform: translateY(-4px); box-shadow: var(--sombra-alta); }
+.plan--destacado { border-top-color: var(--color-primario); }
+.plan--destacado.bloque-oscuro { background: var(--color-oscuro); border-color: var(--color-oscuro); border-top-color: var(--color-primario); }
+@media (min-width: 900px) { .plan--destacado { transform: translateY(-12px); } .plan--destacado:hover { transform: translateY(-16px); } }
+.insignia {
+  position: absolute; top: -6px; right: var(--espacio-6); transform: translateY(-50%);
+  padding: 6px 12px; background: var(--color-primario); color: var(--color-sobre-primario);
+  font-size: var(--texto-xs); font-weight: 600; letter-spacing: var(--tracking-etiquetas); text-transform: uppercase;
+  border-radius: var(--radio-sm);
+}
+.plan h3 { font-size: var(--texto-2xl); }
+.plan-descripcion { color: var(--color-texto-suave); }
+.plan-precio { font-family: var(--fuente-titulos); font-size: clamp(2rem, 3vw, 2.6rem); line-height: 1; letter-spacing: .02em; text-transform: uppercase; }
+.plan-nota { font-size: var(--texto-sm); color: var(--color-texto-suave); }
+.lista-check { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--espacio-3); }
+.lista-check li { display: grid; grid-template-columns: 20px 1fr; gap: var(--espacio-3); align-items: start; }
+.lista-check svg { width: 20px; height: 20px; margin-top: 3px; color: var(--color-marca-texto); }
+.plan .boton { margin-top: auto; }
+.plan-pie { margin-top: auto; padding-top: var(--espacio-4); display: grid; }
+
+/* --- 4.10 Testimonios o casos --- */
+.testimonios { display: grid; gap: var(--espacio-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.testimonio {
+  position: relative;
+  display: flex; flex-direction: column; gap: var(--espacio-6); margin: 0;
+  padding: var(--espacio-8); background: var(--color-superficie); border-left: 6px solid var(--color-primario); border-radius: var(--radio);
+}
+.testimonio::before { content: "“"; font-family: var(--fuente-titulos); font-size: 5rem; line-height: .6; color: var(--color-marca-texto); height: .4em; }
+.testimonio blockquote { margin: 0; font-size: var(--texto-lg); line-height: 1.5; }
+.testimonio figcaption { margin-top: auto; display: grid; gap: 2px; }
+.testimonio figcaption strong { font-weight: 600; }
+.testimonio figcaption span { font-size: var(--texto-sm); color: var(--color-texto-suave); }
+.marca-ejemplo {
+  position: absolute; top: var(--espacio-6); right: var(--espacio-6); padding: 3px 10px;
+  font-size: var(--texto-xs); font-weight: 600; letter-spacing: var(--tracking-etiquetas); text-transform: uppercase;
+  color: var(--color-info); border: 1px solid currentColor; border-radius: var(--radio-sm);
+}
+
+/* --- 4.11 Aliados: franja con desplazamiento continuo --- */
+.aliados { padding-block: var(--espacio-16); border-block: 1px solid var(--color-borde); }
+.aliados .cabeza { margin-bottom: var(--espacio-8); }
+.aliados .cabeza h2 { font-size: var(--texto-3xl); }
+.marquesina {
+  overflow: hidden;
+  -webkit-mask: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+          mask: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.pista { display: flex; width: max-content; }
+.animar .pista { animation: desplazar var(--velocidad, 40s) linear infinite; }
+.marquesina:hover .pista, .marquesina:focus-within .pista { animation-play-state: paused; }
+@keyframes desplazar { to { transform: translateX(-50%); } }
+.grupo-aliados { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; }
+.aliado { display: flex; align-items: center; gap: var(--espacio-12); padding-right: var(--espacio-12); }
+.aliado::after { content: ""; width: 22px; height: 6px; border-radius: var(--radio-barra); background: var(--color-barra); }
+.aliado-nombre { font-family: var(--fuente-titulos); font-size: clamp(1.8rem, 3vw, 2.4rem); letter-spacing: .05em; text-transform: uppercase; color: var(--color-texto-suave); white-space: nowrap; transition: color var(--duracion-corta) var(--curva); }
+.aliado:hover .aliado-nombre { color: var(--color-texto); }
+.aliado img { height: 44px; width: auto; filter: grayscale(1); opacity: .75; transition: filter var(--duracion-corta) var(--curva), opacity var(--duracion-corta) var(--curva); }
+.aliado:hover img { filter: none; opacity: 1; }
+
+/* --- 4.12 Preguntas frecuentes: acordeón accesible --- */
+.faq { max-width: 860px; margin-inline: auto; border-top: 2px solid var(--color-texto); }
+.faq-item { border-bottom: 1px solid var(--color-borde); }
+.faq-item h3 { font-family: var(--fuente-cuerpo); text-transform: none; letter-spacing: 0; line-height: 1.35; }
+.faq-boton {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--espacio-6);
+  padding: var(--espacio-6) 0; background: none; border: 0; text-align: left; cursor: pointer;
+  font-size: var(--texto-lg); font-weight: 600;
+}
+.faq-boton:hover { color: var(--color-marca-texto); }
+.faq-signo { position: relative; flex: none; width: 28px; height: 28px; border: 2px solid currentColor; border-radius: var(--radio-sm); transition: transform var(--duracion-media) var(--curva), background-color var(--duracion-corta); }
+.faq-signo::before, .faq-signo::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 2px; background: currentColor; transform: translate(-50%, -50%); }
+.faq-signo::after { transform: translate(-50%, -50%) rotate(90deg); }
+.faq-boton[aria-expanded="true"] .faq-signo { transform: rotate(45deg); }
+.faq-panel { padding: 0 0 var(--espacio-6); color: var(--color-texto-suave); max-width: 70ch; }
+.faq-panel p + p { margin-top: var(--espacio-3); }
+.animar .faq-panel:not([hidden]) { animation: aparecer var(--duracion-media) var(--curva); }
+@keyframes aparecer { from { opacity: 0; transform: translateY(-6px); } }
+
+/* --- 4.13 CTA final y contacto --- */
+.cta-final { position: relative; overflow: hidden; isolation: isolate; }
+.cta-final .contenedor { display: grid; gap: var(--espacio-12); }
+@media (min-width: 900px) { .cta-final .contenedor { grid-template-columns: 1.2fr .8fr; align-items: end; } }
+.cta-final h2 { font-size: var(--texto-4xl); }
+.cta-final .texto { font-size: var(--texto-lg); color: var(--color-texto-suave); margin-top: var(--espacio-4); max-width: 52ch; }
+.contacto { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--espacio-4); font-style: normal; }
+.contacto li { display: grid; grid-template-columns: 40px 1fr; gap: var(--espacio-4); align-items: center; }
+.contacto .icono-caja { width: 40px; height: 40px; background: rgb(0 0 0 / .18); color: var(--color-texto); }
+.contacto .icono-caja svg { width: 20px; height: 20px; }
+.contacto a, .contacto span { font-weight: 500; }
+.marca-agua { position: absolute; z-index: -1; right: -60px; bottom: -40px; width: min(560px, 70vw); color: var(--color-texto); opacity: .08; }
+
+/* --- 4.14 Pie --- */
+.pie { padding-block: var(--espacio-16) var(--espacio-8); border-top: 6px solid var(--color-primario); background: var(--color-oscuro-2); }
+.pie-rejilla { display: grid; gap: var(--espacio-12); grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+.pie .logo { color: var(--color-sobre-oscuro); display: inline-block; }
+.pie .logo svg { height: 44px; width: auto; }
+.pie h2 { font-size: var(--texto-xl); margin-bottom: var(--espacio-4); color: var(--color-texto); }
+.pie p, .pie li { color: var(--color-texto-suave); font-size: var(--texto-sm); }
+.pie .eslogan { margin-top: var(--espacio-4); max-width: 34ch; }
+.pie ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--espacio-3); }
+.red { display: inline-flex; align-items: center; gap: var(--espacio-3); }
+.red svg { width: 18px; height: 18px; flex: none; }
+.pie-legal { margin-top: var(--espacio-12); padding-top: var(--espacio-6); border-top: 1px solid var(--color-borde); display: flex; flex-wrap: wrap; gap: var(--espacio-2) var(--espacio-6); justify-content: space-between; }
+
+/* --- 4.15 Volver arriba --- */
+.volver-arriba {
+  position: fixed; right: 20px; bottom: 20px; z-index: 45;
+  width: 48px; height: 48px; display: grid; place-items: center;
+  background: var(--color-oscuro); color: var(--color-sobre-oscuro);
+  border: 1px solid rgb(255 255 255 / .16); border-radius: var(--radio-sm); cursor: pointer;
+  box-shadow: var(--sombra-alta);
+  opacity: 0; visibility: hidden; transform: translateY(12px);
+  transition: opacity var(--duracion-media) var(--curva), transform var(--duracion-media) var(--curva), visibility var(--duracion-media);
+  --color-foco: var(--color-neutro);
+}
+.volver-arriba.visible { opacity: 1; visibility: visible; transform: none; }
+.volver-arriba:hover { background: var(--color-primario); border-color: var(--color-primario); }
+.volver-arriba svg { width: 22px; height: 22px; }
+
+/* ==========================================================================
+   5. ANIMACIÓN DE APARICIÓN — solo si el sistema permite movimiento (.animar)
+   ========================================================================== */
+.animar .revelar {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity var(--duracion-larga) var(--curva), transform var(--duracion-larga) var(--curva);
+  transition-delay: calc(var(--i, 0) * var(--escalon));
+}
+.animar .revelar.visible { opacity: 1; transform: none; }
+
+/* ==========================================================================
+   6. MOVIMIENTO REDUCIDO — nada se mueve y todo se ve
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; transition-delay: 0s !important; }
+  .revelar { opacity: 1 !important; transform: none !important; }
+  .pista { width: auto; flex-wrap: wrap; justify-content: center; }
+  .pista .grupo-aliados { flex-wrap: wrap; justify-content: center; row-gap: var(--espacio-4); }
+  .pista .grupo-aliados[aria-hidden="true"] { display: none; }
+  .marquesina { -webkit-mask: none; mask: none; }
+}
+
+/* ==========================================================================
+   7. IMPRESIÓN Y PDF
+   ========================================================================== */
+@media print {
+  @page { margin: 12mm; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; scroll-behavior: auto; }
+  body { font-size: 11pt; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .revelar, .ilustracion .ilus-viga, .ilustracion .ilus-bulto { opacity: 1 !important; transform: none !important; }
+  .riel, .volver-arriba, .saltar, .menu, .menu-boton, .boton-tema, .acciones-encabezado { display: none !important; }
+  .encabezado { position: static; background: var(--color-oscuro); height: auto; padding-block: 12px; box-shadow: none; }
+  .hero { min-height: 0; padding-block: var(--espacio-12); }
+  .seccion { padding-block: var(--espacio-12); }
+  .tarjeta, .plan, .testimonio, .cifra, .paso, .faq-item, .contacto li, .cabeza { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+  .tarjeta:hover, .plan:hover { transform: none; box-shadow: none; }
+  .plan--destacado { transform: none; }
+  .pista { width: auto; flex-wrap: wrap; transform: none !important; }
+  .pista .grupo-aliados { flex-wrap: wrap; row-gap: 12px; }
+  .pista .grupo-aliados[aria-hidden="true"] { display: none; }
+  .marquesina { -webkit-mask: none; mask: none; }
+  .faq-panel[hidden] { display: block !important; }
+  .faq-signo { display: none; }
+
+  /* En papel se conserva el acomodo de escritorio, a escala de hoja */
+  .contenedor { width: 100%; padding-inline: 18px; }
+  .cabeza { margin-bottom: 20px; gap: 8px; }
+  .cabeza h2, .cta-final h2 { font-size: 30pt; }
+  .cabeza .intro, .cta-final .texto { font-size: 12pt; }
+  .hero .contenedor { grid-template-columns: 1.3fr .7fr; gap: 24px; }
+  .hero h1 { font-size: 44pt; margin-block: 12px; }
+  .hero .subtitulo { font-size: 12pt; }
+  .botones { margin-top: 16px; }
+  .ilustracion { max-width: 260px; }
+  .cifras, .planes, .testimonios { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 14px; }
+  .cifra-valor { font-size: 34pt; }
+  .rejilla { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .galeria { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 120px; gap: 8px; }
+  .galeria-item { grid-column: span var(--c4, 1); break-inside: avoid; }
+  .galeria-item figcaption { padding: 24px 10px 8px; }
+  .galeria-item figcaption strong { font-size: 12pt; }
+  .galeria-item--grande figcaption strong { font-size: 16pt; }
+  .tarjeta--foto { padding-top: 0; }
+  .tarjeta--foto .tarjeta-foto { margin: 0 -16px; }
+  .tarjeta--foto .icono-caja { margin-top: -30px; }
+  .tarjeta, .plan, .testimonio { padding: 16px; gap: 10px; }
+  .tarjeta h3, .plan h3, .paso h3 { font-size: 16pt; }
+  .plan-precio { font-size: 20pt; }
+  .pasos { grid-template-columns: repeat(var(--n, 4), 1fr); gap: 14px; }
+  .paso { padding-left: 0; padding-top: 64px; }
+  .pasos::before { left: 26px; right: 26px; top: 25px; bottom: auto; width: auto; height: 2px; }
+  .paso-numero { background: var(--color-primario); border-color: var(--color-primario); color: var(--color-sobre-primario); }
+  .cta-final { break-inside: avoid; }
+  .cta-final .contenedor { grid-template-columns: 1.2fr .8fr; gap: 24px; align-items: end; }
+  .pie { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<div id="raiz"></div>
+
+<!-- ==========================================================================
+     LOGOTIPOS (diseño, no contenido). SVG oficial de 05_Logos/02_Rack-T-web,
+     con fill="currentColor": toman el color del contenedor.
+     ========================================================================== -->
+<template id="tpl-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 369.87 118.36" role="img" aria-label="RACK-T Thinking"><title>RACK-T Thinking</title><g fill="currentColor"><path fill-rule="nonzero" d="M140.59 8.54C140.50 8.85 140.41 9.15 140.32 9.46C139.61 11.82 137.53 13.38 135.06 13.39C130.96 13.40 126.85 13.39 122.75 13.39C84.03 13.39 45.30 13.39 6.57 13.39C4.29 13.39 2.54 12.42 1.51 10.38C0.52 8.43 0.70 6.50 1.96 4.72C2.83 3.50 4.02 2.76 5.52 2.54C5.70 2.51 5.87 2.44 6.05 2.38L135.41 2.38C135.58 2.44 135.76 2.51 135.93 2.54C138.12 2.88 139.88 4.50 140.40 6.65C140.45 6.85 140.53 7.05 140.59 7.25L140.59 8.54"/><path fill-rule="nonzero" d="M140.59 112.77C140.48 113.16 140.38 113.54 140.25 113.92C139.48 116.14 137.43 117.61 135.06 117.62C129.17 117.63 123.28 117.62 117.39 117.62C80.46 117.62 43.53 117.62 6.60 117.62C3.28 117.62 0.85 115.20 0.91 111.97C0.97 109.05 3.37 106.76 6.47 106.67C6.63 106.66 6.79 106.67 6.95 106.67C49.48 106.67 92.00 106.66 134.53 106.67C137.76 106.67 139.69 108.17 140.46 111.28C140.48 111.35 140.55 111.41 140.59 111.48L140.59 112.77"/><path fill-rule="nonzero" d="M140.59 34.64C140.52 34.89 140.43 35.14 140.36 35.40C139.71 37.75 137.64 39.37 135.19 39.45C135.03 39.46 134.86 39.45 134.70 39.45C92.04 39.45 49.38 39.45 6.72 39.45C3.82 39.45 1.56 37.73 1.03 35.13C0.35 31.73 2.77 28.65 6.26 28.50C6.53 28.49 6.80 28.50 7.07 28.50L134.40 28.50C137.80 28.50 139.63 29.91 140.50 33.22C140.51 33.27 140.56 33.30 140.59 33.34L140.59 34.64"/><path fill-rule="nonzero" d="M140.59 86.68C140.31 87.43 140.14 88.24 139.73 88.91C138.68 90.66 137.08 91.54 135.02 91.54C124.67 91.54 114.32 91.54 103.98 91.54C71.51 91.54 39.04 91.54 6.57 91.54C3.25 91.54 0.83 89.12 0.91 85.88C0.98 83.19 3.16 80.88 5.86 80.68C6.31 80.64 6.77 80.63 7.23 80.63C49.37 80.63 91.52 80.65 133.66 80.60C137.27 80.59 139.84 81.85 140.59 85.54L140.59 86.68"/><path fill-rule="nonzero" d="M140.59 60.58C140.51 60.89 140.43 61.20 140.34 61.51C139.68 63.85 137.64 65.42 135.21 65.48C135.07 65.49 134.94 65.49 134.80 65.49C92.09 65.49 49.39 65.49 6.68 65.49C4.04 65.49 2.00 64.12 1.21 61.85C0.00 58.34 2.52 54.69 6.23 54.58C6.42 54.57 6.61 54.58 6.80 54.58C49.42 54.58 92.05 54.58 134.68 54.58C137.52 54.58 139.61 56.05 140.33 58.53C140.41 58.83 140.51 59.14 140.59 59.44L140.59 60.58"/><path fill-rule="nonzero" d="M171.05 38.04C174.08 37.87 177.05 37.77 180.00 37.50C181.43 37.37 182.39 36.36 182.92 35.04C183.26 34.19 183.58 33.29 183.71 32.39C184.53 26.48 184.51 20.54 183.92 14.63C183.50 10.44 181.76 9.02 177.56 8.98C175.78 8.97 174.00 8.98 172.22 8.98C171.84 8.98 171.45 9.03 171.05 9.06L171.05 38.04M170.99 45.02L170.99 86.08L161.16 86.08L161.16 84.75C161.16 57.41 161.17 30.07 161.14 2.73C161.14 1.59 161.41 1.21 162.61 1.23C169.04 1.31 175.48 1.09 181.89 1.42C188.34 1.75 191.16 4.44 192.66 9.31C193.23 11.14 193.63 13.08 193.74 15.00C193.96 18.87 194.12 22.76 193.96 26.62C193.86 29.22 193.34 31.83 192.72 34.36C191.93 37.59 190.00 40.01 186.31 41.29C186.75 41.46 186.90 41.53 187.05 41.57C189.65 42.26 191.24 44.08 191.88 46.54C192.62 49.38 193.35 52.28 193.49 55.19C193.87 62.93 193.92 70.69 194.15 78.45C194.23 80.98 194.46 83.50 194.62 86.09L184.92 86.09C184.77 83.68 184.53 81.31 184.49 78.95C184.40 72.07 184.44 65.20 184.33 58.33C184.29 55.59 184.15 52.83 183.75 50.13C183.27 46.88 182.43 46.04 179.20 45.58C176.55 45.20 173.84 45.20 170.99 45.02"/><path fill-rule="nonzero" d="M332.01 86.15C328.69 86.15 325.51 86.18 322.33 86.10C322.00 86.09 321.57 85.48 321.40 85.06C319.25 79.58 317.13 74.08 315.01 68.59C312.24 61.44 309.48 54.29 306.71 47.14C306.57 46.79 306.38 46.46 305.94 46.18L305.94 86.15L298.44 86.15C295.99 86.15 295.99 86.15 295.99 83.74C295.99 56.88 295.99 30.03 295.99 3.17C295.99 1.25 295.99 1.25 297.90 1.25C299.96 1.25 302.03 1.25 304.09 1.25C305.77 1.26 305.77 1.26 305.78 2.91C305.78 15.17 305.78 27.42 305.78 39.68L305.78 41.06C305.90 41.08 306.02 41.10 306.15 41.12C306.49 40.25 306.84 39.38 307.16 38.51C311.65 26.49 316.13 14.47 320.59 2.43C320.90 1.60 321.28 1.21 322.23 1.23C325.05 1.29 327.87 1.25 330.84 1.25C330.66 1.87 330.55 2.33 330.38 2.77C325.44 15.87 320.48 28.96 315.58 42.07C315.35 42.67 315.33 43.51 315.56 44.10C320.88 57.71 326.24 71.29 331.59 84.88C331.74 85.24 331.84 85.63 332.01 86.15"/><path fill-rule="nonzero" d="M216.14 61.80L229.35 61.80C227.11 46.80 224.88 31.94 222.66 17.09L222.29 17.12C220.24 31.96 218.20 46.80 216.14 61.80M203.47 86.15C204.06 82.21 204.61 78.46 205.18 74.72C206.11 68.54 207.06 62.37 208.00 56.19C209.02 49.50 210.04 42.80 211.05 36.11C211.98 29.97 212.90 23.83 213.83 17.69C214.61 12.55 215.42 7.42 216.17 2.27C216.28 1.52 216.53 1.24 217.30 1.24C220.61 1.27 223.93 1.28 227.24 1.23C228.13 1.22 228.34 1.70 228.45 2.39C229.36 7.92 230.26 13.44 231.17 18.97C232.51 27.08 233.87 35.19 235.21 43.30C236.46 50.86 237.69 58.41 238.94 65.97C239.95 72.09 240.96 78.22 241.97 84.34C242.06 84.90 242.12 85.45 242.20 86.08L233.03 86.08C232.70 83.89 232.36 81.67 232.03 79.45C231.60 76.58 231.19 73.71 230.77 70.83C230.68 70.19 230.43 69.87 229.68 69.88C225.11 69.91 220.54 69.90 215.97 69.88C215.28 69.88 214.99 70.08 214.89 70.82C214.28 75.57 213.62 80.33 212.93 85.07C212.87 85.46 212.41 86.09 212.13 86.10C209.30 86.18 206.48 86.15 203.47 86.15"/><path fill-rule="nonzero" d="M283.35 33.91L274.06 33.91C274.03 33.47 273.99 33.08 273.98 32.68C273.91 28.00 273.88 23.31 273.75 18.62C273.69 16.27 273.37 13.96 272.37 11.78C271.59 10.07 270.42 8.93 268.48 8.75C266.11 8.52 264.05 9.08 262.69 11.22C261.42 13.21 261.02 15.50 260.81 17.79C260.60 20.16 260.53 22.55 260.53 24.93C260.51 38.48 260.47 52.03 260.58 65.58C260.60 68.34 261.00 71.14 261.57 73.85C262.39 77.80 265.45 79.59 269.04 78.53C270.91 77.98 272.13 76.66 272.54 74.84C273.09 72.33 273.59 69.77 273.72 67.21C273.96 62.58 273.94 57.92 273.96 53.27C273.96 52.27 274.25 51.93 275.26 51.96C277.61 52.02 279.96 52.01 282.30 51.96C283.27 51.94 283.66 52.19 283.64 53.24C283.50 58.33 283.56 63.43 283.30 68.51C283.11 72.35 282.32 76.11 280.68 79.64C278.64 84.02 275.13 86.43 270.40 86.86C268.05 87.08 265.62 87.05 263.30 86.69C258.47 85.95 255.27 82.98 253.38 78.54C251.96 75.20 251.06 71.69 251.00 68.10C250.79 56.25 250.74 44.41 250.70 32.56C250.68 27.71 250.78 22.86 250.98 18.02C251.15 13.97 252.31 10.14 254.38 6.64C256.66 2.81 260.26 1.03 264.54 0.39C267.17 0.00 269.78 0.11 272.35 0.74C277.13 1.92 280.25 4.99 281.60 9.61C282.48 12.65 283.10 15.83 283.28 18.98C283.55 23.89 283.35 28.83 283.35 33.91"/><path fill-rule="nonzero" d="M351.40 117.96L351.40 115.95C351.40 81.05 351.40 46.15 351.40 11.25C351.40 9.34 351.39 9.34 349.48 9.34C347.34 9.34 345.19 9.31 343.05 9.35C342.21 9.37 341.92 9.07 341.95 8.23C342.00 6.29 341.99 4.34 341.95 2.40C341.93 1.60 342.13 1.24 343.01 1.24C351.59 1.26 360.16 1.26 368.73 1.24C369.59 1.24 369.87 1.58 369.85 2.40C369.82 4.34 369.82 6.28 369.85 8.22C369.87 9.06 369.54 9.36 368.71 9.35C366.61 9.31 364.50 9.38 362.40 9.32C361.38 9.29 361.00 9.68 361.10 10.66C361.14 11.06 361.11 11.47 361.11 11.87C361.11 46.57 361.11 81.27 361.11 115.97C361.11 118.36 361.21 117.93 359.08 117.95C356.58 117.98 354.08 117.96 351.40 117.96"/><path fill-rule="nonzero" d="M335.66 53.77C332.20 53.80 329.38 51.03 329.35 47.59C329.32 44.11 332.04 41.33 335.51 41.27C339.00 41.21 341.84 43.94 341.87 47.38C341.91 50.94 339.18 53.74 335.66 53.77"/><path fill-rule="nonzero" d="M230.43 95.88C231.41 95.55 231.71 96.00 231.92 96.80C233.28 101.98 234.68 107.15 236.07 112.32C236.10 112.42 236.19 112.50 236.39 112.82L236.39 95.86C236.84 95.83 237.19 95.80 237.56 95.78C237.62 95.99 237.70 96.14 237.70 96.29C237.70 103.08 237.71 109.87 237.68 116.66C237.68 116.95 237.35 117.25 237.17 117.55C236.82 117.31 236.26 117.13 236.17 116.81C234.75 111.81 233.40 106.79 232.03 101.78C231.91 101.33 231.79 100.88 231.41 100.48C231.49 101.46 231.62 102.45 231.63 103.44C231.65 107.85 231.65 112.25 231.61 116.66C231.61 116.95 231.20 117.25 230.98 117.54C230.76 117.24 230.36 116.94 230.36 116.64C230.32 109.85 230.33 103.06 230.34 96.27C230.34 96.16 230.39 96.04 230.43 95.88"/><path fill-rule="nonzero" d="M306.67 112.68C306.67 110.62 306.67 108.57 306.67 106.52C306.67 103.32 306.66 100.13 306.69 96.94C306.69 96.56 306.86 95.93 307.10 95.84C307.89 95.57 307.89 96.20 307.89 96.76C307.88 100.48 307.89 104.19 307.89 107.91C307.89 110.74 307.91 113.57 307.86 116.40C307.86 116.78 307.52 117.16 307.34 117.54C307.01 117.23 306.48 116.96 306.38 116.58C304.93 111.38 303.55 106.17 302.15 100.95C302.12 100.85 302.07 100.75 301.80 100.64C301.80 101.05 301.80 101.45 301.80 101.86C301.83 106.63 301.86 111.39 301.89 116.16C301.89 116.48 301.93 116.84 301.81 117.12C301.72 117.31 301.41 117.48 301.18 117.49C301.03 117.50 300.80 117.25 300.72 117.07C300.64 116.86 300.68 116.60 300.68 116.35C300.68 109.85 300.68 103.34 300.68 96.83C300.68 96.52 300.73 96.20 300.76 95.93C301.85 95.44 302.05 96.13 302.25 96.89C303.67 102.17 305.09 107.45 306.52 112.73C306.57 112.71 306.62 112.70 306.67 112.68"/><path fill-rule="nonzero" d="M333.98 106.17C333.83 109.10 333.81 111.81 333.53 114.48C333.29 116.64 332.06 117.74 330.32 117.81C328.69 117.88 327.70 117.32 327.09 115.80C326.73 114.87 326.45 113.87 326.34 112.89C325.87 108.30 325.64 103.70 326.68 99.15C326.87 98.35 327.22 97.52 327.69 96.85C329.07 94.90 331.71 95.01 332.94 97.06C333.35 97.74 333.57 98.52 333.94 99.39C333.41 99.66 332.96 99.89 332.42 100.16C332.25 99.63 332.22 99.09 331.95 98.76C331.49 98.21 330.89 97.45 330.32 97.43C329.74 97.40 328.79 98.05 328.60 98.60C328.09 100.15 327.63 101.80 327.62 103.41C327.58 106.68 327.82 109.94 328.03 113.20C328.08 113.90 328.36 114.67 328.78 115.21C329.12 115.65 329.88 116.07 330.38 116.00C330.94 115.92 331.81 115.32 331.87 114.86C332.16 112.71 332.24 110.53 332.30 108.36C332.31 108.19 331.68 107.90 331.32 107.82C330.73 107.69 329.94 108.03 329.98 106.94C330.02 105.84 330.84 106.22 331.41 106.18C332.16 106.13 332.92 106.17 333.98 106.17"/><path fill-rule="nonzero" d="M184.57 95.83L185.87 95.83L185.87 104.51C187.24 104.51 188.41 104.56 189.56 104.46C189.82 104.44 190.21 103.83 190.22 103.49C190.28 101.43 190.25 99.37 190.25 97.31L190.25 95.86C190.71 95.83 191.08 95.80 191.55 95.77C191.58 96.21 191.64 96.56 191.64 96.92C191.64 103.38 191.64 109.84 191.64 116.31C191.64 116.43 191.69 116.58 191.63 116.66C191.42 116.97 191.17 117.25 190.94 117.55C190.71 117.25 190.29 116.96 190.29 116.66C190.24 113.87 190.26 111.08 190.25 108.30C190.24 105.96 190.42 106.33 188.24 106.30C187.52 106.29 186.80 106.29 185.89 106.29C185.89 107.50 185.89 108.58 185.89 109.66C185.89 112.00 185.91 114.35 185.85 116.69C185.84 116.98 185.39 117.26 185.14 117.55C184.90 117.26 184.46 116.97 184.46 116.68C184.43 109.85 184.45 103.02 184.46 96.20C184.46 96.12 184.50 96.05 184.57 95.83"/><path fill-rule="nonzero" d="M256.33 95.83L257.70 95.83L257.70 105.09C257.81 105.11 257.92 105.13 258.03 105.16C258.17 104.86 258.34 104.58 258.45 104.28C259.33 101.85 260.27 99.44 261.05 96.99C261.39 95.91 261.90 95.54 263.10 95.89C262.94 96.37 262.79 96.84 262.61 97.31C261.66 99.79 260.74 102.30 259.72 104.75C259.32 105.72 259.30 106.56 259.66 107.53C260.75 110.48 261.76 113.46 262.80 116.42C262.90 116.72 262.98 117.03 263.09 117.40C262.05 117.77 261.46 117.59 261.12 116.46C260.18 113.34 259.13 110.26 258.12 107.17C258.02 107.17 257.92 107.17 257.81 107.16C257.78 107.55 257.73 107.94 257.73 108.32C257.72 110.99 257.73 113.66 257.72 116.32C257.71 116.85 257.88 117.55 256.97 117.55C256.03 117.55 256.27 116.82 256.27 116.31C256.26 109.85 256.26 103.38 256.27 96.92C256.27 96.60 256.30 96.28 256.33 95.83"/><path fill-rule="nonzero" d="M162.85 117.36L162.85 97.54C161.95 97.47 161.16 97.41 160.28 97.35L160.28 95.84L167.32 95.84C167.00 96.48 166.87 97.18 166.50 97.35C165.96 97.60 165.25 97.47 164.48 97.51C164.46 98.05 164.42 98.51 164.42 98.98C164.41 104.76 164.39 110.53 164.44 116.31C164.44 117.43 164.12 117.82 162.85 117.36"/><path fill-rule="nonzero" d="M210.28 95.85L211.69 95.85L211.69 117.40C210.89 117.60 210.18 117.88 210.19 116.56C210.21 109.81 210.20 103.07 210.21 96.32C210.21 96.20 210.24 96.08 210.28 95.85"/><path fill-rule="nonzero" d="M280.63 95.85L282.06 95.85L282.06 117.40C281.25 117.62 280.55 117.86 280.55 116.56C280.57 109.85 280.57 103.14 280.57 96.43C280.57 96.27 280.60 96.12 280.63 95.85"/></g></svg></template>
+<template id="tpl-isotipo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 141.5 120" role="img" aria-label="RACK-T"><title>RACK-T</title><g fill="currentColor"><path fill-rule="nonzero" d="M140.59 8.54C140.50 8.85 140.41 9.15 140.32 9.46C139.61 11.82 137.53 13.38 135.06 13.39C130.96 13.40 126.85 13.39 122.75 13.39C84.03 13.39 45.30 13.39 6.57 13.39C4.29 13.39 2.54 12.42 1.51 10.38C0.52 8.43 0.70 6.50 1.96 4.72C2.83 3.50 4.02 2.76 5.52 2.54C5.70 2.51 5.87 2.44 6.05 2.38L135.41 2.38C135.58 2.44 135.76 2.51 135.93 2.54C138.12 2.88 139.88 4.50 140.40 6.65C140.45 6.85 140.53 7.05 140.59 7.25L140.59 8.54"/><path fill-rule="nonzero" d="M140.59 112.77C140.48 113.16 140.38 113.54 140.25 113.92C139.48 116.14 137.43 117.61 135.06 117.62C129.17 117.63 123.28 117.62 117.39 117.62C80.46 117.62 43.53 117.62 6.60 117.62C3.28 117.62 0.85 115.20 0.91 111.97C0.97 109.05 3.37 106.76 6.47 106.67C6.63 106.66 6.79 106.67 6.95 106.67C49.48 106.67 92.00 106.66 134.53 106.67C137.76 106.67 139.69 108.17 140.46 111.28C140.48 111.35 140.55 111.41 140.59 111.48L140.59 112.77"/><path fill-rule="nonzero" d="M140.59 34.64C140.52 34.89 140.43 35.14 140.36 35.40C139.71 37.75 137.64 39.37 135.19 39.45C135.03 39.46 134.86 39.45 134.70 39.45C92.04 39.45 49.38 39.45 6.72 39.45C3.82 39.45 1.56 37.73 1.03 35.13C0.35 31.73 2.77 28.65 6.26 28.50C6.53 28.49 6.80 28.50 7.07 28.50L134.40 28.50C137.80 28.50 139.63 29.91 140.50 33.22C140.51 33.27 140.56 33.30 140.59 33.34L140.59 34.64"/><path fill-rule="nonzero" d="M140.59 86.68C140.31 87.43 140.14 88.24 139.73 88.91C138.68 90.66 137.08 91.54 135.02 91.54C124.67 91.54 114.32 91.54 103.98 91.54C71.51 91.54 39.04 91.54 6.57 91.54C3.25 91.54 0.83 89.12 0.91 85.88C0.98 83.19 3.16 80.88 5.86 80.68C6.31 80.64 6.77 80.63 7.23 80.63C49.37 80.63 91.52 80.65 133.66 80.60C137.27 80.59 139.84 81.85 140.59 85.54L140.59 86.68"/><path fill-rule="nonzero" d="M140.59 60.58C140.51 60.89 140.43 61.20 140.34 61.51C139.68 63.85 137.64 65.42 135.21 65.48C135.07 65.49 134.94 65.49 134.80 65.49C92.09 65.49 49.39 65.49 6.68 65.49C4.04 65.49 2.00 64.12 1.21 61.85C0.00 58.34 2.52 54.69 6.23 54.58C6.42 54.57 6.61 54.58 6.80 54.58C49.42 54.58 92.05 54.58 134.68 54.58C137.52 54.58 139.61 56.05 140.33 58.53C140.41 58.83 140.51 59.14 140.59 59.44L140.59 60.58"/></g></svg></template>
+
+<!-- ==========================================================================
+     CONTENIDO — lo único que se edita para una pieza nueva.
+     Esquema campo por campo en COMO-USAR.md. Si una sección no está, no se muestra.
+     El orden de "secciones" es el orden en la página.
+     ========================================================================== -->
+<script id="contenido" type="application/json">
+{
+  "_ayuda": "Edita este bloque y la TARJETA PARA COMPARTIR del <head>. Esquema y ejemplos en COMO-USAR.md.",
+  "marca": {
+    "nombre": "RACK-T",
+    "eslogan": "Especialistas en optimización y manejo de materiales para almacenes",
+    "sitio": "https://rackt.com.mx"
+  },
+  "secciones": [
+    {
+      "tipo": "encabezado",
+      "cta": {
+        "texto": "Solicita una cotización",
+        "enlace": "mailto:ventas@rackt.com.mx?subject=Solicitud%20de%20cotizaci%C3%B3n"
+      }
+    },
+    {
+      "tipo": "hero",
+      "ancla": "inicio",
+      "etiqueta": "Especialistas en optimización y manejo de materiales para almacenes",
+      "titulo": "Ingeniería de almacenamiento a la medida de tu operación",
+      "resaltado": "a la medida",
+      "subtitulo": "No vendemos productos: diseñamos soluciones que generan resultados medibles. Racks, mezzanines y servicio de principio a fin, con cobertura nacional.",
+      "cta_primario": {
+        "texto": "Solicita una cotización",
+        "enlace": "mailto:ventas@rackt.com.mx?subject=Solicitud%20de%20cotizaci%C3%B3n"
+      },
+      "cta_secundario": {
+        "texto": "Conoce nuestros proyectos",
+        "enlace": "https://rackt.com.mx"
+      },
+      "imagen": {
+        "src": "assets/img/selectivo-20.webp",
+        "chica": "assets/img/selectivo-20-640.webp",
+        "ancho": 1280,
+        "alt": "Pasillo de rack selectivo con protectores amarillos en una nave recién instalada"
+      }
+    },
+    {
+      "tipo": "cifras",
+      "ancla": "cifras",
+      "etiqueta": "RACK-T en números",
+      "titulo": "Capacidad para proyectos grandes y pequeños",
+      "items": [
+        {
+          "valor": 800,
+          "sufijo": " t",
+          "etiqueta": "Capacidad de producción por día",
+          "nota": "Toneladas de capacidad instalada."
+        },
+        {
+          "valor": 3,
+          "etiqueta": "Oficinas",
+          "nota": "Querétaro, Estado de México y Guadalajara."
+        },
+        {
+          "valor": 50000,
+          "etiqueta": "lb/pulg² de resistencia",
+          "nota": "Acero A50 en nuestras estructuras."
+        },
+        {
+          "valor": 2019,
+          "agrupar": false,
+          "prefijo": "Desde ",
+          "etiqueta": "Proyectos registrados",
+          "nota": "Manufactura, automotriz, retail y centros de distribución."
+        }
+      ]
+    },
+    {
+      "tipo": "beneficios",
+      "ancla": "servicios",
+      "menu": "Servicios",
+      "etiqueta": "Qué hacemos",
+      "titulo": "Soluciones completas para tu almacén",
+      "intro": "Desde un rack selectivo hasta un proyecto integral: te acompañamos con ingeniería, fabricación e instalación.",
+      "items": [
+        {
+          "icono": "rack",
+          "titulo": "Racks",
+          "texto": "Selectivo, picking, pallet flow, drive-in, drive-thru, autoportante y cantilever.",
+          "imagen": {
+            "src": "assets/img/selectivo-21.webp",
+            "chica": "assets/img/selectivo-21-640.webp",
+            "ancho": 1280,
+            "alt": "Hileras de rack selectivo azul y naranja en un almacén"
+          }
+        },
+        {
+          "icono": "mezzanine",
+          "titulo": "Mezzanines",
+          "texto": "Mezzanines y pasillos elevados para aprovechar la altura de tu nave.",
+          "imagen": {
+            "src": "assets/img/mezzanine-02.webp",
+            "chica": "assets/img/mezzanine-02-640.webp",
+            "ancho": 1280,
+            "alt": "Estructura de mezzanine con vigas rojas y columnas"
+          }
+        },
+        {
+          "icono": "escudo",
+          "titulo": "Accesorios y protección",
+          "texto": "Pallet stop, botas protectoras, rieles protectores, malla anticaída y parrillas metálicas.",
+          "imagen": {
+            "src": "assets/img/botas-protectoras-09.webp",
+            "chica": "assets/img/botas-protectoras-09-640.webp",
+            "ancho": 1280,
+            "alt": "Rieles protectores amarillos al pie de un rack selectivo"
+          }
+        },
+        {
+          "icono": "camion",
+          "titulo": "Reubicaciones",
+          "texto": "Reubicaciones y mudanzas industriales sin detener tu operación más de lo necesario.",
+          "imagen": {
+            "src": "assets/img/instalacion-06.webp",
+            "chica": "assets/img/instalacion-06-640.webp",
+            "ancho": 1920,
+            "alt": "Tráiler con marcos y vigas de rack listo para descargar en un andén"
+          }
+        },
+        {
+          "icono": "regla",
+          "titulo": "Peritaje estructural",
+          "texto": "Estudio estructural de racks para saber en qué estado está tu instalación.",
+          "imagen": {
+            "src": "assets/img/selectivo-18.webp",
+            "chica": "assets/img/selectivo-18-640.webp",
+            "ancho": 1280,
+            "alt": "Pasillo de rack selectivo con etiquetas de ubicación"
+          }
+        },
+        {
+          "icono": "casco",
+          "titulo": "Cursos DC3",
+          "texto": "Capacitación de seguridad para operar y mantener tu almacén.",
+          "imagen": {
+            "src": "assets/img/instalacion-07.webp",
+            "chica": "assets/img/instalacion-07-640.webp",
+            "ancho": 1280,
+            "alt": "Técnicos con equipo de seguridad armando un rack"
+          }
+        }
+      ]
+    },
+    {
+      "tipo": "pasos",
+      "ancla": "proceso",
+      "menu": "Proceso",
+      "etiqueta": "Cómo trabajamos",
+      "titulo": "De la idea al almacén funcionando",
+      "items": [
+        {
+          "titulo": "Diagnóstico",
+          "texto": "Conocemos tu operación, tu producto y tu espacio antes de proponer."
+        },
+        {
+          "titulo": "Ingeniería",
+          "texto": "Diseñamos el layout y la solución que da resultados medibles."
+        },
+        {
+          "titulo": "Fabricación",
+          "texto": "Producimos en acero A50 con capacidad de 800 toneladas por día."
+        },
+        {
+          "titulo": "Instalación",
+          "texto": "Montamos, verificamos y entregamos con acta firmada."
+        }
+      ]
+    },
+    {
+      "tipo": "galeria",
+      "ancla": "proyectos",
+      "menu": "Proyectos",
+      "etiqueta": "Proyectos instalados",
+      "titulo": "Lo que ya está trabajando en otros almacenes",
+      "intro": "Sistemas que fabricamos e instalamos en México.",
+      "items": [
+        {
+          "titulo": "Cantilever",
+          "texto": "Para perfil, tubo y cargas largas",
+          "imagen": {
+            "src": "assets/img/cantilever-03.webp",
+            "chica": "assets/img/cantilever-03-640.webp",
+            "ancho": 1920,
+            "alt": "Rack cantilever con brazos rojos para cargas largas"
+          }
+        },
+        {
+          "titulo": "Pasillo elevado",
+          "texto": "Dos niveles de picking",
+          "imagen": {
+            "src": "assets/img/pasillo-elevado-17.webp",
+            "chica": "assets/img/pasillo-elevado-17-640.webp",
+            "ancho": 1920,
+            "alt": "Pasillo elevado con estantería de picking en dos niveles"
+          }
+        },
+        {
+          "titulo": "Push back",
+          "imagen": {
+            "src": "assets/img/push-back-03.webp",
+            "chica": "assets/img/push-back-03-640.webp",
+            "ancho": 1280,
+            "alt": "Sistema push back visto desde abajo con parrillas metálicas"
+          }
+        },
+        {
+          "titulo": "Carton flow",
+          "imagen": {
+            "src": "assets/img/carton-flow-19.webp",
+            "chica": "assets/img/carton-flow-19-640.webp",
+            "ancho": 1280,
+            "alt": "Camas de rodajas de carton flow en una nave de distribución"
+          }
+        },
+        {
+          "titulo": "Pallet flow",
+          "imagen": {
+            "src": "assets/img/pallet-flow-02.webp",
+            "chica": "assets/img/pallet-flow-02-640.webp",
+            "ancho": 1280,
+            "alt": "Rodillos de pallet flow sobre vigas naranjas"
+          }
+        },
+        {
+          "titulo": "Drive-in",
+          "imagen": {
+            "src": "assets/img/drive-in-01.webp",
+            "chica": "assets/img/drive-in-01-640.webp",
+            "ancho": 1280,
+            "alt": "Rack drive-in con guías amarillas"
+          }
+        },
+        {
+          "titulo": "Autoportante",
+          "imagen": {
+            "src": "assets/img/autoportante-04.webp",
+            "chica": "assets/img/autoportante-04-640.webp",
+            "ancho": 1280,
+            "alt": "Estructura autoportante vista desde el nivel superior"
+          }
+        },
+        {
+          "titulo": "Picking",
+          "imagen": {
+            "src": "assets/img/picking-01.webp",
+            "chica": "assets/img/picking-01-640.webp",
+            "ancho": 1920,
+            "alt": "Estantería de picking con entrepaños metálicos"
+          }
+        }
+      ]
+    },
+    {
+      "tipo": "planes",
+      "ancla": "modalidades",
+      "menu": "Modalidades",
+      "etiqueta": "Formas de trabajar",
+      "titulo": "Elige hasta dónde te acompañamos",
+      "items": [
+        {
+          "nombre": "Suministro",
+          "descripcion": "Fabricamos y entregamos racks y accesorios según tu diseño.",
+          "precio": "A la medida",
+          "nota_precio": "Cotización con vigencia de 30 días.",
+          "incluye": [
+            "Fabricación en acero A50",
+            "Accesorios de protección",
+            "Entrega en tu almacén"
+          ],
+          "cta": {
+            "texto": "Solicita una cotización",
+            "enlace": "mailto:ventas@rackt.com.mx"
+          }
+        },
+        {
+          "nombre": "Proyecto llave en mano",
+          "destacado": true,
+          "insignia": "El más completo",
+          "descripcion": "Nos hacemos cargo de todo, del diagnóstico a la entrega.",
+          "precio": "A la medida",
+          "nota_precio": "Cotización con vigencia de 30 días.",
+          "incluye": [
+            "Diagnóstico del espacio",
+            "Ingeniería y layout",
+            "Fabricación e instalación",
+            "Entrega con acta firmada"
+          ],
+          "cta": {
+            "texto": "Solicita una cotización",
+            "enlace": "mailto:ventas@rackt.com.mx"
+          }
+        },
+        {
+          "nombre": "Servicio y mantenimiento",
+          "descripcion": "Cuidamos lo que ya tienes instalado.",
+          "precio": "A la medida",
+          "nota_precio": "Cotización con vigencia de 30 días.",
+          "incluye": [
+            "Peritaje estructural",
+            "Reubicaciones",
+            "Cursos DC3 de seguridad"
+          ],
+          "cta": {
+            "texto": "Solicita una cotización",
+            "enlace": "mailto:ventas@rackt.com.mx"
+          }
+        }
+      ]
+    },
+    {
+      "tipo": "testimonios",
+      "ancla": "testimonios",
+      "etiqueta": "Casos",
+      "titulo": "Lo que dicen nuestros clientes",
+      "items": [
+        {
+          "ejemplo": true,
+          "cita": "Aquí va la opinión de un cliente, en sus propias palabras y con su autorización por escrito.",
+          "nombre": "Nombre del cliente",
+          "cargo": "Puesto",
+          "empresa": "Empresa"
+        },
+        {
+          "ejemplo": true,
+          "cita": "Un caso breve: qué problema tenía el almacén, qué se instaló y qué resultado medible se obtuvo.",
+          "nombre": "Nombre del cliente",
+          "cargo": "Puesto",
+          "empresa": "Empresa"
+        }
+      ]
+    },
+    {
+      "tipo": "aliados",
+      "titulo": "Empresas que han confiado en nosotros",
+      "items": [
+        {
+          "nombre": "Schneider Electric"
+        },
+        {
+          "nombre": "Martinrea"
+        },
+        {
+          "nombre": "SAF Holland"
+        },
+        {
+          "nombre": "Select Shop"
+        },
+        {
+          "nombre": "Go Global"
+        }
+      ]
+    },
+    {
+      "tipo": "preguntas",
+      "ancla": "preguntas",
+      "menu": "Preguntas",
+      "etiqueta": "Preguntas frecuentes",
+      "titulo": "Lo que más nos preguntan",
+      "items": [
+        {
+          "pregunta": "¿Atienden proyectos fuera de Querétaro?",
+          "respuesta": "Sí. Tenemos oficinas en Querétaro, Estado de México y Guadalajara, y cobertura en toda la República."
+        },
+        {
+          "pregunta": "¿Qué incluye un proyecto llave en mano?",
+          "respuesta": "Diagnóstico del espacio, ingeniería y layout, fabricación, instalación y entrega con acta firmada."
+        },
+        {
+          "pregunta": "¿Qué acero utilizan?",
+          "respuesta": "Acero A50, con resistencia de 50,000 lb/pulg²."
+        },
+        {
+          "pregunta": "¿Cuánto tiempo es válida una cotización?",
+          "respuesta": "30 días a partir de su emisión."
+        },
+        {
+          "pregunta": "¿Dan capacitación en seguridad?",
+          "respuesta": [
+            "Sí. Impartimos cursos DC3 de seguridad.",
+            "También hacemos peritajes estructurales de racks para revisar instalaciones existentes."
+          ]
+        }
+      ]
+    },
+    {
+      "tipo": "cta",
+      "ancla": "contacto",
+      "menu": "Contacto",
+      "etiqueta": "Contacto",
+      "titulo": "Platícanos de tu almacén",
+      "texto": "Cuéntanos qué guardas, cuánto y en qué espacio. Te respondemos con una propuesta de solución.",
+      "cta_primario": {
+        "texto": "Solicita una cotización",
+        "enlace": "mailto:ventas@rackt.com.mx?subject=Solicitud%20de%20cotizaci%C3%B3n"
+      },
+      "contacto": [
+        {
+          "tipo": "correo",
+          "valor": "ventas@rackt.com.mx",
+          "enlace": "mailto:ventas@rackt.com.mx"
+        },
+        {
+          "tipo": "telefono",
+          "valor": "442 491 7676",
+          "enlace": "tel:+524424917676"
+        },
+        {
+          "tipo": "sitio",
+          "valor": "rackt.com.mx",
+          "enlace": "https://rackt.com.mx"
+        },
+        {
+          "tipo": "ubicacion",
+          "valor": "Terra Park Centenario, Nave 56, Querétaro, Qro."
+        }
+      ]
+    },
+    {
+      "tipo": "pie",
+      "direccion": "Terra Park Centenario, Nave 56, Km 1+37, Paseo Centenario del Ejército Mexicano, Querétaro, Qro.",
+      "contacto": [
+        "ventas@rackt.com.mx",
+        "442 491 7676"
+      ],
+      "redes": [
+        {
+          "red": "facebook",
+          "nombre": "Rack-T",
+          "url": ""
+        },
+        {
+          "red": "instagram",
+          "nombre": "rack_thinking",
+          "url": ""
+        },
+        {
+          "red": "linkedin",
+          "nombre": "Rack-T",
+          "url": ""
+        }
+      ],
+      "legal": "RACK-T forma parte de Grupo ERT."
+    }
+  ]
+}
+</script>
+
+<script>
+/* ==========================================================================
+   MOTOR — lee el JSON y arma la página. No se edita para cargar contenido.
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  const raiz = document.getElementById('raiz');
+  const sinMovimiento = !document.documentElement.classList.contains('animar');
+  let datos;
+  try {
+    datos = JSON.parse(document.getElementById('contenido').textContent);
+  } catch (e) {
+    raiz.innerHTML = '<p style="padding:2rem;font:1rem system-ui">El bloque de contenido tiene un error de formato JSON: ' + String(e.message).replace(/</g, '&lt;') + '</p>';
+    console.error('Contenido JSON inválido:', e);
+    return;
+  }
+
+  /* ---------- Utilidades ---------- */
+
+  // Crea un elemento. Todo texto entra con textContent (nunca como HTML).
+  function h(etiqueta, props, ...hijos) {
+    const el = document.createElement(etiqueta);
+    for (const [k, v] of Object.entries(props || {})) {
+      if (v === null || v === undefined || v === false) continue;
+      if (k === 'class') el.className = v;
+      else if (k === 'text') el.textContent = v;
+      else if (k === 'style') el.style.cssText = v;
+      else if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
+      else el.setAttribute(k, v === true ? '' : v);
+    }
+    for (const hijo of hijos.flat(Infinity)) {
+      if (hijo === null || hijo === undefined || hijo === false || hijo === '') continue;
+      el.append(hijo instanceof Node ? hijo : document.createTextNode(String(hijo)));
+    }
+    return el;
+  }
+  const tiene = (v) => v !== undefined && v !== null && v !== '' && !(Array.isArray(v) && v.length === 0);
+  const lista = (v) => (Array.isArray(v) ? v : tiene(v) ? [v] : []);
+
+  // Enlaces: se bloquean esquemas peligrosos; los externos abren en otra pestaña.
+  function enlaceSeguro(url) {
+    if (!tiene(url)) return null;
+    const s = String(url).trim();
+    return /^(javascript|data|vbscript):/i.test(s) ? null : s;
+  }
+  function atributosEnlace(url) {
+    const href = enlaceSeguro(url);
+    const externo = href && /^https?:\/\//i.test(href);
+    return { href, target: externo ? '_blank' : null, rel: externo ? 'noopener' : null };
+  }
+
+  // Párrafos: acepta texto o arreglo de textos.
+  const parrafos = (v, clase) => lista(v).map((t) => h('p', { class: clase, text: t }));
+
+  // Íconos SVG (trazo 2 px, estilo industrial). Se eligen por nombre en el JSON.
+  const ICONOS = {
+    rack: '<path d="M4 3v18M20 3v18M4 8h16M4 14h16M4 20h16"/><path d="M7 8V5.5h4V8M13 14v-3h4v3"/>',
+    mezzanine: '<path d="M2 10h20M4 10v11M20 10v11M12 10v11"/><path d="M4 21l8-11"/><path d="M4 6h16M4 6v4M20 6v4"/>',
+    montacargas: '<path d="M3 17V9h6l3 4v4"/><path d="M15 3v14h6"/><circle cx="6" cy="18.5" r="1.8"/><circle cx="11.5" cy="18.5" r="1.8"/>',
+    escudo: '<path d="M12 3l8 3v6c0 5-3.4 8-8 9-4.6-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+    camion: '<path d="M2 6h11v10H2zM13 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
+    regla: '<path d="M3 17L17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/>',
+    casco: '<path d="M3 18h18M5 18v-3a7 7 0 0 1 14 0v3"/><path d="M10 8V5h4v3"/>',
+    engrane: '<circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>',
+    grafica: '<path d="M3 21h18M6 17V11M11 17V6M16 17v-8M21 17V4"/>',
+    reloj: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    check: '<path d="M4 12.5l5 5L20 6.5"/>',
+    flecha: '<path d="M4 12h15M13 6l6 6-6 6"/>',
+    arriba: '<path d="M12 20V5M6 11l6-6 6 6"/>',
+    correo: '<rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/>',
+    telefono: '<path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/>',
+    sitio: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+    ubicacion: '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+    whatsapp: '<path d="M4 20l1.3-3.9A8.5 8.5 0 1 1 8 19z"/><path d="M9 9.5c.3 2.3 2.2 4.2 4.5 4.5l1-1.3 2 1-1 2c-3.5.2-7.7-4-7.5-7.5l2-1 1 2z"/>',
+    facebook: '<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/>',
+    instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
+    linkedin: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/>',
+    youtube: '<rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/>',
+    sol: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/>',
+    luna: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+    menu: '<path d="M3 6h18M3 12h18M3 18h18"/>',
+    cerrar: '<path d="M5 5l14 14M19 5L5 19"/>'
+  };
+  function icono(nombre, clase) {
+    const cuerpo = ICONOS[nombre] || ICONOS.rack;
+    const t = document.createElement('template');
+    t.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + cuerpo + '</svg>';
+    const svg = t.content.firstElementChild;
+    if (clase) svg.setAttribute('class', clase);
+    return svg;
+  }
+
+  // Logotipo desde <template>. decorativo = sin nombre accesible.
+  function logo(id, decorativo) {
+    const svg = document.getElementById(id).content.firstElementChild.cloneNode(true);
+    if (decorativo) { svg.setAttribute('aria-hidden', 'true'); svg.removeAttribute('role'); svg.querySelector('title')?.remove(); }
+    return svg;
+  }
+
+  function boton(cta, variante, conFlecha) {
+    if (!cta || !tiene(cta.texto)) return null;
+    const a = atributosEnlace(cta.enlace);
+    return h('a', { class: 'boton boton--' + variante, ...a }, cta.texto, conFlecha ? icono('flecha') : null);
+  }
+
+  // Foto con versión chica opcional ("chica": miniatura de 640 px): el navegador elige la que
+  // le toca según el ancho en pantalla, así el celular no baja la de 1920 px.
+  // opciones.sizes = ancho que ocupa en pantalla · opciones.prioridad = foto principal (no se difiere).
+  function imagen(img, clase, opciones) {
+    if (!img || !tiene(img.src)) return null;
+    opciones = opciones || {};
+    if (!tiene(img.alt)) console.warn('Imagen sin "alt":', img.src);
+    const conChica = tiene(img.chica);
+    return h('figure', { class: 'foto ' + (img.color ? 'foto--color ' : '') + (clase || '') },
+      h('img', {
+        src: conChica && !opciones.prioridad ? img.chica : img.src,
+        srcset: conChica ? img.chica + ' 640w, ' + img.src + ' ' + (img.ancho || 1920) + 'w' : null,
+        sizes: conChica ? (opciones.sizes || '100vw') : null,
+        alt: img.alt || '',
+        loading: opciones.prioridad ? 'eager' : 'lazy',
+        fetchpriority: opciones.prioridad ? 'high' : null,
+        decoding: 'async'
+      }));
+  }
+
+  // Título con una parte resaltada (bloque rojo detrás del texto).
+  function tituloConResaltado(texto, resaltado) {
+    if (!tiene(resaltado) || !String(texto).includes(resaltado)) return [texto];
+    const [antes, ...resto] = String(texto).split(resaltado);
+    return [antes, h('span', { class: 'resaltado', text: resaltado }), resto.join(resaltado)];
+  }
+
+  // Numeración automática de secciones ("01", "02"...)
+  let numeroSeccion = 0;
+  function cabeza(s, opciones) {
+    opciones = opciones || {};
+    if (!tiene(s.titulo) && !tiene(s.etiqueta) && !tiene(s.intro)) return null;
+    if (opciones.numerar !== false) numeroSeccion += 1;
+    const idTitulo = (s.ancla || s.tipo + '-' + numeroSeccion) + '-titulo';
+    s._idTitulo = tiene(s.titulo) ? idTitulo : null;
+    return h('div', { class: 'cabeza revelar' + (opciones.centro ? ' cabeza--centro' : '') },
+      tiene(s.etiqueta) || opciones.numerar !== false
+        ? h('p', { class: 'etiqueta' },
+            opciones.numerar === false ? null : h('span', { class: 'numero', text: String(numeroSeccion).padStart(2, '0') }),
+            tiene(s.etiqueta) ? s.etiqueta : null)
+        : null,
+      tiene(s.titulo) ? h('h2', { id: idTitulo, text: s.titulo }) : null,
+      parrafos(s.intro, 'intro'));
+  }
+
+  // Envoltura común de sección
+  function seccion(s, clases, ...hijos) {
+    const el = h('section', { id: enlaceSeguro(s.ancla), class: 'seccion ' + (clases || '') }, h('div', { class: 'contenedor' }, ...hijos));
+    if (s._idTitulo) el.setAttribute('aria-labelledby', s._idTitulo);
+    return el;
+  }
+
+  // Asigna el índice de escalonado a hermanos
+  const escalonar = (elementos) => elementos.forEach((el, i) => { el.classList.add('revelar'); el.style.setProperty('--i', i); });
+
+  /* ---------- Ilustración de rack (mientras no haya foto) ---------- */
+  function ilustracionRack() {
+    const postes = [30, 252, 474];
+    const niveles = [118, 222, 326];          // altura de las vigas
+    const bahias = [[46, 252], [268, 474]];
+    let svg = '<svg class="ilustracion revelar" viewBox="0 0 520 440" aria-hidden="true" focusable="false">';
+    // Piso y cota
+    svg += '<line class="ilus-piso" x1="0" y1="412" x2="520" y2="412"/>';
+    svg += '<path class="ilus-cota" d="M508 20v392M502 20h12M502 412h12"/>';
+    // Postes con perforaciones
+    postes.forEach((x) => {
+      svg += '<rect class="ilus-poste" x="' + x + '" y="20" width="16" height="392" rx="2"/>';
+      for (let y = 30; y < 404; y += 18) svg += '<rect class="ilus-perfo" x="' + (x + 6) + '" y="' + y + '" width="4" height="9" rx="2"/>';
+    });
+    // Vigas (se animan) y cargas
+    let iv = 0, ic = 0;
+    const cargas = [
+      [[62, 66], [150, 58]], [[62, 74], [150, 66, true]], [[62, 60], [150, 72]],
+      [[284, 70], [372, 62]], [[284, 58], null], [[284, 66], [372, 74]]
+    ];
+    bahias.forEach(([x1, x2], b) => {
+      niveles.forEach((y, n) => {
+        svg += '<rect class="ilus-viga" style="--i:' + (iv++) + '" x="' + x1 + '" y="' + y + '" width="' + (x2 - x1) + '" height="11" rx="2"/>';
+        const par = cargas[b * 3 + n];
+        par.forEach((c) => {
+          if (!c) return;
+          const cx = b === 0 ? c[0] : c[0], alto = c[1], acento = c[2];
+          const yTarima = (n === 0 ? y : y) - 9, yCarga = yTarima - alto;
+          svg += '<g class="ilus-bulto" style="--i:' + (ic++) + '">' +
+                 '<rect class="ilus-tarima" x="' + cx + '" y="' + yTarima + '" width="80" height="8" rx="1"/>' +
+                 '<rect class="ilus-carga' + (acento ? ' ilus-carga--acento' : '') + '" x="' + (cx + 3) + '" y="' + yCarga + '" width="74" height="' + (alto - 1) + '" rx="1"/></g>';
+        });
+      });
+      // Cargas a piso
+      svg += '<g class="ilus-bulto" style="--i:' + (ic++) + '"><rect class="ilus-tarima" x="' + (x1 + 16) + '" y="403" width="80" height="8" rx="1"/><rect class="ilus-carga" x="' + (x1 + 19) + '" y="336" width="74" height="66" rx="1"/></g>';
+    });
+    svg += '</svg>';
+    const t = document.createElement('template');
+    t.innerHTML = svg;
+    return t.content.firstElementChild;
+  }
+
+  /* ---------- Renderizadores por tipo de sección ---------- */
+  const secciones = lista(datos.secciones);
+  const marca = datos.marca || {};
+
+  const R = {
+    encabezado(s) {
+      const anclas = secciones.filter((x) => tiene(x.menu) && tiene(x.ancla));
+      const menuId = 'menu-principal';
+      const botonMenu = h('button', { class: 'boton-icono menu-boton', type: 'button', 'aria-expanded': 'false', 'aria-controls': menuId, 'aria-label': 'Abrir menú' }, icono('menu'));
+      const botonTema = h('button', { class: 'boton-icono boton-tema', type: 'button', 'aria-label': 'Cambiar entre modo claro y oscuro' },
+        icono('sol', 'icono-sol'), icono('luna', 'icono-luna'));
+      const header = h('header', { class: 'encabezado', id: 'encabezado' },
+        h('div', { class: 'contenedor' },
+          h('a', { class: 'logo', href: '#contenido', 'aria-label': (marca.nombre || 'Inicio') + ' — ir al inicio' }, logo('tpl-logo', true)),
+          anclas.length ? h('nav', { class: 'menu', id: menuId, 'aria-label': 'Principal' },
+            h('ul', {}, anclas.map((x) => h('li', {}, h('a', { class: 'enlace', href: '#' + x.ancla, text: x.menu }))))) : null,
+          h('div', { class: 'acciones-encabezado' },
+            boton(s.cta, 'primario boton--chico', false),
+            botonTema,
+            anclas.length ? botonMenu : null)));
+
+      botonMenu.addEventListener('click', () => {
+        const abierto = header.classList.toggle('abierto');
+        botonMenu.setAttribute('aria-expanded', String(abierto));
+        botonMenu.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
+        botonMenu.replaceChildren(icono(abierto ? 'cerrar' : 'menu'));
+      });
+      header.addEventListener('click', (e) => {
+        if (e.target.closest('.menu a') && header.classList.contains('abierto')) botonMenu.click();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && header.classList.contains('abierto')) { botonMenu.click(); botonMenu.focus(); }
+      });
+      botonTema.addEventListener('click', () => {
+        const nuevo = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', nuevo);
+        try { localStorage.setItem('rt-tema', nuevo); } catch (e) {}
+      });
+      return header;
+    },
+
+    hero(s) {
+      const visual = imagen(s.imagen, 'revelar', { prioridad: true, sizes: '(min-width: 900px) 45vw, 100vw' }) || (s.ilustracion === false ? null : ilustracionRack());
+      const texto = h('div', {},
+        tiene(s.etiqueta) ? h('p', { class: 'etiqueta revelar', style: '--i:0', text: s.etiqueta }) : null,
+        tiene(s.titulo) ? h('h1', { class: 'revelar', style: '--i:1' }, tituloConResaltado(s.titulo, s.resaltado)) : null,
+        tiene(s.subtitulo) ? h('p', { class: 'subtitulo revelar', style: '--i:2', text: s.subtitulo }) : null,
+        (s.cta_primario || s.cta_secundario) ? h('div', { class: 'botones revelar', style: '--i:3' },
+          boton(s.cta_primario, 'primario', true), boton(s.cta_secundario, 'secundario', false)) : null);
+      return h('section', { class: 'hero bloque-oscuro', id: enlaceSeguro(s.ancla), 'aria-label': 'Presentación' },
+        h('div', { class: 'contenedor' }, texto, visual ? h('div', { class: 'hero-visual' }, visual) : null));
+    },
+
+    cifras(s) {
+      const items = lista(s.items).filter((c) => tiene(c.valor));
+      if (!items.length) return null;
+      const cab = cabeza(s);
+      const nodos = items.map((c) => {
+        const num = typeof c.valor === 'number';
+        const fmt = new Intl.NumberFormat('es-MX', { maximumFractionDigits: c.decimales || 0, minimumFractionDigits: c.decimales || 0, useGrouping: c.agrupar !== false });
+        const valor = h('span', num ? { class: 'contador', 'data-valor': c.valor, 'data-decimales': c.decimales || 0, 'data-agrupar': c.agrupar === false ? 'false' : 'true' } : {}, num ? fmt.format(c.valor) : String(c.valor));
+        return h('div', { class: 'cifra' },
+          h('p', { class: 'cifra-valor' },
+            tiene(c.prefijo) ? h('span', { class: 'cifra-afijo', text: c.prefijo }) : null, valor,
+            tiene(c.sufijo) ? h('span', { class: 'cifra-afijo', text: c.sufijo }) : null),
+          tiene(c.etiqueta) ? h('p', { class: 'cifra-etiqueta', text: c.etiqueta }) : null,
+          tiene(c.nota) ? h('p', { class: 'cifra-nota', text: c.nota }) : null);
+      });
+      escalonar(nodos);
+      return seccion(s, 'seccion--superficie', cab, h('div', { class: 'cifras' }, nodos));
+    },
+
+    beneficios(s) {
+      const items = lista(s.items);
+      if (!items.length) return null;
+      const cab = cabeza(s);
+      const nodos = items.map((b) => {
+        const foto = imagen(b.imagen, 'tarjeta-foto', { sizes: '(min-width: 1200px) 290px, (min-width: 640px) 45vw, 100vw' });
+        return h('article', { class: 'tarjeta' + (foto ? ' tarjeta--foto' : '') },
+          foto,
+          h('div', { class: 'icono-caja' }, icono(b.icono || 'rack')),
+          tiene(b.titulo) ? h('h3', { text: b.titulo }) : null,
+          parrafos(b.texto));
+      });
+      escalonar(nodos);
+      return seccion(s, '', cab, h('div', { class: 'rejilla' }, nodos));
+    },
+
+    // Galería de proyectos: la primera foto va grande (2 × 2) y la última se estira lo necesario
+    // para que la rejilla cierre sin huecos, tanto a 4 columnas como a 2.
+    galeria(s) {
+      const items = lista(s.items).filter((g) => g.imagen && tiene(g.imagen.src));
+      if (!items.length) return null;
+      const cab = cabeza(s);
+      const n = items.length;
+      const celdas4 = n > 1 ? 4 + (n - 1) : 1, resto4 = celdas4 % 4;      // a 4 columnas
+      const resto2 = n > 1 ? (n - 1) % 2 : 0;                              // a 2 columnas
+      const nodos = items.map((g, i) => {
+        let c4 = 1, c2 = 1;
+        if (i === 0 && n > 1) { c4 = 2; c2 = 2; }
+        const ultimo = i === n - 1, penultimo = i === n - 2;
+        if (resto4 === 1 && ultimo) c4 = 4;                   // queda sola: panorámica a todo lo ancho
+        if (resto4 === 2 && (ultimo || penultimo) && i > 0) c4 = 2;
+        if (resto4 === 3 && ultimo && i > 0) c4 = 2;
+        if (resto2 === 1 && ultimo && i > 0) c2 = 2;
+        const grande = i === 0 && n > 1;
+        return h('figure', { class: 'galeria-item' + (grande ? ' galeria-item--grande' : ''), style: '--c4:' + c4 + ';--c2:' + c2 },
+          imagen(g.imagen, '', { sizes: grande ? '(min-width: 960px) 600px, 100vw' : '(min-width: 960px) 300px, 50vw' }),
+          (tiene(g.titulo) || tiene(g.texto)) ? h('figcaption', {},
+            tiene(g.titulo) ? h('strong', { text: g.titulo }) : null,
+            tiene(g.texto) ? h('span', { text: g.texto }) : null) : null);
+      });
+      escalonar(nodos);
+      return seccion(s, 'seccion--superficie', cab, h('div', { class: 'galeria' }, nodos),
+        tiene(s.nota) ? h('p', { class: 'galeria-nota revelar', text: s.nota }) : null);
+    },
+
+    pasos(s) {
+      const items = lista(s.items);
+      if (!items.length) return null;
+      const cab = cabeza(s);
+      const nodos = items.map((p, i) => h('li', { class: 'paso' },
+        h('span', { class: 'paso-numero', 'aria-hidden': 'true', text: String(i + 1).padStart(2, '0') }),
+        tiene(p.titulo) ? h('h3', {}, h('span', { class: 'solo-lectores', text: 'Paso ' + (i + 1) + ': ' }), p.titulo) : null,
+        parrafos(p.texto)));
+      escalonar(nodos);
+      return seccion(s, 'seccion--superficie', cab, h('ol', { class: 'pasos', style: '--n:' + Math.min(items.length, 5) }, nodos));
+    },
+
+    planes(s) {
+      const items = lista(s.items);
+      if (!items.length) return null;
+      const cab = cabeza(s);
+      const nodos = items.map((p) => h('article', { class: 'plan' + (p.destacado ? ' plan--destacado bloque-oscuro' : '') },
+        p.destacado && tiene(p.insignia) ? h('span', { class: 'insignia', text: p.insignia }) : null,
+        tiene(p.nombre) ? h('h3', { text: p.nombre }) : null,
+        tiene(p.descripcion) ? h('p', { class: 'plan-descripcion', text: p.descripcion }) : null,
+        tiene(p.precio) ? h('p', { class: 'plan-precio', text: p.precio }) : null,
+        tiene(p.nota_precio) ? h('p', { class: 'plan-nota', text: p.nota_precio }) : null,
+        lista(p.incluye).length ? h('ul', { class: 'lista-check' }, lista(p.incluye).map((x) => h('li', {}, icono('check'), h('span', { text: x })))) : null,
+        p.cta ? h('div', { class: 'plan-pie' }, boton(p.cta, p.destacado ? 'primario' : 'secundario', p.destacado)) : null));
+      escalonar(nodos);
+      return seccion(s, '', cab, h('div', { class: 'planes' }, nodos));
+    },
+
+    testimonios(s) {
+      const items = lista(s.items).filter((t) => tiene(t.cita));
+      if (!items.length) return null;
+      const cab = cabeza(s);
+      const nodos = items.map((t) => h('figure', { class: 'testimonio' },
+        t.ejemplo ? h('span', { class: 'marca-ejemplo', text: 'Ejemplo · reemplazar' }) : null,
+        h('blockquote', {}, h('p', { text: t.cita })),
+        h('figcaption', {},
+          tiene(t.nombre) ? h('strong', { text: t.nombre }) : null,
+          (tiene(t.cargo) || tiene(t.empresa)) ? h('span', { text: [t.cargo, t.empresa].filter(tiene).join(' · ') }) : null)));
+      escalonar(nodos);
+      return seccion(s, '', cab, h('div', { class: 'testimonios' }, nodos));
+    },
+
+    aliados(s) {
+      const items = lista(s.items).filter((a) => tiene(a.nombre) || tiene(a.logo));
+      if (!items.length) return null;
+      const cab = cabeza(s, { centro: true, numerar: false });
+      const grupo = (oculto) => h('ul', { class: 'grupo-aliados', 'aria-hidden': oculto ? 'true' : null },
+        items.map((a) => h('li', { class: 'aliado' },
+          tiene(a.logo) ? h('img', { src: a.logo, alt: oculto ? '' : (a.nombre || ''), loading: 'lazy' }) : h('span', { class: 'aliado-nombre', text: a.nombre }))));
+      const el = h('section', { class: 'aliados', id: enlaceSeguro(s.ancla), 'aria-label': s.titulo || 'Aliados' },
+        h('div', { class: 'contenedor' }, cab),
+        h('div', { class: 'marquesina revelar', style: s.velocidad ? '--velocidad:' + Number(s.velocidad) + 's' : null },
+          h('div', { class: 'pista' }, grupo(false), grupo(true))));
+      return el;
+    },
+
+    preguntas(s) {
+      const items = lista(s.items).filter((p) => tiene(p.pregunta));
+      if (!items.length) return null;
+      const cab = cabeza(s, { centro: true });
+      const nodos = items.map((p, i) => {
+        const idP = 'faq-' + i, idB = 'faq-b-' + i;
+        const panel = h('div', { class: 'faq-panel', id: idP, role: 'region', 'aria-labelledby': idB, hidden: true }, parrafos(p.respuesta));
+        const btn = h('button', { class: 'faq-boton', id: idB, type: 'button', 'aria-expanded': 'false', 'aria-controls': idP },
+          h('span', { text: p.pregunta }), h('span', { class: 'faq-signo', 'aria-hidden': 'true' }));
+        btn.addEventListener('click', () => {
+          const abierto = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!abierto));
+          panel.hidden = abierto;
+        });
+        return h('div', { class: 'faq-item' }, h('h3', {}, btn), panel);
+      });
+      escalonar(nodos);
+      return seccion(s, 'seccion--superficie', cab, h('div', { class: 'faq' }, nodos));
+    },
+
+    cta(s) {
+      const contactos = lista(s.contacto).filter((c) => tiene(c.valor));
+      const el = h('section', { class: 'seccion cta-final bloque-primario', id: enlaceSeguro(s.ancla) },
+        h('div', { class: 'contenedor' },
+          h('div', {},
+            cabeza(s),
+            parrafos(s.texto, 'texto revelar'),
+            (s.cta_primario || s.cta_secundario) ? h('div', { class: 'botones revelar' }, boton(s.cta_primario, 'primario', true), boton(s.cta_secundario, 'secundario', false)) : null),
+          contactos.length ? h('address', {}, h('ul', { class: 'contacto' }, contactos.map((c, i) => {
+            const a = atributosEnlace(c.enlace);
+            return h('li', { class: 'revelar', style: '--i:' + i },
+              h('span', { class: 'icono-caja' }, icono(c.tipo || 'sitio')),
+              a.href ? h('a', { class: 'enlace', ...a, text: c.valor }) : h('span', { text: c.valor }));
+          }))) : null),
+        (() => { const m = logo('tpl-isotipo', true); m.setAttribute('class', 'marca-agua'); return m; })());
+      if (s._idTitulo) el.setAttribute('aria-labelledby', s._idTitulo);
+      if (!s.titulo && !contactos.length && !s.cta_primario) return null;
+      return el;
+    },
+
+    pie(s) {
+      const redes = lista(s.redes).filter((r) => tiene(r.nombre));
+      const contacto = lista(s.contacto);
+      return h('footer', { class: 'pie bloque-oscuro' },
+        h('div', { class: 'contenedor' },
+          h('div', { class: 'pie-rejilla' },
+            h('div', {},
+              h('a', { class: 'logo', href: '#contenido', 'aria-label': (marca.nombre || 'Inicio') + ' — ir al inicio' }, logo('tpl-logo', true)),
+              tiene(marca.eslogan) ? h('p', { class: 'eslogan', text: marca.eslogan }) : null),
+            (tiene(s.direccion) || contacto.length) ? h('div', {},
+              h('h2', { text: 'Contacto' }),
+              h('address', { style: 'font-style:normal' }, h('ul', {},
+                tiene(s.direccion) ? h('li', { text: s.direccion }) : null,
+                contacto.map((c) => h('li', { text: c }))))) : null,
+            redes.length ? h('div', {},
+              h('h2', { text: 'Redes' }),
+              h('ul', {}, redes.map((r) => {
+                const a = atributosEnlace(r.url);
+                const cuerpo = [icono(r.red || 'sitio'), h('span', { text: r.nombre })];
+                return h('li', {}, a.href ? h('a', { class: 'red enlace', ...a, 'aria-label': (r.red || '') + ' ' + r.nombre }, cuerpo) : h('span', { class: 'red' }, cuerpo));
+              }))) : null),
+          h('div', { class: 'pie-legal' },
+            h('p', { text: '© ' + new Date().getFullYear() + ' ' + (marca.nombre || '') }),
+            tiene(s.legal) ? h('p', { text: s.legal }) : null)));
+    }
+  };
+
+  /* ---------- Armado de la página ---------- */
+  // El título y la descripción de la página viven en el <head> (tarjeta para compartir).
+
+  const principal = h('main', { id: 'contenido', tabindex: '-1' });
+  let encabezado = null, pie = null;
+  secciones.forEach((s) => {
+    if (!s || !R[s.tipo]) { if (s && s.tipo) console.warn('Tipo de sección desconocido:', s.tipo); return; }
+    const nodo = R[s.tipo](s);
+    if (!nodo) return;
+    if (s.tipo === 'encabezado') encabezado = nodo;
+    else if (s.tipo === 'pie') pie = nodo;
+    else principal.append(nodo);
+  });
+  const riel = h('div', { class: 'riel', 'aria-hidden': 'true' }, h('span'));
+  const volver = h('button', { class: 'volver-arriba', type: 'button', 'aria-label': 'Volver arriba' }, icono('arriba'));
+  raiz.append(...[encabezado, riel, principal, pie, volver].filter(Boolean));
+
+  /* ---------- Comportamiento ---------- */
+  const primeraEsHero = principal.firstElementChild && principal.firstElementChild.classList.contains('hero');
+  if (encabezado && !primeraEsHero) {
+    encabezado.classList.add('solido');
+    principal.style.paddingTop = 'var(--alto-encabezado)';
+  }
+
+  // Scroll: encabezado sólido, progreso de lectura y botón "volver arriba"
+  let pendiente = false;
+  function alDesplazar() {
+    pendiente = false;
+    const y = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    document.documentElement.style.setProperty('--progreso', max > 0 ? Math.min(1, y / max).toFixed(4) : 0);
+    if (encabezado && primeraEsHero) encabezado.classList.toggle('solido', y > 24);
+    volver.classList.toggle('visible', y > 600);
+  }
+  window.addEventListener('scroll', () => { if (!pendiente) { pendiente = true; requestAnimationFrame(alDesplazar); } }, { passive: true });
+  window.addEventListener('resize', alDesplazar);
+  alDesplazar();
+
+  volver.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: sinMovimiento ? 'auto' : 'smooth' });
+    principal.focus({ preventScroll: true });
+  });
+
+  // Contadores
+  function contar(el) {
+    if (el.dataset.contado) return;
+    el.dataset.contado = '1';
+    const fin = parseFloat(el.dataset.valor), dec = +el.dataset.decimales || 0;
+    const fmt = new Intl.NumberFormat('es-MX', { minimumFractionDigits: dec, maximumFractionDigits: dec, useGrouping: el.dataset.agrupar !== 'false' });
+    if (sinMovimiento) { el.textContent = fmt.format(fin); return; }
+    const t0 = performance.now(), dur = 700;
+    const paso = (t) => {
+      const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = fmt.format(k < 1 ? fin * e : fin);
+      if (k < 1) requestAnimationFrame(paso);
+    };
+    requestAnimationFrame(paso);
+  }
+
+  // Aparición al entrar en pantalla
+  const observables = raiz.querySelectorAll('.revelar, .paso, .contador');
+  if ('IntersectionObserver' in window && !sinMovimiento) {
+    const io = new IntersectionObserver((entradas) => {
+      entradas.forEach((en) => {
+        if (!en.isIntersecting) return;
+        en.target.classList.add('visible');
+        if (en.target.classList.contains('contador')) contar(en.target);
+        io.unobserve(en.target);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    observables.forEach((el) => io.observe(el));
+  } else {
+    observables.forEach((el) => { el.classList.add('visible'); if (el.classList.contains('contador')) contar(el); });
+  }
+
+  // Menú: marca la sección visible
+  const enlacesMenu = [...raiz.querySelectorAll('.menu a')];
+  if (enlacesMenu.length && 'IntersectionObserver' in window) {
+    const porId = new Map(enlacesMenu.map((a) => [a.getAttribute('href').slice(1), a]));
+    const ioMenu = new IntersectionObserver((entradas) => {
+      entradas.forEach((en) => {
+        const a = porId.get(en.target.id);
+        if (a && en.isIntersecting) { enlacesMenu.forEach((x) => x.removeAttribute('aria-current')); a.setAttribute('aria-current', 'true'); }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    porId.forEach((_, id) => { const sec = document.getElementById(id); if (sec) ioMenu.observe(sec); });
+  }
+
+  // Tema del sistema: si la persona no eligió uno, sigue al sistema
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    let guardado = null;
+    try { guardado = localStorage.getItem('rt-tema'); } catch (err) {}
+    if (!guardado) document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+  });
+
+  // Impresión: todo visible, cifras finales y modo claro
+  let temaAntes = null;
+  window.addEventListener('beforeprint', () => {
+    observables.forEach((el) => el.classList.add('visible'));
+    raiz.querySelectorAll('.contador').forEach((el) => {
+      el.dataset.contado = '1';
+      const dec = +el.dataset.decimales || 0;
+      el.textContent = new Intl.NumberFormat('es-MX', { minimumFractionDigits: dec, maximumFractionDigits: dec, useGrouping: el.dataset.agrupar !== 'false' }).format(parseFloat(el.dataset.valor));
+    });
+    temaAntes = document.documentElement.getAttribute('data-theme');
+    document.documentElement.setAttribute('data-theme', 'light');
+  });
+  window.addEventListener('afterprint', () => { if (temaAntes) document.documentElement.setAttribute('data-theme', temaAntes); });
+})();
+</script>
+</body>
+</html>

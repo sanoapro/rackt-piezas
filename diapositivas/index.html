@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- ==========================================================================
+     TARJETA PARA COMPARTIR (WhatsApp, LinkedIn, Facebook, correo)
+     WhatsApp NO ejecuta JavaScript: estos datos se escriben aquí, no en el JSON.
+     Edita título y descripción. https://sanoapro.github.io/rackt-piezas/diapositivas/ lo reemplaza
+     _herramientas/preparar.py con la dirección final del sitio (termina en /).
+     ========================================================================== -->
+<title>RACK-T · Presentación de servicios</title>
+<meta name="description" content="Soluciones de almacenamiento a la medida: racks, mezzanines, ingeniería e instalación.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://sanoapro.github.io/rackt-piezas/diapositivas/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RACK-T">
+<meta property="og:locale" content="es_MX">
+<meta property="og:url" content="https://sanoapro.github.io/rackt-piezas/diapositivas/">
+<meta property="og:title" content="RACK-T · Presentación de servicios">
+<meta property="og:description" content="Soluciones de almacenamiento a la medida: racks, mezzanines, ingeniería e instalación.">
+<meta property="og:image" content="https://sanoapro.github.io/rackt-piezas/diapositivas/og.jpg">
+<meta property="og:image:secure_url" content="https://sanoapro.github.io/rackt-piezas/diapositivas/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="RACK-T · Soluciones de almacenamiento a la medida">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RACK-T · Presentación de servicios">
+<meta name="twitter:description" content="Soluciones de almacenamiento a la medida: racks, mezzanines, ingeniería e instalación.">
+<meta name="twitter:image" content="https://sanoapro.github.io/rackt-piezas/diapositivas/og.jpg">
+
+<!-- Íconos (favicon oficial aprobado el 16/09/2026) y apariencia en el celular -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#1a1919">
+<meta name="format-detection" content="telephone=no">
+<!-- Fuentes de marca: League Gothic (títulos) y Barlow (respaldo web de Bahnschrift) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<!-- Tema y movimiento: se deciden ANTES de pintar -->
+<script>
+  (function () {
+    var tema = null;
+    try { tema = localStorage.getItem('rt-tema'); } catch (e) {}
+    if (tema !== 'light' && tema !== 'dark') {
+      tema = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    document.documentElement.setAttribute('data-theme', tema);
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('animar');
+    }
+  })();
+</script>
+
+<style>
+/* ==========================================================================
+   MODELO DIAPOSITIVAS — RACK-T
+   Lienzo fijo de 1920 × 1080 (16:9) que se escala para caber en la pantalla.
+   Todas las medidas de las diapositivas están en px del lienzo.
+   El contenido vive en <script id="contenido"> al final. Guía: COMO-USAR.md.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. TOKENS DE MARCA — el único bloque que se edita para cambiar la marca
+   Fuente: Brand Book RACK-T 2025
+   ========================================================================== */
+:root {
+  /* Colores de marca */
+  --color-primario: #ab0505;          /* Rojo RACK-T */
+  --color-secundario: #323131;        /* Grafito */
+  --color-neutro: #dfdfdf;            /* Gris */
+  --color-acento: #002455;            /* Azul marino · información y foco */
+  --color-destacado: #f8450d;         /* Naranja · SOLO acentos gráficos, nunca texto */
+  --color-exito: #1d6b47;
+  --color-alerta: #9a5c00;
+  --color-blanco: #ffffff;
+
+  /* Tintes derivados */
+  --color-neutro-claro: #f4f4f4;
+  --color-neutro-medio: #bdbdbd;
+  --color-secundario-medio: #4a4848;
+  --color-secundario-profundo: #242323;
+  --color-secundario-noche: #1a1919;
+  --color-letterbox: #111010;         /* franjas fuera del lienzo 16:9 */
+
+  /* Variantes para fondo oscuro */
+  --color-acento-oscuro: #8fb3e8;
+  --color-exito-oscuro: #62c795;
+  --color-alerta-oscuro: #f0aa4a;
+
+  /* Tipografía */
+  --fuente-titulos: "League Gothic", "Oswald", "Arial Narrow", Impact, sans-serif;
+  --fuente-cuerpo: "Bahnschrift", "Barlow", "Segoe UI", system-ui, sans-serif;
+  --tracking-titulos: 0.03em;
+  --tracking-etiquetas: 0.14em;
+
+  /* Escala tipográfica del lienzo (px de 1920 × 1080) */
+  --d-etiqueta: 26px;
+  --d-texto: 36px;
+  --d-texto-grande: 44px;
+  --d-titulo: 112px;
+  --d-titulo-grande: 168px;
+  --d-cifra: 190px;
+
+  /* Espaciado del lienzo */
+  --d-margen-x: 128px;
+  --d-margen-arriba: 108px;
+  --d-margen-abajo: 120px;
+  --espacio-2: 8px; --espacio-3: 12px; --espacio-4: 16px; --espacio-6: 24px;
+  --espacio-8: 32px; --espacio-12: 48px; --espacio-16: 64px; --espacio-24: 96px;
+
+  /* Forma */
+  --radio-sm: 2px;
+  --radio: 6px;
+  --radio-barra: 999px;
+  --sombra: 0 2px 6px rgb(0 0 0 / .08), 0 20px 48px rgb(0 0 0 / .12);
+
+  /* Movimiento */
+  --duracion-corta: 200ms;
+  --duracion-media: 450ms;
+  --duracion-larga: 650ms;
+  --curva: cubic-bezier(.2, .7, .2, 1);
+  --escalon: 90ms;
+}
+
+/* ==========================================================================
+   2. ROLES DE COLOR — claro y oscuro
+   ========================================================================== */
+:root {
+  --color-fondo: var(--color-blanco);
+  --color-superficie: var(--color-neutro-claro);
+  --color-texto: var(--color-secundario);
+  --color-texto-suave: var(--color-secundario-medio);
+  --color-borde: var(--color-neutro);
+  --color-marca-texto: var(--color-primario);
+  --color-barra: var(--color-primario);
+  --color-info: var(--color-acento);
+  --color-foco: var(--color-acento);
+  --color-oscuro: var(--color-secundario);
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --color-fondo: var(--color-secundario-profundo);
+  --color-superficie: var(--color-secundario);
+  --color-texto: var(--color-neutro);
+  --color-texto-suave: var(--color-neutro-medio);
+  --color-borde: var(--color-secundario-medio);
+  --color-marca-texto: var(--color-neutro-medio);   /* el rojo no se usa como texto en oscuro */
+  --color-info: var(--color-acento-oscuro);
+  --color-foco: var(--color-neutro);
+  --color-oscuro: var(--color-secundario-noche);
+  color-scheme: dark;
+}
+/* Fondo de cada diapositiva: claro (sigue el tema), oscuro o primario */
+.fondo-claro { background: var(--color-fondo); color: var(--color-texto); }
+.fondo-oscuro {
+  --color-texto: var(--color-neutro);
+  --color-texto-suave: var(--color-neutro-medio);
+  --color-borde: rgb(255 255 255 / .14);
+  --color-superficie: rgb(255 255 255 / .05);
+  --color-marca-texto: var(--color-neutro-medio);
+  --color-info: var(--color-acento-oscuro);
+  --color-foco: var(--color-neutro);
+  --color-fondo: var(--color-oscuro);
+  background: var(--color-oscuro); color: var(--color-texto);
+}
+.fondo-primario {
+  --color-texto: var(--color-blanco);
+  --color-texto-suave: rgb(255 255 255 / .88);
+  --color-borde: rgb(255 255 255 / .3);
+  --color-superficie: rgb(0 0 0 / .14);
+  --color-marca-texto: var(--color-blanco);
+  --color-barra: var(--color-blanco);
+  --color-info: var(--color-blanco);
+  --color-foco: var(--color-blanco);
+  --color-fondo: var(--color-primario);
+  background: var(--color-primario); color: var(--color-texto);
+}
+
+/* ==========================================================================
+   3. BASE Y ESCENARIO (lienzo escalado con letterbox)
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--color-letterbox);
+  font-family: var(--fuente-cuerpo);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, .titulo {
+  font-family: var(--fuente-titulos); font-weight: 400; letter-spacing: var(--tracking-titulos);
+  line-height: .98; text-transform: uppercase; margin: 0; text-wrap: balance;
+}
+p, ul, ol, figure, blockquote { margin: 0; }
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--color-foco); outline-offset: 3px; }
+
+.escenario {
+  position: fixed; inset: 0; overflow: hidden;
+  touch-action: pan-y pinch-zoom;              /* el deslizamiento horizontal lo manejamos nosotros */
+  user-select: none; -webkit-user-select: none;
+}
+.lienzo {
+  position: absolute; left: 50%; top: 50%;
+  width: 1920px; height: 1080px;
+  transform: translate(-50%, -50%) scale(var(--escala, 1));
+  overflow: hidden;
+  background: var(--color-fondo);
+}
+.solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ==========================================================================
+   4. DIAPOSITIVAS
+   ========================================================================== */
+.diapositiva {
+  position: absolute; inset: 0; overflow: hidden; isolation: isolate;
+  padding: var(--d-margen-arriba) var(--d-margen-x) var(--d-margen-abajo);
+  display: flex; flex-direction: column;
+  font-size: var(--d-texto); line-height: 1.4;
+  opacity: 0; visibility: hidden; transform: translateX(80px);
+  transition: opacity var(--duracion-media) var(--curva), transform var(--duracion-media) var(--curva), visibility 0s linear var(--duracion-media);
+}
+.diapositiva.previa { transform: translateX(-80px); }
+.diapositiva.activa {
+  opacity: 1; visibility: visible; transform: none;
+  transition: opacity var(--duracion-media) var(--curva), transform var(--duracion-media) var(--curva), visibility 0s;
+}
+
+/* Aparición escalonada de los elementos al entrar */
+.animar .diapositiva [data-anim] { opacity: 0; transform: translateY(26px); }
+.animar .diapositiva.activa [data-anim] {
+  opacity: 1; transform: none;
+  transition: opacity var(--duracion-larga) var(--curva), transform var(--duracion-larga) var(--curva);
+  transition-delay: calc(180ms + var(--i, 0) * var(--escalon));
+}
+
+/* Isotipo discreto en la esquina de cada diapositiva */
+.esquina { position: absolute; top: 72px; right: 96px; width: 52px; color: var(--color-texto); opacity: .9; }
+.fondo-claro .esquina { color: var(--color-primario); }
+
+/* --- Piezas comunes --- */
+.etiqueta {
+  display: inline-flex; align-items: center; gap: 18px;
+  font-size: var(--d-etiqueta); font-weight: 600; letter-spacing: var(--tracking-etiquetas);
+  text-transform: uppercase; color: var(--color-marca-texto); line-height: 1.2;
+}
+.etiqueta::before { content: ""; width: 48px; height: 10px; border-radius: var(--radio-barra); background: var(--color-barra); flex: none; }
+.cabeza { display: grid; gap: 22px; margin-bottom: 64px; max-width: 1480px; padding-right: 120px; }
+.cabeza h2 { font-size: var(--d-titulo); }
+.cabeza .intro { font-size: var(--d-texto-grande); color: var(--color-texto-suave); max-width: 1300px; line-height: 1.3; }
+.cuerpo { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center; }
+.texto-suave { color: var(--color-texto-suave); }
+.resaltado { background: var(--color-primario); color: var(--color-blanco); padding: 0 .1em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.fondo-primario .resaltado { background: var(--color-blanco); color: var(--color-primario); }
+.boton {
+  display: inline-flex; align-items: center; gap: 18px; padding: 26px 44px;
+  font-size: 30px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; text-decoration: none;
+  background: var(--color-primario); color: var(--color-blanco); border-radius: var(--radio-sm);
+  transition: transform var(--duracion-corta) var(--curva), box-shadow var(--duracion-corta) var(--curva);
+}
+.boton svg { width: 32px; height: 32px; transition: transform var(--duracion-corta) var(--curva); }
+.boton:hover { transform: translateY(-3px); box-shadow: var(--sombra); }
+.boton:hover svg { transform: translateX(6px); }
+.fondo-primario .boton { background: var(--color-blanco); color: var(--color-primario); }
+
+/* Viñetas con barra roja */
+.vinetas { list-style: none; padding: 0; display: grid; gap: 34px; max-width: 1500px; }
+.vinetas li { display: grid; grid-template-columns: 56px 1fr; align-items: baseline; font-size: var(--d-texto-grande); line-height: 1.3; }
+.vinetas li::before { content: ""; width: 34px; height: 10px; border-radius: var(--radio-barra); background: var(--color-barra); transform: translateY(-10px); }
+.vinetas strong { font-weight: 600; }
+
+/* --- 4.1 Portada --- */
+.d-portada { padding-right: 0; flex-direction: row; }
+.d-portada .texto { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-right: 96px; }
+.d-portada .logo-grande { flex: none; width: 400px; height: auto; color: var(--color-texto); margin-bottom: 56px; }
+.d-portada h1 { font-size: 140px; line-height: .92; margin: 28px 0 36px; }
+.d-portada .subtitulo { font-size: var(--d-texto-grande); color: var(--color-texto-suave); max-width: 1000px; }
+.d-portada .datos { display: flex; gap: 48px; margin-top: 48px; font-size: 28px; color: var(--color-texto-suave); letter-spacing: .04em; }
+.d-portada .datos span + span::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 48px; background: var(--color-primario); transform: translateY(-4px); }
+.d-portada .panel {
+  position: relative; width: 560px; margin: calc(-1 * var(--d-margen-arriba)) 0 calc(-1 * var(--d-margen-abajo));
+  background: var(--color-primario); display: grid; place-items: center; overflow: hidden;
+}
+.d-portada .panel::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(to bottom, rgb(255 255 255 / .09) 0 22px, transparent 22px 52px);
+}
+.d-portada .panel svg { position: relative; width: 300px; color: var(--color-neutro); }
+.animar .d-portada.activa .panel::before { animation: deriva 30s linear infinite; }
+@keyframes deriva { to { background-position: 0 52px; } }
+
+/* --- 4.2 Separador de sección --- */
+.d-seccion { justify-content: center; }
+.d-seccion .fila { display: flex; align-items: center; gap: 96px; }
+.d-seccion .numero { font-family: var(--fuente-titulos); font-size: 560px; line-height: .78; letter-spacing: -.01em; color: var(--color-texto); flex: none; }
+.d-seccion h2 { font-size: 150px; }
+.d-seccion .subtitulo { font-size: var(--d-texto-grande); color: var(--color-texto-suave); margin-top: 32px; max-width: 900px; }
+.d-seccion::after {                /* patrón de barras de marca */
+  content: ""; position: absolute; z-index: -1; right: 0; top: 0; bottom: 0; width: 34%;
+  background-image: repeating-linear-gradient(to bottom, rgb(255 255 255 / .08) 0 22px, transparent 22px 52px);
+}
+
+/* --- 4.3 Texto --- */
+.d-texto .nota { margin-top: 56px; font-size: 30px; color: var(--color-texto-suave); max-width: 1400px; }
+
+/* --- 4.4 Dos columnas --- */
+.d-dos-columnas .columnas { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 112px; align-items: center; }
+.d-dos-columnas.invertir .col-visual { order: -1; }
+.d-dos-columnas .col-texto .cabeza { margin-bottom: 48px; padding-right: 0; }
+.d-dos-columnas .col-texto .cabeza h2 { font-size: 96px; }
+.d-dos-columnas .col-texto > p { font-size: 38px; color: var(--color-texto-suave); }
+.d-dos-columnas .col-texto > p + p { margin-top: 24px; }
+.d-dos-columnas .col-texto .vinetas { margin-top: 40px; gap: 24px; }
+.d-dos-columnas .col-texto .vinetas li { font-size: 38px; }
+.col-visual { height: 100%; min-height: 0; display: grid; place-items: center; }
+.d-dos-columnas .col-visual { padding-top: 32px; }          /* deja libre el isotipo de la esquina */
+.foto { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: var(--radio); background: var(--color-superficie); }
+.foto img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.foto--color img { filter: none; }
+.foto::after { content: ""; position: absolute; left: 0; bottom: 0; width: 38%; height: 14px; background: var(--color-primario); }
+
+/* Ilustración de rack (mientras no haya foto) */
+.ilustracion { width: 100%; max-height: 100%; }
+.ilus-poste { fill: var(--color-texto-suave); }
+.ilus-perfo { fill: var(--color-fondo); }
+.ilus-viga { fill: var(--color-primario); }
+.ilus-tarima { fill: var(--color-texto-suave); opacity: .55; }
+.ilus-carga { fill: var(--color-superficie); stroke: var(--color-texto-suave); stroke-width: 1.5; }
+.ilus-carga--acento { fill: var(--color-destacado); stroke: none; }
+.ilus-piso { stroke: var(--color-texto-suave); stroke-width: 2; }
+.ilus-cota { stroke: var(--color-info); stroke-width: 1.5; fill: none; }
+.animar .diapositiva .ilus-viga { transform-box: fill-box; transform-origin: left; transform: scaleX(0); }
+.animar .diapositiva .ilus-bulto { opacity: 0; }
+.animar .diapositiva.activa .ilus-viga { transform: scaleX(1); transition: transform var(--duracion-larga) var(--curva) calc(300ms + var(--i, 0) * 90ms); }
+.animar .diapositiva.activa .ilus-bulto { opacity: 1; transition: opacity var(--duracion-media) var(--curva) calc(700ms + var(--i, 0) * 50ms); }
+
+/* --- 4.5 Cifras --- */
+.d-cifras .cifras { flex: 1; display: grid; grid-template-columns: repeat(var(--n, 4), 1fr); gap: 64px; align-content: center; }
+.cifra { display: grid; gap: 14px; align-content: start; }
+.cifra::before { content: ""; width: 96px; height: 14px; border-radius: var(--radio-barra); background: var(--color-barra); margin-bottom: 18px; }
+.cifra-valor { font-family: var(--fuente-titulos); font-size: var(--d-cifra); line-height: .9; letter-spacing: .01em; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.d-cifras[style*="--n:4"] .cifra-valor { font-size: 150px; }
+.cifra-afijo { font-size: .45em; letter-spacing: .03em; }
+.cifra-etiqueta { font-weight: 600; font-size: 38px; line-height: 1.2; }
+.cifra-nota { font-size: 28px; color: var(--color-texto-suave); line-height: 1.35; }
+
+/* --- 4.6 Tarjetas --- */
+.d-tarjetas .rejilla { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); gap: 36px; align-content: center; }
+.tarjeta {
+  position: relative; display: grid; gap: 18px; align-content: start;
+  padding: 44px 44px 48px; background: var(--color-superficie); border-radius: var(--radio);
+  border-bottom: 8px solid var(--color-primario);
+}
+.icono-caja { display: grid; place-items: center; width: 84px; height: 84px; background: var(--color-oscuro); color: var(--color-neutro); border-radius: var(--radio-sm); }
+.fondo-oscuro .icono-caja { background: var(--color-primario); color: var(--color-blanco); }
+.icono-caja svg { width: 44px; height: 44px; }
+.tarjeta h3 { font-size: 54px; margin-top: 8px; }
+.tarjeta p { font-size: 30px; color: var(--color-texto-suave); line-height: 1.35; }
+/* Con 5 o 6 tarjetas: formato horizontal (ícono a la izquierda) para que quepan dos filas */
+.d-tarjetas[data-cantidad="5"] .cabeza, .d-tarjetas[data-cantidad="6"] .cabeza { margin-bottom: 48px; }
+.d-tarjetas[data-cantidad="5"] .tarjeta, .d-tarjetas[data-cantidad="6"] .tarjeta {
+  grid-template-columns: 84px 1fr; column-gap: 28px; row-gap: 10px; padding: 32px 36px 36px;
+}
+.d-tarjetas[data-cantidad="5"] .icono-caja, .d-tarjetas[data-cantidad="6"] .icono-caja { grid-row: span 2; }
+.d-tarjetas[data-cantidad="5"] .tarjeta h3, .d-tarjetas[data-cantidad="6"] .tarjeta h3 { font-size: 48px; margin-top: 0; align-self: center; }
+.d-tarjetas[data-cantidad="5"] .tarjeta p, .d-tarjetas[data-cantidad="6"] .tarjeta p { font-size: 28px; }
+
+/* --- 4.7 Comparativa (columnas de planes o tabla) --- */
+.d-comparativa .columnas-plan { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(var(--n, 3), 1fr); gap: 36px; align-items: stretch; }
+.plan { position: relative; display: flex; flex-direction: column; gap: 22px; padding: 48px; background: var(--color-superficie); border-top: 10px solid var(--color-borde); border-radius: var(--radio); }
+.plan--destacado { background: var(--color-oscuro); color: var(--color-neutro); --color-texto-suave: var(--color-neutro-medio); --color-marca-texto: var(--color-neutro-medio); border-top-color: var(--color-primario); }
+.fondo-oscuro .plan--destacado { background: var(--color-primario); --color-texto-suave: rgb(255 255 255 / .88); --color-marca-texto: var(--color-blanco); border-top-color: var(--color-blanco); color: var(--color-blanco); }
+.insignia { position: absolute; top: -10px; right: 40px; transform: translateY(-50%); padding: 10px 20px; background: var(--color-primario); color: var(--color-blanco); font-size: 22px; font-weight: 600; letter-spacing: var(--tracking-etiquetas); text-transform: uppercase; border-radius: var(--radio-sm); }
+.plan h3 { font-size: 64px; }
+.plan .descripcion { font-size: 30px; color: var(--color-texto-suave); line-height: 1.35; }
+.plan .precio { font-family: var(--fuente-titulos); font-size: 72px; line-height: 1; text-transform: uppercase; letter-spacing: .02em; }
+.lista-check { list-style: none; padding: 0; display: grid; gap: 16px; margin-top: 8px; }
+.lista-check li { display: grid; grid-template-columns: 36px 1fr; gap: 16px; font-size: 30px; line-height: 1.3; }
+.lista-check svg { width: 32px; height: 32px; margin-top: 3px; color: var(--color-marca-texto); }
+.tabla { width: 100%; border-collapse: collapse; font-size: 32px; }
+.tabla th, .tabla td { padding: 24px 28px; text-align: left; border-bottom: 2px solid var(--color-borde); vertical-align: top; }
+.tabla thead th { font-family: var(--fuente-titulos); font-weight: 400; font-size: 48px; letter-spacing: .03em; text-transform: uppercase; border-bottom: 6px solid var(--color-texto); }
+.tabla tbody th { font-weight: 600; }
+.tabla .col-destacada { background: var(--color-superficie); }
+.tabla thead .col-destacada { background: var(--color-primario); color: var(--color-blanco); border-bottom-color: var(--color-primario); }
+
+/* --- 4.8 Línea de tiempo --- */
+.d-linea-tiempo .linea { flex: 1; list-style: none; padding: 0; display: grid; grid-template-columns: repeat(var(--n, 4), 1fr); gap: 40px; align-content: center; position: relative; }
+.d-linea-tiempo .linea::before { content: ""; position: absolute; left: 44px; right: 44px; top: calc(50% - 150px + 43px); height: 6px; background: var(--color-borde); }
+.hito { position: relative; display: grid; gap: 16px; align-content: start; min-height: 300px; }
+.hito-numero {
+  width: 92px; height: 92px; display: grid; place-items: center; margin-bottom: 20px;
+  font-family: var(--fuente-titulos); font-size: 52px; background: var(--color-primario); color: var(--color-blanco); border-radius: var(--radio-sm);
+}
+.hito .fecha { font-size: 24px; font-weight: 600; letter-spacing: var(--tracking-etiquetas); text-transform: uppercase; color: var(--color-marca-texto); }
+.hito h3 { font-size: 58px; }
+.hito p { font-size: 30px; color: var(--color-texto-suave); line-height: 1.35; }
+
+/* --- 4.9 Cita --- */
+.d-cita { justify-content: center; }
+.d-cita figure { max-width: 1480px; display: grid; gap: 56px; }
+.d-cita .comillas { font-family: var(--fuente-titulos); font-size: 360px; line-height: .5; height: 150px; color: var(--color-primario); }
+.d-cita blockquote { font-size: 72px; line-height: 1.22; font-weight: 500; text-wrap: balance; }
+.d-cita figcaption { display: flex; gap: 28px; align-items: center; font-size: 34px; }
+.d-cita figcaption::before { content: ""; width: 72px; height: 10px; border-radius: var(--radio-barra); background: var(--color-primario); }
+.d-cita figcaption strong { font-weight: 600; }
+.d-cita figcaption span { color: var(--color-texto-suave); }
+.marca-ejemplo { position: absolute; top: 72px; left: var(--d-margen-x); padding: 8px 18px; font-size: 22px; font-weight: 600; letter-spacing: var(--tracking-etiquetas); text-transform: uppercase; color: var(--color-info); border: 2px solid currentColor; border-radius: var(--radio-sm); }
+
+/* --- 4.10 Imagen completa --- */
+.d-imagen-completa { justify-content: flex-end; }
+.d-imagen-completa .fondo-foto { position: absolute; inset: 0; z-index: -2; }
+.d-imagen-completa .fondo-foto img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.d-imagen-completa .fondo-foto.color img { filter: none; }
+.d-imagen-completa::before {       /* capa grafito para asegurar contraste (brand book: 60–80 %) */
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to top, rgb(26 25 25 / .88) 0%, rgb(26 25 25 / .62) 55%, rgb(26 25 25 / .35) 100%);
+}
+.d-imagen-completa.sin-foto .fondo-foto {        /* respaldo mientras no haya foto: patrón de barras */
+  background-color: var(--color-oscuro);
+  background-image: repeating-linear-gradient(to bottom, rgb(171 5 5 / .5) 0 22px, transparent 22px 52px);
+  -webkit-mask: linear-gradient(to left, #000 20%, transparent 85%);
+          mask: linear-gradient(to left, #000 20%, transparent 85%);
+}
+.d-imagen-completa h2 { font-size: 150px; max-width: 1400px; }
+.d-imagen-completa .texto { font-size: var(--d-texto-grande); color: var(--color-texto-suave); max-width: 1100px; margin-top: 36px; }
+.d-imagen-completa .credito { position: absolute; right: var(--d-margen-x); bottom: 48px; font-size: 20px; color: var(--color-texto-suave); }
+
+/* --- 4.10b Galería de proyectos --- */
+.d-galeria .cabeza { margin-bottom: 44px; }
+.d-galeria .galeria { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); grid-auto-rows: 1fr; gap: 20px; }
+.galeria-item { position: relative; margin: 0; min-height: 0; overflow: hidden; border-radius: var(--radio); }
+.galeria-item--alta { grid-row: span 2; }
+.galeria-item .foto { height: 100%; border-radius: 0; }
+.galeria-item .foto::after { display: none; }
+.galeria-item figcaption {
+  position: absolute; inset: auto 0 0 0; padding: 72px 28px 24px; display: grid; gap: 4px;
+  color: var(--color-neutro); background: linear-gradient(to top, rgb(26 25 25 / .9), rgb(26 25 25 / 0));
+}
+.galeria-item figcaption strong {
+  font-family: var(--fuente-titulos); font-weight: 400; font-size: 44px; line-height: 1; letter-spacing: .04em;
+  text-transform: uppercase; display: flex; align-items: center; gap: 14px;
+}
+.galeria-item figcaption strong::before { content: ""; width: 28px; height: 9px; border-radius: var(--radio-barra); background: var(--color-primario); flex: none; }
+.galeria-item figcaption span { font-size: 24px; color: var(--color-neutro-medio); }
+
+/* --- 4.11 Logos --- */
+.d-logos .rejilla-logos { flex: 1; display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); gap: 32px; align-content: center; }
+.logo-aliado { display: grid; place-items: center; height: 200px; padding: 32px; background: var(--color-superficie); border-radius: var(--radio); }
+.logo-aliado img { max-height: 110px; width: auto; filter: grayscale(1); }
+.logo-aliado span { font-family: var(--fuente-titulos); font-size: 64px; letter-spacing: .05em; text-transform: uppercase; text-align: center; line-height: 1; }
+
+/* --- 4.12 Cierre --- */
+.d-cierre { flex-direction: row; gap: 96px; align-items: stretch; }
+.d-cierre .texto { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.d-cierre h2 { font-size: 150px; }
+.d-cierre .mensaje { font-size: var(--d-texto-grande); color: var(--color-texto-suave); margin: 36px 0 56px; max-width: 1000px; }
+.d-cierre .lado { width: 560px; display: flex; flex-direction: column; justify-content: center; gap: 48px; }
+.d-cierre .logo-cierre { flex: none; width: 380px; height: auto; color: var(--color-texto); }
+.contacto { list-style: none; padding: 0; display: grid; gap: 26px; font-style: normal; }
+.contacto li { display: grid; grid-template-columns: 64px 1fr; gap: 24px; align-items: center; font-size: 32px; font-weight: 500; }
+.contacto .icono-caja { width: 64px; height: 64px; background: rgb(0 0 0 / .2); color: var(--color-texto); }
+.contacto .icono-caja svg { width: 32px; height: 32px; }
+.contacto a { color: inherit; text-decoration: none; }
+.qr { width: 220px; padding: 16px; background: var(--color-blanco); border-radius: var(--radio-sm); }
+.qr figcaption { font-size: 20px; color: var(--color-secundario); text-align: center; margin-top: 8px; }
+
+/* ==========================================================================
+   5. INTERFAZ (progreso, contador, cuadrícula, notas) — no se imprime
+   ========================================================================== */
+.interfaz { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+.progreso {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 10px;
+  -webkit-mask: repeating-linear-gradient(to right, #000 0 44px, transparent 44px 52px);
+          mask: repeating-linear-gradient(to right, #000 0 44px, transparent 44px 52px);
+  background: rgb(128 128 128 / .25);
+}
+.progreso span { position: absolute; inset: 0; background: var(--color-primario); transform-origin: left; transform: scaleX(var(--avance, 0)); transition: transform var(--duracion-media) var(--curva); }
+.lienzo[data-fondo="primario"] .progreso span { background: var(--color-blanco); }
+.contador {
+  position: absolute; right: 96px; bottom: 40px;
+  font-family: var(--fuente-titulos); font-size: 34px; letter-spacing: .08em; color: var(--color-texto-suave);
+}
+.lienzo[data-fondo="oscuro"] .contador { color: var(--color-neutro-medio); }
+.lienzo[data-fondo="primario"] .contador { color: rgb(255 255 255 / .88); }
+.contador b { font-weight: 400; color: var(--color-texto); }
+.lienzo[data-fondo="oscuro"] .contador b, .lienzo[data-fondo="primario"] .contador b { color: var(--color-blanco); }
+
+/* Pista de atajos (aparece al inicio y se desvanece) */
+.pista-atajos {
+  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 20;
+  padding: 10px 16px; border-radius: var(--radio); background: rgb(17 16 16 / .88); color: var(--color-neutro);
+  font-size: 14px; letter-spacing: .02em; white-space: nowrap; pointer-events: none;
+  transition: opacity 600ms var(--curva);
+}
+.pista-atajos.oculta { opacity: 0; }
+.pista-atajos kbd { font-family: inherit; font-weight: 600; padding: 1px 6px; border: 1px solid rgb(255 255 255 / .3); border-radius: 3px; }
+@media (max-width: 700px) { .pista-atajos { white-space: normal; width: calc(100% - 32px); text-align: center; } }
+
+/* Vista de cuadrícula */
+.cuadricula {
+  position: fixed; inset: 0; z-index: 30; overflow: auto;
+  background: rgb(17 16 16 / .96); color: var(--color-neutro);
+  padding: 72px 20px 40px;
+}
+.cuadricula[hidden] { display: none; }
+.cuadricula > .titulo-cuadricula { position: fixed; top: 0; left: 0; right: 0; padding: 20px 24px; font-size: 32px; background: rgb(17 16 16 / .96); z-index: 1; }
+.cuadricula > .titulo-cuadricula small { font-family: var(--fuente-cuerpo); font-size: 14px; letter-spacing: .04em; text-transform: none; color: var(--color-neutro-medio); margin-left: 16px; }
+.miniaturas { list-style: none; padding: 0; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, 320px); gap: 24px; justify-content: center; }
+.miniatura-boton {
+  position: relative; display: block; width: 320px; height: 180px; padding: 0; overflow: hidden;
+  background: none; border: 3px solid transparent; border-radius: var(--radio); cursor: pointer;
+  transition: border-color var(--duracion-corta) var(--curva), transform var(--duracion-corta) var(--curva);
+}
+.miniatura-boton:hover { transform: translateY(-3px); border-color: var(--color-neutro-medio); }
+.miniatura-boton[aria-current="true"] { border-color: var(--color-primario); }
+.miniatura-boton .num { position: absolute; left: 8px; bottom: 8px; z-index: 2; padding: 2px 10px; background: rgb(17 16 16 / .85); color: var(--color-neutro); font-family: var(--fuente-titulos); font-size: 20px; letter-spacing: .06em; border-radius: var(--radio-sm); }
+.miniatura { text-align: left; font-size: 16px; line-height: normal; letter-spacing: normal; text-transform: none; position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform: scale(calc(314 / 1920)); transform-origin: 0 0; pointer-events: none; }
+.miniatura .diapositiva { opacity: 1 !important; visibility: visible !important; transform: none !important; transition: none !important; }
+.miniatura [data-anim], .miniatura .ilus-viga, .miniatura .ilus-bulto { opacity: 1 !important; transform: none !important; transition: none !important; }
+
+/* Notas del presentador */
+.notas {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; max-height: 34vh; overflow: auto;
+  padding: 18px 24px 22px; background: rgb(17 16 16 / .95); color: var(--color-neutro);
+  border-top: 4px solid var(--color-primario); font-size: 18px; line-height: 1.5;
+}
+.notas[hidden] { display: none; }
+.notas strong { display: block; font-family: var(--fuente-titulos); font-weight: 400; font-size: 24px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; color: var(--color-neutro-medio); }
+.notas p + p { margin-top: 8px; }
+
+/* ==========================================================================
+   6. MOVIMIENTO REDUCIDO — nada se mueve y todo se ve
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; transition-delay: 0s !important; }
+  .diapositiva, .diapositiva.previa { transform: none; }
+  [data-anim], .ilus-viga, .ilus-bulto { opacity: 1 !important; transform: none !important; }
+}
+
+/* ==========================================================================
+   7. IMPRESIÓN Y PDF — una diapositiva por página, 16:9 exacto
+   Chrome: Imprimir → Guardar como PDF · Márgenes: Ninguno · Gráficos de fondo: activado
+   ========================================================================== */
+@page { size: 1920px 1080px; margin: 0; }
+@media print {
+  html, body { height: auto; overflow: visible; background: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .escenario { position: static; overflow: visible; }
+  .lienzo { position: static; transform: none !important; width: 1920px; height: auto; overflow: visible; background: none; }
+  .diapositiva {
+    position: relative; width: 1920px; height: 1080px;
+    opacity: 1 !important; visibility: visible !important; transform: none !important;
+    break-after: page; page-break-after: always; break-inside: avoid;
+  }
+  .diapositiva:last-child { break-after: auto; page-break-after: auto; }
+  [data-anim], .ilus-viga, .ilus-bulto { opacity: 1 !important; transform: none !important; }
+  .interfaz, .cuadricula, .notas, .pista-atajos, #anuncio { display: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="escenario" id="escenario">
+  <div class="lienzo" id="lienzo" role="region" aria-roledescription="presentación" aria-label="Presentación">
+    <div id="diapositivas"></div>
+    <div class="interfaz" aria-hidden="true">
+      <div class="progreso"><span></span></div>
+      <p class="contador"><b id="actual">1</b> / <span id="total">1</span></p>
+    </div>
+  </div>
+</div>
+<p class="solo-lectores" aria-live="polite" id="anuncio"></p>
+<div class="cuadricula" id="cuadricula" hidden role="dialog" aria-modal="true" aria-label="Todas las diapositivas">
+  <h2 class="titulo-cuadricula">Diapositivas <small>Enter o clic para abrir · G o Esc para cerrar</small></h2>
+  <ul class="miniaturas" id="miniaturas"></ul>
+</div>
+<aside class="notas" id="notas" hidden aria-label="Notas del presentador"></aside>
+<p class="pista-atajos" id="pista" aria-hidden="true"><kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>G</kbd> cuadrícula · <kbd>N</kbd> notas · <kbd>F</kbd> pantalla completa · <kbd>T</kbd> tema</p>
+
+<!-- ==========================================================================
+     LOGOTIPOS (diseño, no contenido). SVG oficiales con fill="currentColor".
+     ========================================================================== -->
+<template id="tpl-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 369.87 118.36" role="img" aria-label="RACK-T Thinking"><title>RACK-T Thinking</title><g fill="currentColor"><path fill-rule="nonzero" d="M140.59 8.54C140.50 8.85 140.41 9.15 140.32 9.46C139.61 11.82 137.53 13.38 135.06 13.39C130.96 13.40 126.85 13.39 122.75 13.39C84.03 13.39 45.30 13.39 6.57 13.39C4.29 13.39 2.54 12.42 1.51 10.38C0.52 8.43 0.70 6.50 1.96 4.72C2.83 3.50 4.02 2.76 5.52 2.54C5.70 2.51 5.87 2.44 6.05 2.38L135.41 2.38C135.58 2.44 135.76 2.51 135.93 2.54C138.12 2.88 139.88 4.50 140.40 6.65C140.45 6.85 140.53 7.05 140.59 7.25L140.59 8.54"/><path fill-rule="nonzero" d="M140.59 112.77C140.48 113.16 140.38 113.54 140.25 113.92C139.48 116.14 137.43 117.61 135.06 117.62C129.17 117.63 123.28 117.62 117.39 117.62C80.46 117.62 43.53 117.62 6.60 117.62C3.28 117.62 0.85 115.20 0.91 111.97C0.97 109.05 3.37 106.76 6.47 106.67C6.63 106.66 6.79 106.67 6.95 106.67C49.48 106.67 92.00 106.66 134.53 106.67C137.76 106.67 139.69 108.17 140.46 111.28C140.48 111.35 140.55 111.41 140.59 111.48L140.59 112.77"/><path fill-rule="nonzero" d="M140.59 34.64C140.52 34.89 140.43 35.14 140.36 35.40C139.71 37.75 137.64 39.37 135.19 39.45C135.03 39.46 134.86 39.45 134.70 39.45C92.04 39.45 49.38 39.45 6.72 39.45C3.82 39.45 1.56 37.73 1.03 35.13C0.35 31.73 2.77 28.65 6.26 28.50C6.53 28.49 6.80 28.50 7.07 28.50L134.40 28.50C137.80 28.50 139.63 29.91 140.50 33.22C140.51 33.27 140.56 33.30 140.59 33.34L140.59 34.64"/><path fill-rule="nonzero" d="M140.59 86.68C140.31 87.43 140.14 88.24 139.73 88.91C138.68 90.66 137.08 91.54 135.02 91.54C124.67 91.54 114.32 91.54 103.98 91.54C71.51 91.54 39.04 91.54 6.57 91.54C3.25 91.54 0.83 89.12 0.91 85.88C0.98 83.19 3.16 80.88 5.86 80.68C6.31 80.64 6.77 80.63 7.23 80.63C49.37 80.63 91.52 80.65 133.66 80.60C137.27 80.59 139.84 81.85 140.59 85.54L140.59 86.68"/><path fill-rule="nonzero" d="M140.59 60.58C140.51 60.89 140.43 61.20 140.34 61.51C139.68 63.85 137.64 65.42 135.21 65.48C135.07 65.49 134.94 65.49 134.80 65.49C92.09 65.49 49.39 65.49 6.68 65.49C4.04 65.49 2.00 64.12 1.21 61.85C0.00 58.34 2.52 54.69 6.23 54.58C6.42 54.57 6.61 54.58 6.80 54.58C49.42 54.58 92.05 54.58 134.68 54.58C137.52 54.58 139.61 56.05 140.33 58.53C140.41 58.83 140.51 59.14 140.59 59.44L140.59 60.58"/><path fill-rule="nonzero" d="M171.05 38.04C174.08 37.87 177.05 37.77 180.00 37.50C181.43 37.37 182.39 36.36 182.92 35.04C183.26 34.19 183.58 33.29 183.71 32.39C184.53 26.48 184.51 20.54 183.92 14.63C183.50 10.44 181.76 9.02 177.56 8.98C175.78 8.97 174.00 8.98 172.22 8.98C171.84 8.98 171.45 9.03 171.05 9.06L171.05 38.04M170.99 45.02L170.99 86.08L161.16 86.08L161.16 84.75C161.16 57.41 161.17 30.07 161.14 2.73C161.14 1.59 161.41 1.21 162.61 1.23C169.04 1.31 175.48 1.09 181.89 1.42C188.34 1.75 191.16 4.44 192.66 9.31C193.23 11.14 193.63 13.08 193.74 15.00C193.96 18.87 194.12 22.76 193.96 26.62C193.86 29.22 193.34 31.83 192.72 34.36C191.93 37.59 190.00 40.01 186.31 41.29C186.75 41.46 186.90 41.53 187.05 41.57C189.65 42.26 191.24 44.08 191.88 46.54C192.62 49.38 193.35 52.28 193.49 55.19C193.87 62.93 193.92 70.69 194.15 78.45C194.23 80.98 194.46 83.50 194.62 86.09L184.92 86.09C184.77 83.68 184.53 81.31 184.49 78.95C184.40 72.07 184.44 65.20 184.33 58.33C184.29 55.59 184.15 52.83 183.75 50.13C183.27 46.88 182.43 46.04 179.20 45.58C176.55 45.20 173.84 45.20 170.99 45.02"/><path fill-rule="nonzero" d="M332.01 86.15C328.69 86.15 325.51 86.18 322.33 86.10C322.00 86.09 321.57 85.48 321.40 85.06C319.25 79.58 317.13 74.08 315.01 68.59C312.24 61.44 309.48 54.29 306.71 47.14C306.57 46.79 306.38 46.46 305.94 46.18L305.94 86.15L298.44 86.15C295.99 86.15 295.99 86.15 295.99 83.74C295.99 56.88 295.99 30.03 295.99 3.17C295.99 1.25 295.99 1.25 297.90 1.25C299.96 1.25 302.03 1.25 304.09 1.25C305.77 1.26 305.77 1.26 305.78 2.91C305.78 15.17 305.78 27.42 305.78 39.68L305.78 41.06C305.90 41.08 306.02 41.10 306.15 41.12C306.49 40.25 306.84 39.38 307.16 38.51C311.65 26.49 316.13 14.47 320.59 2.43C320.90 1.60 321.28 1.21 322.23 1.23C325.05 1.29 327.87 1.25 330.84 1.25C330.66 1.87 330.55 2.33 330.38 2.77C325.44 15.87 320.48 28.96 315.58 42.07C315.35 42.67 315.33 43.51 315.56 44.10C320.88 57.71 326.24 71.29 331.59 84.88C331.74 85.24 331.84 85.63 332.01 86.15"/><path fill-rule="nonzero" d="M216.14 61.80L229.35 61.80C227.11 46.80 224.88 31.94 222.66 17.09L222.29 17.12C220.24 31.96 218.20 46.80 216.14 61.80M203.47 86.15C204.06 82.21 204.61 78.46 205.18 74.72C206.11 68.54 207.06 62.37 208.00 56.19C209.02 49.50 210.04 42.80 211.05 36.11C211.98 29.97 212.90 23.83 213.83 17.69C214.61 12.55 215.42 7.42 216.17 2.27C216.28 1.52 216.53 1.24 217.30 1.24C220.61 1.27 223.93 1.28 227.24 1.23C228.13 1.22 228.34 1.70 228.45 2.39C229.36 7.92 230.26 13.44 231.17 18.97C232.51 27.08 233.87 35.19 235.21 43.30C236.46 50.86 237.69 58.41 238.94 65.97C239.95 72.09 240.96 78.22 241.97 84.34C242.06 84.90 242.12 85.45 242.20 86.08L233.03 86.08C232.70 83.89 232.36 81.67 232.03 79.45C231.60 76.58 231.19 73.71 230.77 70.83C230.68 70.19 230.43 69.87 229.68 69.88C225.11 69.91 220.54 69.90 215.97 69.88C215.28 69.88 214.99 70.08 214.89 70.82C214.28 75.57 213.62 80.33 212.93 85.07C212.87 85.46 212.41 86.09 212.13 86.10C209.30 86.18 206.48 86.15 203.47 86.15"/><path fill-rule="nonzero" d="M283.35 33.91L274.06 33.91C274.03 33.47 273.99 33.08 273.98 32.68C273.91 28.00 273.88 23.31 273.75 18.62C273.69 16.27 273.37 13.96 272.37 11.78C271.59 10.07 270.42 8.93 268.48 8.75C266.11 8.52 264.05 9.08 262.69 11.22C261.42 13.21 261.02 15.50 260.81 17.79C260.60 20.16 260.53 22.55 260.53 24.93C260.51 38.48 260.47 52.03 260.58 65.58C260.60 68.34 261.00 71.14 261.57 73.85C262.39 77.80 265.45 79.59 269.04 78.53C270.91 77.98 272.13 76.66 272.54 74.84C273.09 72.33 273.59 69.77 273.72 67.21C273.96 62.58 273.94 57.92 273.96 53.27C273.96 52.27 274.25 51.93 275.26 51.96C277.61 52.02 279.96 52.01 282.30 51.96C283.27 51.94 283.66 52.19 283.64 53.24C283.50 58.33 283.56 63.43 283.30 68.51C283.11 72.35 282.32 76.11 280.68 79.64C278.64 84.02 275.13 86.43 270.40 86.86C268.05 87.08 265.62 87.05 263.30 86.69C258.47 85.95 255.27 82.98 253.38 78.54C251.96 75.20 251.06 71.69 251.00 68.10C250.79 56.25 250.74 44.41 250.70 32.56C250.68 27.71 250.78 22.86 250.98 18.02C251.15 13.97 252.31 10.14 254.38 6.64C256.66 2.81 260.26 1.03 264.54 0.39C267.17 0.00 269.78 0.11 272.35 0.74C277.13 1.92 280.25 4.99 281.60 9.61C282.48 12.65 283.10 15.83 283.28 18.98C283.55 23.89 283.35 28.83 283.35 33.91"/><path fill-rule="nonzero" d="M351.40 117.96L351.40 115.95C351.40 81.05 351.40 46.15 351.40 11.25C351.40 9.34 351.39 9.34 349.48 9.34C347.34 9.34 345.19 9.31 343.05 9.35C342.21 9.37 341.92 9.07 341.95 8.23C342.00 6.29 341.99 4.34 341.95 2.40C341.93 1.60 342.13 1.24 343.01 1.24C351.59 1.26 360.16 1.26 368.73 1.24C369.59 1.24 369.87 1.58 369.85 2.40C369.82 4.34 369.82 6.28 369.85 8.22C369.87 9.06 369.54 9.36 368.71 9.35C366.61 9.31 364.50 9.38 362.40 9.32C361.38 9.29 361.00 9.68 361.10 10.66C361.14 11.06 361.11 11.47 361.11 11.87C361.11 46.57 361.11 81.27 361.11 115.97C361.11 118.36 361.21 117.93 359.08 117.95C356.58 117.98 354.08 117.96 351.40 117.96"/><path fill-rule="nonzero" d="M335.66 53.77C332.20 53.80 329.38 51.03 329.35 47.59C329.32 44.11 332.04 41.33 335.51 41.27C339.00 41.21 341.84 43.94 341.87 47.38C341.91 50.94 339.18 53.74 335.66 53.77"/><path fill-rule="nonzero" d="M230.43 95.88C231.41 95.55 231.71 96.00 231.92 96.80C233.28 101.98 234.68 107.15 236.07 112.32C236.10 112.42 236.19 112.50 236.39 112.82L236.39 95.86C236.84 95.83 237.19 95.80 237.56 95.78C237.62 95.99 237.70 96.14 237.70 96.29C237.70 103.08 237.71 109.87 237.68 116.66C237.68 116.95 237.35 117.25 237.17 117.55C236.82 117.31 236.26 117.13 236.17 116.81C234.75 111.81 233.40 106.79 232.03 101.78C231.91 101.33 231.79 100.88 231.41 100.48C231.49 101.46 231.62 102.45 231.63 103.44C231.65 107.85 231.65 112.25 231.61 116.66C231.61 116.95 231.20 117.25 230.98 117.54C230.76 117.24 230.36 116.94 230.36 116.64C230.32 109.85 230.33 103.06 230.34 96.27C230.34 96.16 230.39 96.04 230.43 95.88"/><path fill-rule="nonzero" d="M306.67 112.68C306.67 110.62 306.67 108.57 306.67 106.52C306.67 103.32 306.66 100.13 306.69 96.94C306.69 96.56 306.86 95.93 307.10 95.84C307.89 95.57 307.89 96.20 307.89 96.76C307.88 100.48 307.89 104.19 307.89 107.91C307.89 110.74 307.91 113.57 307.86 116.40C307.86 116.78 307.52 117.16 307.34 117.54C307.01 117.23 306.48 116.96 306.38 116.58C304.93 111.38 303.55 106.17 302.15 100.95C302.12 100.85 302.07 100.75 301.80 100.64C301.80 101.05 301.80 101.45 301.80 101.86C301.83 106.63 301.86 111.39 301.89 116.16C301.89 116.48 301.93 116.84 301.81 117.12C301.72 117.31 301.41 117.48 301.18 117.49C301.03 117.50 300.80 117.25 300.72 117.07C300.64 116.86 300.68 116.60 300.68 116.35C300.68 109.85 300.68 103.34 300.68 96.83C300.68 96.52 300.73 96.20 300.76 95.93C301.85 95.44 302.05 96.13 302.25 96.89C303.67 102.17 305.09 107.45 306.52 112.73C306.57 112.71 306.62 112.70 306.67 112.68"/><path fill-rule="nonzero" d="M333.98 106.17C333.83 109.10 333.81 111.81 333.53 114.48C333.29 116.64 332.06 117.74 330.32 117.81C328.69 117.88 327.70 117.32 327.09 115.80C326.73 114.87 326.45 113.87 326.34 112.89C325.87 108.30 325.64 103.70 326.68 99.15C326.87 98.35 327.22 97.52 327.69 96.85C329.07 94.90 331.71 95.01 332.94 97.06C333.35 97.74 333.57 98.52 333.94 99.39C333.41 99.66 332.96 99.89 332.42 100.16C332.25 99.63 332.22 99.09 331.95 98.76C331.49 98.21 330.89 97.45 330.32 97.43C329.74 97.40 328.79 98.05 328.60 98.60C328.09 100.15 327.63 101.80 327.62 103.41C327.58 106.68 327.82 109.94 328.03 113.20C328.08 113.90 328.36 114.67 328.78 115.21C329.12 115.65 329.88 116.07 330.38 116.00C330.94 115.92 331.81 115.32 331.87 114.86C332.16 112.71 332.24 110.53 332.30 108.36C332.31 108.19 331.68 107.90 331.32 107.82C330.73 107.69 329.94 108.03 329.98 106.94C330.02 105.84 330.84 106.22 331.41 106.18C332.16 106.13 332.92 106.17 333.98 106.17"/><path fill-rule="nonzero" d="M184.57 95.83L185.87 95.83L185.87 104.51C187.24 104.51 188.41 104.56 189.56 104.46C189.82 104.44 190.21 103.83 190.22 103.49C190.28 101.43 190.25 99.37 190.25 97.31L190.25 95.86C190.71 95.83 191.08 95.80 191.55 95.77C191.58 96.21 191.64 96.56 191.64 96.92C191.64 103.38 191.64 109.84 191.64 116.31C191.64 116.43 191.69 116.58 191.63 116.66C191.42 116.97 191.17 117.25 190.94 117.55C190.71 117.25 190.29 116.96 190.29 116.66C190.24 113.87 190.26 111.08 190.25 108.30C190.24 105.96 190.42 106.33 188.24 106.30C187.52 106.29 186.80 106.29 185.89 106.29C185.89 107.50 185.89 108.58 185.89 109.66C185.89 112.00 185.91 114.35 185.85 116.69C185.84 116.98 185.39 117.26 185.14 117.55C184.90 117.26 184.46 116.97 184.46 116.68C184.43 109.85 184.45 103.02 184.46 96.20C184.46 96.12 184.50 96.05 184.57 95.83"/><path fill-rule="nonzero" d="M256.33 95.83L257.70 95.83L257.70 105.09C257.81 105.11 257.92 105.13 258.03 105.16C258.17 104.86 258.34 104.58 258.45 104.28C259.33 101.85 260.27 99.44 261.05 96.99C261.39 95.91 261.90 95.54 263.10 95.89C262.94 96.37 262.79 96.84 262.61 97.31C261.66 99.79 260.74 102.30 259.72 104.75C259.32 105.72 259.30 106.56 259.66 107.53C260.75 110.48 261.76 113.46 262.80 116.42C262.90 116.72 262.98 117.03 263.09 117.40C262.05 117.77 261.46 117.59 261.12 116.46C260.18 113.34 259.13 110.26 258.12 107.17C258.02 107.17 257.92 107.17 257.81 107.16C257.78 107.55 257.73 107.94 257.73 108.32C257.72 110.99 257.73 113.66 257.72 116.32C257.71 116.85 257.88 117.55 256.97 117.55C256.03 117.55 256.27 116.82 256.27 116.31C256.26 109.85 256.26 103.38 256.27 96.92C256.27 96.60 256.30 96.28 256.33 95.83"/><path fill-rule="nonzero" d="M162.85 117.36L162.85 97.54C161.95 97.47 161.16 97.41 160.28 97.35L160.28 95.84L167.32 95.84C167.00 96.48 166.87 97.18 166.50 97.35C165.96 97.60 165.25 97.47 164.48 97.51C164.46 98.05 164.42 98.51 164.42 98.98C164.41 104.76 164.39 110.53 164.44 116.31C164.44 117.43 164.12 117.82 162.85 117.36"/><path fill-rule="nonzero" d="M210.28 95.85L211.69 95.85L211.69 117.40C210.89 117.60 210.18 117.88 210.19 116.56C210.21 109.81 210.20 103.07 210.21 96.32C210.21 96.20 210.24 96.08 210.28 95.85"/><path fill-rule="nonzero" d="M280.63 95.85L282.06 95.85L282.06 117.40C281.25 117.62 280.55 117.86 280.55 116.56C280.57 109.85 280.57 103.14 280.57 96.43C280.57 96.27 280.60 96.12 280.63 95.85"/></g></svg></template>
+<template id="tpl-logo-v"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 169.51 257.08" role="img" aria-label="RACK-T Thinking"><title>RACK-T Thinking</title><g fill="currentColor"><path fill-rule="nonzero" d="M169.51 7.43C169.40 7.79 169.29 8.16 169.18 8.53C168.32 11.37 165.82 13.26 162.84 13.27C157.89 13.28 152.94 13.27 147.99 13.27C101.30 13.27 54.61 13.27 7.93 13.27C5.17 13.27 3.07 12.10 1.82 9.64C0.63 7.29 0.85 4.96 2.37 2.81C3.41 1.34 4.85 0.45 6.65 0.18C6.87 0.15 7.08 0.06 7.29 0.00L163.25 0.00C163.47 0.06 163.67 0.15 163.89 0.18C166.53 0.60 168.64 2.55 169.27 5.15C169.33 5.39 169.43 5.62 169.51 5.86L169.51 7.43"/><path fill-rule="nonzero" d="M169.51 133.09C169.37 133.55 169.24 134.02 169.09 134.47C168.17 137.15 165.70 138.93 162.83 138.93C155.73 138.94 148.63 138.93 141.53 138.93C97.01 138.93 52.48 138.93 7.95 138.93C3.96 138.93 1.02 136.01 1.10 132.13C1.17 128.60 4.06 125.84 7.80 125.73C7.99 125.72 8.19 125.73 8.39 125.73L162.19 125.73C166.09 125.73 168.42 127.54 169.35 131.29C169.37 131.38 169.45 131.45 169.51 131.53L169.51 133.09"/><path fill-rule="nonzero" d="M169.51 38.89C169.41 39.20 169.31 39.50 169.23 39.80C168.45 42.64 165.94 44.60 162.99 44.69C162.79 44.70 162.60 44.70 162.40 44.70C110.97 44.70 59.54 44.70 8.11 44.69C4.61 44.69 1.88 42.62 1.25 39.49C0.42 35.38 3.35 31.67 7.55 31.49C7.87 31.48 8.20 31.49 8.53 31.49L162.04 31.49C166.14 31.49 168.34 33.19 169.39 37.18C169.41 37.23 169.47 37.28 169.51 37.33L169.51 38.89"/><path fill-rule="nonzero" d="M169.51 101.63C169.17 102.53 168.96 103.51 168.47 104.33C167.20 106.43 165.27 107.50 162.78 107.50C150.31 107.49 137.84 107.50 125.36 107.50C86.21 107.50 47.06 107.50 7.91 107.49C3.91 107.49 1.00 104.57 1.10 100.67C1.19 97.42 3.82 94.65 7.06 94.40C7.61 94.35 8.16 94.34 8.72 94.34C59.53 94.34 110.34 94.37 161.14 94.30C165.50 94.29 168.59 95.80 169.51 100.26L169.51 101.63"/><path fill-rule="nonzero" d="M169.51 70.16C169.41 70.54 169.31 70.91 169.21 71.29C168.40 74.10 165.95 76.00 163.01 76.08C162.85 76.08 162.69 76.08 162.53 76.08C111.03 76.08 59.54 76.08 8.05 76.08C4.87 76.08 2.41 74.43 1.46 71.69C0.00 67.47 3.04 63.06 7.51 62.93C7.74 62.92 7.97 62.93 8.19 62.93C59.59 62.93 110.98 62.93 162.38 62.93C165.79 62.93 168.32 64.70 169.18 67.69C169.29 68.06 169.40 68.43 169.51 68.79L169.51 70.16"/><path fill-rule="nonzero" d="M9.25 192.39C11.69 192.25 14.08 192.18 16.46 191.96C17.61 191.85 18.39 191.04 18.81 189.98C19.09 189.29 19.34 188.57 19.44 187.84C20.11 183.08 20.09 178.30 19.61 173.54C19.27 170.17 17.88 169.02 14.49 168.99C13.06 168.98 11.63 168.99 10.19 168.99C9.88 168.99 9.57 169.03 9.25 169.06L9.25 192.39M9.21 198.01L9.21 231.08L1.29 231.08L1.29 230.01C1.29 207.99 1.29 185.98 1.27 163.96C1.27 163.04 1.49 162.73 2.45 162.75C7.63 162.82 12.82 162.64 17.98 162.90C23.17 163.17 25.45 165.33 26.66 169.25C27.11 170.73 27.43 172.29 27.52 173.84C27.70 176.95 27.83 180.09 27.70 183.20C27.62 185.29 27.20 187.39 26.70 189.43C26.07 192.03 24.51 193.98 21.54 195.01C21.89 195.15 22.01 195.21 22.13 195.24C24.23 195.79 25.51 197.26 26.03 199.24C26.62 201.52 27.21 203.86 27.32 206.20C27.63 212.44 27.67 218.69 27.86 224.93C27.92 226.97 28.10 229.00 28.23 231.09L20.42 231.09C20.30 229.14 20.10 227.24 20.08 225.34C20.00 219.80 20.04 214.27 19.95 208.73C19.91 206.53 19.80 204.31 19.48 202.13C19.09 199.51 18.42 198.84 15.82 198.46C13.68 198.16 11.50 198.16 9.21 198.01"/><path fill-rule="nonzero" d="M138.88 231.14C136.20 231.14 133.64 231.16 131.08 231.10C130.82 231.09 130.46 230.60 130.33 230.26C128.60 225.85 126.90 221.42 125.18 217.00C122.96 211.24 120.73 205.48 118.50 199.72C118.39 199.44 118.23 199.18 117.88 198.95L117.88 231.14L111.84 231.14C109.87 231.14 109.87 231.14 109.87 229.19C109.87 207.57 109.87 185.94 109.87 164.31C109.87 162.77 109.87 162.77 111.41 162.77C113.07 162.77 114.73 162.77 116.39 162.77C117.74 162.77 117.75 162.77 117.75 164.11C117.75 173.97 117.75 183.84 117.75 193.71L117.75 194.82C117.85 194.84 117.95 194.86 118.05 194.87C118.32 194.17 118.60 193.48 118.87 192.77C122.48 183.09 126.09 173.41 129.68 163.72C129.92 163.05 130.24 162.74 131.00 162.75C133.27 162.80 135.54 162.77 137.93 162.77C137.78 163.27 137.70 163.64 137.56 163.99C133.58 174.54 129.59 185.08 125.64 195.64C125.46 196.12 125.44 196.80 125.63 197.28C129.91 208.23 134.23 219.17 138.54 230.11C138.66 230.41 138.74 230.71 138.88 231.14"/><path fill-rule="nonzero" d="M45.56 211.52L56.20 211.52C54.39 199.45 52.60 187.48 50.82 175.52C50.71 175.53 50.61 175.54 50.51 175.55C48.87 187.50 47.22 199.45 45.56 211.52M35.36 231.14C35.83 227.96 36.28 224.95 36.73 221.93C37.49 216.96 38.25 211.99 39.01 207.01C39.83 201.62 40.65 196.23 41.47 190.84C42.21 185.89 42.95 180.95 43.70 176.01C44.33 171.87 44.99 167.73 45.59 163.59C45.68 162.98 45.88 162.75 46.50 162.76C49.17 162.78 51.84 162.79 54.51 162.75C55.22 162.74 55.39 163.13 55.48 163.68C56.21 168.13 56.93 172.59 57.67 177.04C58.75 183.57 59.84 190.10 60.92 196.63C61.92 202.71 62.92 208.80 63.92 214.88C64.74 219.82 65.55 224.75 66.37 229.68C66.44 230.13 66.48 230.58 66.55 231.09L59.17 231.09C58.90 229.31 58.62 227.53 58.36 225.74C58.02 223.43 57.68 221.12 57.35 218.80C57.27 218.29 57.07 218.03 56.47 218.03C52.79 218.06 49.11 218.05 45.43 218.04C44.87 218.03 44.63 218.20 44.56 218.79C44.06 222.62 43.54 226.45 42.98 230.27C42.93 230.58 42.56 231.09 42.33 231.10C40.06 231.16 37.78 231.14 35.36 231.14"/><path fill-rule="nonzero" d="M99.69 189.07L92.21 189.07C92.18 188.71 92.15 188.40 92.14 188.08C92.08 184.30 92.06 180.53 91.96 176.75C91.91 174.87 91.65 173.00 90.85 171.25C90.21 169.87 89.27 168.95 87.71 168.80C85.80 168.62 84.14 169.08 83.05 170.79C82.03 172.40 81.71 174.24 81.54 176.09C81.37 177.99 81.31 179.92 81.31 181.84C81.30 192.75 81.27 203.66 81.35 214.57C81.37 216.80 81.69 219.05 82.15 221.23C82.81 224.41 85.27 225.85 88.16 225.00C89.67 224.56 90.65 223.49 90.98 222.03C91.43 220.01 91.83 217.95 91.93 215.89C92.13 212.15 92.11 208.40 92.12 204.66C92.13 203.85 92.36 203.58 93.18 203.60C95.06 203.65 96.96 203.64 98.84 203.60C99.62 203.58 99.94 203.79 99.92 204.63C99.81 208.73 99.86 212.84 99.65 216.93C99.50 220.02 98.86 223.05 97.54 225.89C95.89 229.42 93.07 231.36 89.26 231.71C87.37 231.88 85.41 231.86 83.54 231.57C79.65 230.97 77.08 228.59 75.55 225.01C74.41 222.32 73.68 219.49 73.63 216.60C73.47 207.06 73.42 197.52 73.39 187.98C73.38 184.08 73.46 180.17 73.62 176.27C73.76 173.01 74.69 169.92 76.36 167.11C78.19 164.02 81.09 162.59 84.54 162.07C86.66 161.76 88.76 161.84 90.83 162.36C94.68 163.31 97.19 165.78 98.28 169.50C98.99 171.94 99.49 174.51 99.63 177.04C99.85 181.00 99.69 184.98 99.69 189.07"/><path fill-rule="nonzero" d="M154.49 256.75L154.49 255.14L154.49 170.82C154.49 169.28 154.49 169.28 152.94 169.28C151.22 169.28 149.49 169.26 147.77 169.29C147.09 169.30 146.86 169.06 146.88 168.38C146.92 166.82 146.91 165.26 146.88 163.69C146.86 163.05 147.03 162.76 147.74 162.76C154.64 162.78 161.55 162.78 168.45 162.76C169.13 162.76 169.36 163.03 169.35 163.69C169.32 165.25 169.32 166.81 169.35 168.38C169.36 169.06 169.10 169.30 168.43 169.29C166.74 169.26 165.04 169.31 163.35 169.27C162.53 169.24 162.22 169.55 162.30 170.35C162.34 170.67 162.31 171.00 162.31 171.32C162.31 199.27 162.31 227.21 162.31 255.15C162.31 257.08 162.39 256.73 160.67 256.75C158.66 256.77 156.65 256.75 154.49 256.75"/><path fill-rule="nonzero" d="M141.81 205.06C139.03 205.08 136.76 202.86 136.73 200.08C136.71 197.28 138.90 195.04 141.69 194.99C144.50 194.95 146.79 197.14 146.82 199.91C146.84 202.78 144.65 205.04 141.81 205.06"/><path fill-rule="nonzero" d="M57.07 238.98C57.86 238.71 58.10 239.07 58.27 239.71C59.36 243.88 60.49 248.05 61.61 252.21C61.64 252.29 61.71 252.36 61.87 252.62L61.87 238.95C62.23 238.93 62.51 238.91 62.82 238.89C62.86 239.06 62.92 239.18 62.92 239.30C62.93 244.77 62.93 250.24 62.91 255.70C62.91 255.94 62.64 256.18 62.50 256.42C62.22 256.23 61.76 256.08 61.69 255.83C60.55 251.80 59.46 247.76 58.36 243.73C58.26 243.36 58.16 243.00 57.86 242.67C57.92 243.47 58.03 244.27 58.03 245.06C58.05 248.61 58.05 252.16 58.02 255.70C58.02 255.94 57.69 256.18 57.51 256.42C57.34 256.18 57.01 255.93 57.01 255.69C56.98 250.22 56.99 244.75 57.00 239.29C57.00 239.20 57.04 239.10 57.07 238.98"/><path fill-rule="nonzero" d="M118.47 252.50L118.47 247.54C118.47 244.97 118.46 242.40 118.48 239.82C118.49 239.52 118.62 239.01 118.81 238.94C119.45 238.73 119.45 239.23 119.45 239.68C119.45 242.67 119.45 245.67 119.45 248.66C119.45 250.94 119.46 253.22 119.43 255.50C119.42 255.81 119.15 256.11 119.01 256.42C118.74 256.16 118.32 255.95 118.23 255.65C117.07 251.46 115.95 247.26 114.82 243.06C114.80 242.97 114.76 242.89 114.54 242.81C114.54 243.13 114.54 243.46 114.55 243.79C114.57 247.63 114.60 251.47 114.62 255.31C114.62 255.57 114.65 255.85 114.55 256.07C114.48 256.23 114.23 256.36 114.05 256.38C113.93 256.39 113.74 256.19 113.68 256.04C113.61 255.87 113.64 255.65 113.64 255.46C113.64 250.22 113.64 244.98 113.64 239.74C113.64 239.49 113.69 239.23 113.71 239.01C114.58 238.62 114.75 239.17 114.91 239.78C116.05 244.04 117.20 248.29 118.34 252.54C118.38 252.53 118.43 252.52 118.47 252.50"/><path fill-rule="nonzero" d="M140.46 247.26C140.34 249.62 140.33 251.80 140.10 253.96C139.91 255.69 138.92 256.58 137.51 256.63C136.20 256.69 135.40 256.24 134.91 255.01C134.62 254.27 134.40 253.46 134.31 252.67C133.93 248.97 133.75 245.27 134.58 241.61C134.73 240.96 135.01 240.29 135.40 239.75C136.51 238.18 138.63 238.27 139.62 239.92C139.95 240.47 140.13 241.10 140.43 241.80C140.00 242.02 139.64 242.20 139.21 242.42C139.07 241.99 139.05 241.56 138.82 241.29C138.46 240.85 137.97 240.24 137.52 240.22C137.05 240.20 136.28 240.72 136.13 241.16C135.72 242.41 135.35 243.74 135.34 245.04C135.31 247.67 135.50 250.30 135.67 252.92C135.71 253.48 135.93 254.10 136.27 254.54C136.55 254.89 137.16 255.23 137.56 255.18C138.02 255.11 138.71 254.63 138.76 254.26C138.99 252.53 139.06 250.77 139.11 249.03C139.11 248.88 138.61 248.65 138.32 248.59C137.85 248.48 137.20 248.75 137.24 247.88C137.27 246.99 137.93 247.30 138.39 247.27C139.00 247.23 139.61 247.26 140.46 247.26"/><path fill-rule="nonzero" d="M20.14 238.93L21.19 238.93L21.19 245.92C22.29 245.92 23.23 245.97 24.16 245.88C24.37 245.86 24.68 245.38 24.69 245.10C24.74 243.44 24.72 241.78 24.72 240.12L24.72 238.96C25.08 238.93 25.38 238.91 25.76 238.88C25.79 239.24 25.83 239.52 25.83 239.81C25.83 245.01 25.83 250.22 25.83 255.42C25.83 255.52 25.87 255.64 25.82 255.71C25.65 255.96 25.46 256.19 25.27 256.42C25.09 256.18 24.75 255.95 24.74 255.71C24.70 253.46 24.72 251.22 24.71 248.97C24.71 247.09 24.85 247.39 23.10 247.36C22.52 247.35 21.94 247.36 21.20 247.36C21.20 248.33 21.20 249.20 21.20 250.07C21.20 251.96 21.22 253.84 21.17 255.73C21.16 255.96 20.80 256.19 20.60 256.42C20.41 256.19 20.05 255.96 20.05 255.72C20.03 250.22 20.04 244.73 20.05 239.23C20.05 239.17 20.09 239.11 20.14 238.93"/><path fill-rule="nonzero" d="M77.93 238.93L79.03 238.93L79.03 246.39C79.12 246.41 79.21 246.43 79.30 246.44C79.41 246.21 79.55 245.98 79.63 245.73C80.34 243.78 81.10 241.84 81.73 239.87C82.00 239.00 82.41 238.70 83.38 238.98C83.25 239.36 83.13 239.75 82.99 240.12C82.22 242.12 81.48 244.14 80.66 246.12C80.33 246.90 80.32 247.57 80.61 248.36C81.49 250.73 82.30 253.13 83.14 255.52C83.22 255.76 83.29 256.01 83.37 256.30C82.54 256.60 82.06 256.46 81.78 255.54C81.02 253.04 80.18 250.56 79.37 248.06C79.29 248.06 79.20 248.06 79.12 248.06C79.10 248.37 79.06 248.68 79.05 248.99C79.05 251.14 79.06 253.29 79.04 255.44C79.04 255.86 79.18 256.42 78.45 256.42C77.69 256.42 77.88 255.84 77.88 255.43C77.87 250.22 77.87 245.01 77.88 239.81C77.88 239.55 77.91 239.30 77.93 238.93"/><path fill-rule="nonzero" d="M2.65 256.27L2.65 240.31C1.92 240.25 1.29 240.21 0.58 240.15L0.58 238.94L6.25 238.94C5.99 239.45 5.89 240.02 5.59 240.16C5.16 240.36 4.58 240.26 3.96 240.29C3.94 240.72 3.91 241.09 3.91 241.47C3.91 246.12 3.89 250.77 3.92 255.42C3.93 256.33 3.67 256.64 2.65 256.27"/><path fill-rule="nonzero" d="M40.84 238.95L41.98 238.95L41.98 256.30C41.34 256.47 40.77 256.69 40.77 255.63C40.79 250.19 40.78 244.76 40.78 239.33C40.78 239.23 40.81 239.14 40.84 238.95"/><path fill-rule="nonzero" d="M97.50 238.95L98.65 238.95L98.65 256.30C98.00 256.48 97.43 256.67 97.44 255.62C97.45 250.22 97.44 244.82 97.45 239.42C97.45 239.29 97.48 239.16 97.50 238.95"/></g></svg></template>
+<template id="tpl-isotipo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 141.5 120" role="img" aria-label="RACK-T"><title>RACK-T</title><g fill="currentColor"><path fill-rule="nonzero" d="M140.59 8.54C140.50 8.85 140.41 9.15 140.32 9.46C139.61 11.82 137.53 13.38 135.06 13.39C130.96 13.40 126.85 13.39 122.75 13.39C84.03 13.39 45.30 13.39 6.57 13.39C4.29 13.39 2.54 12.42 1.51 10.38C0.52 8.43 0.70 6.50 1.96 4.72C2.83 3.50 4.02 2.76 5.52 2.54C5.70 2.51 5.87 2.44 6.05 2.38L135.41 2.38C135.58 2.44 135.76 2.51 135.93 2.54C138.12 2.88 139.88 4.50 140.40 6.65C140.45 6.85 140.53 7.05 140.59 7.25L140.59 8.54"/><path fill-rule="nonzero" d="M140.59 112.77C140.48 113.16 140.38 113.54 140.25 113.92C139.48 116.14 137.43 117.61 135.06 117.62C129.17 117.63 123.28 117.62 117.39 117.62C80.46 117.62 43.53 117.62 6.60 117.62C3.28 117.62 0.85 115.20 0.91 111.97C0.97 109.05 3.37 106.76 6.47 106.67C6.63 106.66 6.79 106.67 6.95 106.67C49.48 106.67 92.00 106.66 134.53 106.67C137.76 106.67 139.69 108.17 140.46 111.28C140.48 111.35 140.55 111.41 140.59 111.48L140.59 112.77"/><path fill-rule="nonzero" d="M140.59 34.64C140.52 34.89 140.43 35.14 140.36 35.40C139.71 37.75 137.64 39.37 135.19 39.45C135.03 39.46 134.86 39.45 134.70 39.45C92.04 39.45 49.38 39.45 6.72 39.45C3.82 39.45 1.56 37.73 1.03 35.13C0.35 31.73 2.77 28.65 6.26 28.50C6.53 28.49 6.80 28.50 7.07 28.50L134.40 28.50C137.80 28.50 139.63 29.91 140.50 33.22C140.51 33.27 140.56 33.30 140.59 33.34L140.59 34.64"/><path fill-rule="nonzero" d="M140.59 86.68C140.31 87.43 140.14 88.24 139.73 88.91C138.68 90.66 137.08 91.54 135.02 91.54C124.67 91.54 114.32 91.54 103.98 91.54C71.51 91.54 39.04 91.54 6.57 91.54C3.25 91.54 0.83 89.12 0.91 85.88C0.98 83.19 3.16 80.88 5.86 80.68C6.31 80.64 6.77 80.63 7.23 80.63C49.37 80.63 91.52 80.65 133.66 80.60C137.27 80.59 139.84 81.85 140.59 85.54L140.59 86.68"/><path fill-rule="nonzero" d="M140.59 60.58C140.51 60.89 140.43 61.20 140.34 61.51C139.68 63.85 137.64 65.42 135.21 65.48C135.07 65.49 134.94 65.49 134.80 65.49C92.09 65.49 49.39 65.49 6.68 65.49C4.04 65.49 2.00 64.12 1.21 61.85C0.00 58.34 2.52 54.69 6.23 54.58C6.42 54.57 6.61 54.58 6.80 54.58C49.42 54.58 92.05 54.58 134.68 54.58C137.52 54.58 139.61 56.05 140.33 58.53C140.41 58.83 140.51 59.14 140.59 59.44L140.59 60.58"/></g></svg></template>
+
+<!-- ==========================================================================
+     CONTENIDO — lo único que se edita para una presentación nueva.
+     "diapositivas" es la lista en orden. Cada una elige su "tipo".
+     Esquema campo por campo en COMO-USAR.md.
+     ========================================================================== -->
+<script id="contenido" type="application/json">
+{
+  "_ayuda": "Edita este bloque y la TARJETA PARA COMPARTIR del <head>. Tipos: portada, seccion, texto, dos-columnas, cifras, tarjetas, comparativa, linea-tiempo, cita, imagen-completa, logos, cierre. Guía en COMO-USAR.md.",
+  "marca": {
+    "nombre": "RACK-T",
+    "eslogan": "Especialistas en optimización y manejo de materiales para almacenes"
+  },
+  "diapositivas": [
+    {
+      "tipo": "portada",
+      "etiqueta": "Presentación de servicios",
+      "titulo": "Soluciones de almacenamiento a la medida",
+      "resaltado": "a la medida",
+      "subtitulo": "Especialistas en optimización y manejo de materiales para almacenes",
+      "fecha": "Septiembre 2026",
+      "autor": "Dirección Comercial",
+      "notas": "Presentarse y explicar en una frase qué hace RACK-T: diseñamos soluciones, no vendemos productos sueltos."
+    },
+    {
+      "tipo": "seccion",
+      "numero": 1,
+      "titulo": "Quiénes somos",
+      "subtitulo": "Ingeniería, fabricación e instalación para almacenes y centros de distribución.",
+      "notas": "Separador de capítulo."
+    },
+    {
+      "tipo": "texto",
+      "etiqueta": "RACK-T en pocas palabras",
+      "titulo": "Una solución, no un catálogo",
+      "vinetas": [
+        "Diseñamos soluciones que generan resultados medibles.",
+        "Oficinas en Querétaro, Estado de México y Guadalajara, con cobertura nacional.",
+        "Capacidad instalada de 800 toneladas de producción por día.",
+        "Formamos parte de Grupo ERT."
+      ],
+      "notas": "Subrayar la venta consultiva: primero entendemos la operación."
+    },
+    {
+      "tipo": "cifras",
+      "etiqueta": "RACK-T en números",
+      "titulo": "Capacidad para proyectos grandes y pequeños",
+      "items": [
+        {
+          "valor": 800,
+          "sufijo": " t",
+          "etiqueta": "Producción por día",
+          "nota": "Capacidad instalada."
+        },
+        {
+          "valor": 3,
+          "etiqueta": "Oficinas",
+          "nota": "Querétaro, Edo. de México y Guadalajara."
+        },
+        {
+          "valor": 50000,
+          "etiqueta": "lb/pulg²",
+          "nota": "Resistencia del acero A50."
+        },
+        {
+          "valor": 2019,
+          "agrupar": false,
+          "prefijo": "Desde ",
+          "etiqueta": "Proyectos registrados",
+          "nota": "Manufactura, automotriz, retail y CEDIS."
+        }
+      ]
+    },
+    {
+      "tipo": "tarjetas",
+      "etiqueta": "Qué hacemos",
+      "titulo": "Soluciones completas para tu almacén",
+      "items": [
+        {
+          "icono": "rack",
+          "titulo": "Racks",
+          "texto": "Selectivo, picking, pallet flow, drive-in, autoportante y cantilever."
+        },
+        {
+          "icono": "mezzanine",
+          "titulo": "Mezzanines",
+          "texto": "Mezzanines y pasillos elevados para aprovechar la altura."
+        },
+        {
+          "icono": "escudo",
+          "titulo": "Protección",
+          "texto": "Pallet stop, botas, rieles protectores y malla anticaída."
+        },
+        {
+          "icono": "camion",
+          "titulo": "Reubicaciones",
+          "texto": "Reubicaciones y mudanzas industriales."
+        },
+        {
+          "icono": "regla",
+          "titulo": "Peritaje",
+          "texto": "Estudio estructural de racks instalados."
+        },
+        {
+          "icono": "casco",
+          "titulo": "Cursos DC3",
+          "texto": "Capacitación de seguridad para tu equipo."
+        }
+      ]
+    },
+    {
+      "tipo": "galeria",
+      "etiqueta": "Proyectos instalados",
+      "titulo": "Lo que ya está trabajando",
+      "items": [
+        {
+          "titulo": "Cantilever",
+          "imagen": {
+            "src": "assets/img/cantilever-03.webp",
+            "chica": "assets/img/cantilever-03-640.webp",
+            "ancho": 1920,
+            "alt": "Rack cantilever con brazos rojos para cargas largas"
+          }
+        },
+        {
+          "titulo": "Mezzanine",
+          "imagen": {
+            "src": "assets/img/mezzanine-02.webp",
+            "chica": "assets/img/mezzanine-02-640.webp",
+            "ancho": 1280,
+            "alt": "Estructura de mezzanine con vigas rojas y columnas"
+          }
+        },
+        {
+          "titulo": "Pasillo elevado",
+          "imagen": {
+            "src": "assets/img/pasillo-elevado-17.webp",
+            "chica": "assets/img/pasillo-elevado-17-640.webp",
+            "ancho": 1920,
+            "alt": "Pasillo elevado con estantería de picking"
+          }
+        },
+        {
+          "titulo": "Carton flow",
+          "imagen": {
+            "src": "assets/img/carton-flow-19.webp",
+            "chica": "assets/img/carton-flow-19-640.webp",
+            "ancho": 1280,
+            "alt": "Camas de rodajas de carton flow"
+          }
+        },
+        {
+          "titulo": "Push back",
+          "imagen": {
+            "src": "assets/img/push-back-03.webp",
+            "chica": "assets/img/push-back-03-640.webp",
+            "ancho": 1280,
+            "alt": "Sistema push back visto desde abajo"
+          }
+        },
+        {
+          "titulo": "Drive-in",
+          "imagen": {
+            "src": "assets/img/drive-in-01.webp",
+            "chica": "assets/img/drive-in-01-640.webp",
+            "ancho": 1280,
+            "alt": "Rack drive-in con guías amarillas"
+          }
+        }
+      ],
+      "notas": "Una foto por línea de producto. Todas son instalaciones de RACK-T."
+    },
+    {
+      "tipo": "dos-columnas",
+      "etiqueta": "Proyecto llave en mano",
+      "titulo": "Nos hacemos cargo de todo",
+      "texto": [
+        "Del diagnóstico del espacio a la entrega con acta firmada, un solo responsable acompaña tu proyecto."
+      ],
+      "vinetas": [
+        "Ingeniería y layout",
+        "Fabricación en acero A50",
+        "Instalación y verificación"
+      ],
+      "invertir": false,
+      "notas": "Foto real de una instalación. Para otra, cambiar \"imagen\".",
+      "imagen": {
+        "src": "assets/img/instalacion-03.webp",
+        "chica": "assets/img/instalacion-03-640.webp",
+        "ancho": 1920,
+        "alt": "Cuadrilla con casco instalando un rack selectivo en una nave nueva"
+      }
+    },
+    {
+      "tipo": "linea-tiempo",
+      "etiqueta": "Cómo trabajamos",
+      "titulo": "De la idea al almacén funcionando",
+      "items": [
+        {
+          "titulo": "Diagnóstico",
+          "texto": "Conocemos tu operación y tu espacio."
+        },
+        {
+          "titulo": "Ingeniería",
+          "texto": "Diseñamos el layout y la solución."
+        },
+        {
+          "titulo": "Fabricación",
+          "texto": "Producimos en acero A50."
+        },
+        {
+          "titulo": "Instalación",
+          "texto": "Montamos y entregamos con acta firmada."
+        }
+      ]
+    },
+    {
+      "tipo": "comparativa",
+      "etiqueta": "Formas de trabajar",
+      "titulo": "Elige hasta dónde te acompañamos",
+      "columnas": [
+        {
+          "nombre": "Suministro",
+          "descripcion": "Fabricamos y entregamos según tu diseño.",
+          "precio": "A la medida",
+          "puntos": [
+            "Fabricación en acero A50",
+            "Accesorios de protección",
+            "Entrega en tu almacén"
+          ]
+        },
+        {
+          "nombre": "Llave en mano",
+          "destacado": true,
+          "insignia": "El más completo",
+          "descripcion": "Del diagnóstico a la entrega.",
+          "precio": "A la medida",
+          "puntos": [
+            "Diagnóstico e ingeniería",
+            "Fabricación e instalación",
+            "Entrega con acta firmada"
+          ]
+        },
+        {
+          "nombre": "Servicio",
+          "descripcion": "Cuidamos lo que ya tienes.",
+          "precio": "A la medida",
+          "puntos": [
+            "Peritaje estructural",
+            "Reubicaciones",
+            "Cursos DC3"
+          ]
+        }
+      ],
+      "notas": "Todas las cotizaciones tienen vigencia de 30 días."
+    },
+    {
+      "tipo": "cita",
+      "ejemplo": true,
+      "cita": "Aquí va la opinión de un cliente, en sus propias palabras y con su autorización por escrito.",
+      "nombre": "Nombre del cliente",
+      "cargo": "Puesto · Empresa"
+    },
+    {
+      "tipo": "imagen-completa",
+      "titulo": "Ingeniería que da forma al crecimiento industrial",
+      "texto": "Cada proyecto empieza por entender cómo se mueve tu material.",
+      "notas": "Foto a sangre en blanco y negro con capa grafito para que el texto se lea.",
+      "imagen": {
+        "src": "assets/img/selectivo-06.webp",
+        "chica": "assets/img/selectivo-06-640.webp",
+        "ancho": 1920,
+        "alt": "Vista amplia de hileras de rack selectivo bajo la estructura de una nave"
+      }
+    },
+    {
+      "tipo": "logos",
+      "etiqueta": "Clientes",
+      "titulo": "Empresas que han confiado en nosotros",
+      "items": [
+        {
+          "nombre": "Schneider Electric"
+        },
+        {
+          "nombre": "Martinrea"
+        },
+        {
+          "nombre": "SAF Holland"
+        },
+        {
+          "nombre": "Select Shop"
+        },
+        {
+          "nombre": "Go Global"
+        }
+      ]
+    },
+    {
+      "tipo": "cierre",
+      "titulo": "Platícanos de tu almacén",
+      "texto": "Cuéntanos qué guardas, cuánto y en qué espacio. Te respondemos con una propuesta de solución.",
+      "cta": {
+        "texto": "Solicita una cotización",
+        "enlace": "mailto:ventas@rackt.com.mx?subject=Solicitud%20de%20cotizaci%C3%B3n"
+      },
+      "contacto": [
+        {
+          "tipo": "correo",
+          "valor": "ventas@rackt.com.mx",
+          "enlace": "mailto:ventas@rackt.com.mx"
+        },
+        {
+          "tipo": "telefono",
+          "valor": "442 491 7676",
+          "enlace": "tel:+524424917676"
+        },
+        {
+          "tipo": "sitio",
+          "valor": "rackt.com.mx",
+          "enlace": "https://rackt.com.mx"
+        },
+        {
+          "tipo": "ubicacion",
+          "valor": "Terra Park Centenario, Nave 56, Querétaro"
+        }
+      ],
+      "notas": "Para mostrar un código QR: \"qr\": { \"src\": \"assets/img/qr.png\", \"alt\": \"Código QR a rackt.com.mx\", \"texto\": \"rackt.com.mx\" }."
+    }
+  ]
+}
+</script>
+
+<script>
+/* ==========================================================================
+   MOTOR — lee el JSON, arma las diapositivas y maneja la navegación.
+   No se edita para cargar contenido.
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  const sinMovimiento = !document.documentElement.classList.contains('animar');
+  const contenedor = document.getElementById('diapositivas');
+  const lienzo = document.getElementById('lienzo');
+  let datos;
+  try {
+    datos = JSON.parse(document.getElementById('contenido').textContent);
+  } catch (e) {
+    contenedor.innerHTML = '<p style="position:absolute;inset:0;padding:120px;font:40px system-ui;color:#fff;background:#323131">El bloque de contenido tiene un error de formato JSON: ' + String(e.message).replace(/</g, '&lt;') + '</p>';
+    console.error('Contenido JSON inválido:', e);
+    return;
+  }
+
+  /* ---------- Utilidades ---------- */
+  function h(etiqueta, props, ...hijos) {
+    const el = document.createElement(etiqueta);
+    for (const [k, v] of Object.entries(props || {})) {
+      if (v === null || v === undefined || v === false) continue;
+      if (k === 'class') el.className = v;
+      else if (k === 'text') el.textContent = v;
+      else if (k === 'style') el.style.cssText = v;
+      else el.setAttribute(k, v === true ? '' : v);
+    }
+    for (const hijo of hijos.flat(Infinity)) {
+      if (hijo === null || hijo === undefined || hijo === false || hijo === '') continue;
+      el.append(hijo instanceof Node ? hijo : document.createTextNode(String(hijo)));
+    }
+    return el;
+  }
+  const tiene = (v) => v !== undefined && v !== null && v !== '' && !(Array.isArray(v) && v.length === 0);
+  const lista = (v) => (Array.isArray(v) ? v : tiene(v) ? [v] : []);
+  function enlaceSeguro(url) {
+    if (!tiene(url)) return null;
+    const s = String(url).trim();
+    return /^(javascript|data|vbscript):/i.test(s) ? null : s;
+  }
+  const parrafos = (v, clase) => lista(v).map((t) => h('p', { class: clase, text: t }));
+
+  // Marca un elemento para la aparición escalonada
+  let indiceAnim = 0;
+  const anim = (el) => { if (el) { el.setAttribute('data-anim', ''); el.style.setProperty('--i', indiceAnim++); } return el; };
+
+  const ICONOS = {
+    rack: '<path d="M4 3v18M20 3v18M4 8h16M4 14h16M4 20h16"/><path d="M7 8V5.5h4V8M13 14v-3h4v3"/>',
+    mezzanine: '<path d="M2 10h20M4 10v11M20 10v11M12 10v11"/><path d="M4 21l8-11"/><path d="M4 6h16M4 6v4M20 6v4"/>',
+    montacargas: '<path d="M3 17V9h6l3 4v4"/><path d="M15 3v14h6"/><circle cx="6" cy="18.5" r="1.8"/><circle cx="11.5" cy="18.5" r="1.8"/>',
+    escudo: '<path d="M12 3l8 3v6c0 5-3.4 8-8 9-4.6-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+    camion: '<path d="M2 6h11v10H2zM13 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
+    regla: '<path d="M3 17L17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/>',
+    casco: '<path d="M3 18h18M5 18v-3a7 7 0 0 1 14 0v3"/><path d="M10 8V5h4v3"/>',
+    engrane: '<circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>',
+    grafica: '<path d="M3 21h18M6 17V11M11 17V6M16 17v-8M21 17V4"/>',
+    reloj: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    check: '<path d="M4 12.5l5 5L20 6.5"/>',
+    flecha: '<path d="M4 12h15M13 6l6 6-6 6"/>',
+    correo: '<rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/>',
+    telefono: '<path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/>',
+    sitio: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+    ubicacion: '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+    whatsapp: '<path d="M4 20l1.3-3.9A8.5 8.5 0 1 1 8 19z"/><path d="M9 9.5c.3 2.3 2.2 4.2 4.5 4.5l1-1.3 2 1-1 2c-3.5.2-7.7-4-7.5-7.5l2-1 1 2z"/>',
+    facebook: '<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/>',
+    instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
+    linkedin: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/>'
+  };
+  function icono(nombre) {
+    const t = document.createElement('template');
+    t.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + (ICONOS[nombre] || ICONOS.rack) + '</svg>';
+    return t.content.firstElementChild;
+  }
+  function logo(id, clase) {
+    const svg = document.getElementById(id).content.firstElementChild.cloneNode(true);
+    if (clase) svg.setAttribute('class', clase);
+    return svg;
+  }
+  function decorativo(svg) { svg.setAttribute('aria-hidden', 'true'); svg.removeAttribute('role'); svg.querySelector('title')?.remove(); return svg; }
+
+  function tituloConResaltado(texto, resaltado) {
+    if (!tiene(resaltado) || !String(texto).includes(resaltado)) return [texto];
+    const [antes, ...resto] = String(texto).split(resaltado);
+    return [antes, h('span', { class: 'resaltado', text: resaltado }), resto.join(resaltado)];
+  }
+  // Foto con versión chica opcional ("chica": 640 px). sizes = qué fracción de la pantalla ocupa;
+  // como el lienzo se escala a la ventana, se expresa en vw.
+  function imagen(img, sizes) {
+    if (!img || !tiene(img.src)) return null;
+    if (!tiene(img.alt)) console.warn('Imagen sin "alt":', img.src);
+    const conChica = tiene(img.chica);
+    return h('figure', { class: 'foto' + (img.color ? ' foto--color' : '') }, h('img', {
+      src: img.src,
+      srcset: conChica ? img.chica + ' 640w, ' + img.src + ' ' + (img.ancho || 1920) + 'w' : null,
+      sizes: conChica ? (sizes || '50vw') : null,
+      alt: img.alt || '', decoding: 'async'
+    }));
+  }
+  function cabeza(d) {
+    if (!tiene(d.titulo) && !tiene(d.etiqueta)) return null;
+    return h('header', { class: 'cabeza' },
+      tiene(d.etiqueta) ? anim(h('p', { class: 'etiqueta', text: d.etiqueta })) : null,
+      tiene(d.titulo) ? anim(h('h2', {}, tituloConResaltado(d.titulo, d.resaltado))) : null,
+      tiene(d.intro) ? anim(h('p', { class: 'intro', text: d.intro })) : null);
+  }
+  const vinetas = (v) => lista(v).length ? h('ul', { class: 'vinetas' }, lista(v).map((t) => anim(h('li', { text: t })))) : null;
+
+  function ilustracionRack() {
+    const postes = [30, 252, 474], niveles = [118, 222, 326], bahias = [[46, 252], [268, 474]];
+    const cargas = [[[62, 66], [150, 58]], [[62, 74], [150, 66, true]], [[62, 60], [150, 72]], [[284, 70], [372, 62]], [[284, 58], null], [[284, 66], [372, 74]]];
+    let svg = '<svg class="ilustracion" viewBox="0 0 520 440" aria-hidden="true" focusable="false">';
+    svg += '<line class="ilus-piso" x1="0" y1="412" x2="520" y2="412"/><path class="ilus-cota" d="M508 20v392M502 20h12M502 412h12"/>';
+    postes.forEach((x) => {
+      svg += '<rect class="ilus-poste" x="' + x + '" y="20" width="16" height="392" rx="2"/>';
+      for (let y = 30; y < 404; y += 18) svg += '<rect class="ilus-perfo" x="' + (x + 6) + '" y="' + y + '" width="4" height="9" rx="2"/>';
+    });
+    let iv = 0, ic = 0;
+    bahias.forEach(([x1, x2], b) => {
+      niveles.forEach((y, n) => {
+        svg += '<rect class="ilus-viga" style="--i:' + (iv++) + '" x="' + x1 + '" y="' + y + '" width="' + (x2 - x1) + '" height="11" rx="2"/>';
+        cargas[b * 3 + n].forEach((c) => {
+          if (!c) return;
+          const yT = y - 9, yC = yT - c[1];
+          svg += '<g class="ilus-bulto" style="--i:' + (ic++) + '"><rect class="ilus-tarima" x="' + c[0] + '" y="' + yT + '" width="80" height="8" rx="1"/><rect class="ilus-carga' + (c[2] ? ' ilus-carga--acento' : '') + '" x="' + (c[0] + 3) + '" y="' + yC + '" width="74" height="' + (c[1] - 1) + '" rx="1"/></g>';
+        });
+      });
+      svg += '<g class="ilus-bulto" style="--i:' + (ic++) + '"><rect class="ilus-tarima" x="' + (x1 + 16) + '" y="403" width="80" height="8" rx="1"/><rect class="ilus-carga" x="' + (x1 + 19) + '" y="336" width="74" height="66" rx="1"/></g>';
+    });
+    const t = document.createElement('template');
+    t.innerHTML = svg + '</svg>';
+    return t.content.firstElementChild;
+  }
+
+  /* ---------- Plantillas por tipo de diapositiva ----------
+     Cada función devuelve [nodos] y el fondo por omisión. Si faltan datos
+     esenciales devuelve null y la diapositiva no se crea. */
+  const marca = datos.marca || {};
+  const T = {
+    portada(d) {
+      return { fondo: 'oscuro', esquina: false, nodos: [
+        h('div', { class: 'texto' },
+          anim(decorativo(logo('tpl-logo', 'logo-grande'))),
+          tiene(d.etiqueta) ? anim(h('p', { class: 'etiqueta', text: d.etiqueta })) : null,
+          tiene(d.titulo) ? anim(h('h1', {}, tituloConResaltado(d.titulo, d.resaltado))) : null,
+          tiene(d.subtitulo || marca.eslogan) ? anim(h('p', { class: 'subtitulo', text: d.subtitulo || marca.eslogan })) : null,
+          (tiene(d.fecha) || tiene(d.autor)) ? anim(h('p', { class: 'datos' }, tiene(d.fecha) ? h('span', { text: d.fecha }) : null, tiene(d.autor) ? h('span', { text: d.autor }) : null)) : null),
+        h('div', { class: 'panel', 'aria-hidden': 'true' }, decorativo(logo('tpl-isotipo')))
+      ] };
+    },
+    seccion(d) {
+      if (!tiene(d.titulo)) return null;
+      return { fondo: 'primario', nodos: [h('div', { class: 'fila' },
+        tiene(d.numero) ? anim(h('p', { class: 'numero', 'aria-hidden': 'true', text: String(d.numero).padStart(2, '0') })) : null,
+        h('div', {},
+          anim(h('h2', {}, tiene(d.numero) ? h('span', { class: 'solo-lectores', text: 'Sección ' + d.numero + ': ' }) : null, d.titulo)),
+          tiene(d.subtitulo) ? anim(h('p', { class: 'subtitulo', text: d.subtitulo })) : null))] };
+    },
+    texto(d) {
+      if (!tiene(d.titulo) && !lista(d.vinetas).length && !tiene(d.texto)) return null;
+      return { fondo: 'claro', nodos: [cabeza(d), h('div', { class: 'cuerpo' },
+        parrafos(d.texto, 'texto-suave').map(anim), vinetas(d.vinetas),
+        tiene(d.nota) ? anim(h('p', { class: 'nota', text: d.nota })) : null)] };
+    },
+    'dos-columnas'(d) {
+      const visual = imagen(d.imagen) || (d.ilustracion === false ? null : ilustracionRack());
+      return { fondo: 'claro', clase: d.invertir ? 'invertir' : '', nodos: [h('div', { class: 'columnas' },
+        h('div', { class: 'col-texto' }, cabeza(d), parrafos(d.texto).map(anim), vinetas(d.vinetas)),
+        visual ? h('div', { class: 'col-visual' }, anim(visual)) : null)] };
+    },
+    cifras(d) {
+      const items = lista(d.items).filter((c) => tiene(c.valor)).slice(0, 4);
+      if (!items.length) return null;
+      return { fondo: 'claro', estilo: '--n:' + items.length, nodos: [cabeza(d), h('div', { class: 'cifras' }, items.map((c) => {
+        const num = typeof c.valor === 'number';
+        const fmt = new Intl.NumberFormat('es-MX', { maximumFractionDigits: c.decimales || 0, minimumFractionDigits: c.decimales || 0, useGrouping: c.agrupar !== false });
+        return anim(h('div', { class: 'cifra' },
+          h('p', { class: 'cifra-valor' },
+            tiene(c.prefijo) ? h('span', { class: 'cifra-afijo', text: c.prefijo }) : null,
+            h('span', num ? { class: 'cuenta', 'data-valor': c.valor, 'data-decimales': c.decimales || 0, 'data-agrupar': c.agrupar === false ? 'false' : 'true' } : {}, num ? fmt.format(c.valor) : String(c.valor)),
+            tiene(c.sufijo) ? h('span', { class: 'cifra-afijo', text: c.sufijo }) : null),
+          tiene(c.etiqueta) ? h('p', { class: 'cifra-etiqueta', text: c.etiqueta }) : null,
+          tiene(c.nota) ? h('p', { class: 'cifra-nota', text: c.nota }) : null));
+      }))] };
+    },
+    tarjetas(d) {
+      const items = lista(d.items).slice(0, 6);
+      if (!items.length) return null;
+      const cols = items.length === 4 ? 2 : items.length <= 3 ? items.length : 3;
+      return { fondo: 'claro', estilo: '--cols:' + cols, datos: { cantidad: items.length }, nodos: [cabeza(d), h('div', { class: 'rejilla' }, items.map((t) => anim(h('article', { class: 'tarjeta' },
+        h('div', { class: 'icono-caja' }, icono(t.icono || 'rack')),
+        tiene(t.titulo) ? h('h3', { text: t.titulo }) : null,
+        parrafos(t.texto)))))] };
+    },
+    comparativa(d) {
+      if (d.tabla && lista(d.tabla.filas).length) {
+        const destacada = d.tabla.destacada;            // índice de columna destacada (opcional)
+        const cls = (i) => (i === destacada ? 'col-destacada' : null);
+        return { fondo: 'claro', nodos: [cabeza(d), h('div', { class: 'cuerpo' }, anim(h('table', { class: 'tabla' },
+          lista(d.tabla.encabezados).length ? h('thead', {}, h('tr', {}, lista(d.tabla.encabezados).map((e, i) => h('th', { scope: 'col', class: cls(i), text: e })))) : null,
+          h('tbody', {}, lista(d.tabla.filas).map((fila) => h('tr', {}, lista(fila).map((c, i) => h(i === 0 ? 'th' : 'td', { scope: i === 0 ? 'row' : null, class: cls(i), text: c }))))))))] };
+      }
+      const cols = lista(d.columnas).slice(0, 4);
+      if (!cols.length) return null;
+      return { fondo: 'claro', estilo: '--n:' + cols.length, nodos: [cabeza(d), h('div', { class: 'columnas-plan' }, cols.map((c) => anim(h('article', { class: 'plan' + (c.destacado ? ' plan--destacado' : '') },
+        c.destacado && tiene(c.insignia) ? h('span', { class: 'insignia', text: c.insignia }) : null,
+        tiene(c.nombre) ? h('h3', { text: c.nombre }) : null,
+        tiene(c.descripcion) ? h('p', { class: 'descripcion', text: c.descripcion }) : null,
+        tiene(c.precio) ? h('p', { class: 'precio', text: c.precio }) : null,
+        lista(c.puntos).length ? h('ul', { class: 'lista-check' }, lista(c.puntos).map((p) => h('li', {}, icono('check'), h('span', { text: p })))) : null))))] };
+    },
+    'linea-tiempo'(d) {
+      const items = lista(d.items).slice(0, 6);
+      if (!items.length) return null;
+      return { fondo: 'claro', nodos: [cabeza(d), h('ol', { class: 'linea', style: '--n:' + items.length }, items.map((p, i) => anim(h('li', { class: 'hito' },
+        h('span', { class: 'hito-numero', 'aria-hidden': 'true', text: String(i + 1).padStart(2, '0') }),
+        tiene(p.fecha) ? h('p', { class: 'fecha', text: p.fecha }) : null,
+        tiene(p.titulo) ? h('h3', { text: p.titulo }) : null,
+        parrafos(p.texto)))))] };
+    },
+    cita(d) {
+      if (!tiene(d.cita)) return null;
+      return { fondo: 'oscuro', nodos: [
+        d.ejemplo ? h('span', { class: 'marca-ejemplo', text: 'Ejemplo · reemplazar' }) : null,
+        h('figure', {},
+          anim(h('span', { class: 'comillas', 'aria-hidden': 'true', text: '“' })),
+          anim(h('blockquote', {}, h('p', { text: d.cita }))),
+          (tiene(d.nombre) || tiene(d.cargo)) ? anim(h('figcaption', {}, h('span', {}, tiene(d.nombre) ? h('strong', { text: d.nombre }) : null, tiene(d.cargo) ? [' · ', d.cargo] : null))) : null)] };
+    },
+    'imagen-completa'(d) {
+      const conFoto = d.imagen && tiene(d.imagen.src);
+      if (conFoto && !tiene(d.imagen.alt)) console.warn('Imagen sin "alt":', d.imagen.src);
+      return { fondo: 'oscuro', clase: conFoto ? '' : 'sin-foto', nodos: [
+        h('div', { class: 'fondo-foto' + (conFoto && d.imagen.color ? ' color' : '') }, conFoto ? h('img', { src: d.imagen.src, alt: d.imagen.alt || '' }) : null),
+        tiene(d.titulo) ? anim(h('h2', {}, tituloConResaltado(d.titulo, d.resaltado))) : null,
+        tiene(d.texto) ? anim(h('p', { class: 'texto', text: d.texto })) : null,
+        tiene(d.credito) ? h('p', { class: 'credito', text: d.credito }) : null] };
+    },
+    // Galería de 1 a 6 fotos. Con 5, la primera ocupa dos filas para que la rejilla cierre;
+    // con 4 va en 2 × 2; con 6, en 3 × 2.
+    galeria(d) {
+      const items = lista(d.items).filter((g) => g.imagen && tiene(g.imagen.src)).slice(0, 6);
+      if (!items.length) return null;
+      const n = items.length, cols = n === 4 ? 2 : Math.min(n, 3);
+      return { fondo: d.fondo || 'claro', estilo: '--cols:' + cols, datos: { cantidad: n }, nodos: [cabeza(d),
+        h('div', { class: 'galeria' }, items.map((g, i) => anim(h('figure', { class: 'galeria-item' + (n === 5 && i === 0 ? ' galeria-item--alta' : '') },
+          imagen(g.imagen, n <= 2 ? '50vw' : '33vw'),
+          (tiene(g.titulo) || tiene(g.texto)) ? h('figcaption', {},
+            tiene(g.titulo) ? h('strong', { text: g.titulo }) : null,
+            tiene(g.texto) ? h('span', { text: g.texto }) : null) : null))))] };
+    },
+    logos(d) {
+      const items = lista(d.items).filter((a) => tiene(a.nombre) || tiene(a.logo));
+      if (!items.length) return null;
+      const cols = items.length <= 4 ? items.length : items.length <= 6 ? 3 : 4;
+      return { fondo: 'claro', estilo: '--cols:' + cols, nodos: [cabeza(d), h('ul', { class: 'rejilla-logos', style: 'list-style:none;padding:0' }, items.map((a) => anim(h('li', { class: 'logo-aliado' },
+        tiene(a.logo) ? h('img', { src: a.logo, alt: a.nombre || '' }) : h('span', { text: a.nombre })))))] };
+    },
+    cierre(d) {
+      const contactos = lista(d.contacto).filter((c) => tiene(c.valor));
+      const cta = d.cta && tiene(d.cta.texto) ? anim(h('a', { class: 'boton', href: enlaceSeguro(d.cta.enlace), target: /^https?:/i.test(d.cta.enlace || '') ? '_blank' : null, rel: 'noopener' }, d.cta.texto, icono('flecha'))) : null;
+      const qr = d.qr && tiene(d.qr.src) ? anim(h('figure', { class: 'qr' }, h('img', { src: d.qr.src, alt: d.qr.alt || 'Código QR' }), tiene(d.qr.texto) ? h('figcaption', { text: d.qr.texto }) : null)) : null;
+      return { fondo: 'primario', esquina: false, nodos: [
+        h('div', { class: 'texto' },
+          tiene(d.titulo) ? anim(h('h2', {}, tituloConResaltado(d.titulo, d.resaltado))) : null,
+          tiene(d.texto) ? anim(h('p', { class: 'mensaje', text: d.texto })) : null,
+          cta ? h('div', {}, cta) : null),
+        h('div', { class: 'lado' },
+          anim(decorativo(logo('tpl-logo', 'logo-cierre'))),
+          contactos.length ? h('address', {}, h('ul', { class: 'contacto' }, contactos.map((c) => anim(h('li', {},
+            h('span', { class: 'icono-caja' }, icono(c.tipo || 'sitio')),
+            tiene(c.enlace) ? h('a', { href: enlaceSeguro(c.enlace), text: c.valor }) : h('span', { text: c.valor })))))) : null,
+          qr)] };
+    }
+  };
+
+  /* ---------- Armado ---------- */
+  // El título de la página vive en el <head> (tarjeta para compartir).
+  const fuente = lista(datos.diapositivas);
+  const diapos = [];
+  fuente.forEach((d) => {
+    if (!d || !T[d.tipo]) { if (d && d.tipo) console.warn('Tipo de diapositiva desconocido:', d.tipo); return; }
+    indiceAnim = 0;
+    const r = T[d.tipo](d);
+    if (!r) return;
+    const fondo = ['claro', 'oscuro', 'primario'].includes(d.fondo) ? d.fondo : r.fondo;
+    const el = h('section', { class: ['diapositiva', 'd-' + d.tipo, 'fondo-' + fondo, r.clase].filter(Boolean).join(' '), style: r.estilo || null, 'aria-roledescription': 'diapositiva' },
+      r.nodos, r.esquina === false ? null : decorativo(logo('tpl-isotipo', 'esquina')));
+    if (r.datos) Object.entries(r.datos).forEach(([k, v]) => el.setAttribute('data-' + k, v));
+    el.dataset.fondo = fondo;
+    diapos.push({ el, d, titulo: d.titulo || d.cita || d.tipo });
+    contenedor.append(el);
+  });
+  const total = diapos.length;
+  document.getElementById('total').textContent = total;
+  diapos.forEach((x, i) => x.el.setAttribute('aria-label', (i + 1) + ' de ' + total + (tiene(x.titulo) ? ': ' + x.titulo : '')));
+
+  /* ---------- Escala del lienzo ---------- */
+  function escalar() {
+    const k = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    lienzo.style.setProperty('--escala', k);
+  }
+  window.addEventListener('resize', escalar);
+  escalar();
+
+  /* ---------- Navegación ---------- */
+  let actual = -1;
+  const anuncio = document.getElementById('anuncio');
+  const notas = document.getElementById('notas');
+
+  function contar(el) {
+    const fin = parseFloat(el.dataset.valor), dec = +el.dataset.decimales || 0;
+    const fmt = new Intl.NumberFormat('es-MX', { minimumFractionDigits: dec, maximumFractionDigits: dec, useGrouping: el.dataset.agrupar !== 'false' });
+    if (sinMovimiento) { el.textContent = fmt.format(fin); return; }
+    const t0 = performance.now() + 250, dur = 700;
+    el.textContent = fmt.format(0);
+    const paso = (t) => {
+      const k = Math.max(0, Math.min(1, (t - t0) / dur)), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = fmt.format(k < 1 ? fin * e : fin);
+      if (k < 1) requestAnimationFrame(paso);
+    };
+    requestAnimationFrame(paso);
+  }
+
+  function pintarNotas() {
+    const x = diapos[actual];
+    const texto = x && lista(x.d.notas);
+    notas.replaceChildren(h('strong', { text: 'Notas · ' + (actual + 1) + ' / ' + total }),
+      ...(texto && texto.length ? texto.map((t) => h('p', { text: t })) : [h('p', { text: 'Sin notas para esta diapositiva.' })]));
+  }
+
+  function ir(i, desdeHash) {
+    if (!total) return;
+    i = Math.max(0, Math.min(total - 1, i));
+    if (i === actual) return;
+    actual = i;
+    diapos.forEach((x, j) => {
+      x.el.classList.toggle('activa', j === i);
+      x.el.classList.toggle('previa', j < i);
+      x.el.toggleAttribute('inert', j !== i);
+      x.el.setAttribute('aria-hidden', j === i ? 'false' : 'true');
+    });
+    const x = diapos[i];
+    lienzo.dataset.fondo = x.el.dataset.fondo;
+    lienzo.style.setProperty('--avance', total > 1 ? i / (total - 1) : 1);
+    document.getElementById('actual').textContent = i + 1;
+    anuncio.textContent = 'Diapositiva ' + (i + 1) + ' de ' + total + (tiene(x.titulo) ? ': ' + x.titulo : '');
+    x.el.querySelectorAll('.cuenta').forEach(contar);
+    if (!desdeHash) history.replaceState(null, '', '#' + (i + 1));
+    if (!notas.hidden) pintarNotas();
+  }
+  const siguiente = () => ir(actual + 1);
+  const anterior = () => ir(actual - 1);
+
+  function desdeHash() {
+    const n = parseInt((location.hash || '').replace('#', ''), 10);
+    return Number.isFinite(n) ? n - 1 : 0;
+  }
+  window.addEventListener('hashchange', () => ir(desdeHash(), true));
+
+  /* Cuadrícula de miniaturas */
+  const cuadricula = document.getElementById('cuadricula');
+  const miniaturas = document.getElementById('miniaturas');
+  let focoPrevio = null;
+  function abrirCuadricula() {
+    miniaturas.replaceChildren(...diapos.map((x, i) => {
+      const clon = x.el.cloneNode(true);
+      clon.classList.remove('activa', 'previa');
+      clon.removeAttribute('inert'); clon.removeAttribute('aria-label'); clon.removeAttribute('aria-roledescription');
+      clon.querySelectorAll('[id]').forEach((n) => n.removeAttribute('id'));
+      clon.querySelectorAll('.cuenta').forEach((n) => {
+        const dec = +n.dataset.decimales || 0;
+        n.textContent = new Intl.NumberFormat('es-MX', { minimumFractionDigits: dec, maximumFractionDigits: dec, useGrouping: n.dataset.agrupar !== 'false' }).format(parseFloat(n.dataset.valor));
+      });
+      const marco = h('div', { class: 'miniatura', 'aria-hidden': 'true' }, clon);
+      const b = h('button', { type: 'button', class: 'miniatura-boton', 'aria-label': 'Ir a la diapositiva ' + (i + 1) + (tiene(x.titulo) ? ': ' + x.titulo : ''), 'aria-current': i === actual ? 'true' : null },
+        marco, h('span', { class: 'num', text: String(i + 1) }));
+      b.addEventListener('click', () => { cerrarCuadricula(); ir(i); });
+      return h('li', {}, b);
+    }));
+    focoPrevio = document.activeElement;
+    cuadricula.hidden = false;
+    const actualBtn = miniaturas.querySelector('[aria-current="true"]') || miniaturas.querySelector('button');
+    actualBtn && actualBtn.focus();
+    actualBtn && actualBtn.scrollIntoView({ block: 'center' });
+  }
+  function cerrarCuadricula() {
+    cuadricula.hidden = true;
+    miniaturas.replaceChildren();
+    if (focoPrevio && focoPrevio.focus) focoPrevio.focus();
+  }
+  const cuadriculaAbierta = () => !cuadricula.hidden;
+
+  function alternarPantallaCompleta() {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(() => {});
+    else document.exitFullscreen?.();
+  }
+  function alternarTema() {
+    const nuevo = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', nuevo);
+    try { localStorage.setItem('rt-tema', nuevo); } catch (e) {}
+  }
+  function alternarNotas() {
+    notas.hidden = !notas.hidden;
+    if (!notas.hidden) pintarNotas();
+  }
+
+  /* Teclado */
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    const k = e.key;
+    if (cuadriculaAbierta()) {
+      if (k === 'Escape' || k === 'g' || k === 'G') { e.preventDefault(); cerrarCuadricula(); }
+      else if (['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp'].includes(k)) {
+        const botones = [...miniaturas.querySelectorAll('button')];
+        const i = botones.indexOf(document.activeElement);
+        const porFila = Math.max(1, Math.round(miniaturas.clientWidth / 344));
+        const salto = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: porFila, ArrowUp: -porFila }[k];
+        const destino = botones[Math.max(0, Math.min(botones.length - 1, (i < 0 ? 0 : i) + salto))];
+        if (destino) { e.preventDefault(); destino.focus(); destino.scrollIntoView({ block: 'nearest' }); }
+      }
+      return;
+    }
+    switch (k) {
+      case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ': case 'Spacebar':
+        e.preventDefault(); siguiente(); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
+        e.preventDefault(); anterior(); break;
+      case 'Home': e.preventDefault(); ir(0); break;
+      case 'End': e.preventDefault(); ir(total - 1); break;
+      case 'f': case 'F': alternarPantallaCompleta(); break;
+      case 'g': case 'G': case 'Escape': if (!document.fullscreenElement || k !== 'Escape') { e.preventDefault(); abrirCuadricula(); } break;
+      case 'n': case 'N': alternarNotas(); break;
+      case 't': case 'T': alternarTema(); break;
+    }
+  });
+
+  /* Clic en los bordes y deslizamiento táctil */
+  const escenario = document.getElementById('escenario');
+  let inicio = null, deslizo = false;
+  escenario.addEventListener('pointerdown', (e) => { inicio = { x: e.clientX, y: e.clientY }; deslizo = false; });
+  escenario.addEventListener('pointerup', (e) => {
+    if (!inicio) return;
+    const dx = e.clientX - inicio.x, dy = e.clientY - inicio.y;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) { deslizo = true; dx < 0 ? siguiente() : anterior(); }
+    inicio = null;
+  });
+  escenario.addEventListener('click', (e) => {
+    if (deslizo || e.target.closest('a, button')) return;
+    const x = e.clientX / window.innerWidth;
+    if (x > 0.85) siguiente();
+    else if (x < 0.15) anterior();
+  });
+
+  /* Pista de atajos: se desvanece a los 5 s */
+  const pista = document.getElementById('pista');
+  setTimeout(() => pista.classList.add('oculta'), 5000);
+
+  /* Tema del sistema si la persona no eligió uno */
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    let guardado = null;
+    try { guardado = localStorage.getItem('rt-tema'); } catch (err) {}
+    if (!guardado) document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+  });
+
+  /* Impresión: cifras finales, modo claro */
+  let temaAntes = null;
+  window.addEventListener('beforeprint', () => {
+    document.querySelectorAll('#diapositivas .cuenta').forEach((n) => {
+      const dec = +n.dataset.decimales || 0;
+      n.textContent = new Intl.NumberFormat('es-MX', { minimumFractionDigits: dec, maximumFractionDigits: dec, useGrouping: n.dataset.agrupar !== 'false' }).format(parseFloat(n.dataset.valor));
+    });
+    temaAntes = document.documentElement.getAttribute('data-theme');
+    document.documentElement.setAttribute('data-theme', 'light');
+  });
+  window.addEventListener('afterprint', () => { if (temaAntes) document.documentElement.setAttribute('data-theme', temaAntes); });
+
+  ir(desdeHash(), true);
+  if (!location.hash) history.replaceState(null, '', '#' + (actual + 1));
+})();
+</script>
+</body>
+</html>
