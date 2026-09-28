@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Herramienta del equipo, no para buscadores. WhatsApp sí lee la tarjeta (noindex no lo impide). -->
+<meta name="robots" content="noindex">
+<title>Kit comercial · RACK-T</title>
+<meta name="description" content="Accesos directos del equipo de RACK-T: piezas para el cliente, canales de contacto y herramientas internas.">
+<meta name="theme-color" content="#1b1c1e">
+<!-- Tarjeta para compartir: URL ABSOLUTAS, porque WhatsApp no lee rutas relativas ni data: -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RACK-T">
+<meta property="og:locale" content="es_MX">
+<meta property="og:url" content="https://sanoapro.github.io/rackt-piezas/kit-rackt/">
+<meta property="og:title" content="Kit comercial · RACK-T">
+<meta property="og:description" content="Todas las ligas del equipo en una lámina: abrir, copiar o mostrar el QR.">
+<meta property="og:image" content="https://sanoapro.github.io/rackt-piezas/kit-rackt/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kit comercial de RACK-T">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kit comercial · RACK-T">
+<meta name="twitter:description" content="Todas las ligas del equipo en una lámina: abrir, copiar o mostrar el QR.">
+<meta name="twitter:image" content="https://sanoapro.github.io/rackt-piezas/kit-rackt/og.png">
+<!-- Favicon SVG inline: las cinco barras del isotipo en rojo RACK-T -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%23ab0505'%3E%3Crect x='2' y='3' width='20' height='2.6' rx='1.3'/%3E%3Crect x='2' y='7.6' width='20' height='2.6' rx='1.3'/%3E%3Crect x='2' y='12.2' width='20' height='2.6' rx='1.3'/%3E%3Crect x='2' y='16.8' width='20' height='2.6' rx='1.3'/%3E%3Crect x='2' y='21.4' width='20' height='1.6' rx='.8'/%3E%3C/g%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Motor compartido. Si alguno da 404, la lámina se ve completa y quieta (regla 4 del motor). -->
+<link rel="stylesheet" href="../compartidos/css/motion.css">
+
+<style>
+/* ==========================================================================
+   KIT COMERCIAL · RACK-T — la lámina de accesos directos
+   Una "diapositiva" fija de 1280 × 720 que se escala entera a la ventana.
+   Datos: al final del archivo (MOSTRAR, CAPTAR, OPERAR, EQUIPO). Guía: README.md
+   ========================================================================== */
+
+/* ---------- 1. Tokens ----------
+   Cada color lleva cuatro variantes:
+   principal (--x) · oscura (--x-d, extremo del degradado del ícono y texto sobre tinte)
+   tinte pastel (--x-t, velo y chip) · luz (--x-l, bordes y hover).
+   Los 4 primeros son de marca (Brand Book 2025); los 4 últimos son complementarios
+   armónicos, necesarios para que dentro de una fila dos vecinos nunca compartan color. */
+:root {
+  --rojo: #ab0505;     --rojo-d: #7a0303;     --rojo-t: #fbeceb;     --rojo-l: #f1bdba;
+  --marino: #002455;   --marino-d: #00152f;   --marino-t: #e7edf6;   --marino-l: #b9c8df;
+  --naranja: #f8450d;  --naranja-d: #b33000;  --naranja-t: #feeee7;  --naranja-l: #fcc5ae;
+  --grafito: #323131;  --grafito-d: #1a1919;  --grafito-t: #efefef;  --grafito-l: #cfcfcf;
+  --acero: #2e6da4;    --acero-d: #1b4a75;    --acero-t: #e8f1f9;    --acero-l: #b9d3eb;
+  --petroleo: #0f6e6e; --petroleo-d: #0a4a4a; --petroleo-t: #e3f3f2; --petroleo-l: #acd9d6;
+  --verde: #1d6b47;    --verde-d: #124a30;    --verde-t: #e5f3eb;    --verde-l: #b1dac3;
+  --ambar: #b86e00;    --ambar-d: #7d4a00;    --ambar-t: #fcf1de;    --ambar-l: #edcb8b;
+
+  /* Tinta en tres niveles, líneas y lavado */
+  --ink: #232222;  --ink2: #595656;  --ink3: #8d8989;
+  --line: #e6e3e1; --line2: #d3cfcc;
+  --wash: #f5f3f2;
+
+  /* Dos sombras suaves, teñidas de grafito (no negras puras: se ven sucias sobre blanco) */
+  --sh1: 0 1px 2px rgba(50, 49, 49, .10), 0 4px 12px -4px rgba(50, 49, 49, .18);
+  --sh2: 0 2px 6px rgba(50, 49, 49, .10), 0 14px 34px -12px rgba(50, 49, 49, .32);
+
+  /* Cuerpo: Bahnschrift (sistema en Windows) → Barlow (misma familia DIN, en web) → pila larga */
+  --font: "Bahnschrift", "Barlow", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  /* Títulos: League Gothic, la de marca. Solo tiene peso Regular: no se pone en bold. */
+  --font-titulo: "League Gothic", "Oswald", "Arial Narrow", Impact, sans-serif;
+  --curva: cubic-bezier(.2, .8, .2, 1);
+}
+
+/* ---------- 2. Escenario ---------- */
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: #1b1c1e;            /* oscuro neutro: la lámina blanca resalta sin competir */
+  overflow: hidden;               /* nunca hay scroll: la lámina se escala para caber */
+  font-family: var(--font); color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; }
+
+#stage {
+  position: absolute; left: 50%; top: 50%;
+  width: 1280px; height: 720px;   /* SIEMPRE 1280 × 720; el JS lo escala */
+  transform: translate(-50%, -50%);
+  background: #fff; border-radius: 12px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .55);
+  overflow: hidden;               /* recorta las manchas que salen de la lámina */
+  padding: 30px 46px 76px;        /* los 76 px de abajo son del decorativo del pie: nada lo pisa */
+}
+/* Filete de marca en el canto superior: franjas duras, no degradado */
+#stage::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 5px; z-index: 2;
+  background: linear-gradient(90deg, var(--rojo) 0 25%, var(--marino) 25% 50%, var(--naranja) 50% 75%, var(--grafito) 75% 100%);
+}
+
+/* ---------- 3. Fondo: manchas pastel + decorativo del pie ---------- */
+.bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.mancha { position: absolute; border-radius: 50%; }
+.mancha.m1 { width: 460px; height: 460px; left: -190px; top: -210px; background: var(--rojo-t); opacity: .6; }
+.mancha.m2 { width: 340px; height: 340px; right: -110px; top: -150px; background: var(--acero-t); opacity: .55; }
+.mancha.m3 { width: 300px; height: 300px; right: -90px; bottom: -130px; background: var(--ambar-t); opacity: .5; }
+
+/* «Nave en perfil»: marcos de rack que crecen UNA vez desde el piso, y cajas que avanzan
+   lentísimo sobre un transportador a perpetuidad. Los racks no se mecen: en la vida real
+   no se mecen, y la marca vende estructuras firmes. */
+.pie-deco { position: absolute; left: 0; right: 0; bottom: 0; width: 1280px; height: 78px; }
+.pie-deco .poste { fill: var(--grafito-l); }
+.pie-deco .viga { fill: var(--rojo-l); }
+.pie-deco .piso { stroke: var(--line2); stroke-width: 1.5; }
+.pie-deco .rodillo { fill: var(--line2); }
+.pie-deco .caja rect { fill: var(--ambar-t); stroke: var(--ambar-l); stroke-width: 1.2; }
+.pie-deco .caja path { stroke: var(--ambar-l); stroke-width: 1; fill: none; }
+.pie-deco .crece {
+  transform-box: fill-box; transform-origin: 50% 100%;
+  animation: crece 2.4s cubic-bezier(.2, .7, .25, 1) both;
+  animation-delay: var(--d, 0s);
+}
+@keyframes crece { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.pie-deco .caja {
+  animation: avanza var(--dur, 46s) linear infinite;
+  animation-delay: var(--d, 0s);      /* retardos negativos distintos: no van sincronizadas */
+}
+@keyframes avanza { from { transform: translateX(0); } to { transform: translateX(1360px); } }
+
+/* ---------- 4. Estructura de la lámina ---------- */
+.kc { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; }
+
+/* PRESUPUESTO DE ALTO (hacer la cuenta antes de tocar tamaños):
+   720 − 30 (padding arriba) − 76 (decorativo) = 614 px útiles
+   − cabecera ≈ 98 (eyebrow 13 + h1 42 + subtítulo 18 + separaciones 8 + respiro 16 + borde 1)
+   − 12 de separación bajo la cabecera
+   − equipo 46 − 13 de separación
+   = 445 px para la retícula → 3 filas iguales con 2 huecos de 10 → ≈ 141 px por fila
+   − 24 del encabezado de fila − 8 de separación ⇒ ≈ 109 px por tarjeta.
+   Con 109 px de alto una tarjeta vertical no cabe: por eso es HORIZONTAL. */
+
+/* Cabecera */
+.kc-head {
+  flex: none; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px;
+  padding-bottom: 16px; border-bottom: 1px solid var(--line2);
+}
+.eyebrow {
+  display: flex; align-items: center; gap: 8px; margin: 0;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--rojo);
+}
+.eyebrow::before { content: ""; width: 18px; height: 3px; border-radius: 2px; background: currentColor; }
+/* El modelo pedía 38 px en una sans de peso 500. La marca pide League Gothic para títulos;
+   como es muy condensada, a 44 px ocupa lo mismo que 38 px de una sans. */
+h1 {
+  margin: 4px 0 4px; font-family: var(--font-titulo); font-weight: 400;
+  font-size: 44px; line-height: .95; letter-spacing: .5px; text-transform: uppercase; color: var(--ink);
+}
+h1 .letras span { display: inline-block; }
+.sub { margin: 0; font-size: 13.5px; color: var(--ink2); }
+.sub b { font-weight: 600; color: var(--ink); }
+.kc-marca { display: flex; align-items: center; gap: 16px; padding-bottom: 4px; }
+.kc-marca img { height: 30px; width: auto; display: block; }
+.kc-marca .logo-texto { font-family: var(--font-titulo); font-size: 32px; line-height: 1; color: var(--grafito); }
+.kc-marca .sep { width: 1px; height: 30px; background: var(--line2); }
+.indicador-cliente {
+  display: none; align-items: center; gap: 6px; height: 24px; padding: 0 10px; border-radius: 99px;
+  background: var(--acero-t); color: var(--acero-d); font-size: 11px; font-weight: 700; letter-spacing: .3px;
+}
+.vista-cliente .indicador-cliente { display: inline-flex; }
+.indicador-cliente svg { width: 14px; height: 14px; }
+
+/* Cuerpo: tres filas del mismo alto; ninguna manda sobre las otras */
+.kc-body { flex: 1; min-height: 0; margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+.fila { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 8px; }
+.fila[hidden] { display: none; }
+.f-head { flex: none; height: 24px; display: flex; align-items: center; gap: 10px; color: var(--fila-c); }
+.f-head .eyebrow { color: var(--fila-c); }
+.f-linea { flex: 1; height: 1px; background: var(--line); }
+.f-cuenta { font-family: var(--font-titulo); font-size: 17px; letter-spacing: .5px; color: var(--ink3); font-variant-numeric: tabular-nums; }
+.f-copiar {
+  display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 7px;
+  border: 1px solid var(--line2); background: #fff; color: var(--ink2); cursor: pointer;
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.f-copiar:hover { background: var(--fila-c); border-color: var(--fila-c); color: #fff; }
+.f-copiar svg { width: 12px; height: 12px; }
+.f-copiar[data-estado="hecho"] { width: auto; padding: 0 8px; font-size: 10.5px; font-weight: 700; background: var(--verde); border-color: var(--verde); color: #fff; }
+.pildora-desc {
+  display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 6px 0 10px; border-radius: 99px;
+  background: var(--marino-t); color: var(--marino); border: 1px solid var(--marino-l);
+  font-size: 11px; font-weight: 700; text-decoration: none; letter-spacing: .2px;
+  transition: background-color .2s, color .2s;
+}
+.pildora-desc:hover { background: var(--marino); color: #fff; }
+.pildora-desc svg { width: 13px; height: 13px; }
+.pildora-desc .n { min-width: 18px; height: 16px; padding: 0 5px; border-radius: 99px; background: #fff; color: var(--marino); display: inline-grid; place-items: center; font-size: 10px; }
+
+/* Rejillas con densidad según cuántas tarjetas lleve la fila (máximo cinco).
+   --filete-x = padding + ícono + separación: el filete arranca donde arranca el texto. */
+.rejilla { flex: 1; min-height: 0; display: grid; gap: 12px; }
+.g1 { grid-template-columns: repeat(3, 1fr); }  /* una o dos tarjetas usan el ancho de .g3 */
+.g2 { grid-template-columns: repeat(3, 1fr); }
+.g1, .g2, .g3 { --ico: 44px; --ico-r: 13px; --nom: 16px; --desc: 12px; --pad-y: 13px; --pad-x: 16px; --gap: 13px; --filete-x: 73px; }
+.g3 { grid-template-columns: repeat(3, 1fr); }
+.g4 { grid-template-columns: repeat(4, 1fr); --ico: 38px; --ico-r: 12px; --nom: 15px; --desc: 11.5px; --pad-y: 12px; --pad-x: 15px; --gap: 11px; --filete-x: 64px; }
+.g5 { grid-template-columns: repeat(5, 1fr); --ico: 34px; --ico-r: 11px; --nom: 13px; --desc: 10.5px; --pad-y: 11px; --pad-x: 12px; --gap: 9px; --filete-x: 55px; }
+
+/* ---------- 5. La tarjeta ----------
+   Envoltura triple: .twrap (la anima la cascada) → .tmag (la mueve el imán) → .tile (la gira
+   la inclinación). Cada capa tiene su propio transform y ninguna pisa a otra. */
+.twrap, .tmag { min-width: 0; min-height: 0; height: 100%; }
+.twrap.saliendo { opacity: 0 !important; transform: scale(.96) !important; transition: opacity .22s, transform .22s !important; }
+.tmag { transition: transform .35s var(--curva); }
+.tile {
+  position: relative; height: 100%; display: flex; align-items: center; gap: var(--gap);
+  padding: var(--pad-y) var(--pad-x); background: #fff;
+  border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--sh1);
+  overflow: hidden; transform-style: preserve-3d;
+  transition: box-shadow .25s, border-color .25s, transform .18s ease-out;
+}
+/* Velo de color que sigue al cursor (las coordenadas ya vienen divididas entre la escala) */
+.tile::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(420px 240px at var(--mx, 50%) var(--my, 50%), var(--tint), transparent 70%);
+  opacity: 0; transition: opacity .3s;
+}
+/* Filete al pie: arranca donde arranca el texto y crece en hover */
+.tile::after {
+  content: ""; position: absolute; left: var(--filete-x); bottom: 0; z-index: 1;
+  width: 34px; height: 4px; border-radius: 4px 4px 0 0; background: var(--c);
+  transition: width .28s cubic-bezier(.2, .8, .2, 1);
+}
+.tile.activa:hover { box-shadow: var(--sh2); border-color: transparent; }
+.tile.activa:hover::before { opacity: 1; }
+.tile.activa:hover::after { width: calc(100% - var(--filete-x) - 18px); }
+
+/* La capa de enlace cubre la tarjeta; aquí se para el tabulador y aquí se dibuja el foco.
+   La tarjeta NO es un <a>: un <button> dentro de un <a> es HTML inválido y cada navegador
+   lo resolvía distinto (el QR terminaba abriendo el enlace). */
+.t-link { position: absolute; inset: 0; z-index: 2; border-radius: 18px; }
+.t-link:focus-visible { outline: 3px solid var(--marino); outline-offset: 2px; }
+
+.t-ico {
+  position: relative; z-index: 1; flex: none; width: var(--ico); height: var(--ico); border-radius: var(--ico-r);
+  display: grid; place-items: center; color: #fff;
+  background: var(--grad); box-shadow: 0 6px 16px -6px var(--c);
+  transition: transform .28s var(--curva);
+}
+.t-ico svg { width: 56%; height: 56%; }
+.tile.activa:hover .t-ico { transform: scale(1.07) rotate(-4deg); }
+
+.t-txt { position: relative; z-index: 1; flex: 1; min-width: 0; align-self: stretch; display: flex; flex-direction: column; }
+/* Solo nombre y descripción dejan libre la esquina de la flecha; el chip, abajo, usa todo el ancho */
+.t-nom, .t-desc { padding-right: 22px; }
+.t-nom { font-size: var(--nom); font-weight: 600; letter-spacing: -.35px; line-height: 1.2; }
+.t-desc {
+  margin-top: 3px; font-size: var(--desc); line-height: 1.3; color: var(--ink2);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+/* El chip va al pie con margin-top:auto para que títulos y chips alineen entre tarjetas
+   aunque una descripción tenga una línea y otra dos. */
+.t-chip {
+  margin-top: auto; align-self: flex-start; max-width: calc(100% - var(--acts, 12px));
+  display: inline-flex; align-items: center; gap: 4px; height: 19px; padding: 0 8px 0 6px; border-radius: 99px;
+  background: var(--tint); color: var(--c2); font-size: 10.5px; font-weight: 600;
+}
+.t-chip svg { flex: none; width: 11px; height: 11px; }
+.t-chip span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.tile.con-qr { --acts: 78px; }
+
+.t-flecha {
+  position: absolute; top: 10px; right: 10px; z-index: 1; width: 24px; height: 24px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--wash); color: var(--ink2);
+  transition: background-color .25s, color .25s, transform .25s var(--curva);
+}
+.t-flecha svg { width: 13px; height: 13px; }
+.tile.activa:hover .t-flecha { background: var(--c); color: #fff; transform: translate(3px, -3px); }
+
+/* Botonera: hermana de la capa de enlace, encima de ella */
+.t-acts { position: absolute; right: 10px; bottom: 9px; z-index: 3; display: flex; align-items: center; gap: 6px; }
+.t-copiar {
+  display: inline-grid; place-items: center; width: 27px; height: 27px; border-radius: 9px;
+  background: #fff; border: 1px solid var(--line2); color: var(--ink2); cursor: pointer;
+  opacity: 0; transform: translateY(4px);           /* oculto hasta hacer hover */
+  transition: opacity .2s, transform .2s var(--curva), background-color .2s, color .2s;
+}
+.t-copiar svg { width: 14px; height: 14px; }
+.tile:hover .t-copiar, .t-copiar:focus-visible { opacity: 1; transform: none; }
+.t-copiar:hover { background: var(--c); border-color: var(--c); color: #fff; }
+.t-copiar:focus-visible, .t-qr:focus-visible { outline: 3px solid var(--marino); outline-offset: 2px; }
+/* Al copiar, el botón mismo crece y lo dice; se queda visible aunque el cursor salga */
+.t-copiar[data-estado="hecho"] {
+  width: auto; padding: 0 9px; opacity: 1; transform: none; gap: 4px;
+  background: var(--verde); border-color: var(--verde); color: #fff; font-size: 11px; font-weight: 700; white-space: nowrap;
+}
+/* QR: SIEMPRE visible (en una pantalla proyectada no hay cursor) */
+.t-qr {
+  display: inline-flex; align-items: center; gap: 4px; height: 27px; padding: 0 9px; border-radius: 9px;
+  background: var(--tint); border: 1.5px solid var(--c); color: var(--c2);
+  font-size: 11px; font-weight: 700; letter-spacing: .4px; cursor: pointer;
+  transition: background-color .2s, color .2s;
+}
+.t-qr svg { width: 14px; height: 14px; }
+.t-qr:hover { background: var(--c); color: #fff; }
+
+/* Tarjeta «pronto»: apartada, sin nada que se sienta clicable */
+.tile.pronto { background: var(--wash); border: 1.5px dashed var(--line2); box-shadow: none; }
+.tile.pronto::before, .tile.pronto::after { display: none; }
+.tile.pronto .t-ico { background: var(--ink3); box-shadow: none; }
+.tile.pronto .t-nom { color: var(--ink2); }
+.tile.pronto .t-chip { background: transparent; color: var(--ink3); font-style: italic; padding-left: 0; }
+
+/* ---------- 6. Pie: el equipo ---------- */
+.kc-team { flex: none; height: 46px; margin-top: 13px; display: flex; align-items: center; gap: 18px; }
+.team-rotulo { flex: none; display: grid; gap: 1px; padding-right: 18px; border-right: 1px solid var(--line2); }
+.team-rotulo strong { font-family: var(--font-titulo); font-weight: 400; font-size: 20px; line-height: 1; letter-spacing: .5px; text-transform: uppercase; }
+.team-rotulo span { font-size: 10.5px; color: var(--ink3); letter-spacing: .3px; }
+.team { flex: 1; display: grid; grid-template-columns: repeat(var(--n, 4), 1fr); gap: 14px; }
+.persona { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.retrato {
+  flex: none; width: 38px; height: 38px; border-radius: 50%; border: 2.5px solid var(--pc); overflow: hidden;
+  display: grid; place-items: center; background: #fff; color: var(--pc);
+  font-family: var(--font-titulo); font-size: 17px; letter-spacing: .5px;
+  transition: transform .25s var(--curva);
+}
+.retrato img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.persona:hover .retrato { transform: scale(1.09); }
+.persona-txt { min-width: 0; display: grid; }
+.persona-n { font-size: 11.5px; font-weight: 600; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.persona-m { font-size: 10.5px; color: var(--ink2); text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color .2s; }
+.persona-m:hover, .persona-m:focus-visible { color: var(--pc); }
+.persona-m:focus-visible { outline: 2px solid var(--marino); outline-offset: 2px; border-radius: 3px; }
+
+/* ---------- 7. Lámina del QR a pantalla completa ----------
+   Vive FUERA de #stage: todo position:fixed que cuelga de un padre escalado se escala con
+   él y deja de cubrir la pantalla. Fondo blanco: un QR sobre color no lo lee ningún teléfono. */
+#qr {
+  position: fixed; inset: 0; z-index: 50; background: #fff; color: var(--ink);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 72px 24px 28px; opacity: 0; transition: opacity .22s ease-out;
+}
+#qr[hidden] { display: none; }        /* sin esta regla una clase suelta lo dejaba visible */
+#qr.abierto { opacity: 1; }
+#qr::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px;
+  background: linear-gradient(90deg, var(--rojo) 0 25%, var(--marino) 25% 50%, var(--naranja) 50% 75%, var(--grafito) 75% 100%);
+}
+.qr-volver {
+  position: absolute; top: 22px; left: 22px; display: inline-flex; align-items: center; gap: 8px;
+  height: 40px; padding: 0 16px 0 12px; border-radius: 99px; border: 1px solid var(--line2); background: #fff;
+  font-size: 14px; font-weight: 600; cursor: pointer; transition: background-color .2s;
+}
+.qr-volver:hover { background: var(--wash); }
+.qr-volver svg { width: 18px; height: 18px; }
+.qr-cerrar {
+  position: absolute; top: 22px; right: 22px; width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--line2); background: #fff; display: grid; place-items: center; cursor: pointer;
+  transition: transform .25s var(--curva), background-color .2s;
+}
+.qr-cerrar:hover { transform: rotate(90deg); background: var(--wash); }
+.qr-cerrar svg { width: 18px; height: 18px; }
+.qr-volver:focus-visible, .qr-cerrar:focus-visible { outline: 3px solid var(--marino); outline-offset: 3px; }
+/* El titular va ARRIBA del código: desde el fondo de una sala se lee primero la palabra */
+.qr-titulo { margin: 0; font-size: clamp(30px, 5.6vh, 62px); font-weight: 700; letter-spacing: -1px; line-height: 1.05; text-align: center; }
+.qr-lema {
+  margin: 1.4vh 0 2.4vh; padding: .35em .9em; border-radius: 99px; max-width: min(90vw, 900px);
+  background: var(--qtint, var(--rojo-t)); color: var(--qc2, var(--rojo-d));
+  font-size: clamp(15px, 2.6vh, 27px); font-weight: 600; text-align: center; text-wrap: balance;
+}
+.qr-lema .dest { color: var(--qc, var(--rojo)); font-weight: 800; }
+.qr-img {
+  width: min(70vh, 70vw); height: auto; padding: 16px; background: #fff;  /* zona de silencio propia */
+  flex: 0 1 auto; min-height: 0; object-fit: contain;                       /* se encoge antes de desbordar */
+  image-rendering: pixelated;
+}
+.qr-ayuda { margin: 2vh 0 0; font-size: clamp(12px, 1.8vh, 16px); color: var(--ink2); text-align: center; }
+
+/* Aviso flotante */
+#toast {
+  position: fixed; left: 50%; bottom: 24px; z-index: 60;
+  transform: translate(-50%, 14px); opacity: 0; pointer-events: none;
+  padding: 10px 18px; border-radius: 99px; background: #1b1c1e; color: #fff;
+  font-size: 13.5px; font-weight: 600; box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+  transition: opacity .22s, transform .22s var(--curva);
+}
+#toast.visible { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- 8. Reducir movimiento ----------
+   Se nombran los pseudoelementos: animation:none sobre el elemento no alcanza a su
+   ::before ni a su ::after. El decorativo se monta YA crecido y quieto. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .twrap, .tmag, .tile, .persona, .retrato { opacity: 1 !important; transform: none !important; }
+  .pie-deco .crece { transform: none !important; }
+  .pie-deco .caja { transform: translateX(var(--q, 0px)) !important; }
+}
+
+/* ---------- 9. Impresión: la lámina completa en una hoja, sin QR ---------- */
+@page { size: 1280px 720px; margin: 0; }
+@media print {
+  html, body { height: auto; overflow: visible; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  #stage { position: relative; left: 0; top: 0; transform: none !important; box-shadow: none; border-radius: 0; }
+  #qr, #toast { display: none !important; }
+  .twrap, .tmag, .tile { opacity: 1 !important; transform: none !important; }
+  .t-copiar { display: none; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .pie-deco .crece { transform: none !important; }
+  .pie-deco .caja { transform: translateX(var(--q, 0px)) !important; }
+}
+</style>
+</head>
+<body>
+
+<div id="stage">
+  <div class="bg" aria-hidden="true">
+    <div class="mancha m1"></div><div class="mancha m2"></div><div class="mancha m3"></div>
+    <svg class="pie-deco" id="pie-deco" viewBox="0 0 1280 78" preserveAspectRatio="none" focusable="false"></svg>
+  </div>
+
+  <div class="kc">
+    <header class="kc-head">
+      <div>
+        <p class="eyebrow">Equipo comercial · RACK-T</p>
+        <h1>Kit <span class="letras" id="letras">comercial</span></h1>
+        <p class="sub">Da clic para abrir · pasa el cursor y usa <b>⧉</b> para copiar el enlace</p>
+      </div>
+      <div class="kc-marca">
+        <span class="indicador-cliente" role="status">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          Vista cliente
+        </span>
+        <span class="sep" aria-hidden="true"></span>
+        <span id="logo"></span>
+      </div>
+    </header>
+
+    <main class="kc-body" id="cuerpo"></main>
+
+    <footer class="kc-team">
+      <div class="team-rotulo"><strong>Tu equipo</strong><span>rackt.com.mx</span></div>
+      <div class="team" id="equipo"></div>
+    </footer>
+  </div>
+</div>
+
+<!-- Lámina del QR: FUERA de #stage a propósito -->
+<div id="qr" role="dialog" aria-modal="true" aria-labelledby="qr-titulo" hidden>
+  <button type="button" class="qr-volver" id="qr-volver">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+    Volver al kit
+  </button>
+  <button type="button" class="qr-cerrar" id="qr-cerrar" aria-label="Cerrar código QR">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <h2 class="qr-titulo" id="qr-titulo"></h2>
+  <p class="qr-lema" id="qr-lema"></p>
+  <img class="qr-img" id="qr-img" alt="">
+  <p class="qr-ayuda">Apunta la cámara del teléfono · <b>Volver al kit</b> o <b>Esc</b> para regresar</p>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- Recursos generados (logos y retratos en base64) y la lista de descargables.
+     Son scripts clásicos: desde file:// no se puede hacer fetch() de archivos locales. -->
+<script src="assets.js"></script>
+<script src="descargables/docs.js"></script>
+<script src="../compartidos/js/motion.js"></script>
+
+<script>
+/* ==========================================================================
+   DATOS — la única fuente. El HTML se arma solo desde aquí.
+   Agregar un acceso = copiar una entrada y cambiar sus valores.
+   Un pictograma nuevo se agrega a ICO con la misma llave que el id.
+   desc: ≤ 55 caracteres en filas de 4 y 5 (dos renglones).
+   Máximo CINCO por fila: la sexta no cabe; hay que repartir, no apretar.
+   ========================================================================== */
+const BASE = 'https://sanoapro.github.io/rackt-piezas/';   // cambiar aquí si el sitio se muda de dominio
+
+const MOSTRAR = [   // Piezas para el cliente
+  { id: 'servicios', nombre: 'Página de servicios', color: '--rojo', color2: '#7a0303', tinte: '--rojo-t',
+    desc: 'Qué hacemos, proyectos instalados y contacto.', host: 'sanoapro.github.io',
+    url: BASE + 'una-hoja/', interno: false, pronto: false,
+    qr: './QR/pagina-servicios.png', qrTitulo: 'Conoce RACK-T', qrLema: 'Racks, mezzanines e ingeniería <b class="dest">a la medida</b>' },
+  { id: 'presentacion', nombre: 'Presentación', color: '--marino', color2: '#00152f', tinte: '--marino-t',
+    desc: 'Presentación 16:9 para juntas y videollamadas.', host: 'sanoapro.github.io',
+    url: BASE + 'diapositivas/', interno: false, pronto: false },
+  { id: 'sitio', nombre: 'Sitio web', color: '--acero', color2: '#1b4a75', tinte: '--acero-t',
+    desc: 'El sitio de RACK-T, con blog y formularios.', host: 'rackt.com.mx',
+    url: 'https://www.rackt.com.mx/', interno: false, pronto: false },
+  { id: 'catalogo', nombre: 'Catálogo', color: '--naranja', color2: '#b33000', tinte: '--naranja-t',
+    desc: 'Todos los sistemas y accesorios en un PDF.', host: 'PDF · 4.8 MB',
+    url: BASE + 'catalogo/catalogo-rackt.pdf', interno: false, pronto: false,
+    qr: './QR/catalogo.png', qrTitulo: 'Catálogo RACK-T', qrLema: 'Todos nuestros sistemas <b class="dest">en un PDF</b>' }
+];
+
+const CAPTAR = [    // Contacto y eventos
+  { id: 'whatsapp', nombre: 'WhatsApp', color: '--verde', color2: '#124a30', tinte: '--verde-t',
+    desc: 'Chat directo con ventas al 442 491 7676.', host: 'wa.me',
+    url: 'https://wa.me/524424917676', interno: false, pronto: false,
+    qr: './QR/whatsapp.png', qrTitulo: 'Escríbenos por WhatsApp', qrLema: 'Cuéntanos qué guardas y <b class="dest">te proponemos la solución</b>' },
+  { id: 'contacto', nombre: 'Contacto', color: '--acero', color2: '#1b4a75', tinte: '--acero-t',
+    desc: 'El cliente deja sus datos y lo llamamos.', host: 'Formulario del sitio',
+    url: 'https://www.rackt.com.mx/contacto', interno: false, pronto: false },
+  { id: 'agenda', nombre: 'Agenda de diagnóstico', color: '--ambar', color2: '#7d4a00', tinte: '--ambar-t',
+    desc: 'Videollamada de diagnóstico de 20 minutos.', host: 'Zoho Bookings',
+    url: '', interno: false, pronto: true },
+  { id: 'evento', nombre: 'Registro de evento', color: '--marino', color2: '#00152f', tinte: '--marino-t',
+    desc: 'Registro rápido en expos y eventos.', host: 'Formulario',
+    url: '', interno: false, pronto: true },
+  { id: 'encuesta', nombre: 'Encuesta posventa', color: '--rojo', color2: '#7a0303', tinte: '--rojo-t',
+    desc: 'Qué tan satisfecho quedó el cliente.', host: 'Zoho Survey',
+    url: 'https://survey.zohopublic.com/zs/b9DFPH', interno: false, pronto: false }
+];
+
+const OPERAR = [    // Uso interno (fila fría con un solo cálido: Zoho One)
+  { id: 'crm', nombre: 'Zoho CRM', color: '--marino', color2: '#00152f', tinte: '--marino-t',
+    desc: 'Clientes, tratos y seguimiento.', host: 'crm.zoho.com',
+    url: 'https://crm.zoho.com/crm/', interno: true, pronto: false },
+  { id: 'books', nombre: 'Zoho Books', color: '--petroleo', color2: '#0a4a4a', tinte: '--petroleo-t',
+    desc: 'Facturas, pagos y cobranza.', host: 'books.zoho.com',
+    url: 'https://books.zoho.com/app/939361246', interno: true, pronto: false },
+  { id: 'workdrive', nombre: 'WorkDrive', color: '--acero', color2: '#1b4a75', tinte: '--acero-t',
+    desc: 'La carpeta del equipo Comercial.', host: 'workdrive.zoho.com',
+    url: 'https://workdrive.zoho.com/folder/f3bhd839dec079d9e49bd9b7060edb3b0004f', interno: true, pronto: false },
+  { id: 'projects', nombre: 'Zoho Projects', color: '--grafito', color2: '#1a1919', tinte: '--grafito-t',
+    desc: 'Instalaciones y tareas de cada obra.', host: 'projects.zoho.com',
+    url: 'https://projects.zoho.com/portal/racktportal', interno: true, pronto: false },
+  { id: 'one', nombre: 'Zoho One', color: '--rojo', color2: '#7a0303', tinte: '--rojo-t',
+    desc: 'Todas las apps de Zoho en un lugar.', host: 'one.zoho.com',
+    url: 'https://one.zoho.com/zohoone/939350519/home', interno: true, pronto: false }
+];
+
+const FILAS = [
+  { clave: 'mostrar', titulo: 'Mostrar · para el cliente', color: '--rojo', lista: MOSTRAR, inicio: 90 },
+  { clave: 'captar', titulo: 'Captar · contacto y eventos', color: '--petroleo', lista: CAPTAR, inicio: 260 },
+  { clave: 'operar', titulo: 'Operar · uso interno', color: '--marino', lista: OPERAR, inicio: 430, descargables: true }
+];
+
+// k = clave del retrato en assets.js (window.BRAND). Si falta el retrato, van las iniciales.
+const EQUIPO = [
+  { k: 'juan-carlos-diaz', n: 'Juan Carlos Díaz', rol: 'Dirección General', mail: 'juan.diaz@rackt.com.mx', tel: '442 491 7676', c: '#ab0505' },
+  { k: 'ivette-camacho', n: 'Ivette Camacho', rol: 'Operaciones', mail: 'operaciones@rackt.com.mx', tel: '442 491 7676', c: '#002455' },
+  { k: 'ivonne-cruz', n: 'Ivonne Cruz', rol: 'Marketing', mail: 'marketing@grupoert.com.mx', tel: '442 491 7676', c: '#b33000' },
+  { k: 'leslie-ortega', n: 'Leslie Ortega', rol: 'Administración y Finanzas', mail: 'administracion@grupoert.com.mx', tel: '442 491 7676', c: '#0f6e6e' }
+];
+
+/* Pictogramas propios en retícula 24 × 24, trazo blanco. Sin librerías de íconos. */
+const ICO = {
+  servicios: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M6.5 6.5h.01M9.5 6.5h.01M6.5 12.5h5v4h-5zM14.5 12.5h3M14.5 16.5h3"/>',
+  presentacion: '<path d="M3 4h18M5 4v10h14V4M12 14v3M8 21l4-4 4 4M9 11V9M12 11V7M15 11V8"/>',
+  sitio: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  catalogo: '<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3M9 7h6M9 10.5h4"/>',
+  whatsapp: '<path d="M4 20l1.3-3.9A8.5 8.5 0 1 1 8 19z"/><path d="M9 9.5c.3 2.3 2.2 4.2 4.5 4.5l1-1.3 2 1-1 2c-3.5.2-7.7-4-7.5-7.5l2-1 1 2z"/>',
+  contacto: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+  agenda: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h3v3H8z"/>',
+  evento: '<path d="M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4z"/><path d="M14 7v2M14 11v2M14 15v2"/>',
+  encuesta: '<path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.8l-5.2 2.8 1-5.8-4.3-4.1 5.9-.9z"/>',
+  crm: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.4a6.5 6.5 0 0 1 3.5 5.6"/>',
+  books: '<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/>',
+  workdrive: '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 10h18"/>',
+  projects: '<path d="M3 4v16h18"/><rect x="6" y="6" width="8" height="3" rx="1"/><rect x="9" y="11" width="9" height="3" rx="1"/><rect x="7" y="16" width="6" height="2" rx="1"/>',
+  one: '<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>',
+  // Interfaz
+  _globo: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  _flecha: '<path d="M7 17L17 7M8 7h9v9"/>',
+  _copiar: '<rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4h-7A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8"/>',
+  _qr: '<path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2M14 18h2M18 18h2v2h-2z"/>',
+  _descargar: '<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>'
+};
+
+/* ==========================================================================
+   MOTOR DE LA LÁMINA
+   ========================================================================== */
+(function () {
+  'use strict';
+  const stage = document.getElementById('stage');
+  const hayMotor = !!window.Motion;
+
+  /* --- Escala: la lámina entera cabe siempre, sin scroll, de un celular a 4K --- */
+  function escalar() {
+    const m = innerWidth < 700 ? 10 : 26;                     // margen alrededor
+    const k = Math.min((innerWidth - m * 2) / 1280, (innerHeight - m * 2) / 720);
+    window.__scale = k;                                       // el velo y el motor lo necesitan
+    stage.style.transform = `translate(-50%,-50%) scale(${k})`;
+  }
+  escalar();
+  addEventListener('resize', escalar);
+
+  /* --- Utilidades --- */
+  const svg = (cuerpo, trazo) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${trazo || 2}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${cuerpo}</svg>`;
+  const el = (tag, clase, html) => { const n = document.createElement(tag); if (clase) n.className = clase; if (html != null) n.innerHTML = html; return n; };
+  const texto = (tag, clase, t) => { const n = document.createElement(tag); if (clase) n.className = clase; n.textContent = t; return n; };
+  const dosDigitos = (n) => String(n).padStart(2, '0');
+
+  /* --- Título: cada letra de la segunda palabra en un color de la marca, rotando --- */
+  const paleta = ['--rojo', '--marino', '--naranja', '--acero', '--petroleo', '--verde', '--ambar', '--grafito'];
+  const letras = document.getElementById('letras');
+  letras.innerHTML = '';
+  [...'comercial'].forEach((ch, i) => { const s = texto('span', '', ch); s.style.color = `var(${paleta[i % paleta.length]})`; letras.append(s); });
+
+  /* --- Logo desde assets.js (si no cargó, queda el nombre en texto) --- */
+  const B = window.BRAND || {};
+  const hueco = document.getElementById('logo');
+  if (B.logo) { const img = el('img'); img.src = B.logo; img.alt = 'RACK-T'; hueco.append(img); }
+  else hueco.append(texto('span', 'logo-texto', 'RACK-T'));
+
+  /* --- Copiar: portapapeles moderno solo en contexto seguro; si no, respaldo con textarea
+         (así funciona también en http:// y file://) --- */
+  function respaldoCopiar(t) {
+    const ta = document.createElement('textarea');
+    ta.value = t; ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0';
+    document.body.append(ta); ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    ta.remove();
+    return ok;
+  }
+  function copiar(t) {
+    if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(t).then(() => true, () => respaldoCopiar(t));
+    }
+    return Promise.resolve(respaldoCopiar(t));
+  }
+  const toastEl = document.getElementById('toast');
+  let toastT = null;
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('visible');
+    clearTimeout(toastT);
+    toastT = setTimeout(() => toastEl.classList.remove('visible'), 1700);
+  }
+  // Botón que dice lo que pasó y vuelve solo. Si el motor no cargó, un respaldo local igual.
+  function estadoBoton(btn, hecho, ms) {
+    if (hayMotor) return Motion.botonEstado(btn, { hecho, msHecho: ms });
+    let original = null, t = null;
+    return () => {
+      if (original === null) original = btn.innerHTML;
+      clearTimeout(t); btn.dataset.estado = 'hecho'; btn.innerHTML = hecho;
+      t = setTimeout(() => { delete btn.dataset.estado; btn.innerHTML = original; original = null; }, ms);
+    };
+  }
+
+  /* --- Armado de filas y tarjetas --- */
+  const cuerpo = document.getElementById('cuerpo');
+  const nDocs = Array.isArray(window.DOCS) ? window.DOCS.length : 0;
+
+  function tarjeta(a) {
+    const wrap = el('div', 'twrap');
+    const mag = el('div', 'tmag');
+    const tile = el('div', 'tile' + (a.pronto ? ' pronto' : ' activa') + (a.qr && !a.pronto ? ' con-qr' : ''));
+    tile.style.setProperty('--c', `var(${a.color})`);
+    tile.style.setProperty('--c2', a.color2);
+    tile.style.setProperty('--tint', `var(${a.tinte})`);
+    tile.style.setProperty('--grad', `linear-gradient(135deg, ${a.color2}, var(${a.color}))`);
+    wrap.dataset.id = a.id;
+    if (a.interno) wrap.dataset.interno = '1';
+
+    if (!a.pronto) {
+      const link = el('a', 't-link');
+      link.href = a.url; link.target = '_blank'; link.rel = 'noopener';
+      link.setAttribute('aria-label', `Abrir ${a.nombre} en una pestaña nueva`);
+      tile.append(link);
+    }
+    tile.append(el('div', 't-ico', svg(ICO[a.id] || ICO._globo)));
+    const txt = el('div', 't-txt');
+    txt.append(texto('div', 't-nom', a.nombre), texto('div', 't-desc', a.desc));
+    const chip = el('div', 't-chip', a.pronto ? '' : svg(ICO._globo, 2.2));
+    chip.append(texto('span', '', a.pronto ? 'Próximamente' : a.host));
+    txt.append(chip);
+    tile.append(txt);
+
+    if (!a.pronto) {
+      tile.append(el('span', 't-flecha', svg(ICO._flecha, 2.4)));
+      const acts = el('div', 't-acts');
+      if (a.qr) {
+        const q = el('button', 't-qr', svg(ICO._qr) + 'QR');
+        q.type = 'button';
+        q.setAttribute('aria-label', `Mostrar el código QR de ${a.nombre}`);
+        q.addEventListener('click', () => abrirQR(a, q));
+        acts.append(q);
+      }
+      const c = el('button', 't-copiar', svg(ICO._copiar));
+      c.type = 'button';
+      c.setAttribute('aria-label', `Copiar el enlace de ${a.nombre}`);
+      c.title = 'Copiar enlace';
+      const marcar = estadoBoton(c, '✓ Copiado', 1400);
+      c.addEventListener('click', () => copiar(a.url).then((ok) => {
+        if (ok) { marcar(); toast('Enlace copiado: ' + a.nombre); } else toast('No se pudo copiar');
+      }));
+      acts.append(c);
+      tile.append(acts);
+    }
+    mag.append(tile);
+    wrap.append(mag);
+    wrap._acceso = a;
+    return wrap;
+  }
+
+  // Densidad según cuántas tarjetas visibles lleve la fila
+  function densidad(rejilla) {
+    const n = rejilla.querySelectorAll('.twrap:not([hidden])').length;
+    rejilla.classList.remove('g1', 'g2', 'g3', 'g4', 'g5');
+    rejilla.classList.add('g' + Math.min(5, Math.max(1, n)));
+    return n;
+  }
+
+  FILAS.forEach((f) => {
+    if (f.lista.length > 5) console.warn(`La fila «${f.titulo}» tiene ${f.lista.length} accesos: máximo 5. Hay que repartir.`);
+    const sec = el('section', 'fila');
+    sec.dataset.fila = f.clave;
+    sec.style.setProperty('--fila-c', `var(${f.color})`);
+    sec.setAttribute('aria-label', f.titulo);
+    const head = el('div', 'f-head');
+    head.append(texto('p', 'eyebrow', f.titulo), el('span', 'f-linea'));
+    if (f.descargables) {
+      const p = el('a', 'pildora-desc', svg(ICO._descargar, 2.2) + 'Descargables');
+      p.href = 'descargables/index.html';            // index.html explícito: en file:// una carpeta no abre su index
+      if (nDocs) p.append(texto('span', 'n', String(nDocs)));
+      p.setAttribute('aria-label', `Descargables: ${nDocs} documentos`);
+      head.append(p);
+    }
+    const cuenta = texto('span', 'f-cuenta', '00');       // se calcula de la lista, nunca a mano
+    cuenta.setAttribute('aria-hidden', 'true');
+    const cf = el('button', 'f-copiar', svg(ICO._copiar));
+    cf.type = 'button';
+    cf.title = 'Copiar la fila completa';
+    cf.setAttribute('aria-label', `Copiar todos los enlaces de ${f.titulo}`);
+    head.append(cuenta, cf);
+    const rej = el('div', 'rejilla');
+    f.lista.forEach((a) => rej.append(tarjeta(a)));
+    sec.append(head, rej);
+    cuerpo.append(sec);
+    f._sec = sec; f._rej = rej; f._cuenta = cuenta;
+
+    // Copiar la fila en texto plano, listo para WhatsApp o correo
+    const marcarFila = estadoBoton(cf, '✓', 1400);
+    cf.addEventListener('click', () => {
+      const lineas = [...rej.querySelectorAll('.twrap:not([hidden])')]
+        .map((w) => w._acceso).filter((a) => !a.pronto)
+        .map((a) => `${a.nombre} — ${a.url}`);
+      copiar(lineas.join('\n')).then((ok) => {
+        if (ok) { marcarFila(); toast(`Copiados ${lineas.length} enlaces`); } else toast('No se pudo copiar');
+      });
+    });
+  });
+
+  function recontar() {
+    FILAS.forEach((f) => {
+      const n = densidad(f._rej);
+      f._cuenta.textContent = dosDigitos(n);
+      f._sec.hidden = n === 0;
+    });
+  }
+  recontar();
+
+  /* --- Equipo --- */
+  const equipo = document.getElementById('equipo');
+  equipo.style.setProperty('--n', EQUIPO.length);
+  EQUIPO.forEach((p) => {
+    const d = el('div', 'persona');
+    d.style.setProperty('--pc', p.c);
+    d.title = `${p.n} · ${p.rol} · ${p.tel}`;
+    const r = el('div', 'retrato');
+    if (B[p.k]) { const img = el('img'); img.src = B[p.k]; img.alt = ''; r.append(img); }
+    else { r.textContent = p.n.split(' ').map((w) => w[0]).slice(0, 2).join(''); r.setAttribute('aria-hidden', 'true'); }
+    const t = el('div', 'persona-txt');
+    const m = texto('a', 'persona-m', p.mail);
+    m.href = 'mailto:' + p.mail;
+    t.append(texto('span', 'persona-n', p.n), m);
+    d.append(r, t);
+    equipo.append(d);
+  });
+
+  /* --- Decorativo del pie: «nave en perfil» (lo arma la página, no el motor) --- */
+  (function naveEnPerfil() {
+    const ns = 'http://www.w3.org/2000/svg';
+    const pie = document.getElementById('pie-deco');
+    const nodo = (tag, at) => { const n = document.createElementNS(ns, tag); for (const k in at) n.setAttribute(k, at[k]); return n; };
+    pie.append(nodo('line', { class: 'piso', x1: 0, y1: 76.5, x2: 1280, y2: 76.5 }));
+    // Marcos: [x, ancho de bahía, alto, bahías]
+    const marcos = [[18, 46, 58, 2], [150, 40, 44, 3], [318, 52, 66, 2], [446, 38, 40, 2], [548, 48, 60, 3], [728, 42, 50, 2],
+                    [838, 54, 64, 2], [968, 40, 46, 3], [1116, 50, 62, 2], [1230, 36, 42, 1]];
+    marcos.forEach(([x, w, alto, bahias], i) => {
+      const g = nodo('g', { transform: `translate(${x} 76)` });           // exterior: sitio y escala
+      const c = nodo('g', { class: 'crece' });                            // interior: crece una vez
+      c.style.setProperty('--d', (0.15 + i * 0.16).toFixed(2) + 's');     // escalonado .15 → 1.6 s
+      for (let b = 0; b <= bahias; b++) c.append(nodo('rect', { class: 'poste', x: b * w, y: -alto, width: 3, height: alto }));
+      for (let y = 12; y < alto - 4; y += 15) {
+        for (let b = 0; b < bahias; b++) c.append(nodo('rect', { class: 'viga', x: b * w + 3, y: -y - 2, width: w - 3, height: 2.6 }));
+      }
+      g.append(c); pie.append(g);
+    });
+    // Transportador: rodillos y cajas que avanzan lentísimo, cada una con su propio retardo
+    for (let x = 6; x < 1280; x += 12) pie.append(nodo('circle', { class: 'rodillo', cx: x, cy: 74, r: 1.4 }));
+    const cajas = [[16, 12, -2], [20, 14, -11], [14, 10, -19], [18, 13, -27], [22, 15, -36], [15, 11, -42]];
+    cajas.forEach(([w, h, d], i) => {
+      const g = nodo('g', { class: 'caja' });
+      g.style.setProperty('--d', d + 's');
+      g.style.setProperty('--dur', '46s');
+      g.style.setProperty('--q', (80 + i * 215) + 'px');                   // posición quieta (reducir movimiento / impresión)
+      g.append(nodo('rect', { x: -40, y: 72 - h, width: w, height: h, rx: 1.5 }));
+      g.append(nodo('path', { d: `M${-40 + w / 2} ${72 - h}v${h * 0.45}` }));
+      pie.append(g);
+    });
+  })();
+
+  /* --- Velo que sigue al cursor ---
+     Regla del motor: el evento solo guarda coordenadas; la geometría se lee en el frame. */
+  const velo = { activa: null, x: 0, y: 0, sucio: false };
+  function veloPinta() {
+    if (!velo.sucio || !velo.activa) return;
+    velo.sucio = false;
+    const r = velo.activa.getBoundingClientRect();
+    const s = window.__scale || 1;                        // la lámina está escalada
+    velo.activa.style.setProperty('--mx', ((velo.x - r.left) / s).toFixed(1) + 'px');
+    velo.activa.style.setProperty('--my', ((velo.y - r.top) / s).toFixed(1) + 'px');
+  }
+  const tactil = window.matchMedia('(pointer: coarse)').matches;
+  if (!tactil) {
+    stage.addEventListener('pointermove', (e) => {
+      velo.activa = e.target.closest ? e.target.closest('.tile.activa') : null;
+      velo.x = e.clientX; velo.y = e.clientY; velo.sucio = true;
+      if (!hayMotor) veloPinta();                          // sin motor, pinta directo
+    }, { passive: true });
+  }
+
+  /* --- Lámina del QR --- */
+  const qr = document.getElementById('qr');
+  const qrImg = document.getElementById('qr-img');
+  const qrVolver = document.getElementById('qr-volver');
+  const qrCerrar = document.getElementById('qr-cerrar');
+  let qrOrigen = null, qrT = null;
+  const qrAbierto = () => !qr.hidden;
+  function abrirQR(a, boton) {
+    qrOrigen = boton;
+    document.getElementById('qr-titulo').textContent = a.qrTitulo || a.nombre;
+    // El lema admite marcado para resaltados: es texto NUESTRO, escrito en la lista de arriba
+    document.getElementById('qr-lema').innerHTML = a.qrLema || '';
+    qr.style.setProperty('--qc', `var(${a.color})`);
+    qr.style.setProperty('--qc2', a.color2);
+    qr.style.setProperty('--qtint', `var(${a.tinte})`);
+    qrImg.src = a.qr;
+    qrImg.alt = `Código QR de ${a.nombre}: ${a.url}`;
+    clearTimeout(qrT);
+    qr.hidden = false;
+    // Un frame de gracia entre display y opacity: sin él la transición no arranca
+    requestAnimationFrame(() => requestAnimationFrame(() => qr.classList.add('abierto')));
+    qrVolver.focus();
+  }
+  function cerrarQR() {
+    qr.classList.remove('abierto');
+    qrT = setTimeout(() => { qr.hidden = true; }, 220);
+    if (qrOrigen) qrOrigen.focus();                        // el foco regresa al botón que lo abrió
+  }
+  qrVolver.addEventListener('click', cerrarQR);
+  qrCerrar.addEventListener('click', cerrarQR);
+  qr.addEventListener('click', (e) => { if (e.target === qr) cerrarQR(); });   // fondo blanco, no el código
+
+  /* --- Vista cliente (C): oculta lo interno con un fundido y reacomoda --- */
+  let vistaCliente = false;
+  function alternarVistaCliente() {
+    vistaCliente = !vistaCliente;
+    document.body.classList.toggle('vista-cliente', vistaCliente);
+    const internos = [...document.querySelectorAll('.twrap[data-interno]')];
+    if (vistaCliente) {
+      internos.forEach((w) => w.classList.add('saliendo'));
+      setTimeout(() => { internos.forEach((w) => { w.hidden = true; w.classList.remove('saliendo'); }); recontar(); }, 230);
+      toast('Vista cliente: se ocultan las herramientas internas');
+    } else {
+      internos.forEach((w) => { w.hidden = false; });
+      recontar();
+      toast('Vista completa');
+    }
+  }
+
+  /* --- Teclado --- */
+  const visibles = () => [...document.querySelectorAll('.twrap:not([hidden])')];
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (qrAbierto()) {
+      // Con el QR abierto solo se escucha Esc: un número no debe abrir otra pestaña por detrás
+      if (e.key === 'Escape') { e.preventDefault(); cerrarQR(); }
+      else if (e.key === 'Tab') {                           // el foco no se escapa del diálogo
+        e.preventDefault();
+        (document.activeElement === qrVolver ? qrCerrar : qrVolver).focus();
+      } else if (e.key.length === 1) e.preventDefault();
+      return;
+    }
+    const k = e.key;
+    if (/^[0-9]$/.test(k)) {
+      // 1–9 y 0 abren los primeros diez accesos en orden de lectura; el 0 es el décimo
+      const a = visibles()[k === '0' ? 9 : Number(k) - 1];
+      if (a && a._acceso && !a._acceso.pronto) window.open(a._acceso.url, '_blank', 'noopener');
+      return;
+    }
+    if (k === 'd' || k === 'D') { location.href = 'descargables/index.html'; return; }
+    if (k === 'f' || k === 'F') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(() => {});
+      else document.exitFullscreen?.();
+      return;
+    }
+    if (k === 'c' || k === 'C') alternarVistaCliente();
+  });
+
+  /* --- Coreografía (solo si el motor cargó) ---
+     venta 90 ms → eventos 260 → interna 430 → equipo 620, paso 70 (equipo 55). */
+  if (hayMotor) {
+    FILAS.forEach((f) => Motion.stagger(f._rej, 70, f.inicio));
+    Motion.stagger(equipo, 55, 620);
+    Motion.revealAll('.mo-reveal', { threshold: 0 });       // sin scroll: umbral 0 y sin rootMargin
+    document.querySelectorAll('.twrap').forEach((w) => {
+      const tile = w.querySelector('.tile');
+      if (!tile.classList.contains('activa')) return;       // las «pronto» se quedan quietas
+      Motion.magnetic(w, w.querySelector('.tmag'), 120, 0.22);
+      Motion.tilt(tile, 5);
+    });
+    Motion.onFrame(veloPinta);
+    Motion.start();                                          // LA ÚLTIMA LÍNEA: aquí se permite ocultar
+  }
+})();
+</script>
+</body>
+</html>

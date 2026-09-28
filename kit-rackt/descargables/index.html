@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Descargables · Kit comercial · RACK-T</title>
+<meta name="description" content="Formatos del equipo de RACK-T para descargar o duplicar.">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RACK-T">
+<meta property="og:locale" content="es_MX">
+<meta property="og:url" content="https://sanoapro.github.io/rackt-piezas/kit-rackt/descargables/index.html">
+<meta property="og:title" content="Descargables · Kit comercial RACK-T">
+<meta property="og:description" content="Formatos del equipo para descargar o duplicar.">
+<meta property="og:image" content="https://sanoapro.github.io/rackt-piezas/kit-rackt/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kit comercial de RACK-T">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sanoapro.github.io/rackt-piezas/kit-rackt/og.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%23ab0505'%3E%3Crect x='2' y='3' width='20' height='2.6' rx='1.3'/%3E%3Crect x='2' y='7.6' width='20' height='2.6' rx='1.3'/%3E%3Crect x='2' y='12.2' width='20' height='2.6' rx='1.3'/%3E%3Crect x='2' y='16.8' width='20' height='2.6' rx='1.3'/%3E%3Crect x='2' y='21.4' width='20' height='1.6' rx='.8'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../compartidos/css/motion.css">
+
+<style>
+/* ==========================================================================
+   DESCARGABLES — página 2 del kit. Mismo sistema visual que la lámina;
+   lo único propio es lo que exige el scroll (esta página SÍ se desplaza,
+   porque la lista va a crecer). Datos: docs.js (la misma lista que cuenta la lámina).
+   ========================================================================== */
+
+/* Tokens: los mismos de la lámina (kit-rackt/index.html). Si cambias uno, cambia los dos. */
+:root {
+  --rojo: #ab0505;     --rojo-d: #7a0303;     --rojo-t: #fbeceb;     --rojo-l: #f1bdba;
+  --marino: #002455;   --marino-d: #00152f;   --marino-t: #e7edf6;   --marino-l: #b9c8df;
+  --naranja: #f8450d;  --naranja-d: #b33000;  --naranja-t: #feeee7;  --naranja-l: #fcc5ae;
+  --grafito: #323131;  --grafito-d: #1a1919;  --grafito-t: #efefef;  --grafito-l: #cfcfcf;
+  --acero: #2e6da4;    --acero-d: #1b4a75;    --acero-t: #e8f1f9;    --acero-l: #b9d3eb;
+  --petroleo: #0f6e6e; --petroleo-d: #0a4a4a; --petroleo-t: #e3f3f2; --petroleo-l: #acd9d6;
+  --verde: #1d6b47;    --verde-d: #124a30;    --verde-t: #e5f3eb;    --verde-l: #b1dac3;
+  --ambar: #b86e00;    --ambar-d: #7d4a00;    --ambar-t: #fcf1de;    --ambar-l: #edcb8b;
+  --ink: #232222;  --ink2: #595656;  --ink3: #8d8989;
+  --line: #e6e3e1; --line2: #d3cfcc; --wash: #f5f3f2;
+  --sh1: 0 1px 2px rgba(50, 49, 49, .10), 0 4px 12px -4px rgba(50, 49, 49, .18);
+  --sh2: 0 2px 6px rgba(50, 49, 49, .10), 0 14px 34px -12px rgba(50, 49, 49, .32);
+  --font: "Bahnschrift", "Barlow", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  --font-titulo: "League Gothic", "Oswald", "Arial Narrow", Impact, sans-serif;
+  --curva: cubic-bezier(.2, .8, .2, 1);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #fff; color: var(--ink); font-family: var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+button { font: inherit; color: inherit; }
+a { color: inherit; }
+
+/* Filete de marca arriba y barra de avance de lectura encima de él */
+.filete { position: fixed; left: 0; right: 0; top: 0; height: 5px; z-index: 20;
+  background: linear-gradient(90deg, var(--rojo) 0 25%, var(--marino) 25% 50%, var(--naranja) 50% 75%, var(--grafito) 75% 100%); }
+.avance { position: fixed; left: 0; right: 0; top: 5px; height: 3px; z-index: 21; background: var(--grafito); transform: scaleX(0); transform-origin: left; }
+
+/* Manchas pastel: en esta página viven arriba y se van con el scroll */
+.bg { position: absolute; inset: 0 0 auto 0; height: 700px; overflow: hidden; z-index: 0; pointer-events: none; }
+.mancha { position: absolute; border-radius: 50%; }
+.m1 { width: 460px; height: 460px; left: -190px; top: -210px; background: var(--rojo-t); opacity: .6; }
+.m2 { width: 340px; height: 340px; right: -110px; top: -150px; background: var(--acero-t); opacity: .55; }
+.m3 { width: 300px; height: 300px; right: 18%; top: 380px; background: var(--ambar-t); opacity: .45; }
+
+.pagina { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 40px 24px 150px; }
+
+/* Cabecera */
+.volver {
+  display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px 0 10px; border-radius: 99px;
+  border: 1px solid var(--line2); background: #fff; font-size: 13.5px; font-weight: 600; text-decoration: none;
+  transition: background-color .2s;
+}
+.volver:hover { background: var(--wash); }
+.volver svg { width: 16px; height: 16px; }
+.volver:focus-visible { outline: 3px solid var(--marino); outline-offset: 3px; }
+.cabeza { margin: 28px 0 32px; padding-bottom: 18px; border-bottom: 1px solid var(--line2); display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.eyebrow { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 10.5px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--rojo); }
+.eyebrow::before { content: ""; width: 18px; height: 3px; border-radius: 2px; background: currentColor; }
+h1 { margin: 6px 0; font-family: var(--font-titulo); font-weight: 400; font-size: clamp(40px, 6vw, 56px); line-height: .95; letter-spacing: .5px; text-transform: uppercase; }
+h1 .letras span { display: inline-block; }
+.sub { margin: 0; font-size: 14.5px; color: var(--ink2); max-width: 60ch; }
+.cabeza img { height: 30px; width: auto; display: block; }
+
+/* Dos columnas: rejilla + columna lateral pegajosa que explica las acciones */
+.cuerpo { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 28px; align-items: start; }
+@media (max-width: 979px) { .cuerpo { grid-template-columns: 1fr; } .lateral { position: static !important; } }
+.lateral { position: sticky; top: 28px; padding: 22px; border-radius: 18px; background: var(--wash); border: 1px solid var(--line); }
+.lateral h2 { margin: 0 0 12px; font-family: var(--font-titulo); font-weight: 400; font-size: 24px; letter-spacing: .5px; text-transform: uppercase; }
+.lateral dl { margin: 0; display: grid; gap: 14px; }
+.lateral dt { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 13.5px; }
+.lateral dt span { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; background: #fff; border: 1px solid var(--line2); }
+.lateral dt svg { width: 14px; height: 14px; }
+.lateral dd { margin: 4px 0 0 34px; font-size: 13px; line-height: 1.45; color: var(--ink2); }
+.lateral .aviso { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--line2); font-size: 12px; color: var(--ink3); line-height: 1.45; }
+
+/* Rejilla de documentos */
+.docs { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.dwrap, .dmag { min-width: 0; }
+.dmag { transition: transform .35s var(--curva); height: 100%; }
+.doc {
+  position: relative; height: 100%; display: flex; flex-direction: column; gap: 12px; padding: 20px 20px 22px;
+  background: #fff; border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--sh1); overflow: hidden;
+  transition: box-shadow .25s, border-color .25s, transform .18s ease-out;
+}
+.doc::before {                         /* velo que sigue al cursor */
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(420px 240px at var(--mx, 50%) var(--my, 50%), var(--tint), transparent 70%);
+  opacity: 0; transition: opacity .3s;
+}
+.doc::after {                          /* filete que crece: arranca donde arranca el texto */
+  content: ""; position: absolute; left: 20px; bottom: 0; width: 34px; height: 4px; border-radius: 4px 4px 0 0;
+  background: var(--c); transition: width .28s cubic-bezier(.2, .8, .2, 1);
+}
+.doc:hover { box-shadow: var(--sh2); border-color: transparent; }
+.doc:hover::before { opacity: 1; }
+.doc:hover::after { width: calc(100% - 40px); }
+.doc > * { position: relative; z-index: 1; }
+.d-top { display: flex; align-items: center; gap: 12px; }
+.d-ico { flex: none; width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; color: #fff;
+  background: var(--grad); box-shadow: 0 6px 16px -6px var(--c); transition: transform .28s var(--curva); }
+.d-ico svg { width: 24px; height: 24px; }
+.doc:hover .d-ico { transform: scale(1.07) rotate(-4deg); }
+.d-tipo { display: inline-flex; align-items: center; height: 20px; padding: 0 9px; border-radius: 99px; background: var(--tint); color: var(--c2); font-size: 11px; font-weight: 700; }
+.d-copiar { margin-left: auto; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 9px;
+  border: 1px solid var(--line2); background: #fff; color: var(--ink2); cursor: pointer; transition: background-color .2s, color .2s; }
+.d-copiar svg { width: 15px; height: 15px; }
+.d-copiar:hover { background: var(--c); border-color: var(--c); color: #fff; }
+.d-copiar[data-estado="hecho"] { width: auto; padding: 0 10px; background: var(--verde); border-color: var(--verde); color: #fff; font-size: 11.5px; font-weight: 700; }
+.d-nom { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -.35px; line-height: 1.2; }
+.d-desc { margin: 0; font-size: 13.5px; line-height: 1.45; color: var(--ink2); }
+.d-acciones { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px; }
+.accion {
+  display: inline-flex; align-items: center; gap: 7px; height: 38px; padding: 0 14px; border-radius: 11px;
+  border: 1.5px solid var(--c); color: var(--c2); background: #fff; font-size: 13px; font-weight: 700; text-decoration: none;
+  transition: background-color .2s, color .2s, transform .2s var(--curva);
+}
+.accion svg { width: 16px; height: 16px; }
+.accion:hover { background: var(--tint); transform: translateY(-1px); }
+.accion.primaria { background: var(--c); color: #fff; }
+.accion.primaria:hover { background: var(--c2); }
+.accion:focus-visible, .d-copiar:focus-visible { outline: 3px solid var(--marino); outline-offset: 2px; }
+.d-nota { margin: 2px 0 0; padding-top: 10px; border-top: 1px dashed var(--line2); font-size: 12px; color: var(--ink3); line-height: 1.45; }
+
+/* Un solo documento: ocupa el ancho entero y parte las acciones a un panel lateral de su color.
+   El JS pone y quita .uno según cuántos haya; al llegar el segundo vuelve la rejilla sola. */
+.docs.uno { grid-template-columns: 1fr; }
+.docs.uno .doc { display: grid; grid-template-columns: minmax(0, 1fr) 260px; grid-template-areas: "top panel" "nom panel" "desc panel" "nota panel"; column-gap: 24px; padding-right: 0; }
+.docs.uno .d-top { grid-area: top; } .docs.uno .d-nom { grid-area: nom; } .docs.uno .d-desc { grid-area: desc; } .docs.uno .d-nota { grid-area: nota; }
+.docs.uno .d-acciones { grid-area: panel; margin: -20px 0 -22px; padding: 22px; flex-direction: column; justify-content: center; background: var(--tint); border-left: 4px solid var(--c); }
+.docs.uno .accion { justify-content: center; }
+@media (max-width: 640px) {
+  .docs.uno .doc { grid-template-columns: 1fr; grid-template-areas: "top" "nom" "desc" "panel" "nota"; padding-right: 20px; }
+  .docs.uno .d-acciones { margin: 0; border-left: 0; border-radius: 12px; }
+}
+
+.vacio { padding: 40px; border: 1.5px dashed var(--line2); border-radius: 18px; background: var(--wash); color: var(--ink2); text-align: center; }
+
+/* Decorativo del pie: trazado a 1280 px. Aquí no se comprime: lleva min-width y el pie lo recorta. */
+.pie { position: relative; z-index: 0; height: 78px; overflow: hidden; margin-top: -78px; pointer-events: none; }
+.pie-deco { position: absolute; left: 50%; transform: translateX(-50%); bottom: 0; width: 100%; min-width: 1280px; height: 78px; }
+.pie-deco .poste { fill: var(--grafito-l); }
+.pie-deco .viga { fill: var(--rojo-l); }
+.pie-deco .piso { stroke: var(--line2); stroke-width: 1.5; }
+.pie-deco .rodillo { fill: var(--line2); }
+.pie-deco .caja rect { fill: var(--ambar-t); stroke: var(--ambar-l); stroke-width: 1.2; }
+.pie-deco .caja path { stroke: var(--ambar-l); stroke-width: 1; fill: none; }
+.pie-deco .crece { transform-box: fill-box; transform-origin: 50% 100%; animation: crece 2.4s cubic-bezier(.2, .7, .25, 1) both; animation-delay: var(--d, 0s); }
+@keyframes crece { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.pie-deco .caja { animation: avanza var(--dur, 46s) linear infinite; animation-delay: var(--d, 0s); }
+@keyframes avanza { from { transform: translateX(0); } to { transform: translateX(1360px); } }
+
+#toast { position: fixed; left: 50%; bottom: 24px; z-index: 60; transform: translate(-50%, 14px); opacity: 0; pointer-events: none;
+  padding: 10px 18px; border-radius: 99px; background: #1b1c1e; color: #fff; font-size: 13.5px; font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .3); transition: opacity .22s, transform .22s var(--curva); }
+#toast.visible { opacity: 1; transform: translate(-50%, 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .dwrap, .dmag, .doc { opacity: 1 !important; transform: none !important; }
+  .pie-deco .crece { transform: none !important; }
+  .pie-deco .caja { transform: translateX(var(--q, 0px)) !important; }
+}
+@media print {
+  .filete, .avance, #toast, .volver, .d-copiar { display: none !important; }
+  .bg { display: none; }
+  .cuerpo { grid-template-columns: 1fr 260px; }
+  .lateral { position: static; }
+  .doc { box-shadow: none !important; break-inside: avoid; }
+  .dwrap, .dmag, .doc { opacity: 1 !important; transform: none !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .pie-deco .crece { transform: none !important; }
+  .pie-deco .caja { transform: translateX(var(--q, 0px)) !important; }
+}
+</style>
+</head>
+<body>
+<div class="filete" aria-hidden="true"></div>
+<div class="avance" id="avance" aria-hidden="true"></div>
+<div class="bg" aria-hidden="true"><div class="mancha m1"></div><div class="mancha m2"></div><div class="mancha m3"></div></div>
+
+<div class="pagina">
+  <a class="volver" href="../index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+    Volver al kit
+  </a>
+  <header class="cabeza">
+    <div>
+      <p class="eyebrow">Kit comercial · RACK-T</p>
+      <h1>Formatos <span class="letras" id="letras">descargables</span></h1>
+      <p class="sub">Descarga el formato o copia su enlace para mandarlo por WhatsApp. <b>Esc</b> regresa al kit.</p>
+    </div>
+    <span id="logo"></span>
+  </header>
+
+  <div class="cuerpo">
+    <main><div class="docs" id="docs"></div></main>
+    <aside class="lateral" aria-label="Qué hace cada botón">
+      <h2>Qué hace cada botón</h2>
+      <dl id="explica"></dl>
+      <p class="aviso" id="aviso-google" hidden>Los documentos de Google deben estar compartidos como «cualquiera con el enlace · lector»; si no, «Hacer una copia» muestra una pantalla de permiso.</p>
+    </aside>
+  </div>
+</div>
+
+<div class="pie" aria-hidden="true"><svg class="pie-deco" id="pie-deco" viewBox="0 0 1280 78" preserveAspectRatio="none" focusable="false"></svg></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets.js"></script>
+<script src="docs.js"></script>
+<script src="../../compartidos/js/motion.js"></script>
+<script>
+(function () {
+  'use strict';
+  const hayMotor = !!window.Motion;
+  const DOCS = Array.isArray(window.DOCS) ? window.DOCS : [];
+  const svg = (c, t) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${t || 2}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${c}</svg>`;
+  const el = (tag, clase, html) => { const n = document.createElement(tag); if (clase) n.className = clase; if (html != null) n.innerHTML = html; return n; };
+  const texto = (tag, clase, t) => { const n = document.createElement(tag); if (clase) n.className = clase; n.textContent = t; return n; };
+  const I = {
+    doc: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>',
+    copia: '<rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4h-7A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8"/>',
+    pdf: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 15h6"/>',
+    word: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M8.5 11l1.5 6 2-4 2 4 1.5-6"/>',
+    descargar: '<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>',
+    abrir: '<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>'
+  };
+
+  // Título con letras de colores (mismo recurso que la lámina)
+  const paleta = ['--rojo', '--marino', '--naranja', '--acero', '--petroleo', '--verde', '--ambar', '--grafito'];
+  const letras = document.getElementById('letras');
+  letras.textContent = '';
+  [...'descargables'].forEach((ch, i) => { const s = texto('span', '', ch); s.style.color = `var(${paleta[i % paleta.length]})`; letras.append(s); });
+  const B = window.BRAND || {};
+  if (B.logo) { const img = el('img'); img.src = B.logo; img.alt = 'RACK-T'; document.getElementById('logo').append(img); }
+
+  // Copiar (mismo respaldo que la lámina: funciona en http:// y file://)
+  function respaldoCopiar(t) {
+    const ta = document.createElement('textarea'); ta.value = t; ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0'; document.body.append(ta); ta.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch (e) {} ta.remove(); return ok;
+  }
+  const copiar = (t) => (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText)
+    ? navigator.clipboard.writeText(t).then(() => true, () => respaldoCopiar(t)) : Promise.resolve(respaldoCopiar(t));
+  const toastEl = document.getElementById('toast'); let tt = null;
+  const toast = (m) => { toastEl.textContent = m; toastEl.classList.add('visible'); clearTimeout(tt); tt = setTimeout(() => toastEl.classList.remove('visible'), 1700); };
+  function estadoBoton(btn, hecho, ms) {
+    if (hayMotor) return Motion.botonEstado(btn, { hecho, msHecho: ms });
+    let o = null, t = null;
+    return () => { if (o === null) o = btn.innerHTML; clearTimeout(t); btn.dataset.estado = 'hecho'; btn.innerHTML = hecho;
+      t = setTimeout(() => { delete btn.dataset.estado; btn.innerHTML = o; o = null; }, ms); };
+  }
+
+  // Acciones que se derivan de cada documento
+  function acciones(d) {
+    if (d.docId) {
+      const base = `https://docs.google.com/document/d/${encodeURIComponent(d.docId)}`;
+      return { compartir: base + '/copy', lista: [
+        { t: 'Hacer una copia', url: base + '/copy', ico: I.copia, primaria: true },
+        { t: 'PDF', url: base + '/export?format=pdf', ico: I.pdf },
+        { t: 'Word', url: base + '/export?format=docx', ico: I.word }] };
+    }
+    return { compartir: d.archivo, lista: [
+      { t: 'Descargar', url: d.archivo, ico: I.descargar, primaria: true, descarga: true },
+      { t: 'Abrir', url: d.archivo, ico: I.abrir }] };
+  }
+
+  const cont = document.getElementById('docs');
+  if (!DOCS.length) cont.append(texto('p', 'vacio', 'Todavía no hay formatos. Se agregan en descargables/docs.js.'));
+  DOCS.forEach((d) => {
+    const ac = acciones(d);
+    const wrap = el('div', 'dwrap'), mag = el('div', 'dmag'), card = el('article', 'doc');
+    card.style.setProperty('--c', `var(${d.color})`);
+    card.style.setProperty('--c2', d.color2);
+    card.style.setProperty('--tint', `var(${d.tinte})`);
+    card.style.setProperty('--grad', `linear-gradient(135deg, ${d.color2}, var(${d.color}))`);
+    const top = el('div', 'd-top');
+    top.append(el('div', 'd-ico', svg(I.doc)), texto('span', 'd-tipo', d.tipo));
+    const c = el('button', 'd-copiar', svg(I.copia));
+    c.type = 'button';
+    // El ⧉ copia el enlace que se manda: con Google es el de COPIA, así quien lo recibe
+    // obtiene su propia copia y no edita la del que lo mandó.
+    c.setAttribute('aria-label', `Copiar el enlace de ${d.nombre}`);
+    const marcar = estadoBoton(c, '✓ Copiado', 1400);
+    c.addEventListener('click', () => copiar(ac.compartir).then((ok) => { if (ok) { marcar(); toast('Enlace copiado: ' + d.nombre); } else toast('No se pudo copiar'); }));
+    top.append(c);
+    const acs = el('div', 'd-acciones');
+    ac.lista.forEach((x) => {
+      const a = el('a', 'accion' + (x.primaria ? ' primaria' : ''), svg(x.ico, 2.2));
+      a.append(document.createTextNode(x.t));
+      a.href = x.url;
+      if (x.descarga) a.setAttribute('download', ''); else { a.target = '_blank'; a.rel = 'noopener'; }
+      acs.append(a);
+    });
+    card.append(top, texto('h3', 'd-nom', d.nombre), texto('p', 'd-desc', d.desc), acs);
+    if (d.nota) card.append(texto('p', 'd-nota', d.nota));
+    mag.append(card); wrap.append(mag); cont.append(wrap);
+  });
+  // Un solo documento → modo .uno; con dos o más, la rejilla normal (sin tocar nada)
+  cont.classList.toggle('uno', DOCS.length === 1);
+
+  // La columna lateral explica solo las acciones que aparecen
+  const hayGoogle = DOCS.some((d) => d.docId), hayArchivo = DOCS.some((d) => !d.docId);
+  const dl = document.getElementById('explica');
+  const explica = (ico, t, d) => { const dt = el('dt', '', `<span>${svg(ico)}</span>`); dt.append(t); dl.append(dt, texto('dd', '', d)); };
+  if (hayArchivo) {
+    explica(I.descargar, 'Descargar', 'Baja el formato en blanco a tu computadora para llenarlo.');
+    explica(I.abrir, 'Abrir', 'Lo abre en otra pestaña para verlo o imprimirlo.');
+  }
+  if (hayGoogle) {
+    explica(I.copia, 'Hacer una copia', 'Crea tu propia copia en Google Docs; el original no se toca.');
+    explica(I.pdf, 'PDF', 'Descarga el documento como PDF.');
+    explica(I.word, 'Word', 'Descarga el documento como .docx para editarlo en Word.');
+  }
+  document.getElementById('aviso-google').hidden = !hayGoogle;       // el aviso solo aplica a documentos de Google
+  explica(I.copia, 'Copiar enlace', hayGoogle ? 'Copia la liga de copia: quien la recibe obtiene su propio documento.' : 'Copia la liga del archivo para mandarla por WhatsApp o correo.');
+
+  // Decorativo del pie (mismo trazo que la lámina)
+  (function nave() {
+    const ns = 'http://www.w3.org/2000/svg', pie = document.getElementById('pie-deco');
+    const n = (tag, at) => { const x = document.createElementNS(ns, tag); for (const k in at) x.setAttribute(k, at[k]); return x; };
+    pie.append(n('line', { class: 'piso', x1: 0, y1: 76.5, x2: 1280, y2: 76.5 }));
+    [[18, 46, 58, 2], [150, 40, 44, 3], [318, 52, 66, 2], [446, 38, 40, 2], [548, 48, 60, 3], [728, 42, 50, 2],
+     [838, 54, 64, 2], [968, 40, 46, 3], [1116, 50, 62, 2], [1230, 36, 42, 1]].forEach(([x, w, alto, b], i) => {
+      const g = n('g', { transform: `translate(${x} 76)` }), c = n('g', { class: 'crece' });
+      c.style.setProperty('--d', (0.15 + i * 0.16).toFixed(2) + 's');
+      for (let k = 0; k <= b; k++) c.append(n('rect', { class: 'poste', x: k * w, y: -alto, width: 3, height: alto }));
+      for (let y = 12; y < alto - 4; y += 15) for (let k = 0; k < b; k++) c.append(n('rect', { class: 'viga', x: k * w + 3, y: -y - 2, width: w - 3, height: 2.6 }));
+      g.append(c); pie.append(g);
+    });
+    for (let x = 6; x < 1280; x += 12) pie.append(n('circle', { class: 'rodillo', cx: x, cy: 74, r: 1.4 }));
+    [[16, 12, -2], [20, 14, -11], [14, 10, -19], [18, 13, -27], [22, 15, -36], [15, 11, -42]].forEach(([w, h, d], i) => {
+      const g = n('g', { class: 'caja' });
+      g.style.setProperty('--d', d + 's'); g.style.setProperty('--dur', '46s'); g.style.setProperty('--q', (80 + i * 215) + 'px');
+      g.append(n('rect', { x: -40, y: 72 - h, width: w, height: h, rx: 1.5 }), n('path', { d: `M${-40 + w / 2} ${72 - h}v${h * 0.45}` }));
+      pie.append(g);
+    });
+  })();
+
+  // Velo: el evento guarda coordenadas; el frame lee la geometría (aquí no hay escala)
+  const velo = { activa: null, x: 0, y: 0, sucio: false };
+  function veloPinta() {
+    if (!velo.sucio || !velo.activa) return;
+    velo.sucio = false;
+    const r = velo.activa.getBoundingClientRect();
+    velo.activa.style.setProperty('--mx', (velo.x - r.left).toFixed(1) + 'px');
+    velo.activa.style.setProperty('--my', (velo.y - r.top).toFixed(1) + 'px');
+  }
+  if (!window.matchMedia('(pointer: coarse)').matches) {
+    document.addEventListener('pointermove', (e) => {
+      velo.activa = e.target.closest ? e.target.closest('.doc') : null;
+      velo.x = e.clientX; velo.y = e.clientY; velo.sucio = true;
+      if (!hayMotor) veloPinta();
+    }, { passive: true });
+  }
+
+  // Esc regresa al kit
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key === 'Escape') location.href = '../index.html';
+  });
+
+  if (hayMotor) {
+    Motion.progressBar(document.getElementById('avance'));
+    Motion.stagger(cont, 70, 120);
+    Motion.revealAll('.mo-reveal', { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });   // aquí sí hay scroll
+    document.querySelectorAll('.dwrap').forEach((w) => { Motion.magnetic(w, w.querySelector('.dmag'), 120, 0.22); Motion.tilt(w.querySelector('.doc'), 5); });
+    Motion.onFrame(veloPinta);
+    Motion.start();                                   // última línea
+  }
+})();
+</script>
+</body>
+</html>

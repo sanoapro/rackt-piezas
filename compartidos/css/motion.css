@@ -1,0 +1,36 @@
+/* ==========================================================================
+   Motion — estilos compartidos. SIN COLORES: solo opacidad, transform y tiempos.
+   Todas las clases llevan prefijo mo- para no chocar con las de cada página.
+   ========================================================================== */
+
+/* Lo revelable SOLO se esconde cuando el motor confirmó que corrió (html.mo-ready).
+   Si motion.js no carga, esta regla no aplica y todo se ve. */
+html.mo-ready .mo-reveal:not(.mo-in) {
+  opacity: 0;
+  transform: translateY(14px);
+}
+.mo-reveal {
+  /* Entrada por elemento bajo 600 ms, con curva de salida suave */
+  transition: opacity 520ms cubic-bezier(.2, .7, .2, 1), transform 520ms cubic-bezier(.2, .7, .2, 1);
+  transition-delay: var(--mo-delay, 0ms);
+}
+
+/* Barra de avance: nace vacía y la llena el bucle */
+.mo-progress { transform-origin: left center; transform: scaleX(0); }
+
+/* Botón que cambia de estado (el color lo pone cada página) */
+.mo-hecho { transition: transform 200ms cubic-bezier(.2, .8, .2, 1); }
+
+/* Reducir movimiento: todo quieto y visible. Se nombran los pseudoelementos
+   porque animation:none sobre el elemento NO alcanza a su ::before ni a su ::after. */
+@media (prefers-reduced-motion: reduce) {
+  .mo-reveal, .mo-reveal::before, .mo-reveal::after {
+    opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important;
+  }
+}
+
+/* Al imprimir no queda nada en opacity:0 */
+@media print {
+  .mo-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .mo-progress { display: none !important; }
+}
