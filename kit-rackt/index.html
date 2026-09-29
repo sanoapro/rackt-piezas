@@ -6,7 +6,7 @@
 <!-- Herramienta del equipo, no para buscadores. El noindex va solo a Google y Bing: nada frena al lector de WhatsApp. -->
 <meta name="googlebot" content="noindex">
 <meta name="bingbot" content="noindex">
-<title>Kit comercial · RACK-T</title>
+<title>Kit Rack-T</title>
 <meta name="description" content="Accesos directos del equipo de RACK-T: piezas para el cliente, canales de contacto y herramientas internas.">
 <meta name="theme-color" content="#1b1c1e">
 <!-- Tarjeta para compartir: URL ABSOLUTAS, porque WhatsApp no lee rutas relativas ni data: -->
@@ -14,16 +14,16 @@
 <meta property="og:site_name" content="RACK-T">
 <meta property="og:locale" content="es_MX">
 <meta property="og:url" content="https://sanoapro.github.io/rackt-piezas/kit-rackt/">
-<meta property="og:title" content="Kit comercial · RACK-T">
+<meta property="og:title" content="Kit Rack-T">
 <meta property="og:description" content="Todas las ligas del equipo en una lámina: abrir, copiar o mostrar el QR.">
 <meta property="og:image" content="https://sanoapro.github.io/rackt-piezas/kit-rackt/og.jpg">
 <meta property="og:image:secure_url" content="https://sanoapro.github.io/rackt-piezas/kit-rackt/og.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Kit comercial de RACK-T">
+<meta property="og:image:alt" content="Kit Rack-T">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Kit comercial · RACK-T">
+<meta name="twitter:title" content="Kit Rack-T">
 <meta name="twitter:description" content="Todas las ligas del equipo en una lámina: abrir, copiar o mostrar el QR.">
 <meta name="twitter:image" content="https://sanoapro.github.io/rackt-piezas/kit-rackt/og.jpg">
 <!-- Favicon SVG inline: las cinco barras del isotipo en rojo RACK-T -->
@@ -37,7 +37,7 @@
 
 <style>
 /* ==========================================================================
-   KIT COMERCIAL · RACK-T — la lámina de accesos directos
+   KIT RACK-T — la lámina de accesos directos del equipo
    Una "diapositiva" fija de 1280 × 720 que se escala entera a la ventana.
    Datos: al final del archivo (MOSTRAR, CAPTAR, OPERAR, EQUIPO). Guía: README.md
    ========================================================================== */
@@ -440,8 +440,8 @@ h1 .letras span { display: inline-block; }
   <div class="kc">
     <header class="kc-head">
       <div>
-        <p class="eyebrow">Equipo comercial · RACK-T</p>
-        <h1>Kit <span class="letras" id="letras">comercial</span></h1>
+        <p class="eyebrow">Accesos del equipo</p>
+        <h1>Kit <span class="letras" id="letras">Rack-T</span></h1>
         <p class="sub">Da clic para abrir · pasa el cursor y usa <b>⧉</b> para copiar el enlace</p>
       </div>
       <div class="kc-marca">
@@ -623,7 +623,7 @@ const ICO = {
   const paleta = ['--rojo', '--marino', '--naranja', '--acero', '--petroleo', '--verde', '--ambar', '--grafito'];
   const letras = document.getElementById('letras');
   letras.innerHTML = '';
-  [...'comercial'].forEach((ch, i) => { const s = texto('span', '', ch); s.style.color = `var(${paleta[i % paleta.length]})`; letras.append(s); });
+  [...'Rack-T'].forEach((ch, i) => { const s = texto('span', '', ch); s.style.color = `var(${paleta[i % paleta.length]})`; letras.append(s); });
 
   /* --- Logo desde assets.js (si no cargó, queda el nombre en texto) --- */
   const B = window.BRAND || {};
