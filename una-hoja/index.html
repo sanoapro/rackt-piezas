@@ -570,6 +570,25 @@ button { font: inherit; color: inherit; }
   color: var(--color-info); border: 1px solid currentColor; border-radius: var(--radio-sm);
 }
 
+/* --- 4.10b Casos: logo del cliente y proyecto realizado --- */
+.casos { display: grid; gap: var(--espacio-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); }
+.caso {
+  position: relative; display: flex; flex-direction: column; gap: var(--espacio-4);
+  padding: var(--espacio-6); background: var(--color-fondo); border: 1px solid var(--color-borde);
+  border-top: 6px solid var(--color-primario); border-radius: var(--radio);
+  transition: transform var(--duracion-media) var(--curva), box-shadow var(--duracion-media) var(--curva);
+}
+.caso:hover { transform: translateY(-4px); box-shadow: var(--sombra-alta); }
+/* El logo siempre sobre claro: muchos logos de cliente son oscuros y desaparecen en modo oscuro */
+.caso-logo { height: 76px; display: grid; place-items: center; padding: var(--espacio-3); background: var(--color-blanco); border-radius: var(--radio-sm); border: 1px solid var(--color-neutro); }
+.caso-logo img { max-height: 52px; max-width: 100%; width: auto; object-fit: contain; }
+.caso-logo .aliado-nombre { font-size: 1.6rem; color: var(--color-secundario); }
+.caso-sector { font-size: var(--texto-xs); font-weight: 600; letter-spacing: var(--tracking-etiquetas); text-transform: uppercase; color: var(--color-marca-texto); }
+.caso h3 { font-size: var(--texto-2xl); margin-top: 2px; }
+.caso-proyecto { color: var(--color-texto); }
+.caso-proyecto strong { font-weight: 600; }
+.caso-nota { font-size: var(--texto-sm); color: var(--color-texto-suave); }
+
 /* --- 4.11 Aliados: franja con desplazamiento continuo --- */
 .aliados { padding-block: var(--espacio-16); border-block: 1px solid var(--color-borde); }
 .aliados .cabeza { margin-bottom: var(--espacio-8); }
@@ -588,7 +607,9 @@ button { font: inherit; color: inherit; }
 .aliado::after { content: ""; width: 22px; height: 6px; border-radius: var(--radio-barra); background: var(--color-barra); }
 .aliado-nombre { font-family: var(--fuente-titulos); font-size: clamp(1.8rem, 3vw, 2.4rem); letter-spacing: .05em; text-transform: uppercase; color: var(--color-texto-suave); white-space: nowrap; transition: color var(--duracion-corta) var(--curva); }
 .aliado:hover .aliado-nombre { color: var(--color-texto); }
-.aliado img { height: 44px; width: auto; filter: grayscale(1); opacity: .75; transition: filter var(--duracion-corta) var(--curva), opacity var(--duracion-corta) var(--curva); }
+.aliado img { height: 44px; width: auto; max-width: 150px; object-fit: contain; filter: grayscale(1); opacity: .75; transition: filter var(--duracion-corta) var(--curva), opacity var(--duracion-corta) var(--curva); }
+/* En modo oscuro los logos de cliente (casi todos oscuros) van sobre una placa clara */
+[data-theme="dark"] .aliado img { background: var(--color-neutro-claro); padding: 8px 12px; border-radius: var(--radio-sm); box-sizing: content-box; opacity: .9; }
 .aliado:hover img { filter: none; opacity: 1; }
 
 /* --- 4.12 Preguntas frecuentes: acordeón accesible --- */
@@ -777,7 +798,7 @@ button { font: inherit; color: inherit; }
       },
       "cta_secundario": {
         "texto": "Conoce nuestros proyectos",
-        "enlace": "https://rackt.com.mx"
+        "enlace": "#proyectos"
       },
       "imagen": {
         "src": "assets/img/selectivo-20.webp",
@@ -1060,45 +1081,369 @@ button { font: inherit; color: inherit; }
       ]
     },
     {
-      "tipo": "testimonios",
-      "ancla": "testimonios",
+      "tipo": "casos",
+      "ancla": "casos",
       "etiqueta": "Casos",
-      "titulo": "Lo que dicen nuestros clientes",
+      "titulo": "Proyectos que respaldan nuestro trabajo",
+      "intro": "Algunas de las empresas con las que hemos trabajado en distintos estados de la República.",
       "items": [
         {
-          "ejemplo": true,
-          "cita": "Aquí va la opinión de un cliente, en sus propias palabras y con su autorización por escrito.",
-          "nombre": "Nombre del cliente",
-          "cargo": "Puesto",
-          "empresa": "Empresa"
+          "cliente": "Schneider Electric",
+          "logo": "assets/aliados/schneider-electric.webp",
+          "sector": "Manufactura · Querétaro, CDMX y Reynosa",
+          "proyecto": "Rack selectivo."
         },
         {
-          "ejemplo": true,
-          "cita": "Un caso breve: qué problema tenía el almacén, qué se instaló y qué resultado medible se obtuvo.",
-          "nombre": "Nombre del cliente",
-          "cargo": "Puesto",
-          "empresa": "Empresa"
+          "cliente": "Martinrea",
+          "logo": "assets/aliados/martinrea.webp",
+          "sector": "Autopartes",
+          "proyecto": "Rack selectivo, pasillos y reubicación."
+        },
+        {
+          "cliente": "SAF-HOLLAND",
+          "logo": "assets/aliados/saf-holland.webp",
+          "sector": "Autopartes",
+          "proyecto": "Mini racks, rack cantilever y protectores."
+        },
+        {
+          "cliente": "Select Shop",
+          "logo": "assets/aliados/select-shop.webp",
+          "sector": "Retail y distribución",
+          "proyecto": "Rack selectivo."
+        },
+        {
+          "cliente": "Go Global",
+          "logo": "assets/aliados/go-global.webp",
+          "sector": "Logística · Querétaro y San Luis Potosí",
+          "proyecto": "Mudanza de bodega."
         }
       ]
     },
     {
       "tipo": "aliados",
       "titulo": "Empresas que han confiado en nosotros",
+      "intro": "Algunas de las más de 130 empresas que nos han comprado desde 2019.",
+      "velocidad": 200,
       "items": [
         {
-          "nombre": "Schneider Electric"
+          "nombre": "Schneider Electric",
+          "logo": "assets/aliados/schneider-electric.webp"
         },
         {
-          "nombre": "Martinrea"
+          "nombre": "Martinrea",
+          "logo": "assets/aliados/martinrea.webp"
         },
         {
-          "nombre": "SAF Holland"
+          "nombre": "SAF-HOLLAND",
+          "logo": "assets/aliados/saf-holland.webp"
         },
         {
-          "nombre": "Select Shop"
+          "nombre": "BorgWarner",
+          "logo": "assets/aliados/borgwarner.webp"
         },
         {
-          "nombre": "Go Global"
+          "nombre": "ZEISS",
+          "logo": "assets/aliados/zeiss.webp"
+        },
+        {
+          "nombre": "GEODIS",
+          "logo": "assets/aliados/geodis.webp"
+        },
+        {
+          "nombre": "Nippon Express",
+          "logo": "assets/aliados/nippon-express.webp"
+        },
+        {
+          "nombre": "Exel",
+          "logo": "assets/aliados/exel.webp"
+        },
+        {
+          "nombre": "JATCO",
+          "logo": "assets/aliados/jatco.webp"
+        },
+        {
+          "nombre": "Multimatic",
+          "logo": "assets/aliados/multimatic.webp"
+        },
+        {
+          "nombre": "Bio-Rad",
+          "logo": "assets/aliados/bio-rad.webp"
+        },
+        {
+          "nombre": "Wilo",
+          "logo": "assets/aliados/wilo.webp"
+        },
+        {
+          "nombre": "Paquete Express",
+          "logo": "assets/aliados/paquete-express.webp"
+        },
+        {
+          "nombre": "Select Shop",
+          "logo": "assets/aliados/select-shop.webp"
+        },
+        {
+          "nombre": "Go Global",
+          "logo": "assets/aliados/go-global.webp"
+        },
+        {
+          "nombre": "Adegermex",
+          "logo": "assets/aliados/adegermex.webp"
+        },
+        {
+          "nombre": "Alianza Eléctrica",
+          "logo": "assets/aliados/alianza-electrica.webp"
+        },
+        {
+          "nombre": "American BOA",
+          "logo": "assets/aliados/american-boa.webp"
+        },
+        {
+          "nombre": "APG Química",
+          "logo": "assets/aliados/apg-quimica.webp"
+        },
+        {
+          "nombre": "Armo Diseño",
+          "logo": "assets/aliados/armo.webp"
+        },
+        {
+          "nombre": "Axon Cable",
+          "logo": "assets/aliados/axon-cable.webp"
+        },
+        {
+          "nombre": "Bezabala",
+          "logo": "assets/aliados/bezabala.webp"
+        },
+        {
+          "nombre": "Bolsas con Sentido",
+          "logo": "assets/aliados/bolsen.webp"
+        },
+        {
+          "nombre": "Brunnermeier",
+          "logo": "assets/aliados/brunnermeier.webp"
+        },
+        {
+          "nombre": "Cargotech",
+          "logo": "assets/aliados/cargotech.webp"
+        },
+        {
+          "nombre": "Carthane",
+          "logo": "assets/aliados/carthane.webp"
+        },
+        {
+          "nombre": "ClicOh",
+          "logo": "assets/aliados/clicoh.webp"
+        },
+        {
+          "nombre": "Colchones Wendy",
+          "logo": "assets/aliados/colchones-wendy.webp"
+        },
+        {
+          "nombre": "Colorbatch",
+          "logo": "assets/aliados/colorbatch.webp"
+        },
+        {
+          "nombre": "Control Técnico y Representaciones",
+          "logo": "assets/aliados/ctr.webp"
+        },
+        {
+          "nombre": "Dicka Logistics",
+          "logo": "assets/aliados/dicka-logistics.webp"
+        },
+        {
+          "nombre": "Diconsa",
+          "logo": "assets/aliados/diconsa.webp"
+        },
+        {
+          "nombre": "Doble Altura Arquitectos",
+          "logo": "assets/aliados/doble-altura.webp"
+        },
+        {
+          "nombre": "Don Colchón",
+          "logo": "assets/aliados/don-colchon.webp"
+        },
+        {
+          "nombre": "Economía en Materiales Publicitarios",
+          "logo": "assets/aliados/economia-materiales-publicitarios.webp"
+        },
+        {
+          "nombre": "Equipamiento Vehicular México",
+          "logo": "assets/aliados/equipamiento-vehicular.webp"
+        },
+        {
+          "nombre": "Espejos Inteligentes",
+          "logo": "assets/aliados/espejos-inteligentes.webp"
+        },
+        {
+          "nombre": "Fiabila",
+          "logo": "assets/aliados/fiabila.webp"
+        },
+        {
+          "nombre": "Fine Floors",
+          "logo": "assets/aliados/fine-floors.webp"
+        },
+        {
+          "nombre": "Gallium de México",
+          "logo": "assets/aliados/gallium.webp"
+        },
+        {
+          "nombre": "Garlock",
+          "logo": "assets/aliados/garlock.webp"
+        },
+        {
+          "nombre": "Gismex",
+          "logo": "assets/aliados/gismex.webp"
+        },
+        {
+          "nombre": "Global México Fresco",
+          "logo": "assets/aliados/global-mexico-fresco.webp"
+        },
+        {
+          "nombre": "Goulds Pumps",
+          "logo": "assets/aliados/goulds.webp"
+        },
+        {
+          "nombre": "Grupo Altex",
+          "logo": "assets/aliados/grupo-altex.webp"
+        },
+        {
+          "nombre": "Grupo Lienca",
+          "logo": "assets/aliados/grupo-lienca.webp"
+        },
+        {
+          "nombre": "Importaciones Soarma",
+          "logo": "assets/aliados/soarma.webp"
+        },
+        {
+          "nombre": "Impresos Coyoacán",
+          "logo": "assets/aliados/impresos-coyoacan.webp"
+        },
+        {
+          "nombre": "Industrial Papelera Venus",
+          "logo": "assets/aliados/papelera-venus.webp"
+        },
+        {
+          "nombre": "Interprice Logística",
+          "logo": "assets/aliados/interprice.webp"
+        },
+        {
+          "nombre": "Laboratorios KSK",
+          "logo": "assets/aliados/laboratorios-ksk.webp"
+        },
+        {
+          "nombre": "Lamitec",
+          "logo": "assets/aliados/lamitec.webp"
+        },
+        {
+          "nombre": "Maquinaria Oviedo",
+          "logo": "assets/aliados/maquinaria-oviedo.webp"
+        },
+        {
+          "nombre": "Matra México",
+          "logo": "assets/aliados/matra.webp"
+        },
+        {
+          "nombre": "MexiPC",
+          "logo": "assets/aliados/mexipc.webp"
+        },
+        {
+          "nombre": "Monteblanco",
+          "logo": "assets/aliados/monteblanco.webp"
+        },
+        {
+          "nombre": "Olio Fino",
+          "logo": "assets/aliados/olio-fino.webp"
+        },
+        {
+          "nombre": "Pakmail",
+          "logo": "assets/aliados/pakmail.webp"
+        },
+        {
+          "nombre": "Pibe Logistic",
+          "logo": "assets/aliados/pibe-logistic.webp"
+        },
+        {
+          "nombre": "Plomería Selecta",
+          "logo": "assets/aliados/plomeria-selecta.webp"
+        },
+        {
+          "nombre": "PPD Group",
+          "logo": "assets/aliados/ppd-group.webp"
+        },
+        {
+          "nombre": "Prisma de México",
+          "logo": "assets/aliados/prisma-mexico.webp"
+        },
+        {
+          "nombre": "RC Alambres",
+          "logo": "assets/aliados/rc-alambres.webp"
+        },
+        {
+          "nombre": "RC Refrigeración",
+          "logo": "assets/aliados/rc-refrigeracion.webp"
+        },
+        {
+          "nombre": "Reiner",
+          "logo": "assets/aliados/reiner.webp"
+        },
+        {
+          "nombre": "Royal Brinkman",
+          "logo": "assets/aliados/royal-brinkman.webp"
+        },
+        {
+          "nombre": "Silogistics",
+          "logo": "assets/aliados/silogistics.webp"
+        },
+        {
+          "nombre": "Soluciones Digitales de México",
+          "logo": "assets/aliados/soluciones-digitales.webp"
+        },
+        {
+          "nombre": "Tecnoco",
+          "logo": "assets/aliados/tecnoco.webp"
+        },
+        {
+          "nombre": "TecnoStamp",
+          "logo": "assets/aliados/tecnostamp.webp"
+        },
+        {
+          "nombre": "Tovar Electroequipos",
+          "logo": "assets/aliados/tovar.webp"
+        },
+        {
+          "nombre": "Transportes Monarca",
+          "logo": "assets/aliados/transporte-monarca.webp"
+        },
+        {
+          "nombre": "Tu Audio",
+          "logo": "assets/aliados/tu-audio.webp"
+        },
+        {
+          "nombre": "Urresko",
+          "logo": "assets/aliados/urresko.webp"
+        },
+        {
+          "nombre": "Vallen",
+          "logo": "assets/aliados/vallen.webp"
+        },
+        {
+          "nombre": "Venus Cup",
+          "logo": "assets/aliados/venus-cup.webp"
+        },
+        {
+          "nombre": "Vitacilina",
+          "logo": "assets/aliados/vitacilina.webp"
+        },
+        {
+          "nombre": "Welldex",
+          "logo": "assets/aliados/welldex.webp"
+        },
+        {
+          "nombre": "WIKUS México",
+          "logo": "assets/aliados/wikus.webp"
+        },
+        {
+          "nombre": "Y&L Pet Manufacturing",
+          "logo": "assets/aliados/yl-pet.webp"
         }
       ]
     },
@@ -1557,6 +1902,25 @@ button { font: inherit; color: inherit; }
           (tiene(t.cargo) || tiene(t.empresa)) ? h('span', { text: [t.cargo, t.empresa].filter(tiene).join(' · ') }) : null)));
       escalonar(nodos);
       return seccion(s, '', cab, h('div', { class: 'testimonios' }, nodos));
+    },
+
+    // Casos reales: logo del cliente + qué se le hizo. Sin citas: un testimonio solo va si el
+    // cliente lo dijo y autorizó publicarlo (para eso existe el tipo «testimonios»).
+    casos(s) {
+      const items = lista(s.items).filter((c) => tiene(c.cliente));
+      if (!items.length) return null;
+      const cab = cabeza(s);
+      const nodos = items.map((c) => h('article', { class: 'caso' },
+        h('div', { class: 'caso-logo' }, tiene(c.logo)
+          ? h('img', { src: c.logo, alt: c.cliente, loading: 'lazy' })
+          : h('span', { class: 'aliado-nombre', text: c.cliente })),
+        h('div', { class: 'caso-txt' },
+          tiene(c.sector) ? h('p', { class: 'caso-sector', text: c.sector }) : null,
+          h('h3', { text: c.cliente }),
+          tiene(c.proyecto) ? h('p', { class: 'caso-proyecto' }, h('strong', { text: 'Proyecto: ' }), c.proyecto) : null,
+          parrafos(c.texto, 'caso-nota'))));
+      escalonar(nodos);
+      return seccion(s, '', cab, h('div', { class: 'casos' }, nodos));
     },
 
     aliados(s) {
