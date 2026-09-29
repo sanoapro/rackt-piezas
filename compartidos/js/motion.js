@@ -104,7 +104,10 @@
       var alcance = (radio || 100) * s + Math.max(r.width, r.height) / 2;
       if (Math.sqrt(dx * dx + dy * dy) < alcance) {
         activo = true;
-        inner.style.transform = 'translate(' + (dx * (fuerza || 0.2) / s).toFixed(2) + 'px,' + (dy * (fuerza || 0.2) / s).toFixed(2) + 'px)';
+        // Tope del desplazamiento: sin él, en rejillas apretadas la tarjeta vecina se encimaba
+        // (hasta ~25 px contra 12 px de separación) y su enlace tapaba los botones de la otra.
+        var tope = function (v) { return Math.max(-8, Math.min(8, v)); };
+        inner.style.transform = 'translate(' + tope(dx * (fuerza || 0.2) / s).toFixed(2) + 'px,' + tope(dy * (fuerza || 0.2) / s).toFixed(2) + 'px)';
       } else if (activo) {
         activo = false;
         inner.style.transform = '';

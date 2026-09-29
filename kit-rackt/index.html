@@ -209,6 +209,9 @@ h1 .letras span { display: inline-block; }
    Envoltura triple: .twrap (la anima la cascada) → .tmag (la mueve el imán) → .tile (la gira
    la inclinación). Cada capa tiene su propio transform y ninguna pisa a otra. */
 .twrap, .tmag { min-width: 0; min-height: 0; height: 100%; }
+/* La tarjeta bajo el cursor va encima de sus vecinas: sus botones nunca quedan tapados */
+.twrap { position: relative; }
+.twrap:hover, .twrap:focus-within { z-index: 2; }
 .twrap.saliendo { opacity: 0 !important; transform: scale(.96) !important; transition: opacity .22s, transform .22s !important; }
 .tmag { transition: transform .35s var(--curva); }
 .tile {
@@ -267,6 +270,17 @@ h1 .letras span { display: inline-block; }
 .t-chip svg { flex: none; width: 11px; height: 11px; }
 .t-chip span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .tile.con-qr { --acts: 78px; }
+/* Tarjeta doble: dos botones al pie en lugar del chip; el ⧉ sube a la esquina de la flecha */
+.t-dobles { margin-top: auto; display: flex; gap: 5px; position: relative; z-index: 3; }
+.t-boton {
+  display: inline-flex; align-items: center; gap: 2px; height: 22px; padding: 0 7px; border-radius: 99px;
+  background: var(--tint); color: var(--c2); border: 1px solid var(--c); font-size: 10px; letter-spacing: .01em; font-weight: 700;
+  text-decoration: none; white-space: nowrap; transition: background-color .2s, color .2s;
+}
+.t-boton svg { width: 10px; height: 10px; }
+.t-boton:hover { background: var(--c); color: #fff; }
+.t-boton:focus-visible { outline: 3px solid var(--marino); outline-offset: 2px; }
+.tile.doble .t-acts { top: 10px; bottom: auto; }
 
 .t-flecha {
   position: absolute; top: 10px; right: 10px; z-index: 1; width: 24px; height: 24px; border-radius: 50%;
@@ -526,9 +540,12 @@ const OPERAR = [    // Uso interno (fila fría con un solo cálido: Zoho One)
   { id: 'books', nombre: 'Zoho Books', color: '--petroleo', color2: '#0a4a4a', tinte: '--petroleo-t',
     desc: 'Facturas, pagos y cobranza.', host: 'books.zoho.com',
     url: 'https://books.zoho.com/app/939361246', interno: true, pronto: false },
-  { id: 'workdrive', nombre: 'WorkDrive', color: '--acero', color2: '#1b4a75', tinte: '--acero-t',
-    desc: 'La carpeta del equipo Comercial.', host: 'workdrive.zoho.com',
-    url: 'https://workdrive.zoho.com/folder/f3bhd839dec079d9e49bd9b7060edb3b0004f', interno: true, pronto: false },
+  // Tarjeta DOBLE: un solo cuadro con dos botones. `url` es el primero (el que abre la tecla numérica).
+  { id: 'marketing', nombre: 'Zoho Marketing', color: '--acero', color2: '#1b4a75', tinte: '--acero-t',
+    desc: 'Automatización y campañas de correo.', host: 'zoho.com',
+    url: 'https://accounts.zoho.com/signin?servicename=MarketingAutomation&serviceurl=https%3A%2F%2Fmarketingautomation.zoho.com%2F', interno: true, pronto: false,
+    enlaces: [ { nombre: 'Automation', titulo: 'Zoho Marketing Automation', url: 'https://accounts.zoho.com/signin?servicename=MarketingAutomation&serviceurl=https%3A%2F%2Fmarketingautomation.zoho.com%2F' },
+               { nombre: 'Campaigns', titulo: 'Zoho Campaigns', url: 'https://campaigns.zoho.com/' } ] },
   { id: 'projects', nombre: 'Zoho Projects', color: '--grafito', color2: '#1a1919', tinte: '--grafito-t',
     desc: 'Instalaciones y tareas de cada obra.', host: 'projects.zoho.com',
     url: 'https://projects.zoho.com/portal/racktportal', interno: true, pronto: false },
@@ -565,8 +582,8 @@ const ICO = {
   encuesta: '<path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.8l-5.2 2.8 1-5.8-4.3-4.1 5.9-.9z"/>',
   crm: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.4a6.5 6.5 0 0 1 3.5 5.6"/>',
   books: '<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/>',
-  workdrive: '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 10h18"/>',
   projects: '<path d="M3 4v16h18"/><rect x="6" y="6" width="8" height="3" rx="1"/><rect x="9" y="11" width="9" height="3" rx="1"/><rect x="7" y="16" width="6" height="2" rx="1"/>',
+  marketing: '<path d="M3 10.5v3a1 1 0 0 0 1 1h2.5L12 19V5L6.5 9.5H4a1 1 0 0 0-1 1z"/><path d="M15.5 9a4 4 0 0 1 0 6M18.5 6a8 8 0 0 1 0 12"/>',
   one: '<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>',
   // Interfaz
   _globo: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
@@ -656,7 +673,8 @@ const ICO = {
   function tarjeta(a) {
     const wrap = el('div', 'twrap');
     const mag = el('div', 'tmag');
-    const tile = el('div', 'tile' + (a.pronto ? ' pronto' : ' activa') + (a.qr && !a.pronto ? ' con-qr' : ''));
+    const doble = Array.isArray(a.enlaces) && a.enlaces.length > 1;
+    const tile = el('div', 'tile' + (a.pronto ? ' pronto' : ' activa') + (a.qr && !a.pronto ? ' con-qr' : '') + (doble ? ' doble' : ''));
     tile.style.setProperty('--c', `var(${a.color})`);
     tile.style.setProperty('--c2', a.color2);
     tile.style.setProperty('--tint', `var(${a.tinte})`);
@@ -664,7 +682,8 @@ const ICO = {
     wrap.dataset.id = a.id;
     if (a.interno) wrap.dataset.interno = '1';
 
-    if (!a.pronto) {
+    // Con dos destinos no hay capa que cubra la tarjeta: cada botón es su propio enlace
+    if (!a.pronto && !doble) {
       const link = el('a', 't-link');
       link.href = a.url; link.target = '_blank'; link.rel = 'noopener';
       link.setAttribute('aria-label', `Abrir ${a.nombre} en una pestaña nueva`);
@@ -673,13 +692,26 @@ const ICO = {
     tile.append(el('div', 't-ico', svg(ICO[a.id] || ICO._globo)));
     const txt = el('div', 't-txt');
     txt.append(texto('div', 't-nom', a.nombre), texto('div', 't-desc', a.desc));
-    const chip = el('div', 't-chip', a.pronto ? '' : svg(ICO._globo, 2.2));
-    chip.append(texto('span', '', a.pronto ? 'Próximamente' : a.host));
-    txt.append(chip);
+    if (doble) {
+      // En lugar del chip de origen, dos botones del color de la tarjeta (uno por destino)
+      const bots = el('div', 't-dobles');
+      a.enlaces.forEach((e) => {
+        const b = el('a', 't-boton', svg(ICO._flecha, 2.4));
+        b.prepend(document.createTextNode(e.nombre));
+        b.href = e.url; b.target = '_blank'; b.rel = 'noopener';
+        b.setAttribute('aria-label', `Abrir ${e.titulo || e.nombre} en una pestaña nueva`);
+        bots.append(b);
+      });
+      txt.append(bots);
+    } else {
+      const chip = el('div', 't-chip', a.pronto ? '' : svg(ICO._globo, 2.2));
+      chip.append(texto('span', '', a.pronto ? 'Próximamente' : a.host));
+      txt.append(chip);
+    }
     tile.append(txt);
 
     if (!a.pronto) {
-      tile.append(el('span', 't-flecha', svg(ICO._flecha, 2.4)));
+      if (!doble) tile.append(el('span', 't-flecha', svg(ICO._flecha, 2.4)));   // una flecha = un destino
       const acts = el('div', 't-acts');
       if (a.qr) {
         const q = el('button', 't-qr', svg(ICO._qr) + 'QR');
@@ -693,7 +725,9 @@ const ICO = {
       c.setAttribute('aria-label', `Copiar el enlace de ${a.nombre}`);
       c.title = 'Copiar enlace';
       const marcar = estadoBoton(c, '✓ Copiado', 1400);
-      c.addEventListener('click', () => copiar(a.url).then((ok) => {
+      // En la tarjeta doble se copian los dos enlaces, uno por renglón
+      const textoCopia = doble ? a.enlaces.map((e) => `${e.titulo || e.nombre} — ${e.url}`).join('\n') : a.url;
+      c.addEventListener('click', () => copiar(textoCopia).then((ok) => {
         if (ok) { marcar(); toast('Enlace copiado: ' + a.nombre); } else toast('No se pudo copiar');
       }));
       acts.append(c);
@@ -746,7 +780,9 @@ const ICO = {
     cf.addEventListener('click', () => {
       const lineas = [...rej.querySelectorAll('.twrap:not([hidden])')]
         .map((w) => w._acceso).filter((a) => !a.pronto)
-        .map((a) => `${a.nombre} — ${a.url}`);
+        .flatMap((a) => Array.isArray(a.enlaces) && a.enlaces.length > 1
+          ? a.enlaces.map((e) => `${e.titulo || e.nombre} — ${e.url}`)
+          : [`${a.nombre} — ${a.url}`]);
       copiar(lineas.join('\n')).then((ok) => {
         if (ok) { marcarFila(); toast(`Copiados ${lineas.length} enlaces`); } else toast('No se pudo copiar');
       });
