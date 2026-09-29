@@ -302,6 +302,10 @@ h1 .letras span { display: inline-block; }
 }
 .t-qr svg { width: 14px; height: 14px; }
 .t-qr:hover { background: var(--c); color: #fff; }
+/* En filas de cinco la tarjeta es angosta: la píldora QR se compacta para que el chip de origen quepa */
+.g5 .t-qr { padding: 0 6px; gap: 3px; font-size: 10.5px; }
+.g5 .t-qr svg { width: 12px; height: 12px; }
+.g5 .tile.con-qr { --acts: 70px; }
 
 /* Tarjeta «pronto»: apartada, sin nada que se sienta clicable */
 .tile.pronto { background: var(--wash); border: 1.5px dashed var(--line2); box-shadow: none; }
@@ -478,17 +482,20 @@ const BASE = 'https://sanoapro.github.io/rackt-piezas/';   // cambiar aquí si e
 
 const MOSTRAR = [   // Piezas para el cliente
   { id: 'servicios', nombre: 'Página de servicios', color: '--rojo', color2: '#7a0303', tinte: '--rojo-t',
-    desc: 'Qué hacemos, proyectos instalados y contacto.', host: 'sanoapro.github.io',
+    desc: 'Qué hacemos, proyectos instalados y contacto.', host: 'github.io',
     url: BASE + 'una-hoja/', interno: false, pronto: false,
     qr: './QR/pagina-servicios.png', qrTitulo: 'Conoce RACK-T', qrLema: 'Racks, mezzanines e ingeniería <b class="dest">a la medida</b>' },
   { id: 'presentacion', nombre: 'Presentación', color: '--marino', color2: '#00152f', tinte: '--marino-t',
-    desc: 'Presentación 16:9 para juntas y videollamadas.', host: 'sanoapro.github.io',
+    desc: 'Presentación 16:9 para juntas y videollamadas.', host: 'github.io',
     url: BASE + 'diapositivas/', interno: false, pronto: false },
+  { id: 'fotos', nombre: 'Catálogo fotográfico', color: '--petroleo', color2: '#0a4a4a', tinte: '--petroleo-t',
+    desc: '189 fotos de instalaciones reales, por sistema.', host: 'github.io',
+    url: BASE + 'catalogo-fotografico/', interno: false, pronto: false },
   { id: 'sitio', nombre: 'Sitio web', color: '--acero', color2: '#1b4a75', tinte: '--acero-t',
     desc: 'El sitio de RACK-T, con blog y formularios.', host: 'rackt.com.mx',
     url: 'https://www.rackt.com.mx/', interno: false, pronto: false },
   { id: 'catalogo', nombre: 'Catálogo', color: '--naranja', color2: '#b33000', tinte: '--naranja-t',
-    desc: 'Todos los sistemas y accesorios en un PDF.', host: 'PDF · 4.8 MB',
+    desc: 'Todos los sistemas y accesorios en un PDF.', host: 'PDF',
     url: BASE + 'catalogo/catalogo-rackt.pdf', interno: false, pronto: false,
     qr: './QR/catalogo.png', qrTitulo: 'Catálogo RACK-T', qrLema: 'Todos nuestros sistemas <b class="dest">en un PDF</b>' }
 ];
@@ -549,6 +556,7 @@ const ICO = {
   servicios: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M6.5 6.5h.01M9.5 6.5h.01M6.5 12.5h5v4h-5zM14.5 12.5h3M14.5 16.5h3"/>',
   presentacion: '<path d="M3 4h18M5 4v10h14V4M12 14v3M8 21l4-4 4 4M9 11V9M12 11V7M15 11V8"/>',
   sitio: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  fotos: '<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 8"/>',
   catalogo: '<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3M9 7h6M9 10.5h4"/>',
   whatsapp: '<path d="M4 20l1.3-3.9A8.5 8.5 0 1 1 8 19z"/><path d="M9 9.5c.3 2.3 2.2 4.2 4.5 4.5l1-1.3 2 1-1 2c-3.5.2-7.7-4-7.5-7.5l2-1 1 2z"/>',
   contacto: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
