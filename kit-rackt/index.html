@@ -551,12 +551,14 @@ const OPERAR = [    // Uso interno (fila fría con un solo cálido: Zoho One)
     url: 'https://accounts.zoho.com/signin?servicename=MarketingAutomation&serviceurl=https%3A%2F%2Fmarketingautomation.zoho.com%2F', interno: true, pronto: false,
     enlaces: [ { nombre: 'Automation', titulo: 'Zoho Marketing Automation', url: 'https://accounts.zoho.com/signin?servicename=MarketingAutomation&serviceurl=https%3A%2F%2Fmarketingautomation.zoho.com%2F' },
                { nombre: 'Campaigns', titulo: 'Zoho Campaigns', url: 'https://campaigns.zoho.com/' } ] },
-  { id: 'sign', nombre: 'Zoho Sign', color: '--grafito', color2: '#1a1919', tinte: '--grafito-t',
-    desc: 'Firma de remisiones y actas de obra.', host: 'sign.zoho.com',
-    url: 'https://accounts.zoho.com/signin?servicename=ZohoSign&serviceurl=https%3A%2F%2Fsign.zoho.com%2Fzs', interno: true, pronto: false },
-  { id: 'one', nombre: 'Zoho One', color: '--rojo', color2: '#7a0303', tinte: '--rojo-t',
-    desc: 'Todas las apps de Zoho en un lugar.', host: 'one.zoho.com',
-    url: 'https://one.zoho.com/zohoone/939350519/home', interno: true, pronto: false }
+  // 29/10/2026 (Martín): Almacén (para Ivette y el almacén) en lugar de Zoho Sign, y la carpeta Proyectos de WorkDrive en
+  // lugar de Zoho One (Sign se abre solo desde el negocio y Zoho One es solo el menú de apps).
+  { id: 'almacen', nombre: 'Almacén', color: '--grafito', color2: '#1a1919', tinte: '--grafito-t',
+    desc: 'Existencias, reposición y ajustes de la bodega.', host: 'Zoho Books',
+    url: 'https://books.zoho.com/app/939361246#/inventory/items', interno: true, pronto: false },
+  { id: 'proyectos', nombre: 'Proyectos', color: '--rojo', color2: '#7a0303', tinte: '--rojo-t',
+    desc: 'Carpeta de cada obra por folio: fotos y documentos.', host: 'Zoho WorkDrive',
+    url: 'https://workdrive.zoho.com/folder/f3bhd754126af0c7040c992b40cf106e76a70', interno: true, pronto: false }
 ];
 
 const FILAS = [
@@ -590,6 +592,8 @@ const ICO = {
   sign: '<path d="M14.5 4.5l5 5L9.5 19.5H4.5v-5z"/><path d="M12.5 6.5l5 5M4 21.5h16"/>',
   marketing: '<path d="M3 10.5v3a1 1 0 0 0 1 1h2.5L12 19V5L6.5 9.5H4a1 1 0 0 0-1 1z"/><path d="M15.5 9a4 4 0 0 1 0 6M18.5 6a8 8 0 0 1 0 12"/>',
   one: '<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>',
+  almacen: '<path d="M3 9.5L12 4l9 5.5V20H3z"/><path d="M7 20v-7h10v7M7 16h10"/>',
+  proyectos: '<path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v9.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5z"/><path d="M8 14h8"/>',
   // Interfaz
   _globo: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
   _flecha: '<path d="M7 17L17 7M8 7h9v9"/>',
