@@ -536,9 +536,12 @@ const CAPTAR = [    // Contacto y eventos
 ];
 
 const OPERAR = [    // Uso interno (fila fría con un solo cálido: Zoho One)
+  // Tarjeta DOBLE (29/10/2026, Martín): el CRM y la pestaña «Tablero RACK-T» (WebTab2). Sin sesión, Zoho pide entrar y regresa al tablero.
   { id: 'crm', nombre: 'Zoho CRM', color: '--marino', color2: '#00152f', tinte: '--marino-t',
-    desc: 'Clientes, tratos y seguimiento.', host: 'crm.zoho.com',
-    url: 'https://crm.zoho.com/crm/', interno: true, pronto: false },
+    desc: 'Clientes, tratos, seguimiento y tablero de dirección.', host: 'crm.zoho.com',
+    url: 'https://crm.zoho.com/crm/', interno: true, pronto: false,
+    enlaces: [ { nombre: 'CRM', titulo: 'Zoho CRM', url: 'https://crm.zoho.com/crm/' },
+               { nombre: 'Tablero', titulo: 'Tablero RACK-T (Zoho CRM)', url: 'https://crm.zoho.com/crm/org939354584/tab/WebTab2' } ] },
   { id: 'books', nombre: 'Zoho Books', color: '--petroleo', color2: '#0a4a4a', tinte: '--petroleo-t',
     desc: 'Facturas, pagos y cobranza.', host: 'books.zoho.com',
     url: 'https://books.zoho.com/app/939361246', interno: true, pronto: false },
