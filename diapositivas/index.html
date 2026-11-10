@@ -483,8 +483,10 @@ button { font: inherit; color: inherit; }
 .contacto .icono-caja { width: 64px; height: 64px; background: rgb(0 0 0 / .2); color: var(--color-texto); }
 .contacto .icono-caja svg { width: 32px; height: 32px; }
 .contacto a { color: inherit; text-decoration: none; }
-.qr { width: 220px; padding: 16px; background: var(--color-blanco); border-radius: var(--radio-sm); }
-.qr figcaption { font-size: 20px; color: var(--color-secundario); text-align: center; margin-top: 8px; }
+.d-cierre .accion { display: flex; align-items: center; gap: 56px; }
+.qr { flex: none; width: 240px; margin: 0; padding: 16px; background: var(--color-blanco); border-radius: var(--radio-sm); }
+.qr img { width: 100%; height: auto; }
+.qr figcaption { font-size: 20px; line-height: 1.25; color: var(--color-secundario); text-align: center; margin-top: 10px; }
 
 /* ==========================================================================
    5. INTERFAZ (progreso, contador, cuadrícula, notas) — no se imprime
@@ -615,7 +617,12 @@ button { font: inherit; color: inherit; }
   "_ayuda": "Edita este bloque y la TARJETA PARA COMPARTIR del <head>. Tipos: portada, seccion, texto, dos-columnas, cifras, tarjetas, comparativa, linea-tiempo, cita, imagen-completa, logos, cierre. Guía en COMO-USAR.md.",
   "marca": {
     "nombre": "RACK-T",
-    "eslogan": "Especialistas en optimización y manejo de materiales para almacenes"
+    "eslogan": "Especialistas en optimización y manejo de materiales para almacenes",
+    "utm": {
+      "source": "piezas-rackt",
+      "medium": "pieza-html",
+      "campaign": "diapositivas"
+    }
   },
   "diapositivas": [
     {
@@ -632,7 +639,7 @@ button { font: inherit; color: inherit; }
       "tipo": "seccion",
       "numero": 1,
       "titulo": "Quiénes somos",
-      "subtitulo": "Ingeniería, fabricación e instalación para almacenes y centros de distribución.",
+      "subtitulo": "Ingeniería, suministro e instalación para almacenes y centros de distribución.",
       "notas": "Separador de capítulo."
     },
     {
@@ -642,7 +649,7 @@ button { font: inherit; color: inherit; }
       "vinetas": [
         "Diseñamos soluciones que generan resultados medibles.",
         "Oficinas en Querétaro, Estado de México y Guadalajara, con cobertura nacional.",
-        "Capacidad instalada de 800 toneladas de producción por día.",
+        "5 años de garantía RACK-T en los productos de almacenamiento.",
         "Formamos parte de Grupo ERT."
       ],
       "notas": "Subrayar la venta consultiva: primero entendemos la operación."
@@ -650,14 +657,8 @@ button { font: inherit; color: inherit; }
     {
       "tipo": "cifras",
       "etiqueta": "RACK-T en números",
-      "titulo": "Capacidad para proyectos grandes y pequeños",
+      "titulo": "Respaldo para proyectos grandes y pequeños",
       "items": [
-        {
-          "valor": 800,
-          "sufijo": " t",
-          "etiqueta": "Producción por día",
-          "nota": "Capacidad instalada."
-        },
         {
           "valor": 3,
           "etiqueta": "Oficinas",
@@ -673,7 +674,13 @@ button { font: inherit; color: inherit; }
           "agrupar": false,
           "prefijo": "Desde ",
           "etiqueta": "Proyectos registrados",
-          "nota": "Manufactura, automotriz, retail y CEDIS."
+          "nota": "Manufactura, automotriz, retail y centros de distribución."
+        },
+        {
+          "valor": 5,
+          "sufijo": " años",
+          "etiqueta": "Garantía RACK-T",
+          "nota": "Material, mano de obra y manufactura."
         }
       ]
     },
@@ -703,9 +710,9 @@ button { font: inherit; color: inherit; }
           "texto": "Reubicaciones y mudanzas industriales."
         },
         {
-          "icono": "regla",
-          "titulo": "Peritaje",
-          "texto": "Estudio estructural de racks instalados."
+          "icono": "grafica",
+          "titulo": "Optimización",
+          "texto": "Consultoría para aprovechar mejor tu espacio."
         },
         {
           "icono": "casco",
@@ -785,7 +792,7 @@ button { font: inherit; color: inherit; }
       ],
       "vinetas": [
         "Ingeniería y layout",
-        "Fabricación en acero A50",
+        "Racks y accesorios en acero A50",
         "Instalación y verificación"
       ],
       "invertir": false,
@@ -811,8 +818,8 @@ button { font: inherit; color: inherit; }
           "texto": "Diseñamos el layout y la solución."
         },
         {
-          "titulo": "Fabricación",
-          "texto": "Producimos en acero A50."
+          "titulo": "Suministro",
+          "texto": "Racks y accesorios en acero A50."
         },
         {
           "titulo": "Instalación",
@@ -827,12 +834,12 @@ button { font: inherit; color: inherit; }
       "columnas": [
         {
           "nombre": "Suministro",
-          "descripcion": "Fabricamos y entregamos según tu diseño.",
-          "precio": "A la medida",
+          "descripcion": "Suministramos según tu diseño.",
           "puntos": [
-            "Fabricación en acero A50",
+            "Racks y accesorios en acero A50",
             "Accesorios de protección",
-            "Entrega en tu almacén"
+            "Entrega en tu almacén",
+            "5 años de garantía RACK-T"
           ]
         },
         {
@@ -840,25 +847,24 @@ button { font: inherit; color: inherit; }
           "destacado": true,
           "insignia": "El más completo",
           "descripcion": "Del diagnóstico a la entrega.",
-          "precio": "A la medida",
           "puntos": [
             "Diagnóstico e ingeniería",
-            "Fabricación e instalación",
-            "Entrega con acta firmada"
+            "Suministro e instalación",
+            "Entrega con acta firmada",
+            "5 años de garantía RACK-T"
           ]
         },
         {
           "nombre": "Servicio",
           "descripcion": "Cuidamos lo que ya tienes.",
-          "precio": "A la medida",
           "puntos": [
-            "Peritaje estructural",
+            "Optimización de espacios",
             "Reubicaciones",
             "Cursos DC3"
           ]
         }
       ],
-      "notas": "Todas las cotizaciones tienen vigencia de 30 días."
+      "notas": "Todas las cotizaciones tienen vigencia de 30 días. Suministro y llave en mano llevan 5 años de garantía RACK-T."
     },
     {
       "tipo": "casos",
@@ -964,15 +970,15 @@ button { font: inherit; color: inherit; }
           "logo": "assets/aliados/wilo.webp"
         }
       ],
-      "notas": "Más de 130 empresas nos han comprado desde 2019; aquí van doce de las más conocidas."
+      "notas": "Algunas de las empresas que nos han comprado desde 2019. No decir un total hasta medirlo en el MAESTRO."
     },
     {
       "tipo": "cierre",
       "titulo": "Platícanos de tu almacén",
       "texto": "Cuéntanos qué guardas, cuánto y en qué espacio. Te respondemos con una propuesta de solución.",
       "cta": {
-        "texto": "Solicita una cotización",
-        "enlace": "mailto:comercial@rackt.com.mx?subject=Solicitud%20de%20cotizaci%C3%B3n"
+        "texto": "Solicita tu propuesta",
+        "enlace": "https://www.rackt.com.mx/contacto"
       },
       "contacto": [
         {
@@ -995,7 +1001,12 @@ button { font: inherit; color: inherit; }
           "valor": "Terra Park Centenario, Nave 56, Querétaro"
         }
       ],
-      "notas": "Para mostrar un código QR: \"qr\": { \"src\": \"assets/img/qr.png\", \"alt\": \"Código QR a rackt.com.mx\", \"texto\": \"rackt.com.mx\" }."
+      "notas": "El QR lo genera «python _herramientas/preparar.py qr CARPETA»: apunta al formulario del sitio con las UTM de la pieza y utm_content=qr.",
+      "qr": {
+        "src": "assets/qr-contacto.svg",
+        "alt": "Código QR al formulario de contacto de RACK-T",
+        "texto": "Escanea y cuéntanos de tu almacén"
+      }
     }
   ]
 }
@@ -1043,6 +1054,18 @@ button { font: inherit; color: inherit; }
     if (!tiene(url)) return null;
     const s = String(url).trim();
     return /^(javascript|data|vbscript):/i.test(s) ? null : s;
+  }
+  // Medición: los enlaces a rackt.com.mx salen con las UTM de la pieza («marca.utm») y
+  // utm_content = lugar del botón, para que el prospecto entre al CRM con su origen.
+  function conUtm(href, lugar) {
+    const utm = (datos.marca && datos.marca.utm) || null;
+    if (!href || !utm || !/^https?:\/\/(www\.)?rackt\.com\.mx(\/|$|\?|#)/i.test(href)) return href;
+    let u;
+    try { u = new URL(href); } catch (e) { return href; }
+    if ([...u.searchParams.keys()].some((k) => k.startsWith('utm_'))) return href;
+    ['source', 'medium', 'campaign', 'term'].forEach((k) => { if (tiene(utm[k])) u.searchParams.set('utm_' + k, utm[k]); });
+    if (tiene(lugar)) u.searchParams.set('utm_content', lugar);
+    return u.toString();
   }
   const parrafos = (v, clase) => lista(v).map((t) => h('p', { class: clase, text: t }));
 
@@ -1276,19 +1299,21 @@ button { font: inherit; color: inherit; }
     },
     cierre(d) {
       const contactos = lista(d.contacto).filter((c) => tiene(c.valor));
-      const cta = d.cta && tiene(d.cta.texto) ? anim(h('a', { class: 'boton', href: enlaceSeguro(d.cta.enlace), target: /^https?:/i.test(d.cta.enlace || '') ? '_blank' : null, rel: 'noopener' }, d.cta.texto, icono('flecha'))) : null;
+      const ctaHref = conUtm(enlaceSeguro(d.cta && d.cta.enlace), 'cierre');
+      const cta = d.cta && tiene(d.cta.texto) ? anim(h('a', { class: 'boton', href: ctaHref, target: /^https?:/i.test(ctaHref || '') ? '_blank' : null, rel: 'noopener' }, d.cta.texto, icono('flecha'))) : null;
+      // El QR lo genera «preparar.py qr» con la misma dirección y utm_content=qr: así se sabe
+      // cuántos prospectos llegan escaneando la presentación.
       const qr = d.qr && tiene(d.qr.src) ? anim(h('figure', { class: 'qr' }, h('img', { src: d.qr.src, alt: d.qr.alt || 'Código QR' }), tiene(d.qr.texto) ? h('figcaption', { text: d.qr.texto }) : null)) : null;
       return { fondo: 'primario', esquina: false, nodos: [
         h('div', { class: 'texto' },
           tiene(d.titulo) ? anim(h('h2', {}, tituloConResaltado(d.titulo, d.resaltado))) : null,
           tiene(d.texto) ? anim(h('p', { class: 'mensaje', text: d.texto })) : null,
-          cta ? h('div', {}, cta) : null),
+          (cta || qr) ? h('div', { class: 'accion' }, cta, qr) : null),
         h('div', { class: 'lado' },
           anim(decorativo(logo('tpl-logo', 'logo-cierre'))),
           contactos.length ? h('address', {}, h('ul', { class: 'contacto' }, contactos.map((c) => anim(h('li', {},
             h('span', { class: 'icono-caja' }, icono(c.tipo || 'sitio')),
-            tiene(c.enlace) ? h('a', { href: enlaceSeguro(c.enlace), text: c.valor }) : h('span', { text: c.valor })))))) : null,
-          qr)] };
+            tiene(c.enlace) ? h('a', { href: conUtm(enlaceSeguro(c.enlace), 'contacto-' + (c.tipo || 'sitio')), text: c.valor }) : h('span', { text: c.valor })))))) : null)] };
     }
   };
 

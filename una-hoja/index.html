@@ -672,6 +672,115 @@ button { font: inherit; color: inherit; }
 .volver-arriba:hover { background: var(--color-primario); border-color: var(--color-primario); }
 .volver-arriba svg { width: 22px; height: 22px; }
 
+/* --- 4.16 Aviso: franja delgada sobre el encabezado (campañas con fecha) --- */
+.aviso {
+  position: fixed; inset: 0 0 auto 0; z-index: 51; height: var(--alto-aviso, 0px);
+  display: flex; align-items: center; justify-content: center; gap: var(--espacio-3);
+  padding-inline: var(--margen-lateral);
+  background: var(--color-primario); color: var(--color-sobre-primario);
+  font-size: var(--texto-sm); font-weight: 500; text-align: center;
+  --color-foco: var(--color-blanco);
+}
+.aviso a { color: inherit; font-weight: 600; text-underline-offset: 3px; }
+.aviso p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+html.con-aviso { --alto-aviso: 40px; scroll-padding-top: calc(var(--alto-encabezado) + var(--alto-aviso) + 16px); }
+html.con-aviso .encabezado { top: var(--alto-aviso); }
+html.con-aviso .hero { padding-top: calc(var(--alto-encabezado) + var(--alto-aviso) + var(--espacio-12)); }
+html.con-aviso .riel { top: calc(var(--alto-encabezado) + var(--alto-aviso) + 32px); }
+@media (max-width: 1319px) { html.con-aviso .riel { top: calc(var(--alto-encabezado) + var(--alto-aviso)); } }
+
+/* --- 4.17 Barra de acciones en celular: el contacto siempre a un toque --- */
+.barra-movil {
+  position: fixed; inset: auto 0 0 0; z-index: 46;
+  display: none; gap: var(--espacio-2);
+  padding: var(--espacio-2) var(--espacio-3) calc(var(--espacio-2) + env(safe-area-inset-bottom, 0px));
+  background: var(--color-oscuro); border-top: 1px solid rgb(255 255 255 / .1);
+  box-shadow: 0 -8px 24px rgb(0 0 0 / .18);
+  transform: translateY(110%); transition: transform var(--duracion-media) var(--curva);
+  --color-foco: var(--color-neutro);
+}
+.barra-movil .boton { flex: 1 1 0; min-height: 48px; padding-inline: 12px; font-size: var(--texto-xs); }
+.barra-movil .boton--secundario { color: var(--color-sobre-oscuro); }
+.barra-movil .boton svg { width: 18px; height: 18px; }
+.barra-movil.visible { transform: none; }
+@media (max-width: 959px) {
+  .barra-movil { display: flex; }
+  html.con-barra .volver-arriba { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+  html.con-barra .pie { padding-bottom: calc(var(--espacio-8) + 72px); }
+}
+
+/* --- 4.18 Puntos de confianza bajo los botones (garantía, vigencia, cobertura) --- */
+.puntos { list-style: none; margin: var(--espacio-6) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--espacio-3) var(--espacio-6); }
+.puntos li { display: inline-flex; align-items: center; gap: var(--espacio-2); font-size: var(--texto-sm); color: var(--color-texto-suave); }
+.puntos svg { width: 18px; height: 18px; flex: none; color: var(--color-primario); }
+.bloque-oscuro .puntos svg, .bloque-primario .puntos svg { color: var(--color-texto); }
+
+/* --- 4.19 Franja de confianza: pocos logos, quietos, justo después del hero --- */
+.confianza { padding-block: var(--espacio-8); background: var(--color-fondo); border-bottom: 1px solid var(--color-borde); }
+.confianza .contenedor { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espacio-6) var(--espacio-12); }
+.confianza-texto { flex: 0 1 220px; font-size: var(--texto-xs); font-weight: 600; letter-spacing: var(--tracking-etiquetas); text-transform: uppercase; color: var(--color-texto-suave); line-height: 1.5; }
+.confianza ul { flex: 1 1 520px; list-style: none; margin: 0; padding: 0; display: grid; gap: var(--espacio-6); grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); align-items: center; }
+.confianza li { display: grid; place-items: center; height: 48px; }
+.confianza img { max-height: 40px; max-width: 120px; width: auto; object-fit: contain; filter: grayscale(1); opacity: .7; transition: filter var(--duracion-corta) var(--curva), opacity var(--duracion-corta) var(--curva); }
+.confianza li:hover img { filter: none; opacity: 1; }
+[data-theme="dark"] .confianza img { background: var(--color-neutro-claro); padding: 6px 10px; border-radius: var(--radio-sm); box-sizing: content-box; opacity: .9; }
+.confianza .aliado-nombre { font-size: 1.4rem; }
+
+/* --- 4.20 Servicios en rejilla «bento»: una tarjeta protagonista y la rejilla cierra sin huecos --- */
+.rejilla--bento { grid-template-columns: repeat(4, 1fr); }
+.rejilla--bento > .tarjeta { grid-column: span var(--c4, 1); }
+.rejilla--bento > .tarjeta--grande { grid-row: span 2; }
+.tarjeta--grande h3 { font-size: var(--texto-3xl); }
+.tarjeta--grande p { font-size: var(--texto-lg); }
+.tarjeta--grande.tarjeta--foto .tarjeta-foto { aspect-ratio: auto; flex: 1; min-height: 260px; }
+.tarjeta--grande.tarjeta--foto { display: flex; flex-direction: column; }
+/* La tarjeta que se estira a lo ancho pone la foto a un lado */
+@media (min-width: 960px) {
+  .tarjeta--ancha.tarjeta--foto {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 1fr auto auto 1fr;
+    column-gap: var(--espacio-8); row-gap: var(--espacio-3); padding: 0 var(--espacio-8) 0 0; align-items: start;
+  }
+  .tarjeta--ancha.tarjeta--foto .tarjeta-foto { grid-column: 1; grid-row: 1 / -1; margin: 0; height: 100%; min-height: 240px; aspect-ratio: auto; border-radius: var(--radio) 0 0 var(--radio); }
+  .tarjeta--ancha.tarjeta--foto > :not(.tarjeta-foto) { grid-column: 2; }
+  .tarjeta--ancha.tarjeta--foto .icono-caja { grid-row: 1; align-self: end; margin-top: var(--espacio-8); box-shadow: none; }
+  .tarjeta--ancha.tarjeta--foto h3 { grid-row: 2; }
+  .tarjeta--ancha.tarjeta--foto > p { grid-row: 3; padding-bottom: var(--espacio-8); }
+}
+@media (max-width: 959px) {
+  .rejilla--bento { grid-template-columns: repeat(2, 1fr); }
+  .rejilla--bento > .tarjeta { grid-column: span var(--c2, 1); }
+  .rejilla--bento > .tarjeta--grande { grid-row: auto; }
+}
+@media (max-width: 639px) {
+  .rejilla--bento { grid-template-columns: 1fr; }
+  .rejilla--bento > .tarjeta { grid-column: auto; }
+}
+
+/* --- 4.21 Casos con foto, reto y resultado (cuando el expediente da los datos) --- */
+.casos--ricos { grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+.caso .foto { margin: calc(-1 * var(--espacio-6)) calc(-1 * var(--espacio-6)) 0; aspect-ratio: 16 / 9; border-radius: 0; }
+.caso-datos { display: flex; flex-wrap: wrap; gap: var(--espacio-4) var(--espacio-8); margin-top: var(--espacio-2); padding-top: var(--espacio-4); border-top: 1px solid var(--color-borde); }
+.caso-dato { display: grid; }
+.caso-dato strong { font-family: var(--fuente-titulos); font-weight: 400; font-size: 2rem; line-height: 1; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.caso-dato span { font-size: var(--texto-xs); color: var(--color-texto-suave); }
+.caso dl { margin: 0; display: grid; gap: var(--espacio-2); }
+.caso dt { font-size: var(--texto-xs); font-weight: 600; letter-spacing: var(--tracking-etiquetas); text-transform: uppercase; color: var(--color-texto-suave); }
+.caso dd { margin: 0 0 var(--espacio-2); }
+
+/* --- 4.22 Muro de logos sin movimiento: tope de logos y cierre «y N más» --- */
+.aliados-mas { margin-top: var(--espacio-6); text-align: center; font-size: var(--texto-sm); color: var(--color-texto-suave); }
+.aliados-estatico .aliado::after { display: none; }
+.aliados-estatico .aliado { padding: 0; }
+.aliados-estatico .grupo-aliados { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--espacio-6) var(--espacio-8); justify-items: center; align-items: center; }
+.aliados-estatico .aliado img { max-width: 100%; }
+@media (max-width: 959px) { .aliados-estatico .grupo-aliados { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.aliados-estatico .marquesina { -webkit-mask: none; mask: none; }
+.aliados-estatico .pista { width: auto; display: block; animation: none !important; }
+.aliados-estatico .grupo-aliados[aria-hidden="true"] { display: none; }
+.aliados-estatico .marquesina { width: min(100% - 2 * var(--margen-lateral), var(--ancho-max)); margin-inline: auto; }
+.aliados-estatico .aliado--extra { display: none; }
+.aliados:not(.aliados-estatico) .aliados-mas { display: none; }
+
 /* ==========================================================================
    5. ANIMACIÓN DE APARICIÓN — solo si el sistema permite movimiento (.animar)
    ========================================================================== */
@@ -704,7 +813,11 @@ button { font: inherit; color: inherit; }
   body { font-size: 11pt; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .revelar, .ilustracion .ilus-viga, .ilustracion .ilus-bulto { opacity: 1 !important; transform: none !important; }
-  .riel, .volver-arriba, .saltar, .menu, .menu-boton, .boton-tema, .acciones-encabezado { display: none !important; }
+  .riel, .volver-arriba, .saltar, .menu, .menu-boton, .boton-tema, .acciones-encabezado, .barra-movil, .aviso { display: none !important; }
+  html.con-aviso .encabezado { top: 0; }
+  .rejilla.rejilla--bento { grid-template-columns: repeat(4, 1fr); }
+  .rejilla--bento > .tarjeta { grid-column: span var(--c4, 1); }
+  .confianza { padding-block: 12px; }
   .encabezado { position: static; background: var(--color-oscuro); height: auto; padding-block: 12px; box-shadow: none; }
   .hero { min-height: 0; padding-block: var(--espacio-12); }
   .seccion { padding-block: var(--espacio-12); }
@@ -771,19 +884,36 @@ button { font: inherit; color: inherit; }
      ========================================================================== -->
 <script id="contenido" type="application/json">
 {
-  "_ayuda": "Edita este bloque y la TARJETA PARA COMPARTIR del <head>. Esquema y ejemplos en COMO-USAR.md.",
+  "_ayuda": "Edita este bloque y la TARJETA PARA COMPARTIR del <head>. Esquema y ejemplos en COMO-USAR.md. marca.utm.campaign = nombre corto de la pieza (lo pone «preparar.py nueva»).",
   "marca": {
     "nombre": "RACK-T",
     "eslogan": "Especialistas en optimización y manejo de materiales para almacenes",
-    "sitio": "https://rackt.com.mx"
+    "sitio": "https://rackt.com.mx",
+    "utm": {
+      "source": "piezas-rackt",
+      "medium": "pieza-html",
+      "campaign": "una-hoja"
+    }
   },
   "secciones": [
     {
       "tipo": "encabezado",
       "cta": {
-        "texto": "Solicita una cotización",
-        "enlace": "mailto:comercial@rackt.com.mx?subject=Solicitud%20de%20cotizaci%C3%B3n"
-      }
+        "texto": "Solicita tu propuesta",
+        "enlace": "https://www.rackt.com.mx/contacto"
+      },
+      "barra_movil": [
+        {
+          "texto": "Llamar",
+          "enlace": "tel:+524424917676",
+          "icono": "telefono"
+        },
+        {
+          "texto": "Solicita tu propuesta",
+          "enlace": "https://www.rackt.com.mx/contacto",
+          "principal": true
+        }
+      ]
     },
     {
       "tipo": "hero",
@@ -793,11 +923,11 @@ button { font: inherit; color: inherit; }
       "resaltado": "a la medida",
       "subtitulo": "No vendemos productos: diseñamos soluciones que generan resultados medibles. Racks, mezzanines y servicio de principio a fin, con cobertura nacional.",
       "cta_primario": {
-        "texto": "Solicita una cotización",
-        "enlace": "mailto:comercial@rackt.com.mx?subject=Solicitud%20de%20cotizaci%C3%B3n"
+        "texto": "Cuéntanos de tu almacén",
+        "enlace": "https://www.rackt.com.mx/contacto"
       },
       "cta_secundario": {
-        "texto": "Conoce nuestros proyectos",
+        "texto": "Ver proyectos instalados",
         "enlace": "#proyectos"
       },
       "imagen": {
@@ -805,20 +935,49 @@ button { font: inherit; color: inherit; }
         "chica": "assets/img/selectivo-20-640.webp",
         "ancho": 1280,
         "alt": "Pasillo de rack selectivo con protectores amarillos en una nave recién instalada"
-      }
+      },
+      "puntos": [
+        "5 años de garantía RACK-T",
+        "Cotización vigente 30 días",
+        "Cobertura nacional"
+      ]
+    },
+    {
+      "tipo": "confianza",
+      "texto": "Han confiado en nosotros",
+      "items": [
+        {
+          "nombre": "Schneider Electric",
+          "logo": "assets/aliados/schneider-electric.webp"
+        },
+        {
+          "nombre": "Martinrea",
+          "logo": "assets/aliados/martinrea.webp"
+        },
+        {
+          "nombre": "SAF-HOLLAND",
+          "logo": "assets/aliados/saf-holland.webp"
+        },
+        {
+          "nombre": "BorgWarner",
+          "logo": "assets/aliados/borgwarner.webp"
+        },
+        {
+          "nombre": "ZEISS",
+          "logo": "assets/aliados/zeiss.webp"
+        },
+        {
+          "nombre": "GEODIS",
+          "logo": "assets/aliados/geodis.webp"
+        }
+      ]
     },
     {
       "tipo": "cifras",
       "ancla": "cifras",
       "etiqueta": "RACK-T en números",
-      "titulo": "Capacidad para proyectos grandes y pequeños",
+      "titulo": "Respaldo para proyectos grandes y pequeños",
       "items": [
-        {
-          "valor": 800,
-          "sufijo": " t",
-          "etiqueta": "Capacidad de producción por día",
-          "nota": "Toneladas de capacidad instalada."
-        },
         {
           "valor": 3,
           "etiqueta": "Oficinas",
@@ -835,6 +994,12 @@ button { font: inherit; color: inherit; }
           "prefijo": "Desde ",
           "etiqueta": "Proyectos registrados",
           "nota": "Manufactura, automotriz, retail y centros de distribución."
+        },
+        {
+          "valor": 5,
+          "sufijo": " años",
+          "etiqueta": "De garantía RACK-T",
+          "nota": "En material, mano de obra y manufactura de nuestros productos de almacenamiento."
         }
       ]
     },
@@ -844,7 +1009,7 @@ button { font: inherit; color: inherit; }
       "menu": "Servicios",
       "etiqueta": "Qué hacemos",
       "titulo": "Soluciones completas para tu almacén",
-      "intro": "Desde un rack selectivo hasta un proyecto integral: te acompañamos con ingeniería, fabricación e instalación.",
+      "intro": "Desde un rack selectivo hasta un proyecto integral: te acompañamos con ingeniería, suministro e instalación.",
       "items": [
         {
           "icono": "rack",
@@ -891,9 +1056,9 @@ button { font: inherit; color: inherit; }
           }
         },
         {
-          "icono": "regla",
-          "titulo": "Peritaje estructural",
-          "texto": "Estudio estructural de racks para saber en qué estado está tu instalación.",
+          "icono": "grafica",
+          "titulo": "Optimización de espacios",
+          "texto": "Consultoría para sacar más posiciones del espacio que ya tienes.",
           "imagen": {
             "src": "assets/img/selectivo-18.webp",
             "chica": "assets/img/selectivo-18-640.webp",
@@ -912,7 +1077,8 @@ button { font: inherit; color: inherit; }
             "alt": "Técnicos con equipo de seguridad armando un rack"
           }
         }
-      ]
+      ],
+      "disposicion": "bento"
     },
     {
       "tipo": "pasos",
@@ -930,8 +1096,8 @@ button { font: inherit; color: inherit; }
           "texto": "Diseñamos el layout y la solución que da resultados medibles."
         },
         {
-          "titulo": "Fabricación",
-          "texto": "Producimos en acero A50 con capacidad de 800 toneladas por día."
+          "titulo": "Suministro",
+          "texto": "Racks y accesorios en acero A50, entregados en tu almacén."
         },
         {
           "titulo": "Instalación",
@@ -945,7 +1111,7 @@ button { font: inherit; color: inherit; }
       "menu": "Proyectos",
       "etiqueta": "Proyectos instalados",
       "titulo": "Lo que ya está trabajando en otros almacenes",
-      "intro": "Sistemas que fabricamos e instalamos en México.",
+      "intro": "Sistemas que diseñamos, suministramos e instalamos en México.",
       "items": [
         {
           "titulo": "Cantilever",
@@ -1032,17 +1198,16 @@ button { font: inherit; color: inherit; }
       "items": [
         {
           "nombre": "Suministro",
-          "descripcion": "Fabricamos y entregamos racks y accesorios según tu diseño.",
-          "precio": "A la medida",
-          "nota_precio": "Cotización con vigencia de 30 días.",
+          "descripcion": "Suministramos racks y accesorios según tu diseño.",
+          "nota_precio": "5 años de garantía RACK-T · cotización vigente 30 días.",
           "incluye": [
-            "Fabricación en acero A50",
+            "Racks y accesorios en acero A50",
             "Accesorios de protección",
             "Entrega en tu almacén"
           ],
           "cta": {
-            "texto": "Solicita una cotización",
-            "enlace": "mailto:comercial@rackt.com.mx"
+            "texto": "Cotizar suministro",
+            "enlace": "https://www.rackt.com.mx/contacto"
           }
         },
         {
@@ -1050,32 +1215,30 @@ button { font: inherit; color: inherit; }
           "destacado": true,
           "insignia": "El más completo",
           "descripcion": "Nos hacemos cargo de todo, del diagnóstico a la entrega.",
-          "precio": "A la medida",
-          "nota_precio": "Cotización con vigencia de 30 días.",
+          "nota_precio": "5 años de garantía RACK-T · cotización vigente 30 días.",
           "incluye": [
             "Diagnóstico del espacio",
             "Ingeniería y layout",
-            "Fabricación e instalación",
+            "Suministro e instalación",
             "Entrega con acta firmada"
           ],
           "cta": {
-            "texto": "Solicita una cotización",
-            "enlace": "mailto:comercial@rackt.com.mx"
+            "texto": "Cotizar llave en mano",
+            "enlace": "https://www.rackt.com.mx/contacto"
           }
         },
         {
           "nombre": "Servicio y mantenimiento",
           "descripcion": "Cuidamos lo que ya tienes instalado.",
-          "precio": "A la medida",
-          "nota_precio": "Cotización con vigencia de 30 días.",
+          "nota_precio": "Cotización vigente 30 días.",
           "incluye": [
-            "Peritaje estructural",
+            "Optimización de espacios",
             "Reubicaciones",
             "Cursos DC3 de seguridad"
           ],
           "cta": {
-            "texto": "Solicita una cotización",
-            "enlace": "mailto:comercial@rackt.com.mx"
+            "texto": "Cotizar servicio",
+            "enlace": "https://www.rackt.com.mx/contacto"
           }
         }
       ]
@@ -1122,7 +1285,7 @@ button { font: inherit; color: inherit; }
     {
       "tipo": "aliados",
       "titulo": "Empresas que han confiado en nosotros",
-      "intro": "Algunas de las más de 130 empresas que nos han comprado desde 2019.",
+      "intro": "Algunas de las empresas que nos han comprado desde 2019.",
       "velocidad": 200,
       "items": [
         {
@@ -1445,7 +1608,8 @@ button { font: inherit; color: inherit; }
           "nombre": "Y&L Pet Manufacturing",
           "logo": "assets/aliados/yl-pet.webp"
         }
-      ]
+      ],
+      "tope": 12
     },
     {
       "tipo": "preguntas",
@@ -1460,11 +1624,15 @@ button { font: inherit; color: inherit; }
         },
         {
           "pregunta": "¿Qué incluye un proyecto llave en mano?",
-          "respuesta": "Diagnóstico del espacio, ingeniería y layout, fabricación, instalación y entrega con acta firmada."
+          "respuesta": "Diagnóstico del espacio, ingeniería y layout, suministro, instalación y entrega con acta firmada."
         },
         {
           "pregunta": "¿Qué acero utilizan?",
           "respuesta": "Acero A50, con resistencia de 50,000 lb/pulg²."
+        },
+        {
+          "pregunta": "¿Qué garantía tienen sus productos?",
+          "respuesta": "5 años de garantía RACK-T contra defectos de material, mano de obra y manufactura, a partir de la entrega de los materiales."
         },
         {
           "pregunta": "¿Cuánto tiempo es válida una cotización?",
@@ -1472,10 +1640,11 @@ button { font: inherit; color: inherit; }
         },
         {
           "pregunta": "¿Dan capacitación en seguridad?",
-          "respuesta": [
-            "Sí. Impartimos cursos DC3 de seguridad.",
-            "También hacemos peritajes estructurales de racks para revisar instalaciones existentes."
-          ]
+          "respuesta": "Sí. Impartimos cursos DC3 de seguridad para operar y mantener tu almacén."
+        },
+        {
+          "pregunta": "¿Cómo pido una propuesta?",
+          "respuesta": "Llena el formulario de contacto: cuéntanos qué guardas, cuánto y en qué espacio. Con eso preparamos una propuesta a la medida."
         }
       ]
     },
@@ -1487,8 +1656,8 @@ button { font: inherit; color: inherit; }
       "titulo": "Platícanos de tu almacén",
       "texto": "Cuéntanos qué guardas, cuánto y en qué espacio. Te respondemos con una propuesta de solución.",
       "cta_primario": {
-        "texto": "Solicita una cotización",
-        "enlace": "mailto:comercial@rackt.com.mx?subject=Solicitud%20de%20cotizaci%C3%B3n"
+        "texto": "Solicita tu propuesta",
+        "enlace": "https://www.rackt.com.mx/contacto"
       },
       "contacto": [
         {
@@ -1510,6 +1679,10 @@ button { font: inherit; color: inherit; }
           "tipo": "ubicacion",
           "valor": "Terra Park Centenario, Nave 56, Querétaro, Qro."
         }
+      ],
+      "puntos": [
+        "5 años de garantía RACK-T",
+        "Cotización vigente 30 días"
       ]
     },
     {
@@ -1588,10 +1761,41 @@ button { font: inherit; color: inherit; }
     const s = String(url).trim();
     return /^(javascript|data|vbscript):/i.test(s) ? null : s;
   }
-  function atributosEnlace(url) {
-    const href = enlaceSeguro(url);
+  function atributosEnlace(url, lugar) {
+    const href = conUtm(enlaceSeguro(url), lugar);
     const externo = href && /^https?:\/\//i.test(href);
     return { href, target: externo ? '_blank' : null, rel: externo ? 'noopener' : null };
+  }
+
+  // Medición: todo enlace a rackt.com.mx sale con las UTM de la pieza («marca.utm» del JSON) y con
+  // utm_content = el lugar del botón (hero, encabezado, plan-2, barra…). El formulario del sitio las
+  // lee y el prospecto entra al CRM con su origen. Si el enlace ya trae UTM, se respeta.
+  function conUtm(href, lugar) {
+    const utm = (datos.marca && datos.marca.utm) || null;
+    if (!href || !utm || !/^https?:\/\/(www\.)?rackt\.com\.mx(\/|$|\?|#)/i.test(href)) return href;
+    let u;
+    try { u = new URL(href); } catch (e) { return href; }
+    if ([...u.searchParams.keys()].some((k) => k.startsWith('utm_'))) return href;
+    ['source', 'medium', 'campaign', 'term'].forEach((k) => { if (tiene(utm[k])) u.searchParams.set('utm_' + k, utm[k]); });
+    if (tiene(lugar) || tiene(utm.content)) u.searchParams.set('utm_content', lugar || utm.content);
+    return u.toString();
+  }
+
+  // Rejilla que cierra sin huecos: la primera pieza va grande (2 × 2) y las últimas se estiran
+  // según sobren celdas a 4 columnas y a 2. La usan la galería y los servicios en «bento».
+  function tramos(n, primeraGrande) {
+    const g = primeraGrande && n > 1;
+    const resto4 = ((g ? 4 : 1) + (n - 1)) % 4, resto2 = g ? (n - 1) % 2 : n % 2;
+    return Array.from({ length: n }, (_, i) => {
+      let c4 = 1, c2 = 1;
+      if (i === 0 && g) { c4 = 2; c2 = 2; }
+      const ultimo = i === n - 1, penultimo = i === n - 2, libre = !(i === 0 && g);
+      if (resto4 === 1 && ultimo && libre) c4 = 4;
+      if (resto4 === 2 && (ultimo || penultimo) && libre) c4 = 2;
+      if (resto4 === 3 && ultimo && libre) c4 = 2;
+      if (resto2 === 1 && ultimo && libre) c2 = 2;
+      return { c4, c2, grande: i === 0 && g };
+    });
   }
 
   // Párrafos: acepta texto o arreglo de textos.
@@ -1642,11 +1846,18 @@ button { font: inherit; color: inherit; }
     return svg;
   }
 
-  function boton(cta, variante, conFlecha) {
+  // lugar = dónde está el botón; viaja como utm_content para saber qué botón trae prospectos.
+  function boton(cta, variante, conFlecha, lugar) {
     if (!cta || !tiene(cta.texto)) return null;
-    const a = atributosEnlace(cta.enlace);
-    return h('a', { class: 'boton boton--' + variante, ...a }, cta.texto, conFlecha ? icono('flecha') : null);
+    const a = atributosEnlace(cta.enlace, cta.lugar || lugar);
+    return h('a', { class: 'boton boton--' + variante, ...a },
+      tiene(cta.icono) ? icono(cta.icono) : null, cta.texto, conFlecha ? icono('flecha') : null);
   }
+
+  // Puntos de confianza: lista corta con palomita (garantía, vigencia, cobertura).
+  const puntos = (v, clase) => lista(v).length
+    ? h('ul', { class: 'puntos ' + (clase || '') }, lista(v).map((t) => h('li', {}, icono('check'), h('span', { text: t }))))
+    : null;
 
   // Foto con versión chica opcional ("chica": miniatura de 640 px): el navegador elige la que
   // le toca según el ancho en pantalla, así el celular no baja la de 1920 px.
@@ -1762,7 +1973,7 @@ button { font: inherit; color: inherit; }
           anclas.length ? h('nav', { class: 'menu', id: menuId, 'aria-label': 'Principal' },
             h('ul', {}, anclas.map((x) => h('li', {}, h('a', { class: 'enlace', href: '#' + x.ancla, text: x.menu }))))) : null,
           h('div', { class: 'acciones-encabezado' },
-            boton(s.cta, 'primario boton--chico', false),
+            boton(s.cta, 'primario boton--chico', false, 'encabezado'),
             botonTema,
             anclas.length ? botonMenu : null)));
 
@@ -1771,10 +1982,34 @@ button { font: inherit; color: inherit; }
         botonMenu.setAttribute('aria-expanded', String(abierto));
         botonMenu.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
         botonMenu.replaceChildren(icono(abierto ? 'cerrar' : 'menu'));
+        document.documentElement.style.overflow = abierto ? 'hidden' : '';   // la página no se mueve detrás del menú
+        if (abierto) header.querySelector('.menu a')?.focus();
       });
       header.addEventListener('click', (e) => {
         if (e.target.closest('.menu a') && header.classList.contains('abierto')) botonMenu.click();
       });
+      document.addEventListener('click', (e) => {                       // tocar fuera cierra el menú
+        if (header.classList.contains('abierto') && !header.contains(e.target)) botonMenu.click();
+      });
+
+      // Aviso opcional sobre el encabezado: { texto, enlace?, texto_enlace?, hasta: "AAAA-MM-DD" }.
+      // Después de «hasta» deja de mostrarse solo, para que una campaña vencida no se quede publicada.
+      const av = s.aviso;
+      const vigente = av && tiene(av.texto) && (!tiene(av.hasta) || new Date() <= new Date(av.hasta + 'T23:59:59'));
+      if (vigente) {
+        const a = atributosEnlace(av.enlace, 'aviso');
+        s._aviso = h('div', { class: 'aviso', role: 'region', 'aria-label': 'Aviso' },
+          h('p', {}, av.texto, a.href ? ' ' : null, a.href ? h('a', { ...a, text: av.texto_enlace || 'Ver más' }) : null));
+        document.documentElement.classList.add('con-aviso');
+      }
+
+      // Barra de acciones en celular (máximo 3 botones): { texto, enlace, icono?, principal? }
+      const acciones = lista(s.barra_movil).filter((b) => tiene(b.texto) && tiene(b.enlace)).slice(0, 3);
+      if (acciones.length) {
+        s._barra = h('nav', { class: 'barra-movil', 'aria-label': 'Acciones rápidas' },
+          acciones.map((b) => boton(b, b.principal ? 'primario' : 'secundario', false, 'barra-movil')));
+        document.documentElement.classList.add('con-barra');
+      }
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && header.classList.contains('abierto')) { botonMenu.click(); botonMenu.focus(); }
       });
@@ -1793,7 +2028,8 @@ button { font: inherit; color: inherit; }
         tiene(s.titulo) ? h('h1', { class: 'revelar', style: '--i:1' }, tituloConResaltado(s.titulo, s.resaltado)) : null,
         tiene(s.subtitulo) ? h('p', { class: 'subtitulo revelar', style: '--i:2', text: s.subtitulo }) : null,
         (s.cta_primario || s.cta_secundario) ? h('div', { class: 'botones revelar', style: '--i:3' },
-          boton(s.cta_primario, 'primario', true), boton(s.cta_secundario, 'secundario', false)) : null);
+          boton(s.cta_primario, 'primario', true, 'hero'), boton(s.cta_secundario, 'secundario', false, 'hero-2')) : null,
+        lista(s.puntos).length ? h('div', { class: 'revelar', style: '--i:4' }, puntos(s.puntos)) : null);
       return h('section', { class: 'hero bloque-oscuro', id: enlaceSeguro(s.ancla), 'aria-label': 'Presentación' },
         h('div', { class: 'contenedor' }, texto, visual ? h('div', { class: 'hero-visual' }, visual) : null));
     },
@@ -1821,16 +2057,35 @@ button { font: inherit; color: inherit; }
       const items = lista(s.items);
       if (!items.length) return null;
       const cab = cabeza(s);
-      const nodos = items.map((b) => {
-        const foto = imagen(b.imagen, 'tarjeta-foto', { sizes: '(min-width: 1200px) 290px, (min-width: 640px) 45vw, 100vw' });
-        return h('article', { class: 'tarjeta' + (foto ? ' tarjeta--foto' : '') },
+      // «disposicion»: "bento" (por omisión) = la primera tarjeta protagonista si trae foto y la rejilla
+      // cierra sin huecos; "rejilla" = todas iguales.
+      const bento = s.disposicion !== 'rejilla' && items.length >= 3;
+      const acomodo = bento ? tramos(items.length, !!(items[0].imagen && items[0].imagen.src)) : [];
+      const nodos = items.map((b, i) => {
+        const t = acomodo[i] || {};
+        const foto = imagen(b.imagen, 'tarjeta-foto', { sizes: t.grande ? '(min-width: 960px) 600px, 100vw' : '(min-width: 1200px) 290px, (min-width: 640px) 45vw, 100vw' });
+        const ancha = bento && !t.grande && t.c4 >= 2 && foto;
+        return h('article', {
+            class: 'tarjeta' + (foto ? ' tarjeta--foto' : '') + (t.grande ? ' tarjeta--grande' : '') + (ancha ? ' tarjeta--ancha' : ''),
+            style: bento ? '--c4:' + t.c4 + ';--c2:' + t.c2 : null },
           foto,
           h('div', { class: 'icono-caja' }, icono(b.icono || 'rack')),
           tiene(b.titulo) ? h('h3', { text: b.titulo }) : null,
           parrafos(b.texto));
       });
       escalonar(nodos);
-      return seccion(s, '', cab, h('div', { class: 'rejilla' }, nodos));
+      return seccion(s, '', cab, h('div', { class: 'rejilla' + (bento ? ' rejilla--bento' : '') }, nodos));
+    },
+
+    // Franja de confianza: pocos logos quietos justo después del hero. { texto, items: [{nombre, logo}] }
+    confianza(s) {
+      const items = lista(s.items).filter((a) => tiene(a.nombre) || tiene(a.logo)).slice(0, 8);
+      if (!items.length) return null;
+      return h('section', { class: 'confianza', 'aria-label': s.texto || 'Clientes' },
+        h('div', { class: 'contenedor' },
+          tiene(s.texto) ? h('p', { class: 'confianza-texto', text: s.texto }) : null,
+          h('ul', {}, items.map((a) => h('li', {},
+            tiene(a.logo) ? h('img', { src: a.logo, alt: a.nombre || '', loading: 'lazy' }) : h('span', { class: 'aliado-nombre', text: a.nombre }))))));
     },
 
     // Galería de proyectos: la primera foto va grande (2 × 2) y la última se estira lo necesario
@@ -1839,19 +2094,10 @@ button { font: inherit; color: inherit; }
       const items = lista(s.items).filter((g) => g.imagen && tiene(g.imagen.src));
       if (!items.length) return null;
       const cab = cabeza(s);
-      const n = items.length;
-      const celdas4 = n > 1 ? 4 + (n - 1) : 1, resto4 = celdas4 % 4;      // a 4 columnas
-      const resto2 = n > 1 ? (n - 1) % 2 : 0;                              // a 2 columnas
+      const acomodo = tramos(items.length, true);
       const nodos = items.map((g, i) => {
-        let c4 = 1, c2 = 1;
-        if (i === 0 && n > 1) { c4 = 2; c2 = 2; }
-        const ultimo = i === n - 1, penultimo = i === n - 2;
-        if (resto4 === 1 && ultimo) c4 = 4;                   // queda sola: panorámica a todo lo ancho
-        if (resto4 === 2 && (ultimo || penultimo) && i > 0) c4 = 2;
-        if (resto4 === 3 && ultimo && i > 0) c4 = 2;
-        if (resto2 === 1 && ultimo && i > 0) c2 = 2;
-        const grande = i === 0 && n > 1;
-        return h('figure', { class: 'galeria-item' + (grande ? ' galeria-item--grande' : ''), style: '--c4:' + c4 + ';--c2:' + c2 },
+        const { c4, c2, grande } = acomodo[i];
+        return h('figure',{ class: 'galeria-item' + (grande ? ' galeria-item--grande' : ''), style: '--c4:' + c4 + ';--c2:' + c2 },
           imagen(g.imagen, '', { sizes: grande ? '(min-width: 960px) 600px, 100vw' : '(min-width: 960px) 300px, 50vw' }),
           (tiene(g.titulo) || tiene(g.texto)) ? h('figcaption', {},
             tiene(g.titulo) ? h('strong', { text: g.titulo }) : null,
@@ -1878,14 +2124,14 @@ button { font: inherit; color: inherit; }
       const items = lista(s.items);
       if (!items.length) return null;
       const cab = cabeza(s);
-      const nodos = items.map((p) => h('article', { class: 'plan' + (p.destacado ? ' plan--destacado bloque-oscuro' : '') },
+      const nodos = items.map((p, i) => h('article', { class: 'plan' + (p.destacado ? ' plan--destacado bloque-oscuro' : '') },
         p.destacado && tiene(p.insignia) ? h('span', { class: 'insignia', text: p.insignia }) : null,
         tiene(p.nombre) ? h('h3', { text: p.nombre }) : null,
         tiene(p.descripcion) ? h('p', { class: 'plan-descripcion', text: p.descripcion }) : null,
         tiene(p.precio) ? h('p', { class: 'plan-precio', text: p.precio }) : null,
         tiene(p.nota_precio) ? h('p', { class: 'plan-nota', text: p.nota_precio }) : null,
         lista(p.incluye).length ? h('ul', { class: 'lista-check' }, lista(p.incluye).map((x) => h('li', {}, icono('check'), h('span', { text: x })))) : null,
-        p.cta ? h('div', { class: 'plan-pie' }, boton(p.cta, p.destacado ? 'primario' : 'secundario', p.destacado)) : null));
+        p.cta ? h('div', { class: 'plan-pie' }, boton(p.cta, p.destacado ? 'primario' : 'secundario', p.destacado, 'plan-' + (i + 1))) : null));
       escalonar(nodos);
       return seccion(s, '', cab, h('div', { class: 'planes' }, nodos));
     },
@@ -1910,7 +2156,11 @@ button { font: inherit; color: inherit; }
       const items = lista(s.items).filter((c) => tiene(c.cliente));
       if (!items.length) return null;
       const cab = cabeza(s);
+      // Caso rico (opcional, solo con datos del expediente y permiso del cliente):
+      // imagen, reto, solucion, resultado y datos: [{ valor, etiqueta }].
+      const ricos = items.some((c) => c.imagen || tiene(c.reto) || tiene(c.resultado) || lista(c.datos).length);
       const nodos = items.map((c) => h('article', { class: 'caso' },
+        imagen(c.imagen, '', { sizes: '(min-width: 960px) 400px, 100vw' }),
         h('div', { class: 'caso-logo' }, tiene(c.logo)
           ? h('img', { src: c.logo, alt: c.cliente, loading: 'lazy' })
           : h('span', { class: 'aliado-nombre', text: c.cliente })),
@@ -1918,22 +2168,33 @@ button { font: inherit; color: inherit; }
           tiene(c.sector) ? h('p', { class: 'caso-sector', text: c.sector }) : null,
           h('h3', { text: c.cliente }),
           tiene(c.proyecto) ? h('p', { class: 'caso-proyecto' }, h('strong', { text: 'Proyecto: ' }), c.proyecto) : null,
+          (tiene(c.reto) || tiene(c.solucion) || tiene(c.resultado)) ? h('dl', {},
+            tiene(c.reto) ? [h('dt', { text: 'Reto' }), h('dd', { text: c.reto })] : null,
+            tiene(c.solucion) ? [h('dt', { text: 'Solución' }), h('dd', { text: c.solucion })] : null,
+            tiene(c.resultado) ? [h('dt', { text: 'Resultado' }), h('dd', { text: c.resultado })] : null) : null,
+          lista(c.datos).length ? h('div', { class: 'caso-datos' }, lista(c.datos).map((d) => h('p', { class: 'caso-dato' },
+            h('strong', { text: d.valor }), h('span', { text: d.etiqueta })))) : null,
           parrafos(c.texto, 'caso-nota'))));
       escalonar(nodos);
-      return seccion(s, '', cab, h('div', { class: 'casos' }, nodos));
+      return seccion(s, '', cab, h('div', { class: 'casos' + (ricos ? ' casos--ricos' : '') }, nodos));
     },
 
     aliados(s) {
       const items = lista(s.items).filter((a) => tiene(a.nombre) || tiene(a.logo));
       if (!items.length) return null;
       const cab = cabeza(s, { centro: true, numerar: false });
+      // Sin movimiento (o al imprimir) la franja se vuelve rejilla con tope de logos y «y N más»;
+      // así no se convierte en un muro de 15 filas. «tope» en el JSON (12 por omisión: dos filas de 6).
+      const tope = Number(s.tope) > 0 ? Number(s.tope) : 12;
       const grupo = (oculto) => h('ul', { class: 'grupo-aliados', 'aria-hidden': oculto ? 'true' : null },
-        items.map((a) => h('li', { class: 'aliado' },
+        items.map((a, i) => h('li', { class: 'aliado' + (i >= tope ? ' aliado--extra' : '') },
           tiene(a.logo) ? h('img', { src: a.logo, alt: oculto ? '' : (a.nombre || ''), loading: 'lazy' }) : h('span', { class: 'aliado-nombre', text: a.nombre }))));
-      const el = h('section', { class: 'aliados', id: enlaceSeguro(s.ancla), 'aria-label': s.titulo || 'Aliados' },
+      const sobran = items.length - tope;
+      const el = h('section', { class: 'aliados' + (sinMovimiento ? ' aliados-estatico' : ''), id: enlaceSeguro(s.ancla), 'aria-label': s.titulo || 'Aliados' },
         h('div', { class: 'contenedor' }, cab),
         h('div', { class: 'marquesina revelar', style: s.velocidad ? '--velocidad:' + Number(s.velocidad) + 's' : null },
-          h('div', { class: 'pista' }, grupo(false), grupo(true))));
+          h('div', { class: 'pista' }, grupo(false), grupo(true))),
+        sobran > 0 ? h('p', { class: 'aliados-mas', text: 'y ' + sobran + ' empresas más' }) : null);
       return el;
     },
 
@@ -1964,9 +2225,10 @@ button { font: inherit; color: inherit; }
           h('div', {},
             cabeza(s),
             parrafos(s.texto, 'texto revelar'),
-            (s.cta_primario || s.cta_secundario) ? h('div', { class: 'botones revelar' }, boton(s.cta_primario, 'primario', true), boton(s.cta_secundario, 'secundario', false)) : null),
+            (s.cta_primario || s.cta_secundario) ? h('div', { class: 'botones revelar' }, boton(s.cta_primario, 'primario', true, 'cierre'), boton(s.cta_secundario, 'secundario', false, 'cierre-2')) : null,
+            lista(s.puntos).length ? h('div', { class: 'revelar' }, puntos(s.puntos)) : null),
           contactos.length ? h('address', {}, h('ul', { class: 'contacto' }, contactos.map((c, i) => {
-            const a = atributosEnlace(c.enlace);
+            const a = atributosEnlace(c.enlace, 'contacto-' + (c.tipo || 'sitio'));
             return h('li', { class: 'revelar', style: '--i:' + i },
               h('span', { class: 'icono-caja' }, icono(c.tipo || 'sitio')),
               a.href ? h('a', { class: 'enlace', ...a, text: c.valor }) : h('span', { text: c.valor }));
@@ -2019,7 +2281,21 @@ button { font: inherit; color: inherit; }
   });
   const riel = h('div', { class: 'riel', 'aria-hidden': 'true' }, h('span'));
   const volver = h('button', { class: 'volver-arriba', type: 'button', 'aria-label': 'Volver arriba' }, icono('arriba'));
-  raiz.append(...[encabezado, riel, principal, pie, volver].filter(Boolean));
+  const datosEnc = secciones.find((s) => s && s.tipo === 'encabezado') || {};
+  const aviso = datosEnc._aviso || null, barra = datosEnc._barra || null;
+  raiz.append(...[aviso, encabezado, riel, principal, pie, volver, barra].filter(Boolean));
+
+  // Barra de celular: aparece al dejar atrás el hero y se esconde cuando el cierre de contacto está a la vista
+  if (barra) {
+    const cierre = raiz.querySelector('.cta-final');
+    let cierreVisible = false;
+    const actualizarBarra = () => barra.classList.toggle('visible', window.scrollY > window.innerHeight * 0.6 && !cierreVisible);
+    if (cierre && 'IntersectionObserver' in window) {
+      new IntersectionObserver((e) => { cierreVisible = e[0].isIntersecting; actualizarBarra(); }, { threshold: 0.2 }).observe(cierre);
+    }
+    window.addEventListener('scroll', actualizarBarra, { passive: true });
+    actualizarBarra();
+  }
 
   /* ---------- Comportamiento ---------- */
   const primeraEsHero = principal.firstElementChild && principal.firstElementChild.classList.contains('hero');
@@ -2110,8 +2386,12 @@ button { font: inherit; color: inherit; }
     });
     temaAntes = document.documentElement.getAttribute('data-theme');
     document.documentElement.setAttribute('data-theme', 'light');
+    raiz.querySelectorAll('.aliados').forEach((el) => el.classList.add('aliados-estatico'));
   });
-  window.addEventListener('afterprint', () => { if (temaAntes) document.documentElement.setAttribute('data-theme', temaAntes); });
+  window.addEventListener('afterprint', () => {
+    if (temaAntes) document.documentElement.setAttribute('data-theme', temaAntes);
+    if (!sinMovimiento) raiz.querySelectorAll('.aliados').forEach((el) => el.classList.remove('aliados-estatico'));
+  });
 })();
 </script>
 </body>
