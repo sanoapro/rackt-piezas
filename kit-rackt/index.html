@@ -94,9 +94,9 @@ button { font: inherit; color: inherit; }
 /* ---------- 3. Fondo: patrón de barras (textura del brand book) + nave en perfil ---------- */
 .bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .barras {
-  position: absolute; right: -40px; top: 6px; width: 560px; height: 300px;
+  position: absolute; right: -40px; top: 6px; width: 520px; height: 240px;
   background-image: repeating-linear-gradient(to bottom, var(--rojo) 0 14px, transparent 14px 34px);
-  opacity: .055;
+  opacity: .045;
   -webkit-mask: linear-gradient(to left, #000 15%, transparent 85%), linear-gradient(to bottom, #000 30%, transparent);
   -webkit-mask-composite: source-in; mask-composite: intersect;
   mask: linear-gradient(to left, #000 15%, transparent 85%), linear-gradient(to bottom, #000 30%, transparent);
@@ -171,6 +171,9 @@ h1 {
 .kc-body { flex: 1; min-height: 0; margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
 .fila { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 8px; }
 .fila[hidden] { display: none; }
+/* Vista cliente (sin la fila interna): filas de alto natural, centradas en la lámina */
+html:not(.modo-app) body.vista-cliente .kc-body { justify-content: center; gap: 22px; }
+html:not(.modo-app) body.vista-cliente .fila { flex: 0 1 168px; }
 .f-head { flex: none; height: 24px; display: flex; align-items: center; gap: 10px; color: var(--fila-c); }
 .f-head .eyebrow { color: var(--fila-c); }
 .f-linea { flex: 1; height: 1px; background: var(--line); }
@@ -407,15 +410,17 @@ html.modo-app .kc-head { flex-wrap: wrap; align-items: flex-start; gap: 14px; }
 html.modo-app .kc-head > div:first-child { flex: 1 1 260px; }
 html.modo-app h1 { font-size: 46px; }
 html.modo-app .sub { font-size: 14px; }
-html.modo-app .kc-marca { order: -1; width: 100%; justify-content: space-between; flex-wrap: wrap; }
+html.modo-app .kc-marca { order: -1; width: 100%; flex-direction: row-reverse; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
 html.modo-app .kc-marca .sep, html.modo-app .h-pantalla { display: none; }
 html.modo-app .h-botones { display: flex; gap: 8px; flex-wrap: wrap; }
 html.modo-app .h-boton { height: 44px; padding: 0 14px; font-size: 13px; }
 html.modo-app .h-icono { width: 44px; }
 html.modo-app .kc-body { margin-top: 18px; gap: 26px; }
 html.modo-app .fila { flex: none; gap: 10px; }
-html.modo-app .f-head { height: 44px; }
-html.modo-app .f-head .eyebrow { font-size: 12px; }
+html.modo-app .f-head { height: auto; min-height: 44px; flex-wrap: wrap; row-gap: 8px; }
+html.modo-app .f-linea { min-width: 12px; }
+html.modo-app .f-head .eyebrow { font-size: 12px; white-space: nowrap; letter-spacing: 1.2px; }
+html.modo-app .f-cuenta { display: none; }
 html.modo-app .f-copiar { width: 44px; height: 44px; }
 html.modo-app .f-copiar svg { width: 16px; height: 16px; }
 html.modo-app .pildora-desc { height: 44px; padding: 0 10px 0 12px; font-size: 13px; }
@@ -774,8 +779,8 @@ const ICO = {
       // El chip dice de dónde es el enlace; si va al CRM con su origen, lo dice también
       const medido = url !== a.url;
       const chip = el('div', 't-chip' + (medido ? ' medido' : ''), a.pronto ? '' : svg(medido ? ICO._crm : ICO._globo, 2.2));
-      chip.append(texto('span', '', a.pronto ? 'Próximamente' : (medido ? a.host + ' · llega al CRM' : a.host)));
-      if (medido) chip.title = 'El enlace lleva UTM: el prospecto entra al CRM con su origen';
+      chip.append(texto('span', '', a.pronto ? 'Próximamente' : (medido ? 'Entra al CRM' : a.host)));
+      if (medido) chip.title = a.host + ' · el enlace lleva UTM: el prospecto entra al CRM con su origen';
       txt.append(chip);
     }
     tile.append(txt);
@@ -976,7 +981,7 @@ const ICO = {
   const bPantalla = document.getElementById('b-pantalla');
   let vistaCliente = false;
   function pintarBotonCliente() {
-    bCliente.innerHTML = svg(ICO._ojo) + (vistaCliente ? 'Vista cliente' : 'Vista cliente');
+    bCliente.innerHTML = svg(ICO._ojo) + 'Vista cliente';
     bCliente.setAttribute('aria-pressed', String(vistaCliente));
   }
   function alternarVistaCliente(silencio) {
@@ -1036,11 +1041,12 @@ const ICO = {
   });
 
   /* --- Coreografía (solo si el motor cargó) --- */
+  // En la app (página que se desplaza) no hay cascada: nada debe quedar oculto esperando un scroll.
   if (hayMotor) {
-    FILAS.forEach((f) => Motion.stagger(f._rej, 70, f.inicio));
-    Motion.stagger(equipo, 55, 620);
-    Motion.revealAll('.mo-reveal', { threshold: 0 });
     if (!esApp()) {
+      FILAS.forEach((f) => Motion.stagger(f._rej, 70, f.inicio));
+      Motion.stagger(equipo, 55, 620);
+      Motion.revealAll('.mo-reveal', { threshold: 0 });
       document.querySelectorAll('.twrap').forEach((w) => {
         const tile = w.querySelector('.tile');
         if (!tile.classList.contains('activa')) return;

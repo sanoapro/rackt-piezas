@@ -263,6 +263,14 @@ details.tabla td.num,details.tabla th.num{text-align:right}
 .pendiente h3{font-family:var(--f-cuerpo);font-weight:700;font-size:1.05rem;letter-spacing:0}
 .pendiente .quien-llega{font-size:.88rem;color:var(--texto-2);margin-top:4px}
 
+/* --- Sugerencia (lo decide Juan Carlos) --- */
+.sugerencia{border:1px solid var(--c-marino);border-left:6px solid var(--c-marino);border-radius:4px;padding:16px 18px;background:var(--suave-marino)}
+.sugerencia .sug-et{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tinta-marino);margin-bottom:6px}
+.sugerencia h3{font-family:var(--f-cuerpo);font-weight:700;font-size:1.08rem;letter-spacing:0;margin:0 0 8px}
+.sugerencia .sug-por{font-weight:600;font-size:.92rem;margin:8px 0 4px}
+.sugerencia ul{margin:0;padding-left:1.2em}.sugerencia li{margin:3px 0}
+.sugerencia .sug-nota{font-size:.88rem;color:var(--texto-2);margin-top:10px}
+
 /* --- Tooltip --- */
 #tip{position:fixed;z-index:50;pointer-events:none;background:var(--grafito);color:#fff;font-size:.88rem;line-height:1.35;padding:8px 10px;border-radius:4px;max-width:260px;opacity:0;transition:opacity .12s}
 #tip.ver{opacity:1}
@@ -334,7 +342,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
   {
    "id": "resumen",
    "nombre": "Resumen",
-   "respuesta": "Los $100 M dan utilidad, pero la reserva de hoy deja a la empresa sin efectivo. Hay que cambiar esa regla antes de enero.",
+   "respuesta": "Qué dejan $100 M de venta: utilidad, caja y lo que falta por conseguir",
    "bloques": [
     {
      "tipo": "cifras",
@@ -352,9 +360,9 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "tono": "grafito"
       },
       {
-       "valor": "$6.0 M",
+       "valor": "$10.2 M",
        "etiqueta": "Utilidad de operación",
-       "nota": "6 % de la venta, provisional",
+       "nota": "10 % de la venta, provisional",
        "tono": "marino"
       },
       {
@@ -373,7 +381,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "tono": "marino",
        "vinetas": [
         "Con 25 % de margen, $100 M dejan $25.0 M de margen bruto.",
-        "Después de comisiones, gasto y equipo comercial quedan $6.0 M.",
+        "Después de comisiones, gasto y equipo comercial quedan $10.2 M.",
         "Es provisional: el gasto fijo real de hoy todavía se está midiendo."
        ]
       },
@@ -381,9 +389,9 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "titulo": "Caja",
        "tono": "rojo",
        "vinetas": [
-        "Con 50 % de anticipo y ESJ cobrando al ritmo del cliente, los proyectos ya no atan dinero.",
-        "Apartar el 26 % de todo lo cobrado son $25.5 M en el año: más que el margen.",
-        "Así, en diciembre faltarían $22.3 M. Ver «Caja y reserva»."
+        "Con 50 % de anticipo y ESJ cobrando al ritmo del cliente, el modelo supone que los proyectos ya no atan dinero.",
+        "Apartar el 26 % de todo lo cobrado son $25.5 M en el año; el margen bruto es $25.0 M.",
+        "Así, el mes más apretado (octubre) quedaría en −$23.4 M. Ver «Caja y reserva»."
        ]
       },
       {
@@ -392,10 +400,20 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "vinetas": [
         "Schneider no tendrá venta en 2027.",
         "Los 7 grandes ya cotizados suman $17.8 M.",
-        "Aun así faltan $44.3 M en proyectos grandes nuevos, con nombre y responsable."
+        "Aun así faltan $44.3 M en proyectos grandes nuevos."
        ]
       }
      ]
+    },
+    {
+     "tipo": "sugerencia",
+     "texto": "Revisar la regla de la reserva del 26 % antes de enero.",
+     "porque": [
+      "Con la regla de hoy (26 % de todo lo cobrado) se apartarían $25.5 M en 2027, y el margen bruto de toda la venta es $25.0 M: se apartaría más de lo que deja la venta.",
+      "Con saldo inicial en cero y sin línea de crédito, el modelo deja la caja en −$23.4 M en octubre.",
+      "El gasto fijo de hoy todavía es estimado; con el dato real de Leslie la cifra puede moverse."
+     ],
+     "nota": "La decisión es de Juan Carlos; esto es una sugerencia para que la revise."
     },
     {
      "tipo": "decisiones",
@@ -416,7 +434,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
   {
    "id": "puente",
    "nombre": "De dónde salen",
-   "respuesta": "Con lo que ya tenemos se sostienen $55.7 M. Los otros $44.3 M tienen que venir de proyectos grandes nuevos.",
+   "respuesta": "De los $100 M, $55.7 M salen de ventas medidas y supuestos; $44.3 M todavía no tienen de dónde salir",
    "bloques": [
     {
      "tipo": "cascada",
@@ -510,11 +528,19 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "tono": "grafito",
        "vinetas": [
         "Unos 15 proyectos de $3 M, o casi 4 clientes del tamaño de Select Shop.",
-        "La lista de 30 cuentas grandes: hoy tiene 7.",
-        "Cada cuenta con responsable y siguiente paso con fecha."
+        "La lista de 30 cuentas grandes: hoy tiene 7."
        ]
       }
      ]
+    },
+    {
+     "tipo": "sugerencia",
+     "texto": "Que cada una de las 30 cuentas grandes tenga responsable y siguiente paso con fecha.",
+     "porque": [
+      "Los $44.3 M que faltan no tienen hoy cliente ni cotización; la lista tiene 7 de 30 cuentas.",
+      "Con responsable y fecha, la reunión de los lunes puede ver si ese hueco se está cerrando."
+     ],
+     "nota": "La decisión es de Juan Carlos; esto es una sugerencia para que la revise."
     }
    ]
   },
@@ -645,7 +671,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
   {
    "id": "numeros",
    "nombre": "Números 2027",
-   "respuesta": "A $100 M quedan $6.0 M de utilidad de operación (6 %). El gasto fijo de hoy todavía es estimado.",
+   "respuesta": "A $100 M quedan $10.2 M de utilidad de operación (10 %). El gasto fijo de hoy todavía es estimado.",
    "bloques": [
     {
      "tipo": "cascada",
@@ -669,12 +695,12 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
       },
       {
        "nombre": "Gasto fijo de hoy (estimado)",
-       "valor": -12600000,
+       "valor": -8883226.800000003,
        "tipo": "supuesto"
       },
       {
        "nombre": "Gasto nuevo 2027",
-       "valor": -2053200,
+       "valor": -1530660,
        "tipo": "resta"
       },
       {
@@ -684,7 +710,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
       },
       {
        "nombre": "Utilidad de operación",
-       "valor": 5955800,
+       "valor": 10195113.200000001,
        "tipo": "resultado"
       }
      ],
@@ -710,23 +736,23 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
       {
        "nombre": "Conservador",
        "venta": "$50.0 M",
-       "utilidad": "−$3.8 M",
-       "pct": "−8 %",
+       "utilidad": "$0.4 M",
+       "pct": "1 %",
        "nota": "Solo Iván y CDMX"
       },
       {
        "nombre": "Objetivo",
        "venta": "$100.0 M",
-       "utilidad": "$6.0 M",
-       "pct": "6 %",
+       "utilidad": "$10.2 M",
+       "pct": "10 %",
        "nota": "El plan de Juan Carlos",
        "destacado": true
       },
       {
        "nombre": "Acelerado",
        "venta": "$120.0 M",
-       "utilidad": "$13.3 M",
-       "pct": "11 %",
+       "utilidad": "$17.7 M",
+       "pct": "15 %",
        "nota": "Con Morelia y 60 % de anticipo"
       }
      ]
@@ -752,7 +778,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "tono": "marino"
       }
      ],
-     "nota": "Total $2.1 M. El equipo comercial nuevo va aparte: $0.9 M en el año."
+     "nota": "Total $1.5 M. El equipo comercial nuevo va aparte: $0.9 M en el año."
     },
     {
      "tipo": "pendiente",
@@ -765,7 +791,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
   {
    "id": "caja",
    "nombre": "Caja y reserva",
-   "respuesta": "Apartar el 26 % de todo lo que se cobra deja la caja en −$22.3 M en diciembre. Con la regla D la reserva crece y la caja aguanta.",
+   "respuesta": "Cómo queda la caja en 2027 con cada manera de apartar el 26 %",
    "bloques": [
     {
      "tipo": "lineas",
@@ -788,54 +814,54 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
       {
        "nombre": "Sin reserva",
        "valores": [
-        0.5,
-        -0.3,
-        0.93,
-        0.43,
-        0.55,
-        1.14,
-        1.09,
-        1.46,
-        2.69,
-        2.45,
-        3.25,
-        3.17
+        0.15,
+        -6.18,
+        -0.21,
+        -1.86,
+        -0.1,
+        -0.12,
+        -2.98,
+        0.59,
+        3.64,
+        -2.39,
+        2.13,
+        4.65
        ],
        "tono": "grafito"
       },
       {
        "nombre": "Regla A · 26 % de todo lo cobrado",
        "valores": [
-        -1.88,
-        -3.49,
-        -5.53,
-        -7.24,
-        -9.08,
-        -11.02,
-        -12.83,
-        -14.72,
-        -16.79,
-        -18.56,
-        -20.54,
-        -22.34
+        -2.23,
+        -9.37,
+        -6.67,
+        -9.53,
+        -9.74,
+        -12.27,
+        -16.9,
+        -15.59,
+        -15.85,
+        -23.4,
+        -21.66,
+        -20.86
        ],
        "tono": "rojo"
       },
       {
        "nombre": "Regla D · 26 % de lo que sobra",
        "valores": [
-        0.37,
-        -0.43,
-        0.48,
-        -0.02,
-        0.07,
-        0.5,
-        0.46,
-        0.73,
-        1.64,
-        1.4,
-        2.0,
-        1.91
+        0.11,
+        -6.22,
+        -1.8,
+        -3.45,
+        -2.15,
+        -2.16,
+        -5.02,
+        -2.38,
+        -0.13,
+        -6.16,
+        -2.81,
+        -0.95
        ],
        "tono": "marino"
       }
@@ -851,36 +877,45 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "nombre": "26 % de todo lo cobrado",
        "nota": "Como hoy",
        "junta": "$25.5 M",
-       "peor": "−$22.3 M",
-       "lectura": "No alcanza: se aparta más de lo que se gana.",
+       "peor": "−$23.4 M",
+       "lectura": "Aparta más que el margen bruto del año.",
        "tono": "rojo"
       },
       {
        "letra": "B",
        "nombre": "26 % del margen de lo cobrado",
        "junta": "$6.4 M",
-       "peor": "−$3.2 M",
-       "lectura": "Sigue faltando efectivo todo el año.",
+       "peor": "−$7.6 M",
+       "lectura": "Aparta solo sobre el margen de lo cobrado.",
        "tono": "grafito"
       },
       {
        "letra": "C",
        "nombre": "26 % hasta juntar 3 meses de gasto",
-       "junta": "$3.9 M",
-       "peor": "−$3.5 M",
-       "lectura": "Se llena rápido y deja hueco al arranque.",
+       "junta": "$2.8 M",
+       "peor": "−$9.0 M",
+       "lectura": "Deja de apartar al juntar 3 meses de gasto.",
        "tono": "grafito"
       },
       {
        "letra": "D",
        "nombre": "26 % de lo que sobra cada mes",
-       "junta": "$1.3 M",
-       "peor": "−$0.4 M",
-       "lectura": "La reserva crece sin frenar la operación.",
-       "tono": "marino",
-       "recomendada": true
+       "junta": "$5.6 M",
+       "peor": "−$6.2 M",
+       "lectura": "Aparta solo de lo que sobra cada mes.",
+       "tono": "grafito"
       }
      ]
+    },
+    {
+     "tipo": "sugerencia",
+     "texto": "Considerar la regla D: apartar el 26 % de lo que sobra cada mes.",
+     "porque": [
+      "De las cuatro, es la que deja el mes más apretado menos negativo: −$6.2 M, contra −$7.6 M con la B, −$9.0 M con la C, −$23.4 M con la A.",
+      "No resuelve todo: ese mes pide tener $6.2 M disponibles al 1 de enero.",
+      "Con la D se juntan $5.6 M en 2027."
+     ],
+     "nota": "La decisión es de Juan Carlos; esto es una sugerencia para que la revise."
     },
     {
      "tipo": "tarjetas",
@@ -899,9 +934,8 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "tono": "rojo",
        "insignia": "Para el 20 de noviembre",
        "vinetas": [
-        "Elegir la regla de la reserva: A, B, C o D.",
-        "Se recomienda la D.",
-        "Con la D, el mes más apretado pide $0.4 M en el banco al 1 de enero."
+        "Elegir la regla de la reserva: A, B, C, D u otra.",
+        "Las cuatro se calculan con saldo inicial en cero y sin línea de crédito."
        ]
       }
      ]
@@ -917,7 +951,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
   {
    "id": "operacion",
    "nombre": "Operación",
-   "respuesta": "Al crecer, lo primero que se rompe es el material chino; después, la coordinación de obras.",
+   "respuesta": "Lo que, según Juan Carlos e Ivette, se rompe primero al crecer: el material chino y, después, la coordinación de obras",
    "bloques": [
     {
      "tipo": "tarjetas",
@@ -1257,6 +1291,14 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
       var pend = !/\d/.test(p.cuando);
       return h("div", { class: "paso" }, [h("div", { class: "quien", text: p.quien }), h("div", { text: p.que }), h("span", { class: "cuando" + (pend ? " pend" : ""), text: p.cuando })]);
     }));
+  };
+  B.sugerencia = function (b) {
+    return h("aside", { class: "sugerencia", "aria-label": "Sugerencia para revisar" }, [
+      h("span", { class: "sug-et", text: "Sugerencia para revisar" }),
+      h("h3", { text: b.texto }),
+      h("p", { class: "sug-por", text: "Por qué lo sugerimos" }),
+      h("ul", null, (b.porque || []).map(function (x) { return h("li", { text: x }); })),
+      b.nota ? h("p", { class: "sug-nota", text: b.nota }) : null]);
   };
   B.pendiente = function (b) {
     return h("div", { class: "pendiente" }, [h("div", { class: "barras-marca", "aria-hidden": "true" }),
