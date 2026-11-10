@@ -362,7 +362,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
       {
        "valor": "$10.2 M",
        "etiqueta": "Utilidad de operación",
-       "nota": "10 % de la venta, provisional",
+       "nota": "10 % de la venta",
        "tono": "marino"
       },
       {
@@ -382,7 +382,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "vinetas": [
         "Con 25 % de margen, $100 M dejan $25.0 M de margen bruto.",
         "Después de comisiones, gasto y equipo comercial quedan $10.2 M.",
-        "Es provisional: el gasto fijo real de hoy todavía se está midiendo."
+        "Con el gasto fijo real de 2026: $0.7 M al mes, sin el sueldo del dueño."
        ]
       },
       {
@@ -391,7 +391,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "vinetas": [
         "Con 50 % de anticipo y ESJ cobrando al ritmo del cliente, el modelo supone que los proyectos ya no atan dinero.",
         "Apartar el 26 % de todo lo cobrado son $25.5 M en el año; el margen bruto es $25.0 M.",
-        "Así, el mes más apretado (octubre) quedaría en −$23.4 M. Ver «Caja y reserva»."
+        "Así, el mes más apretado (diciembre) quedaría en −$19.8 M. Ver «Caja y reserva»."
        ]
       },
       {
@@ -410,8 +410,8 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
      "texto": "Revisar la regla de la reserva del 26 % antes de enero.",
      "porque": [
       "Con la regla de hoy (26 % de todo lo cobrado) se apartarían $25.5 M en 2027, y el margen bruto de toda la venta es $25.0 M: se apartaría más de lo que deja la venta.",
-      "Con saldo inicial en cero y sin línea de crédito, el modelo deja la caja en −$23.4 M en octubre.",
-      "El gasto fijo de hoy todavía es estimado; con el dato real de Leslie la cifra puede moverse."
+      "Con saldo inicial en cero y sin línea de crédito, el modelo deja la caja en −$19.8 M en diciembre.",
+      "Hoy el fondo ya tiene $1.8 M, juntados desde el 1 de octubre."
      ],
      "nota": "La decisión es de Juan Carlos; esto es una sugerencia para que la revise."
     },
@@ -671,7 +671,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
   {
    "id": "numeros",
    "nombre": "Números 2027",
-   "respuesta": "A $100 M quedan $10.2 M de utilidad de operación (10 %). El gasto fijo de hoy todavía es estimado.",
+   "respuesta": "A $100 M quedan $10.2 M de utilidad de operación (10 %). Ya con el gasto fijo real de 2026.",
    "bloques": [
     {
      "tipo": "cascada",
@@ -694,9 +694,9 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "tipo": "resta"
       },
       {
-       "nombre": "Gasto fijo de hoy (estimado)",
+       "nombre": "Gasto fijo de hoy (real 2026)",
        "valor": -8883226.800000003,
-       "tipo": "supuesto"
+       "tipo": "resta"
       },
       {
        "nombre": "Gasto nuevo 2027",
@@ -717,11 +717,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
      "leyenda": [
       [
        "resta",
-       "Gasto decidido"
-      ],
-      [
-       "supuesto",
-       "Estimado: llega el dato real de Leslie"
+       "Costo y gasto"
       ],
       [
        "resultado",
@@ -778,13 +774,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "tono": "marino"
       }
      ],
-     "nota": "Total $1.5 M. El equipo comercial nuevo va aparte: $0.9 M en el año."
-    },
-    {
-     "tipo": "pendiente",
-     "titulo": "Gasto fijo real de hoy",
-     "quien": "Leslie",
-     "texto": "Nómina, renta de la nave y servicios de enero a octubre. Mientras llega, el plan usa $1 M al mes."
+     "nota": "Total $1.5 M: ya descuenta lo que hoy se gasta en sistemas y marketing. El equipo comercial nuevo va aparte: $0.9 M en el año."
     }
    ]
   },
@@ -814,54 +804,54 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
       {
        "nombre": "Sin reserva",
        "valores": [
-        0.15,
-        -6.18,
-        -0.21,
-        -1.86,
-        -0.1,
-        -0.12,
-        -2.98,
-        0.59,
-        3.64,
-        -2.39,
-        2.13,
-        4.65
+        0.71,
+        0.12,
+        1.57,
+        1.28,
+        1.61,
+        2.41,
+        2.58,
+        3.16,
+        4.6,
+        4.57,
+        5.58,
+        5.71
        ],
        "tono": "grafito"
       },
       {
        "nombre": "Regla A · 26 % de todo lo cobrado",
        "valores": [
-        -2.23,
-        -9.37,
-        -6.67,
-        -9.53,
-        -9.74,
-        -12.27,
-        -16.9,
-        -15.59,
-        -15.85,
-        -23.4,
-        -21.66,
-        -20.86
+        -1.67,
+        -3.07,
+        -4.89,
+        -6.39,
+        -8.02,
+        -9.75,
+        -11.34,
+        -13.03,
+        -14.89,
+        -16.44,
+        -18.21,
+        -19.8
        ],
        "tono": "rojo"
       },
       {
        "nombre": "Regla D · 26 % de lo que sobra",
        "valores": [
-        0.11,
-        -6.22,
-        -1.8,
-        -3.45,
-        -2.15,
-        -2.16,
-        -5.02,
-        -2.38,
-        -0.13,
-        -6.16,
-        -2.81,
-        -0.95
+        0.52,
+        -0.06,
+        1.01,
+        0.72,
+        0.97,
+        1.56,
+        1.68,
+        2.11,
+        3.17,
+        3.15,
+        3.9,
+        3.99
        ],
        "tono": "marino"
       }
@@ -877,7 +867,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "nombre": "26 % de todo lo cobrado",
        "nota": "Como hoy",
        "junta": "$25.5 M",
-       "peor": "−$23.4 M",
+       "peor": "−$19.8 M",
        "lectura": "Aparta más que el margen bruto del año.",
        "tono": "rojo"
       },
@@ -885,7 +875,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "letra": "B",
        "nombre": "26 % del margen de lo cobrado",
        "junta": "$6.4 M",
-       "peor": "−$7.6 M",
+       "peor": "−$0.9 M",
        "lectura": "Aparta solo sobre el margen de lo cobrado.",
        "tono": "grafito"
       },
@@ -893,15 +883,15 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "letra": "C",
        "nombre": "26 % hasta juntar 3 meses de gasto",
        "junta": "$2.8 M",
-       "peor": "−$9.0 M",
+       "peor": "−$2.7 M",
        "lectura": "Deja de apartar al juntar 3 meses de gasto.",
        "tono": "grafito"
       },
       {
        "letra": "D",
        "nombre": "26 % de lo que sobra cada mes",
-       "junta": "$5.6 M",
-       "peor": "−$6.2 M",
+       "junta": "$1.7 M",
+       "peor": "−$0.1 M",
        "lectura": "Aparta solo de lo que sobra cada mes.",
        "tono": "grafito"
       }
@@ -911,9 +901,9 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
      "tipo": "sugerencia",
      "texto": "Considerar la regla D: apartar el 26 % de lo que sobra cada mes.",
      "porque": [
-      "De las cuatro, es la que deja el mes más apretado menos negativo: −$6.2 M, contra −$7.6 M con la B, −$9.0 M con la C, −$23.4 M con la A.",
-      "No resuelve todo: ese mes pide tener $6.2 M disponibles al 1 de enero.",
-      "Con la D se juntan $5.6 M en 2027."
+      "De las cuatro, es la que deja el mes más apretado menos negativo: −$0.1 M, contra −$0.9 M con la B, −$2.7 M con la C, −$19.8 M con la A.",
+      "No resuelve todo: ese mes pide tener $0.1 M disponibles al 1 de enero.",
+      "Con la D se juntan $1.7 M en 2027."
      ],
      "nota": "La decisión es de Juan Carlos; esto es una sugerencia para que la revise."
     },
@@ -941,10 +931,18 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
      ]
     },
     {
-     "tipo": "pendiente",
-     "titulo": "Saldo del fondo de inversión",
-     "quien": "Leslie",
-     "texto": "Lo que ya se juntó desde octubre. Con eso se sabe cuánto colchón hay al empezar 2027."
+     "tipo": "tarjetas",
+     "items": [
+      {
+       "titulo": "El fondo de reserva hoy",
+       "tono": "marino",
+       "vinetas": [
+        "Al 30 de octubre tiene $1.8 M.",
+        "Se empezó a llenar el 1 de octubre.",
+        "Las cuatro reglas cuentan desde cero en enero; ese saldo va aparte."
+       ]
+      }
+     ]
     }
    ]
   },
@@ -1036,7 +1034,7 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
   {
    "id": "pasos",
    "nombre": "Siguientes pasos",
-   "respuesta": "Para cerrar el plan faltan seis cosas; tres son de Juan Carlos.",
+   "respuesta": "Para cerrar el plan faltan cinco cosas; tres son de Juan Carlos.",
    "bloques": [
     {
      "tipo": "pasos",
@@ -1055,11 +1053,6 @@ body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap
        "quien": "Juan Carlos",
        "que": "Datos de China y de Cercassa",
        "cuando": "Pendiente"
-      },
-      {
-       "quien": "Leslie",
-       "que": "Gasto fijo real, fondo de inversión y un pago de saldo a ESJ",
-       "cuando": "20 nov"
       },
       {
        "quien": "Contador",
