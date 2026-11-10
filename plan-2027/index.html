@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- ==========================================================================
+     TARJETA PARA COMPARTIR (WhatsApp, LinkedIn, Facebook, correo)
+     WhatsApp NO ejecuta JavaScript: estos datos se escriben aquí, no en el JSON.
+     Edita título y descripción. https://sanoapro.github.io/rackt-piezas/plan-2027/ lo reemplaza
+     _herramientas/preparar.py con la dirección final del sitio (termina en /).
+     ========================================================================== -->
+<title>RACK-T · Plan 2027 a $100 millones</title>
+<meta name="description" content="El plan de RACK-T para vender $100 millones en 2027: de dónde sale la venta, el equipo, los números, la caja y los siguientes pasos.">
+<link rel="canonical" href="https://sanoapro.github.io/rackt-piezas/plan-2027/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RACK-T">
+<meta property="og:locale" content="es_MX">
+<meta property="og:url" content="https://sanoapro.github.io/rackt-piezas/plan-2027/">
+<meta property="og:title" content="RACK-T · Plan 2027 a $100 millones">
+<meta property="og:description" content="El plan de RACK-T para vender $100 millones en 2027: de dónde sale la venta, el equipo, los números, la caja y los siguientes pasos.">
+<meta property="og:image" content="https://sanoapro.github.io/rackt-piezas/plan-2027/og.jpg">
+<meta property="og:image:secure_url" content="https://sanoapro.github.io/rackt-piezas/plan-2027/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="RACK-T · Plan 2027 a $100 millones">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RACK-T · Plan 2027 a $100 millones">
+<meta name="twitter:description" content="El plan de RACK-T para vender $100 millones en 2027: de dónde sale la venta, el equipo, los números, la caja y los siguientes pasos.">
+<meta name="twitter:image" content="https://sanoapro.github.io/rackt-piezas/plan-2027/og.jpg">
+
+<!-- Íconos (favicon oficial aprobado el 16/09/2026) y apariencia en el celular -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#323131">
+<meta name="format-detection" content="telephone=no">
+<!-- Fuentes de marca: League Gothic (títulos) y Barlow (respaldo web de Bahnschrift, que es fuente de sistema en Windows) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<!-- Tema y movimiento: se deciden ANTES de pintar para que no parpadee -->
+<script>
+  (function () {
+    var tema = null;
+    try { tema = localStorage.getItem('rt-tema'); } catch (e) {}
+    if (tema !== 'light' && tema !== 'dark') {
+      tema = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    document.documentElement.setAttribute('data-theme', tema);
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('animar');
+    }
+  })();
+</script>
+
+<meta name="googlebot" content="noindex">
+<meta name="bingbot" content="noindex">
+<style>
+/* ==========================================================================
+   Plan 2027 · RACK-T. Diseño fijo: el contenido vive en <script id="contenido">
+   y lo escribe 09_ANALISIS/05_PLAN-2027/construir_presentacion.py.
+   ========================================================================== */
+:root{
+  --rojo:#ab0505;--gris:#dfdfdf;--grafito:#323131;--marino:#002455;--naranja:#f8450d;--blanco:#fff;
+  --gris-50:#f4f4f4;--gris-300:#bdbdbd;--grafito-700:#4a4848;
+  --f-titulo:"League Gothic","Oswald","Arial Narrow",sans-serif;
+  --f-cuerpo:"Bahnschrift","Barlow","Segoe UI",system-ui,sans-serif;
+  /* modo claro */
+  --bg:#f4f4f4;--card:#fff;--texto:#323131;--texto-2:#4a4848;--borde:#dfdfdf;--banda:#323131;--en-banda:#dfdfdf;
+  --c-marino:#1f4f99;--c-rojo:#ab0505;--c-neutro:#7a7878;--c-total:#323131;
+  --tinta-marino:#002455;--tinta-rojo:#ab0505;--suave-rojo:#fbeaea;--suave-marino:#e8eef8;
+  --foco:#002455;--sombra:0 1px 0 rgba(50,49,49,.06);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1c1b1b;--card:#262525;--texto:#e9e8e8;--texto-2:#bdbdbd;--borde:#3a3838;--banda:#111;--en-banda:#dfdfdf;
+  --c-marino:#5585d1;--c-rojo:#dc4b42;--c-neutro:#8f8d8d;--c-total:#dfdfdf;
+  --tinta-marino:#8fb3e8;--tinta-rojo:#f08a83;--suave-rojo:#3a2120;--suave-marino:#1e2a3d;--foco:#dfdfdf;--sombra:none}}
+:root[data-theme="dark"]{
+  --bg:#1c1b1b;--card:#262525;--texto:#e9e8e8;--texto-2:#bdbdbd;--borde:#3a3838;--banda:#111;--en-banda:#dfdfdf;
+  --c-marino:#5585d1;--c-rojo:#dc4b42;--c-neutro:#8f8d8d;--c-total:#dfdfdf;
+  --tinta-marino:#8fb3e8;--tinta-rojo:#f08a83;--suave-rojo:#3a2120;--suave-marino:#1e2a3d;--foco:#dfdfdf;--sombra:none}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--texto);font-family:var(--f-cuerpo);font-size:1rem;line-height:1.55}
+h1,h2,h3{font-family:var(--f-titulo);font-weight:400;letter-spacing:.02em;line-height:1.02;margin:0}
+p{margin:0}
+:focus-visible{outline:3px solid var(--foco);outline-offset:2px}
+.envoltura{max-width:1180px;margin:0 auto;padding:0 20px}
+@media (max-width:520px){.envoltura{padding:0 16px}}
+
+/* --- Banda superior --- */
+.banda{background:var(--banda);color:var(--en-banda)}
+.banda .envoltura{display:flex;align-items:center;gap:20px;padding-top:18px;padding-bottom:18px}
+.logo{display:block;height:34px;color:var(--en-banda);flex:none}
+.logo svg{height:100%;width:auto;display:block}
+.banda-titulo{flex:1;min-width:0;border-left:2px solid var(--rojo);padding-left:16px}
+.banda-titulo h1{font-size:clamp(1.9rem,4.4vw,2.8rem);color:#fff}
+.banda-titulo p{font-size:.92rem;color:var(--gris-300);margin-top:2px}
+.botones{display:flex;gap:8px;flex:none}
+.btn{font:600 .95rem var(--f-cuerpo);border-radius:4px;border:1px solid transparent;padding:10px 16px;cursor:pointer;min-height:44px}
+.btn-presentar{background:var(--rojo);color:#fff}
+.btn-presentar:hover{background:#8f0404}
+.btn-tema{background:transparent;color:var(--en-banda);border-color:#5b5959;width:44px;padding:0;font-size:1.1rem}
+@media (max-width:640px){.logo{height:26px}.banda .envoltura{flex-wrap:wrap;gap:12px}.banda-titulo{order:3;flex-basis:100%;border-left:0;padding-left:0}.botones{margin-left:auto}}
+
+/* --- Pestañas --- */
+.pestanas{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--borde)}
+.pestanas .envoltura{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.pestanas .envoltura::-webkit-scrollbar{display:none}
+.tab{flex:none;font:500 1rem var(--f-cuerpo);color:var(--texto-2);background:none;border:0;border-bottom:3px solid transparent;padding:14px 14px 11px;cursor:pointer;white-space:nowrap;min-height:48px}
+.tab:hover{color:var(--texto)}
+.tab[aria-selected="true"]{color:var(--texto);font-weight:700;border-bottom-color:var(--rojo)}
+.tab .n{display:inline-block;min-width:1.4em;color:var(--texto-2);font-weight:400;margin-right:4px}
+
+/* --- Panel --- */
+main{padding:28px 0 64px}
+.panel[hidden]{display:none}
+.respuesta{font-family:var(--f-titulo);font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.05;letter-spacing:.015em;max-width:38ch;border-left:6px solid var(--rojo);padding-left:18px;margin:4px 0 28px}
+.bloque{margin-top:28px}
+.bloque>h2{font-family:var(--f-cuerpo);font-weight:700;font-size:1.1rem;letter-spacing:0;margin-bottom:12px;color:var(--texto)}
+.nota{font-size:.92rem;color:var(--texto-2);margin-top:10px;max-width:75ch}
+
+/* --- La barra de $100 M (el elemento de marca: vigas de rack) --- */
+.viga{margin:0 0 8px}
+.viga-pista{display:flex;gap:3px;height:34px}
+.viga-seg{border-radius:999px;height:100%;position:relative}
+.viga-seg.medido{background:var(--c-marino)}
+.viga-seg.hueco{background:repeating-linear-gradient(135deg,var(--c-rojo) 0 10px,color-mix(in srgb,var(--c-rojo) 72%,var(--card)) 10px 16px)}
+.viga-rotulos{display:flex;gap:3px;margin-top:8px;font-size:.95rem}
+.viga-rotulos div{min-width:0}
+.viga-rotulos b{display:block;font-family:var(--f-titulo);font-weight:400;font-size:1.9rem;line-height:1;letter-spacing:.02em}
+.viga-texto{margin:6px 0 4px;color:var(--texto-2);max-width:70ch}
+
+/* --- Cifras --- */
+.cifras{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.cifras{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cifra{background:var(--card);border:1px solid var(--borde);border-radius:4px;padding:16px 18px;border-top:4px solid var(--c-total);box-shadow:var(--sombra)}
+.cifra.marino{border-top-color:var(--c-marino)}.cifra.rojo{border-top-color:var(--c-rojo)}
+.cifra .v{font-family:var(--f-titulo);font-size:clamp(2.4rem,5vw,3.4rem);line-height:1;letter-spacing:.01em}
+.cifra.rojo .v{color:var(--tinta-rojo)}.cifra.marino .v{color:var(--tinta-marino)}
+.cifra .e{font-weight:600;margin-top:6px}
+.cifra .s{font-size:.88rem;color:var(--texto-2)}
+
+/* --- Tarjetas --- */
+.tarjetas{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px}
+.tarjeta{background:var(--card);border:1px solid var(--borde);border-radius:4px;padding:18px 20px 20px;position:relative;box-shadow:var(--sombra)}
+.tarjeta::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:4px;border-radius:4px 4px 0 0;background:var(--c-total)}
+.tarjeta.marino::before{background:var(--c-marino)}.tarjeta.rojo::before{background:var(--c-rojo)}
+.tarjeta h3{font-family:var(--f-cuerpo);font-weight:700;font-size:1.15rem;letter-spacing:0;line-height:1.25;margin-bottom:10px}
+.insignia{display:inline-block;font-size:.82rem;font-weight:600;padding:3px 8px;border-radius:999px;background:var(--suave-rojo);color:var(--tinta-rojo);margin-bottom:10px}
+.insignia.marino{background:var(--suave-marino);color:var(--tinta-marino)}
+ul.vinetas{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+ul.vinetas li{position:relative;padding-left:22px}
+ul.vinetas li::before{content:"";position:absolute;left:0;top:.62em;width:12px;height:4px;border-radius:999px;background:var(--c-total)}
+.tarjeta.marino ul.vinetas li::before{background:var(--c-marino)}.tarjeta.rojo ul.vinetas li::before{background:var(--c-rojo)}
+
+/* --- Decisiones --- */
+.decisiones{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px}
+.decision{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--borde);border-radius:4px;padding:12px 14px}
+.decision i{flex:none;width:24px;height:24px;border-radius:50%;background:var(--c-marino);color:#fff;display:grid;place-items:center;font-style:normal;font-size:.85rem;font-weight:700;margin-top:1px}
+
+/* --- Gráficas comunes --- */
+.grafica{background:var(--card);border:1px solid var(--borde);border-radius:4px;padding:18px 20px}
+.leyenda{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.9rem;color:var(--texto-2);margin-bottom:12px}
+.leyenda span{display:inline-flex;align-items:center;gap:8px}
+.muestra{width:18px;height:8px;border-radius:999px;display:inline-block}
+.m-medido,.m-marino{background:var(--c-marino)}
+.m-supuesto{background:repeating-linear-gradient(135deg,var(--c-marino) 0 4px,color-mix(in srgb,var(--c-marino) 35%,var(--card)) 4px 7px)}
+.m-hueco,.m-rojo{background:var(--c-rojo)}
+.m-resta,.m-grafito{background:var(--c-neutro)}
+.m-total,.m-resultado{background:var(--c-total)}
+details.tabla{margin-top:12px;font-size:.92rem}
+details.tabla summary{cursor:pointer;color:var(--tinta-marino);font-weight:600;min-height:32px;display:flex;align-items:center}
+details.tabla table{border-collapse:collapse;width:100%;margin-top:8px;font-variant-numeric:tabular-nums}
+details.tabla th,details.tabla td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--borde)}
+details.tabla td.num,details.tabla th.num{text-align:right}
+.tabla-scroll{overflow-x:auto}
+
+/* --- Cascada horizontal --- */
+.cascada{display:grid;gap:6px}
+.cfila{display:grid;grid-template-columns:minmax(150px,34%) 1fr;gap:14px;align-items:center;min-height:34px}
+.cfila .cn{font-size:.95rem;line-height:1.25}
+.cfila.total .cn,.cfila.resultado .cn{font-weight:700}
+.cpista{position:relative;height:22px}
+.cbarra{position:absolute;top:0;height:100%;border-radius:4px;min-width:3px;cursor:default}
+.cbarra.medido{background:var(--c-marino)}
+.cbarra.supuesto{background:repeating-linear-gradient(135deg,var(--c-marino) 0 6px,color-mix(in srgb,var(--c-marino) 35%,var(--card)) 6px 10px)}
+.cbarra.hueco{background:var(--c-rojo)}
+.cbarra.resta{background:var(--c-neutro)}
+.cbarra.total{background:var(--c-total)}
+.cbarra.resultado{background:var(--c-marino)}
+.cvalor{position:absolute;top:50%;transform:translateY(-50%);font-size:.88rem;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:560px){.cfila{grid-template-columns:1fr;gap:4px}.cfila .cn{font-size:.9rem}}
+
+/* --- Barras simples --- */
+.barras{display:grid;gap:10px}
+.bfila .bn{font-size:.95rem;margin-bottom:4px;display:flex;justify-content:space-between;gap:12px}
+.bfila .bn b{font-variant-numeric:tabular-nums}
+.bpista{height:14px;background:color-mix(in srgb,var(--borde) 60%,transparent);border-radius:999px;overflow:hidden}
+.bbarra{height:100%;border-radius:999px}
+.bbarra.marino{background:var(--c-marino)}.bbarra.rojo{background:var(--c-rojo)}.bbarra.grafito{background:var(--c-neutro)}
+
+/* --- Líneas --- */
+.lineas svg{width:100%;height:auto;display:block;overflow:visible}
+.lineas .eje text{fill:var(--texto-2);font:12px var(--f-cuerpo)}
+.lineas .reja{stroke:var(--borde);stroke-width:1}
+.lineas .cero{stroke:var(--texto-2);stroke-width:1.2}
+.lineas .serie{fill:none;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.lineas .s-grafito{stroke:var(--c-neutro);stroke-dasharray:6 5}
+.lineas .s-rojo{stroke:var(--c-rojo)}.lineas .s-marino{stroke:var(--c-marino)}
+.lineas .punto{stroke:var(--card);stroke-width:2}
+.lineas .p-grafito{fill:var(--c-neutro)}.lineas .p-rojo{fill:var(--c-rojo)}.lineas .p-marino{fill:var(--c-marino)}
+.lineas .rotulo{font:600 12.5px var(--f-cuerpo);fill:var(--texto)}
+.lineas svg.chico .eje text,.lineas svg.chico .rotulo{font-size:15px}
+.lineas .guia{stroke:var(--texto-2);stroke-width:1;stroke-dasharray:3 3;opacity:0}
+.lineas .guia.on{opacity:1}
+
+/* --- Línea de tiempo del equipo --- */
+.gantt{overflow-x:auto}
+.gantt-tabla{min-width:640px;display:grid;grid-template-columns:200px repeat(14,minmax(28px,1fr));row-gap:8px;align-items:center;font-size:.9rem}
+.gantt-anio{font-weight:700;color:var(--texto-2);border-bottom:2px solid var(--borde);padding-bottom:2px}
+.gantt-mes{color:var(--texto-2);font-size:.8rem;text-align:center}
+.gantt-nombre b{display:block;font-size:.95rem}
+.gantt-nombre span{color:var(--texto-2);font-size:.84rem}
+.gantt-barra{height:16px;border-radius:999px}
+.gantt-barra.marino{background:var(--c-marino)}.gantt-barra.grafito{background:var(--c-total)}
+.gantt-barra.gris{background:transparent;border:2px dashed var(--c-neutro);height:16px}
+
+/* --- Escenarios y reglas --- */
+.escenarios,.reglas{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.escenario,.regla{background:var(--card);border:1px solid var(--borde);border-radius:4px;padding:16px 18px}
+.escenario.destacado{border:2px solid var(--c-marino)}
+.escenario h3,.regla h3{font-family:var(--f-cuerpo);font-weight:700;font-size:1.05rem;letter-spacing:0}
+.escenario .v{font-family:var(--f-titulo);font-size:2.3rem;line-height:1;margin-top:8px}
+.escenario .d{color:var(--texto-2);font-size:.9rem}
+.regla{position:relative}
+.regla-cab{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;min-height:44px;margin-bottom:6px}
+.escenario .regla-cab{min-height:0;margin-bottom:2px;align-items:center}
+.regla-cab .insignia{margin:4px 0 0}
+.regla .letra{font-family:var(--f-titulo);font-size:2.6rem;line-height:.9;color:var(--texto-2)}
+.regla.rojo .letra{color:var(--tinta-rojo)}.regla.marino .letra{color:var(--tinta-marino)}
+.regla.recomendada{border:2px solid var(--c-marino)}
+.regla dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:10px 0;font-size:.92rem}
+.regla dt{color:var(--texto-2)}.regla dd{margin:0;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.regla .peor.neg{color:var(--tinta-rojo)}
+
+/* --- Pasos --- */
+.pasos{display:grid;gap:8px}
+.paso{display:grid;grid-template-columns:150px 1fr auto;gap:14px;align-items:center;background:var(--card);border:1px solid var(--borde);border-radius:4px;padding:12px 16px}
+.quien{font-weight:700}
+.cuando{font-weight:600;font-size:.9rem;padding:4px 10px;border-radius:999px;background:var(--suave-marino);color:var(--tinta-marino);white-space:nowrap}
+.cuando.pend{background:transparent;border:1px dashed var(--c-neutro);color:var(--texto-2)}
+@media (max-width:560px){.paso{grid-template-columns:1fr auto;row-gap:2px}.paso .quien{grid-column:1/-1;font-size:.9rem;color:var(--texto-2)}}
+
+/* --- Pendiente (lo que llega después) --- */
+.pendiente{border:2px dashed var(--c-neutro);border-radius:4px;padding:16px 18px;display:flex;gap:16px;align-items:flex-start;background:var(--card)}
+.pendiente .barras-marca{flex:none;width:28px;height:38px;background:repeating-linear-gradient(to bottom,var(--c-neutro) 0 5px,transparent 5px 11px);border-radius:2px;opacity:.6}
+.pendiente h3{font-family:var(--f-cuerpo);font-weight:700;font-size:1.05rem;letter-spacing:0}
+.pendiente .quien-llega{font-size:.88rem;color:var(--texto-2);margin-top:4px}
+
+/* --- Tooltip --- */
+#tip{position:fixed;z-index:50;pointer-events:none;background:var(--grafito);color:#fff;font-size:.88rem;line-height:1.35;padding:8px 10px;border-radius:4px;max-width:260px;opacity:0;transition:opacity .12s}
+#tip.ver{opacity:1}
+#tip b{display:block}
+
+/* --- Pie --- */
+footer{border-top:1px solid var(--borde);padding:18px 0 28px;color:var(--texto-2);font-size:.9rem}
+footer .envoltura{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
+.flechas{display:none}
+
+/* --- Modo presentar --- */
+body.presentando .banda .botones .btn-tema{display:none}
+body.presentando main{padding-top:36px}
+body.presentando .respuesta{font-size:clamp(2.4rem,4.6vw,3.6rem)}
+body.presentando .flechas{display:flex;position:fixed;right:20px;bottom:20px;gap:8px;z-index:30}
+.flechas button{width:52px;height:52px;border-radius:50%;border:0;background:var(--grafito);color:#fff;font-size:1.4rem;cursor:pointer;opacity:.85}
+
+/* --- Impresión: todo, una pestaña tras otra --- */
+@media print{
+  .pestanas,.botones,.flechas,#tip{display:none!important}
+  .panel[hidden]{display:block!important}
+  .panel{break-before:page}.panel:first-of-type{break-before:auto}
+  body{background:#fff}
+  details.tabla{display:none}
+  .tarjeta,.cifra,.grafica,.regla,.escenario,.paso{break-inside:avoid}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="banda">
+  <div class="envoltura">
+    <a class="logo" href="#resumen" aria-label="RACK-T, ir al resumen"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 369.87 118.36" role="img" aria-label="RACK-T Thinking"><title>RACK-T Thinking</title><g fill="currentColor"><path fill-rule="nonzero" d="M140.59 8.54C140.50 8.85 140.41 9.15 140.32 9.46C139.61 11.82 137.53 13.38 135.06 13.39C130.96 13.40 126.85 13.39 122.75 13.39C84.03 13.39 45.30 13.39 6.57 13.39C4.29 13.39 2.54 12.42 1.51 10.38C0.52 8.43 0.70 6.50 1.96 4.72C2.83 3.50 4.02 2.76 5.52 2.54C5.70 2.51 5.87 2.44 6.05 2.38L135.41 2.38C135.58 2.44 135.76 2.51 135.93 2.54C138.12 2.88 139.88 4.50 140.40 6.65C140.45 6.85 140.53 7.05 140.59 7.25L140.59 8.54"/><path fill-rule="nonzero" d="M140.59 112.77C140.48 113.16 140.38 113.54 140.25 113.92C139.48 116.14 137.43 117.61 135.06 117.62C129.17 117.63 123.28 117.62 117.39 117.62C80.46 117.62 43.53 117.62 6.60 117.62C3.28 117.62 0.85 115.20 0.91 111.97C0.97 109.05 3.37 106.76 6.47 106.67C6.63 106.66 6.79 106.67 6.95 106.67C49.48 106.67 92.00 106.66 134.53 106.67C137.76 106.67 139.69 108.17 140.46 111.28C140.48 111.35 140.55 111.41 140.59 111.48L140.59 112.77"/><path fill-rule="nonzero" d="M140.59 34.64C140.52 34.89 140.43 35.14 140.36 35.40C139.71 37.75 137.64 39.37 135.19 39.45C135.03 39.46 134.86 39.45 134.70 39.45C92.04 39.45 49.38 39.45 6.72 39.45C3.82 39.45 1.56 37.73 1.03 35.13C0.35 31.73 2.77 28.65 6.26 28.50C6.53 28.49 6.80 28.50 7.07 28.50L134.40 28.50C137.80 28.50 139.63 29.91 140.50 33.22C140.51 33.27 140.56 33.30 140.59 33.34L140.59 34.64"/><path fill-rule="nonzero" d="M140.59 86.68C140.31 87.43 140.14 88.24 139.73 88.91C138.68 90.66 137.08 91.54 135.02 91.54C124.67 91.54 114.32 91.54 103.98 91.54C71.51 91.54 39.04 91.54 6.57 91.54C3.25 91.54 0.83 89.12 0.91 85.88C0.98 83.19 3.16 80.88 5.86 80.68C6.31 80.64 6.77 80.63 7.23 80.63C49.37 80.63 91.52 80.65 133.66 80.60C137.27 80.59 139.84 81.85 140.59 85.54L140.59 86.68"/><path fill-rule="nonzero" d="M140.59 60.58C140.51 60.89 140.43 61.20 140.34 61.51C139.68 63.85 137.64 65.42 135.21 65.48C135.07 65.49 134.94 65.49 134.80 65.49C92.09 65.49 49.39 65.49 6.68 65.49C4.04 65.49 2.00 64.12 1.21 61.85C0.00 58.34 2.52 54.69 6.23 54.58C6.42 54.57 6.61 54.58 6.80 54.58C49.42 54.58 92.05 54.58 134.68 54.58C137.52 54.58 139.61 56.05 140.33 58.53C140.41 58.83 140.51 59.14 140.59 59.44L140.59 60.58"/><path fill-rule="nonzero" d="M171.05 38.04C174.08 37.87 177.05 37.77 180.00 37.50C181.43 37.37 182.39 36.36 182.92 35.04C183.26 34.19 183.58 33.29 183.71 32.39C184.53 26.48 184.51 20.54 183.92 14.63C183.50 10.44 181.76 9.02 177.56 8.98C175.78 8.97 174.00 8.98 172.22 8.98C171.84 8.98 171.45 9.03 171.05 9.06L171.05 38.04M170.99 45.02L170.99 86.08L161.16 86.08L161.16 84.75C161.16 57.41 161.17 30.07 161.14 2.73C161.14 1.59 161.41 1.21 162.61 1.23C169.04 1.31 175.48 1.09 181.89 1.42C188.34 1.75 191.16 4.44 192.66 9.31C193.23 11.14 193.63 13.08 193.74 15.00C193.96 18.87 194.12 22.76 193.96 26.62C193.86 29.22 193.34 31.83 192.72 34.36C191.93 37.59 190.00 40.01 186.31 41.29C186.75 41.46 186.90 41.53 187.05 41.57C189.65 42.26 191.24 44.08 191.88 46.54C192.62 49.38 193.35 52.28 193.49 55.19C193.87 62.93 193.92 70.69 194.15 78.45C194.23 80.98 194.46 83.50 194.62 86.09L184.92 86.09C184.77 83.68 184.53 81.31 184.49 78.95C184.40 72.07 184.44 65.20 184.33 58.33C184.29 55.59 184.15 52.83 183.75 50.13C183.27 46.88 182.43 46.04 179.20 45.58C176.55 45.20 173.84 45.20 170.99 45.02"/><path fill-rule="nonzero" d="M332.01 86.15C328.69 86.15 325.51 86.18 322.33 86.10C322.00 86.09 321.57 85.48 321.40 85.06C319.25 79.58 317.13 74.08 315.01 68.59C312.24 61.44 309.48 54.29 306.71 47.14C306.57 46.79 306.38 46.46 305.94 46.18L305.94 86.15L298.44 86.15C295.99 86.15 295.99 86.15 295.99 83.74C295.99 56.88 295.99 30.03 295.99 3.17C295.99 1.25 295.99 1.25 297.90 1.25C299.96 1.25 302.03 1.25 304.09 1.25C305.77 1.26 305.77 1.26 305.78 2.91C305.78 15.17 305.78 27.42 305.78 39.68L305.78 41.06C305.90 41.08 306.02 41.10 306.15 41.12C306.49 40.25 306.84 39.38 307.16 38.51C311.65 26.49 316.13 14.47 320.59 2.43C320.90 1.60 321.28 1.21 322.23 1.23C325.05 1.29 327.87 1.25 330.84 1.25C330.66 1.87 330.55 2.33 330.38 2.77C325.44 15.87 320.48 28.96 315.58 42.07C315.35 42.67 315.33 43.51 315.56 44.10C320.88 57.71 326.24 71.29 331.59 84.88C331.74 85.24 331.84 85.63 332.01 86.15"/><path fill-rule="nonzero" d="M216.14 61.80L229.35 61.80C227.11 46.80 224.88 31.94 222.66 17.09L222.29 17.12C220.24 31.96 218.20 46.80 216.14 61.80M203.47 86.15C204.06 82.21 204.61 78.46 205.18 74.72C206.11 68.54 207.06 62.37 208.00 56.19C209.02 49.50 210.04 42.80 211.05 36.11C211.98 29.97 212.90 23.83 213.83 17.69C214.61 12.55 215.42 7.42 216.17 2.27C216.28 1.52 216.53 1.24 217.30 1.24C220.61 1.27 223.93 1.28 227.24 1.23C228.13 1.22 228.34 1.70 228.45 2.39C229.36 7.92 230.26 13.44 231.17 18.97C232.51 27.08 233.87 35.19 235.21 43.30C236.46 50.86 237.69 58.41 238.94 65.97C239.95 72.09 240.96 78.22 241.97 84.34C242.06 84.90 242.12 85.45 242.20 86.08L233.03 86.08C232.70 83.89 232.36 81.67 232.03 79.45C231.60 76.58 231.19 73.71 230.77 70.83C230.68 70.19 230.43 69.87 229.68 69.88C225.11 69.91 220.54 69.90 215.97 69.88C215.28 69.88 214.99 70.08 214.89 70.82C214.28 75.57 213.62 80.33 212.93 85.07C212.87 85.46 212.41 86.09 212.13 86.10C209.30 86.18 206.48 86.15 203.47 86.15"/><path fill-rule="nonzero" d="M283.35 33.91L274.06 33.91C274.03 33.47 273.99 33.08 273.98 32.68C273.91 28.00 273.88 23.31 273.75 18.62C273.69 16.27 273.37 13.96 272.37 11.78C271.59 10.07 270.42 8.93 268.48 8.75C266.11 8.52 264.05 9.08 262.69 11.22C261.42 13.21 261.02 15.50 260.81 17.79C260.60 20.16 260.53 22.55 260.53 24.93C260.51 38.48 260.47 52.03 260.58 65.58C260.60 68.34 261.00 71.14 261.57 73.85C262.39 77.80 265.45 79.59 269.04 78.53C270.91 77.98 272.13 76.66 272.54 74.84C273.09 72.33 273.59 69.77 273.72 67.21C273.96 62.58 273.94 57.92 273.96 53.27C273.96 52.27 274.25 51.93 275.26 51.96C277.61 52.02 279.96 52.01 282.30 51.96C283.27 51.94 283.66 52.19 283.64 53.24C283.50 58.33 283.56 63.43 283.30 68.51C283.11 72.35 282.32 76.11 280.68 79.64C278.64 84.02 275.13 86.43 270.40 86.86C268.05 87.08 265.62 87.05 263.30 86.69C258.47 85.95 255.27 82.98 253.38 78.54C251.96 75.20 251.06 71.69 251.00 68.10C250.79 56.25 250.74 44.41 250.70 32.56C250.68 27.71 250.78 22.86 250.98 18.02C251.15 13.97 252.31 10.14 254.38 6.64C256.66 2.81 260.26 1.03 264.54 0.39C267.17 0.00 269.78 0.11 272.35 0.74C277.13 1.92 280.25 4.99 281.60 9.61C282.48 12.65 283.10 15.83 283.28 18.98C283.55 23.89 283.35 28.83 283.35 33.91"/><path fill-rule="nonzero" d="M351.40 117.96L351.40 115.95C351.40 81.05 351.40 46.15 351.40 11.25C351.40 9.34 351.39 9.34 349.48 9.34C347.34 9.34 345.19 9.31 343.05 9.35C342.21 9.37 341.92 9.07 341.95 8.23C342.00 6.29 341.99 4.34 341.95 2.40C341.93 1.60 342.13 1.24 343.01 1.24C351.59 1.26 360.16 1.26 368.73 1.24C369.59 1.24 369.87 1.58 369.85 2.40C369.82 4.34 369.82 6.28 369.85 8.22C369.87 9.06 369.54 9.36 368.71 9.35C366.61 9.31 364.50 9.38 362.40 9.32C361.38 9.29 361.00 9.68 361.10 10.66C361.14 11.06 361.11 11.47 361.11 11.87C361.11 46.57 361.11 81.27 361.11 115.97C361.11 118.36 361.21 117.93 359.08 117.95C356.58 117.98 354.08 117.96 351.40 117.96"/><path fill-rule="nonzero" d="M335.66 53.77C332.20 53.80 329.38 51.03 329.35 47.59C329.32 44.11 332.04 41.33 335.51 41.27C339.00 41.21 341.84 43.94 341.87 47.38C341.91 50.94 339.18 53.74 335.66 53.77"/><path fill-rule="nonzero" d="M230.43 95.88C231.41 95.55 231.71 96.00 231.92 96.80C233.28 101.98 234.68 107.15 236.07 112.32C236.10 112.42 236.19 112.50 236.39 112.82L236.39 95.86C236.84 95.83 237.19 95.80 237.56 95.78C237.62 95.99 237.70 96.14 237.70 96.29C237.70 103.08 237.71 109.87 237.68 116.66C237.68 116.95 237.35 117.25 237.17 117.55C236.82 117.31 236.26 117.13 236.17 116.81C234.75 111.81 233.40 106.79 232.03 101.78C231.91 101.33 231.79 100.88 231.41 100.48C231.49 101.46 231.62 102.45 231.63 103.44C231.65 107.85 231.65 112.25 231.61 116.66C231.61 116.95 231.20 117.25 230.98 117.54C230.76 117.24 230.36 116.94 230.36 116.64C230.32 109.85 230.33 103.06 230.34 96.27C230.34 96.16 230.39 96.04 230.43 95.88"/><path fill-rule="nonzero" d="M306.67 112.68C306.67 110.62 306.67 108.57 306.67 106.52C306.67 103.32 306.66 100.13 306.69 96.94C306.69 96.56 306.86 95.93 307.10 95.84C307.89 95.57 307.89 96.20 307.89 96.76C307.88 100.48 307.89 104.19 307.89 107.91C307.89 110.74 307.91 113.57 307.86 116.40C307.86 116.78 307.52 117.16 307.34 117.54C307.01 117.23 306.48 116.96 306.38 116.58C304.93 111.38 303.55 106.17 302.15 100.95C302.12 100.85 302.07 100.75 301.80 100.64C301.80 101.05 301.80 101.45 301.80 101.86C301.83 106.63 301.86 111.39 301.89 116.16C301.89 116.48 301.93 116.84 301.81 117.12C301.72 117.31 301.41 117.48 301.18 117.49C301.03 117.50 300.80 117.25 300.72 117.07C300.64 116.86 300.68 116.60 300.68 116.35C300.68 109.85 300.68 103.34 300.68 96.83C300.68 96.52 300.73 96.20 300.76 95.93C301.85 95.44 302.05 96.13 302.25 96.89C303.67 102.17 305.09 107.45 306.52 112.73C306.57 112.71 306.62 112.70 306.67 112.68"/><path fill-rule="nonzero" d="M333.98 106.17C333.83 109.10 333.81 111.81 333.53 114.48C333.29 116.64 332.06 117.74 330.32 117.81C328.69 117.88 327.70 117.32 327.09 115.80C326.73 114.87 326.45 113.87 326.34 112.89C325.87 108.30 325.64 103.70 326.68 99.15C326.87 98.35 327.22 97.52 327.69 96.85C329.07 94.90 331.71 95.01 332.94 97.06C333.35 97.74 333.57 98.52 333.94 99.39C333.41 99.66 332.96 99.89 332.42 100.16C332.25 99.63 332.22 99.09 331.95 98.76C331.49 98.21 330.89 97.45 330.32 97.43C329.74 97.40 328.79 98.05 328.60 98.60C328.09 100.15 327.63 101.80 327.62 103.41C327.58 106.68 327.82 109.94 328.03 113.20C328.08 113.90 328.36 114.67 328.78 115.21C329.12 115.65 329.88 116.07 330.38 116.00C330.94 115.92 331.81 115.32 331.87 114.86C332.16 112.71 332.24 110.53 332.30 108.36C332.31 108.19 331.68 107.90 331.32 107.82C330.73 107.69 329.94 108.03 329.98 106.94C330.02 105.84 330.84 106.22 331.41 106.18C332.16 106.13 332.92 106.17 333.98 106.17"/><path fill-rule="nonzero" d="M184.57 95.83L185.87 95.83L185.87 104.51C187.24 104.51 188.41 104.56 189.56 104.46C189.82 104.44 190.21 103.83 190.22 103.49C190.28 101.43 190.25 99.37 190.25 97.31L190.25 95.86C190.71 95.83 191.08 95.80 191.55 95.77C191.58 96.21 191.64 96.56 191.64 96.92C191.64 103.38 191.64 109.84 191.64 116.31C191.64 116.43 191.69 116.58 191.63 116.66C191.42 116.97 191.17 117.25 190.94 117.55C190.71 117.25 190.29 116.96 190.29 116.66C190.24 113.87 190.26 111.08 190.25 108.30C190.24 105.96 190.42 106.33 188.24 106.30C187.52 106.29 186.80 106.29 185.89 106.29C185.89 107.50 185.89 108.58 185.89 109.66C185.89 112.00 185.91 114.35 185.85 116.69C185.84 116.98 185.39 117.26 185.14 117.55C184.90 117.26 184.46 116.97 184.46 116.68C184.43 109.85 184.45 103.02 184.46 96.20C184.46 96.12 184.50 96.05 184.57 95.83"/><path fill-rule="nonzero" d="M256.33 95.83L257.70 95.83L257.70 105.09C257.81 105.11 257.92 105.13 258.03 105.16C258.17 104.86 258.34 104.58 258.45 104.28C259.33 101.85 260.27 99.44 261.05 96.99C261.39 95.91 261.90 95.54 263.10 95.89C262.94 96.37 262.79 96.84 262.61 97.31C261.66 99.79 260.74 102.30 259.72 104.75C259.32 105.72 259.30 106.56 259.66 107.53C260.75 110.48 261.76 113.46 262.80 116.42C262.90 116.72 262.98 117.03 263.09 117.40C262.05 117.77 261.46 117.59 261.12 116.46C260.18 113.34 259.13 110.26 258.12 107.17C258.02 107.17 257.92 107.17 257.81 107.16C257.78 107.55 257.73 107.94 257.73 108.32C257.72 110.99 257.73 113.66 257.72 116.32C257.71 116.85 257.88 117.55 256.97 117.55C256.03 117.55 256.27 116.82 256.27 116.31C256.26 109.85 256.26 103.38 256.27 96.92C256.27 96.60 256.30 96.28 256.33 95.83"/><path fill-rule="nonzero" d="M162.85 117.36L162.85 97.54C161.95 97.47 161.16 97.41 160.28 97.35L160.28 95.84L167.32 95.84C167.00 96.48 166.87 97.18 166.50 97.35C165.96 97.60 165.25 97.47 164.48 97.51C164.46 98.05 164.42 98.51 164.42 98.98C164.41 104.76 164.39 110.53 164.44 116.31C164.44 117.43 164.12 117.82 162.85 117.36"/><path fill-rule="nonzero" d="M210.28 95.85L211.69 95.85L211.69 117.40C210.89 117.60 210.18 117.88 210.19 116.56C210.21 109.81 210.20 103.07 210.21 96.32C210.21 96.20 210.24 96.08 210.28 95.85"/><path fill-rule="nonzero" d="M280.63 95.85L282.06 95.85L282.06 117.40C281.25 117.62 280.55 117.86 280.55 116.56C280.57 109.85 280.57 103.14 280.57 96.43C280.57 96.27 280.60 96.12 280.63 95.85"/></g></svg></a>
+    <div class="banda-titulo"><h1 id="titulo">Plan 2027</h1><p id="subtitulo"></p></div>
+    <div class="botones">
+      <button class="btn btn-tema" type="button" id="btn-tema" aria-label="Cambiar entre modo claro y oscuro">◐</button>
+      <button class="btn btn-presentar" type="button" id="btn-presentar">Presentar</button>
+    </div>
+  </div>
+</header>
+<nav class="pestanas" aria-label="Secciones del plan"><div class="envoltura" role="tablist" id="tabs"></div></nav>
+<main><div class="envoltura" id="paneles"></div></main>
+<footer><div class="envoltura"><span id="pie-fecha"></span><span>Cifras en pesos, sin IVA, en el escenario de $100 M</span></div></footer>
+<div class="flechas"><button type="button" id="ant" aria-label="Pestaña anterior">‹</button><button type="button" id="sig" aria-label="Pestaña siguiente">›</button></div>
+<div id="tip" role="status" aria-live="polite"></div>
+
+<script id="contenido" type="application/json">
+{
+ "titulo": "Plan 2027 a $100 millones",
+ "subtitulo": "Lo que decidió Juan Carlos el 9 de noviembre y lo que dicen los números",
+ "actualizado": "10 de noviembre de 2026",
+ "barra": {
+  "meta": 100000000.0,
+  "segmentos": [
+   {
+    "nombre": "Ya sustentado",
+    "valor": 55701245.51964378,
+    "tipo": "medido"
+   },
+   {
+    "nombre": "Por conseguir",
+    "valor": 44298754.48035622,
+    "tipo": "hueco"
+   }
+  ],
+  "texto": "De los $100 M, $55.7 M ya tienen de dónde salir. Faltan $44.3 M en proyectos grandes que hoy no existen."
+ },
+ "pestanas": [
+  {
+   "id": "resumen",
+   "nombre": "Resumen",
+   "respuesta": "Los $100 M dan utilidad, pero la reserva de hoy deja a la empresa sin efectivo. Hay que cambiar esa regla antes de enero.",
+   "bloques": [
+    {
+     "tipo": "cifras",
+     "items": [
+      {
+       "valor": "$100 M",
+       "etiqueta": "Meta de venta 2027",
+       "nota": "Sin IVA",
+       "tono": "grafito"
+      },
+      {
+       "valor": "25 %",
+       "etiqueta": "Margen bruto",
+       "nota": "Promedio decidido",
+       "tono": "grafito"
+      },
+      {
+       "valor": "$6.0 M",
+       "etiqueta": "Utilidad de operación",
+       "nota": "6 % de la venta, provisional",
+       "tono": "marino"
+      },
+      {
+       "valor": "$44.3 M",
+       "etiqueta": "Por conseguir",
+       "nota": "En proyectos grandes nuevos",
+       "tono": "rojo"
+      }
+     ]
+    },
+    {
+     "tipo": "tarjetas",
+     "items": [
+      {
+       "titulo": "Utilidad",
+       "tono": "marino",
+       "vinetas": [
+        "Con 25 % de margen, $100 M dejan $25.0 M de margen bruto.",
+        "Después de comisiones, gasto y equipo comercial quedan $6.0 M.",
+        "Es provisional: el gasto fijo real de hoy todavía se está midiendo."
+       ]
+      },
+      {
+       "titulo": "Caja",
+       "tono": "rojo",
+       "vinetas": [
+        "Con 50 % de anticipo y ESJ cobrando al ritmo del cliente, los proyectos ya no atan dinero.",
+        "Apartar el 26 % de todo lo cobrado son $25.5 M en el año: más que el margen.",
+        "Así, en diciembre faltarían $22.3 M. Ver «Caja y reserva»."
+       ]
+      },
+      {
+       "titulo": "Venta",
+       "tono": "grafito",
+       "vinetas": [
+        "Schneider no tendrá venta en 2027.",
+        "Los 7 grandes ya cotizados suman $17.8 M.",
+        "Aun así faltan $44.3 M en proyectos grandes nuevos, con nombre y responsable."
+       ]
+      }
+     ]
+    },
+    {
+     "tipo": "decisiones",
+     "titulo": "Lo que se decidió el 9 de noviembre",
+     "items": [
+      "Meta de $100 M y margen de 25 %",
+      "Anticipo mínimo de 50 %; menos, solo con autorización de Dirección",
+      "Iván entra el 23 de noviembre; CDMX en enero y León en abril",
+      "Sin línea de crédito: la fuerza está en el material chino",
+      "ESJ cobra al ritmo en que paga el cliente",
+      "Proyectos de $1 M o más primero",
+      "Reunión comercial los lunes a las 9:00",
+      "Nada se cotiza fuera del CRM"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "puente",
+   "nombre": "De dónde salen",
+   "respuesta": "Con lo que ya tenemos se sostienen $55.7 M. Los otros $44.3 M tienen que venir de proyectos grandes nuevos.",
+   "bloques": [
+    {
+     "tipo": "cascada",
+     "titulo": "Cómo se llega a $100 M (millones de pesos)",
+     "unidad": "M",
+     "filas": [
+      {
+       "nombre": "Clientes que ya nos compran",
+       "valor": 5557188.965,
+       "tipo": "medido"
+      },
+      {
+       "nombre": "Select Shop (sin Schneider)",
+       "valor": 12134400,
+       "tipo": "supuesto"
+      },
+      {
+       "nombre": "Clientes nuevos en Querétaro",
+       "valor": 10118729.063999997,
+       "tipo": "supuesto"
+      },
+      {
+       "nombre": "Clientes nuevos en CDMX y Edomex",
+       "valor": 12268103.11054545,
+       "tipo": "supuesto"
+      },
+      {
+       "nombre": "Clientes nuevos en León",
+       "valor": 6025392.063999998,
+       "tipo": "supuesto"
+      },
+      {
+       "nombre": "Stock y ventas rápidas",
+       "valor": 7358588.387096774,
+       "tipo": "supuesto"
+      },
+      {
+       "nombre": "Grandes ya cotizados (con la tasa de hoy)",
+       "valor": 2238843.929001567,
+       "tipo": "medido"
+      },
+      {
+       "nombre": "Proyectos grandes por conseguir",
+       "valor": 44298754.48035622,
+       "tipo": "hueco"
+      },
+      {
+       "nombre": "Meta 2027",
+       "valor": 100000000,
+       "tipo": "total"
+      }
+     ],
+     "leyenda": [
+      [
+       "medido",
+       "Sale de ventas medidas"
+      ],
+      [
+       "supuesto",
+       "Supuesto por confirmar"
+      ],
+      [
+       "hueco",
+       "No existe todavía"
+      ]
+     ]
+    },
+    {
+     "tipo": "tarjetas",
+     "items": [
+      {
+       "titulo": "Los 7 grandes ya cotizados",
+       "tono": "marino",
+       "vinetas": [
+        "Fedeqro, El Gigante Del Peluche, Panduit, DT Latam, Truper Guadalajara, Bayer y Gistek.",
+        "Suman $17.8 M; se esperan en el primer trimestre.",
+        "El plan solo cuenta la parte que se cierra con la tasa de hoy."
+       ]
+      },
+      {
+       "titulo": "Schneider fuera de 2027",
+       "tono": "rojo",
+       "vinetas": [
+        "En 2025 compró $50.6 M y en 2026 $10.5 M.",
+        "Al quitarlo, lo que falta subió de $33.8 M a $44.3 M.",
+        "Select Shop se supone igual que en 2026, hasta tener su monto."
+       ]
+      },
+      {
+       "titulo": "Lo que cierra el hueco",
+       "tono": "grafito",
+       "vinetas": [
+        "Unos 15 proyectos de $3 M, o casi 4 clientes del tamaño de Select Shop.",
+        "La lista de 30 cuentas grandes: hoy tiene 7.",
+        "Cada cuenta con responsable y siguiente paso con fecha."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "equipo",
+   "nombre": "Equipo y ventas",
+   "respuesta": "Cuatro personas que cotizan y cierran: Juan Carlos, Iván, CDMX y León.",
+   "bloques": [
+    {
+     "tipo": "gantt",
+     "titulo": "Quién entra y cuándo",
+     "meses": [
+      "Nov",
+      "Dic",
+      "Ene",
+      "Feb",
+      "Mar",
+      "Abr",
+      "May",
+      "Jun",
+      "Jul",
+      "Ago",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dic"
+     ],
+     "anios": [
+      [
+       "2026",
+       2
+      ],
+      [
+       "2027",
+       12
+      ]
+     ],
+     "items": [
+      {
+       "nombre": "Juan Carlos",
+       "nota": "Proyectos grandes y cuentas clave",
+       "desde": 0,
+       "tono": "grafito"
+      },
+      {
+       "nombre": "Iván · Querétaro",
+       "nota": "Entra el 23 de noviembre",
+       "desde": 0,
+       "tono": "marino"
+      },
+      {
+       "nombre": "Ingeniero comercial · CDMX",
+       "nota": "Home office, desde enero",
+       "desde": 2,
+       "tono": "marino"
+      },
+      {
+       "nombre": "Ingeniero comercial · León",
+       "nota": "Home office, desde abril",
+       "desde": 5,
+       "tono": "marino"
+      },
+      {
+       "nombre": "Morelia",
+       "nota": "Posible, después de León",
+       "desde": 8,
+       "tono": "gris"
+      }
+     ]
+    },
+    {
+     "tipo": "barras",
+     "titulo": "Cotizaciones al mes",
+     "unidad": "",
+     "items": [
+      {
+       "nombre": "Hoy",
+       "valor": 30,
+       "tono": "grafito"
+      },
+      {
+       "nombre": "Hacen falta para $100 M",
+       "valor": 79,
+       "tono": "rojo"
+      },
+      {
+       "nombre": "Lo que puede el equipo (3 ingenieros × 2 al día)",
+       "valor": 132,
+       "tono": "marino"
+      }
+     ],
+     "nota": "Dos cotizaciones al día solo salen con proyectos chicos o con plantilla: un proyecto mediano lleva 7 días y uno grande 14."
+    },
+    {
+     "tipo": "tarjetas",
+     "items": [
+      {
+       "titulo": "Reglas del equipo",
+       "tono": "marino",
+       "vinetas": [
+        "Meta de cierre: 25 % de lo cotizado.",
+        "Primero los proyectos de $1 M o más; los chicos, rápido y con plantilla.",
+        "Lo que no está en el CRM no cuenta para comisión ni para la meta."
+       ]
+      },
+      {
+       "titulo": "Ritmo semanal",
+       "tono": "grafito",
+       "vinetas": [
+        "Lunes a las 9:00, 15 minutos, con el tablero.",
+        "Cobranza, embudo y negocios sin seguimiento.",
+        "Primera reunión: lunes 23 de noviembre."
+       ]
+      },
+      {
+       "titulo": "Prospección",
+       "tono": "grafito",
+       "vinetas": [
+        "Sin prospectador: prospecta cada ingeniero comercial.",
+        "Centro de llamadas, a evaluar después de contratar CDMX.",
+        "Referidos y aliados comerciales con programa propio."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "numeros",
+   "nombre": "Números 2027",
+   "respuesta": "A $100 M quedan $6.0 M de utilidad de operación (6 %). El gasto fijo de hoy todavía es estimado.",
+   "bloques": [
+    {
+     "tipo": "cascada",
+     "titulo": "De la venta a la utilidad (millones de pesos)",
+     "unidad": "M",
+     "filas": [
+      {
+       "nombre": "Venta 2027",
+       "valor": 100000000,
+       "tipo": "total"
+      },
+      {
+       "nombre": "Costo de los proyectos",
+       "valor": -75000000,
+       "tipo": "resta"
+      },
+      {
+       "nombre": "Comisiones (3.50 %)",
+       "valor": -3500000.0000000005,
+       "tipo": "resta"
+      },
+      {
+       "nombre": "Gasto fijo de hoy (estimado)",
+       "valor": -12600000,
+       "tipo": "supuesto"
+      },
+      {
+       "nombre": "Gasto nuevo 2027",
+       "valor": -2053200,
+       "tipo": "resta"
+      },
+      {
+       "nombre": "Equipo comercial nuevo",
+       "valor": -891000,
+       "tipo": "resta"
+      },
+      {
+       "nombre": "Utilidad de operación",
+       "valor": 5955800,
+       "tipo": "resultado"
+      }
+     ],
+     "leyenda": [
+      [
+       "resta",
+       "Gasto decidido"
+      ],
+      [
+       "supuesto",
+       "Estimado: llega el dato real de Leslie"
+      ],
+      [
+       "resultado",
+       "Lo que queda"
+      ]
+     ]
+    },
+    {
+     "tipo": "escenarios",
+     "titulo": "Tres escenarios",
+     "items": [
+      {
+       "nombre": "Conservador",
+       "venta": "$50.0 M",
+       "utilidad": "−$3.8 M",
+       "pct": "−8 %",
+       "nota": "Solo Iván y CDMX"
+      },
+      {
+       "nombre": "Objetivo",
+       "venta": "$100.0 M",
+       "utilidad": "$6.0 M",
+       "pct": "6 %",
+       "nota": "El plan de Juan Carlos",
+       "destacado": true
+      },
+      {
+       "nombre": "Acelerado",
+       "venta": "$120.0 M",
+       "utilidad": "$13.3 M",
+       "pct": "11 %",
+       "nota": "Con Morelia y 60 % de anticipo"
+      }
+     ]
+    },
+    {
+     "tipo": "barras",
+     "titulo": "Gasto nuevo 2027 (al año)",
+     "unidad": "$",
+     "items": [
+      {
+       "nombre": "Sistemas y desarrollo",
+       "valor": 409200,
+       "tono": "marino"
+      },
+      {
+       "nombre": "Marketing",
+       "valor": 684000,
+       "tono": "marino"
+      },
+      {
+       "nombre": "Dirección y reclutamiento",
+       "valor": 960000,
+       "tono": "marino"
+      }
+     ],
+     "nota": "Total $2.1 M. El equipo comercial nuevo va aparte: $0.9 M en el año."
+    },
+    {
+     "tipo": "pendiente",
+     "titulo": "Gasto fijo real de hoy",
+     "quien": "Leslie",
+     "texto": "Nómina, renta de la nave y servicios de enero a octubre. Mientras llega, el plan usa $1 M al mes."
+    }
+   ]
+  },
+  {
+   "id": "caja",
+   "nombre": "Caja y reserva",
+   "respuesta": "Apartar el 26 % de todo lo que se cobra deja la caja en −$22.3 M en diciembre. Con la regla D la reserva crece y la caja aguanta.",
+   "bloques": [
+    {
+     "tipo": "lineas",
+     "titulo": "Saldo de caja al cierre de cada mes de 2027 (millones de pesos)",
+     "meses": [
+      "Ene",
+      "Feb",
+      "Mar",
+      "Abr",
+      "May",
+      "Jun",
+      "Jul",
+      "Ago",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dic"
+     ],
+     "series": [
+      {
+       "nombre": "Sin reserva",
+       "valores": [
+        0.5,
+        -0.3,
+        0.93,
+        0.43,
+        0.55,
+        1.14,
+        1.09,
+        1.46,
+        2.69,
+        2.45,
+        3.25,
+        3.17
+       ],
+       "tono": "grafito"
+      },
+      {
+       "nombre": "Regla A · 26 % de todo lo cobrado",
+       "valores": [
+        -1.88,
+        -3.49,
+        -5.53,
+        -7.24,
+        -9.08,
+        -11.02,
+        -12.83,
+        -14.72,
+        -16.79,
+        -18.56,
+        -20.54,
+        -22.34
+       ],
+       "tono": "rojo"
+      },
+      {
+       "nombre": "Regla D · 26 % de lo que sobra",
+       "valores": [
+        0.37,
+        -0.43,
+        0.48,
+        -0.02,
+        0.07,
+        0.5,
+        0.46,
+        0.73,
+        1.64,
+        1.4,
+        2.0,
+        1.91
+       ],
+       "tono": "marino"
+      }
+     ],
+     "nota": "Con saldo inicial en cero y sin línea de crédito."
+    },
+    {
+     "tipo": "reglas",
+     "titulo": "Cuatro maneras de apartar el 26 %",
+     "items": [
+      {
+       "letra": "A",
+       "nombre": "26 % de todo lo cobrado",
+       "nota": "Como hoy",
+       "junta": "$25.5 M",
+       "peor": "−$22.3 M",
+       "lectura": "No alcanza: se aparta más de lo que se gana.",
+       "tono": "rojo"
+      },
+      {
+       "letra": "B",
+       "nombre": "26 % del margen de lo cobrado",
+       "junta": "$6.4 M",
+       "peor": "−$3.2 M",
+       "lectura": "Sigue faltando efectivo todo el año.",
+       "tono": "grafito"
+      },
+      {
+       "letra": "C",
+       "nombre": "26 % hasta juntar 3 meses de gasto",
+       "junta": "$3.9 M",
+       "peor": "−$3.5 M",
+       "lectura": "Se llena rápido y deja hueco al arranque.",
+       "tono": "grafito"
+      },
+      {
+       "letra": "D",
+       "nombre": "26 % de lo que sobra cada mes",
+       "junta": "$1.3 M",
+       "peor": "−$0.4 M",
+       "lectura": "La reserva crece sin frenar la operación.",
+       "tono": "marino",
+       "recomendada": true
+      }
+     ]
+    },
+    {
+     "tipo": "tarjetas",
+     "items": [
+      {
+       "titulo": "Por qué los proyectos ya no atan dinero",
+       "tono": "marino",
+       "vinetas": [
+        "Anticipo mínimo de 50 %.",
+        "A ESJ se le paga al ritmo en que paga el cliente.",
+        "Mecalux y China se pagan por adelantado: se cuida con el stock."
+       ]
+      },
+      {
+       "titulo": "Decisión pendiente",
+       "tono": "rojo",
+       "insignia": "Para el 20 de noviembre",
+       "vinetas": [
+        "Elegir la regla de la reserva: A, B, C o D.",
+        "Se recomienda la D.",
+        "Con la D, el mes más apretado pide $0.4 M en el banco al 1 de enero."
+       ]
+      }
+     ]
+    },
+    {
+     "tipo": "pendiente",
+     "titulo": "Saldo del fondo de inversión",
+     "quien": "Leslie",
+     "texto": "Lo que ya se juntó desde octubre. Con eso se sabe cuánto colchón hay al empezar 2027."
+    }
+   ]
+  },
+  {
+   "id": "operacion",
+   "nombre": "Operación",
+   "respuesta": "Al crecer, lo primero que se rompe es el material chino; después, la coordinación de obras.",
+   "bloques": [
+    {
+     "tipo": "tarjetas",
+     "titulo": "Lo que se rompe primero (Juan Carlos e Ivette coinciden)",
+     "items": [
+      {
+       "titulo": "1. Proveedor chino",
+       "tono": "rojo",
+       "vinetas": [
+        "Hay 2 contenedores trabados desde hace 4 meses.",
+        "De ahí sale el stock de $1 M al mes del plan.",
+        "Entrega normal: 4 a 5 meses; en el peor caso, 10."
+       ]
+      },
+      {
+       "titulo": "2. Coordinación de obras",
+       "tono": "grafito",
+       "vinetas": [
+        "Operaciones coordina 3 a 4 obras a la vez; hoy hay 9 abiertas.",
+        "Depende mucho de la Dirección General.",
+        "Hay un solo segurista y cubre una obra a la vez."
+       ]
+      },
+      {
+       "titulo": "3. Almacén y compras",
+       "tono": "grafito",
+       "vinetas": [
+        "Hace falta un equipo más fuerte para el seguimiento.",
+        "Y para cotizar con proveedores a tiempo.",
+        "La bodega tiene espacio; falta medir cuánto."
+       ]
+      }
+     ]
+    },
+    {
+     "tipo": "tarjetas",
+     "titulo": "Obras de diciembre",
+     "items": [
+      {
+       "titulo": "Omec y Nemak",
+       "tono": "marino",
+       "vinetas": [
+        "Material pedido: Omega y ESJ, llega en 4 a 5 semanas.",
+        "Se entregan el 22 y 23 de diciembre.",
+        "Instalador: se cotiza con Marco e Iván."
+       ]
+      },
+      {
+       "titulo": "Cobro detenido",
+       "tono": "rojo",
+       "vinetas": [
+        "Tres obras terminadas no tienen la remisión firmada.",
+        "Sin remisión no se cobra el saldo.",
+        "Pedirla al cliente esta semana."
+       ]
+      },
+      {
+       "titulo": "Proveedores",
+       "tono": "grafito",
+       "vinetas": [
+        "Material nacional: 3 a 6 semanas; en el peor caso, 6 a 8.",
+        "Todos tienen sustituto, menos las memorias de cálculo.",
+        "Unos 6 fletes al mes, en plataforma abierta."
+       ]
+      }
+     ]
+    },
+    {
+     "tipo": "pendiente",
+     "titulo": "Inventario con costo y cupo de la bodega",
+     "quien": "Ivette y almacén",
+     "texto": "El conteo de bodega ya está; faltan los costos de cada artículo y cuánto más cabe."
+    },
+    {
+     "tipo": "pendiente",
+     "titulo": "China y Cercassa",
+     "quien": "Juan Carlos",
+     "texto": "Proveedor, tiempos de barco y aduana, forma de pago y costo de traerlo."
+    }
+   ]
+  },
+  {
+   "id": "pasos",
+   "nombre": "Siguientes pasos",
+   "respuesta": "Para cerrar el plan faltan seis cosas; tres son de Juan Carlos.",
+   "bloques": [
+    {
+     "tipo": "pasos",
+     "items": [
+      {
+       "quien": "Juan Carlos",
+       "que": "Elegir la regla de la reserva",
+       "cuando": "20 nov"
+      },
+      {
+       "quien": "Juan Carlos",
+       "que": "Cuentas grandes 8 a 30 y monto de Select Shop",
+       "cuando": "13 nov"
+      },
+      {
+       "quien": "Juan Carlos",
+       "que": "Datos de China y de Cercassa",
+       "cuando": "Pendiente"
+      },
+      {
+       "quien": "Leslie",
+       "que": "Gasto fijo real, fondo de inversión y un pago de saldo a ESJ",
+       "cuando": "20 nov"
+      },
+      {
+       "quien": "Contador",
+       "que": "Costo total de nómina de un ingeniero comercial",
+       "cuando": "13 nov"
+      },
+      {
+       "quien": "Ivette",
+       "que": "Inventario con costo y cupo de bodega",
+       "cuando": "Pendiente"
+      }
+     ]
+    },
+    {
+     "tipo": "tarjetas",
+     "titulo": "Marketing 2027",
+     "items": [
+      {
+       "titulo": "Dónde se invierte",
+       "tono": "marino",
+       "vinetas": [
+        "Google sigue, con revisión de SEO y búsqueda en IA.",
+        "Cámaras: francesa y americana; la española, si conviene.",
+        "Eventos con aliados comerciales."
+       ]
+      },
+      {
+       "titulo": "Qué se prueba",
+       "tono": "grafito",
+       "vinetas": [
+        "LinkedIn y otras plataformas, antes de subir el monto.",
+        "Facebook e Instagram se apagan; se revisa por tipo de empresa.",
+        "La agencia actual contra hacerlo con IA."
+       ]
+      },
+      {
+       "titulo": "Qué se construye",
+       "tono": "grafito",
+       "vinetas": [
+        "Programa de referidos y aliados.",
+        "Casos de éxito con fotos, sin el nombre del cliente.",
+        "Presupuesto: $0.7 M en el año."
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
+</script>
+<script>
+(function () {
+  "use strict";
+  var datos;
+  try { datos = JSON.parse(document.getElementById("contenido").textContent); }
+  catch (e) { document.getElementById("paneles").textContent = "El contenido tiene un error de formato: " + e.message; return; }
+
+  function h(tag, attrs, hijos) {
+    var el = document.createElement(tag);
+    if (attrs) for (var k in attrs) {
+      if (k === "class") el.className = attrs[k];
+      else if (k === "text") el.textContent = attrs[k];
+      else if (k === "html") el.innerHTML = attrs[k];
+      else if (attrs[k] != null) el.setAttribute(k, attrs[k]);
+    }
+    (hijos || []).forEach(function (c) { if (c != null) el.appendChild(typeof c === "string" ? document.createTextNode(c) : c); });
+    return el;
+  }
+  var NS = "http://www.w3.org/2000/svg";
+  function s(tag, attrs) { var el = document.createElementNS(NS, tag); for (var k in attrs) el.setAttribute(k, attrs[k]); return el; }
+  function mm(v) { var t = (Math.abs(v) / 1e6).toLocaleString("es-MX", { minimumFractionDigits: 1, maximumFractionDigits: 1 }); return (v < 0 ? "−$" : "$") + t + " M"; }
+  function pesos(v) { return "$" + Math.round(v).toLocaleString("es-MX"); }
+
+  /* --- tooltip --- */
+  var tip = document.getElementById("tip");
+  function verTip(ev, html) { tip.innerHTML = html; tip.classList.add("ver"); moverTip(ev); }
+  function moverTip(ev) {
+    var x = ev.clientX + 14, y = ev.clientY + 14, w = tip.offsetWidth, hgt = tip.offsetHeight;
+    if (x + w > window.innerWidth - 8) x = ev.clientX - w - 14;
+    if (y + hgt > window.innerHeight - 8) y = ev.clientY - hgt - 14;
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+  }
+  function ocultarTip() { tip.classList.remove("ver"); }
+  function conTip(el, html) {
+    el.addEventListener("pointerenter", function (e) { verTip(e, html); });
+    el.addEventListener("pointermove", moverTip);
+    el.addEventListener("pointerleave", ocultarTip);
+  }
+  function tablaDatos(enc, filas) {
+    var t = h("table");
+    t.appendChild(h("thead", null, [h("tr", null, enc.map(function (x, i) { return h("th", { class: i ? "num" : null, text: x }); }))]));
+    t.appendChild(h("tbody", null, filas.map(function (f) { return h("tr", null, f.map(function (x, i) { return h("td", { class: i ? "num" : null, text: x }); })); })));
+    return h("details", { class: "tabla" }, [h("summary", { text: "Ver los números" }), h("div", { class: "tabla-scroll" }, [t])]);
+  }
+
+  /* --- bloques --- */
+  var B = {};
+  B.cifras = function (b) {
+    return h("div", { class: "cifras" }, b.items.map(function (c) {
+      return h("div", { class: "cifra " + (c.tono || "") }, [h("div", { class: "v", text: c.valor }), h("div", { class: "e", text: c.etiqueta }), c.nota ? h("div", { class: "s", text: c.nota }) : null]);
+    }));
+  };
+  function tarjeta(t) {
+    return h("article", { class: "tarjeta " + (t.tono || "") }, [
+      t.insignia ? h("span", { class: "insignia", text: t.insignia }) : null,
+      h("h3", { text: t.titulo }),
+      h("ul", { class: "vinetas" }, (t.vinetas || []).map(function (v) { return h("li", { text: v }); }))]);
+  }
+  B.tarjetas = function (b) { return h("div", { class: "tarjetas" }, b.items.map(tarjeta)); };
+  B.decisiones = function (b) {
+    return h("div", { class: "decisiones" }, b.items.map(function (d) { return h("div", { class: "decision" }, [h("i", { "aria-hidden": "true", text: "✓" }), h("span", { text: d })]); }));
+  };
+  B.cascada = function (b) {
+    var acc = 0, filas = [], maxv = 0, ini;
+    b.filas.forEach(function (f) {
+      if (f.tipo === "total" || f.tipo === "resultado") { ini = f.tipo === "resultado" ? 0 : 0; filas.push({ f: f, a: 0, z: f.valor }); acc = f.tipo === "total" ? f.valor : acc; }
+      else if (f.valor < 0) { filas.push({ f: f, a: acc + f.valor, z: acc }); acc += f.valor; }
+      else { filas.push({ f: f, a: acc, z: acc + f.valor }); acc += f.valor; }
+      maxv = Math.max(maxv, acc, f.valor);
+    });
+    var cont = h("div", { class: "grafica" });
+    if (b.leyenda) cont.appendChild(h("div", { class: "leyenda" }, b.leyenda.map(function (l) { return h("span", null, [h("i", { class: "muestra m-" + l[0] }), l[1]]); })));
+    var cas = h("div", { class: "cascada", role: "img", "aria-label": b.titulo });
+    filas.forEach(function (r) {
+      var izq = r.a / maxv * 100, ancho = Math.max((r.z - r.a) / maxv * 100, .4);
+      var barra = h("div", { class: "cbarra " + r.f.tipo, style: "left:" + izq + "%;width:" + ancho + "%" });
+      var dentro = izq + ancho > 78;
+      var val = h("span", { class: "cvalor", text: mm(r.f.valor), style: dentro ? "right:" + (100 - izq) + "%;margin-right:8px" : "left:" + (izq + ancho) + "%;margin-left:8px" });
+      conTip(barra, "<b>" + r.f.nombre + "</b>" + mm(r.f.valor));
+      cas.appendChild(h("div", { class: "cfila " + r.f.tipo }, [h("div", { class: "cn", text: r.f.nombre }), h("div", { class: "cpista" }, [barra, val])]));
+    });
+    cont.appendChild(cas);
+    cont.appendChild(tablaDatos(["Concepto", "Millones de pesos"], b.filas.map(function (f) { return [f.nombre, mm(f.valor)]; })));
+    return cont;
+  };
+  B.barras = function (b) {
+    var maxv = Math.max.apply(null, b.items.map(function (i) { return i.valor; }));
+    var fmt = b.unidad === "$" ? mm : function (v) { return v.toLocaleString("es-MX"); };
+    var cont = h("div", { class: "grafica" }, [h("div", { class: "barras" }, b.items.map(function (i) {
+      var barra = h("div", { class: "bbarra " + (i.tono || "marino"), style: "width:" + (i.valor / maxv * 100) + "%" });
+      conTip(barra, "<b>" + i.nombre + "</b>" + fmt(i.valor));
+      return h("div", { class: "bfila" }, [h("div", { class: "bn" }, [h("span", { text: i.nombre }), h("b", { text: fmt(i.valor) })]), h("div", { class: "bpista" }, [barra])]);
+    }))]);
+    if (b.nota) cont.appendChild(h("p", { class: "nota", text: b.nota }));
+    return cont;
+  };
+  B.lineas = function (b) {
+    var chico = window.innerWidth < 600;
+    var W = chico ? 380 : 760, H = chico ? 300 : 320, m = { t: 16, r: chico ? 70 : 150, b: 34, l: chico ? 40 : 52 }, iw = W - m.l - m.r, ih = H - m.t - m.b;
+    var todos = []; b.series.forEach(function (se) { todos = todos.concat(se.valores); });
+    var lo = Math.min(0, Math.min.apply(null, todos)), hi = Math.max(0, Math.max.apply(null, todos));
+    var paso = (function () { var r = (hi - lo) / 5, p = Math.pow(10, Math.floor(Math.log10(r))); return [1, 2, 2.5, 5, 10].map(function (k) { return k * p; }).find(function (k) { return k >= r; }); })();
+    lo = Math.floor(lo / paso) * paso; hi = Math.ceil(hi / paso) * paso;
+    var X = function (i) { return m.l + i * iw / (b.meses.length - 1); }, Y = function (v) { return m.t + (hi - v) / (hi - lo) * ih; };
+    var svg = s("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": b.titulo, class: chico ? "chico" : "" });
+    var eje = s("g", { class: "eje" });
+    for (var v = lo; v <= hi + 1e-9; v += paso) {
+      eje.appendChild(s("line", { class: Math.abs(v) < 1e-9 ? "cero" : "reja", x1: m.l, x2: m.l + iw, y1: Y(v), y2: Y(v) }));
+      var tx = s("text", { x: m.l - 8, y: Y(v) + 4, "text-anchor": "end" }); tx.textContent = (v < 0 ? "−" : "") + Math.abs(v).toLocaleString("es-MX"); eje.appendChild(tx);
+    }
+    b.meses.forEach(function (mes, i) { if (chico && i % 2) return; var t = s("text", { x: X(i), y: H - 10, "text-anchor": "middle" }); t.textContent = mes; eje.appendChild(t); });
+    svg.appendChild(eje);
+    var rotulos = [];
+    b.series.forEach(function (se) {
+      var d = se.valores.map(function (v, i) { return (i ? "L" : "M") + X(i).toFixed(1) + " " + Y(v).toFixed(1); }).join(" ");
+      svg.appendChild(s("path", { class: "serie s-" + se.tono, d: d }));
+      var u = se.valores.length - 1;
+      svg.appendChild(s("circle", { class: "punto p-" + se.tono, cx: X(u), cy: Y(se.valores[u]), r: 5 }));
+      rotulos.push({ y: Y(se.valores[u]), t: (chico ? "" : se.nombre.split(" · ")[0] + " ") + mm(se.valores[u] * 1e6), tono: se.tono });
+    });
+    rotulos.sort(function (a, c) { return a.y - c.y; });
+    for (var k = 1; k < rotulos.length; k++) if (rotulos[k].y - rotulos[k - 1].y < 18) rotulos[k].y = rotulos[k - 1].y + 18;
+    rotulos.forEach(function (r) { var t = s("text", { class: "rotulo", x: m.l + iw + 10, y: r.y + 4 }); t.textContent = r.t; svg.appendChild(t); });
+    var guia = s("line", { class: "guia", y1: m.t, y2: m.t + ih, x1: -10, x2: -10 }); svg.appendChild(guia);
+    var capa = s("rect", { x: m.l - 10, y: m.t, width: iw + 20, height: ih, fill: "transparent" });
+    function enMes(e) {
+      var r = svg.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * W, i = Math.max(0, Math.min(b.meses.length - 1, Math.round((x - m.l) / (iw / (b.meses.length - 1)))));
+      guia.setAttribute("x1", X(i)); guia.setAttribute("x2", X(i)); guia.classList.add("on");
+      verTip(e, "<b>" + b.meses[i] + "</b>" + b.series.map(function (se) { return se.nombre + ": " + mm(se.valores[i] * 1e6); }).join("<br>"));
+    }
+    capa.addEventListener("pointermove", enMes); capa.addEventListener("pointerdown", enMes);
+    capa.addEventListener("pointerleave", function () { ocultarTip(); guia.classList.remove("on"); });
+    svg.appendChild(capa);
+    var cont = h("div", { class: "grafica lineas" }, [
+      h("div", { class: "leyenda" }, b.series.map(function (se) { return h("span", null, [h("i", { class: "muestra m-" + se.tono, style: se.tono === "grafito" ? "background:repeating-linear-gradient(90deg,var(--c-neutro) 0 6px,transparent 6px 9px)" : null }), se.nombre]); })),
+      svg]);
+    if (b.nota) cont.appendChild(h("p", { class: "nota", text: b.nota }));
+    cont.appendChild(tablaDatos(["Mes"].concat(b.series.map(function (se) { return se.nombre; })), b.meses.map(function (mes, i) { return [mes].concat(b.series.map(function (se) { return mm(se.valores[i] * 1e6); })); })));
+    return cont;
+  };
+  B.gantt = function (b) {
+    var n = b.meses.length, g = h("div", { class: "gantt-tabla" });
+    g.appendChild(h("div"));
+    b.anios.forEach(function (a) { g.appendChild(h("div", { class: "gantt-anio", style: "grid-column:span " + a[1], text: a[0] })); });
+    g.appendChild(h("div"));
+    b.meses.forEach(function (mes) { g.appendChild(h("div", { class: "gantt-mes", text: mes })); });
+    b.items.forEach(function (it) {
+      g.appendChild(h("div", { class: "gantt-nombre" }, [h("b", { text: it.nombre }), h("span", { text: it.nota })]));
+      var desde = it.desde == null ? 9 : it.desde;
+      if (desde > 0) g.appendChild(h("div", { style: "grid-column:span " + desde }));
+      var barra = h("div", { class: "gantt-barra " + (it.tono || "marino"), style: "grid-column:span " + (n - desde) });
+      conTip(barra, "<b>" + it.nombre + "</b>" + it.nota);
+      g.appendChild(barra);
+    });
+    return h("div", { class: "grafica gantt" }, [g]);
+  };
+  B.escenarios = function (b) {
+    return h("div", { class: "escenarios" }, b.items.map(function (e) {
+      return h("div", { class: "escenario" + (e.destacado ? " destacado" : "") }, [
+        h("div", { class: "regla-cab" }, [h("h3", { text: e.nombre }), e.destacado ? h("span", { class: "insignia marino", text: "El plan" }) : null]),
+        h("div", { class: "d", text: "Venta " + e.venta }),
+        h("div", { class: "v", text: e.utilidad }), h("div", { class: "d", text: "Utilidad de operación: " + e.pct }),
+        h("div", { class: "d", text: e.nota })]);
+    }));
+  };
+  B.reglas = function (b) {
+    return h("div", { class: "reglas" }, b.items.map(function (r) {
+      return h("div", { class: "regla " + (r.tono || "") + (r.recomendada ? " recomendada" : "") }, [
+        h("div", { class: "regla-cab" }, [h("div", { class: "letra", text: r.letra }),
+          r.recomendada ? h("span", { class: "insignia marino", text: "Recomendada" }) : (r.nota ? h("span", { class: "insignia", text: r.nota }) : null)]),
+        h("h3", { text: r.nombre }),
+        h("dl", null, [h("dt", { text: "Se junta en 2027" }), h("dd", { text: r.junta }), h("dt", { text: "Mes más apretado" }), h("dd", { class: "peor" + (r.peor.indexOf("−") === 0 ? " neg" : ""), text: r.peor })]),
+        h("p", { text: r.lectura })]);
+    }));
+  };
+  B.pasos = function (b) {
+    return h("div", { class: "pasos" }, b.items.map(function (p) {
+      var pend = !/\d/.test(p.cuando);
+      return h("div", { class: "paso" }, [h("div", { class: "quien", text: p.quien }), h("div", { text: p.que }), h("span", { class: "cuando" + (pend ? " pend" : ""), text: p.cuando })]);
+    }));
+  };
+  B.pendiente = function (b) {
+    return h("div", { class: "pendiente" }, [h("div", { class: "barras-marca", "aria-hidden": "true" }),
+      h("div", null, [h("h3", { text: b.titulo }), h("p", { text: b.texto }), h("p", { class: "quien-llega", text: "En preparación: llega con los datos de " + b.quien + "." })])]);
+  };
+
+  function viga(bar) {
+    var pista = h("div", { class: "viga-pista", role: "img", "aria-label": bar.texto }), rot = h("div", { class: "viga-rotulos" });
+    bar.segmentos.forEach(function (sg) {
+      var pct = sg.valor / bar.meta * 100, seg = h("div", { class: "viga-seg " + sg.tipo, style: "flex:0 0 calc(" + pct + "% - 2px)" });
+      conTip(seg, "<b>" + sg.nombre + "</b>" + mm(sg.valor));
+      pista.appendChild(seg);
+      rot.appendChild(h("div", { style: "flex:0 0 calc(" + pct + "% - 2px)" }, [h("b", { text: mm(sg.valor) }), sg.nombre]));
+    });
+    return h("section", { class: "viga", "aria-label": "Avance hacia la meta" }, [pista, rot, h("p", { class: "viga-texto", text: bar.texto })]);
+  }
+
+  /* --- armar --- */
+  document.getElementById("titulo").textContent = datos.titulo;
+  document.getElementById("subtitulo").textContent = datos.subtitulo;
+  document.getElementById("pie-fecha").textContent = "Actualizado el " + datos.actualizado;
+  var tabs = document.getElementById("tabs"), paneles = document.getElementById("paneles"), botones = [], vistas = [];
+  datos.pestanas.forEach(function (p, i) {
+    var bt = h("button", { class: "tab", role: "tab", id: "tab-" + p.id, "aria-controls": "panel-" + p.id, "aria-selected": "false", tabindex: "-1", type: "button" }, [h("span", { class: "n", text: String(i + 1) }), p.nombre]);
+    bt.addEventListener("click", function () { ir(i, true); });
+    tabs.appendChild(bt); botones.push(bt);
+    var panel = h("section", { class: "panel", id: "panel-" + p.id, role: "tabpanel", "aria-labelledby": "tab-" + p.id, hidden: "" });
+    panel.appendChild(h("h2", { class: "respuesta", text: p.respuesta }));
+    if (i === 0 && datos.barra) panel.appendChild(viga(datos.barra));
+    p.bloques.forEach(function (b) {
+      var f = B[b.tipo]; if (!f) return;
+      var sec = h("section", { class: "bloque" });
+      if (b.titulo && b.tipo !== "pendiente") sec.appendChild(h("h2", { text: b.titulo }));
+      sec.appendChild(f(b)); panel.appendChild(sec);
+    });
+    paneles.appendChild(panel); vistas.push(panel);
+  });
+  var actual = -1;
+  function ir(i, foco) {
+    i = (i + vistas.length) % vistas.length;
+    vistas.forEach(function (v, k) { v.hidden = k !== i; botones[k].setAttribute("aria-selected", k === i ? "true" : "false"); botones[k].tabIndex = k === i ? 0 : -1; });
+    if (actual !== -1) window.scrollTo({ top: 0 });
+    actual = i;
+    tabs.scrollLeft = botones[i].offsetLeft - tabs.clientWidth / 2 + botones[i].offsetWidth / 2;
+    if (foco) botones[i].focus({ preventScroll: true });
+    history.replaceState(null, "", "#" + datos.pestanas[i].id);
+  }
+  tabs.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight") { ir(actual + 1, true); e.preventDefault(); }
+    if (e.key === "ArrowLeft") { ir(actual - 1, true); e.preventDefault(); }
+  });
+  var inicio = datos.pestanas.findIndex(function (p) { return "#" + p.id === location.hash; });
+  ir(inicio < 0 ? 0 : inicio, false);
+  window.addEventListener("hashchange", function () { var k = datos.pestanas.findIndex(function (p) { return "#" + p.id === location.hash; }); if (k >= 0 && k !== actual) ir(k, false); });
+
+  /* --- presentar --- */
+  var btnP = document.getElementById("btn-presentar");
+  function presentar(on) {
+    document.body.classList.toggle("presentando", on);
+    btnP.textContent = on ? "Salir" : "Presentar";
+    if (on && document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function () {});
+    if (!on && document.fullscreenElement) document.exitFullscreen().catch(function () {});
+  }
+  btnP.addEventListener("click", function () { presentar(!document.body.classList.contains("presentando")); });
+  document.addEventListener("fullscreenchange", function () { if (!document.fullscreenElement) presentar(false); });
+  document.getElementById("ant").addEventListener("click", function () { ir(actual - 1); });
+  document.getElementById("sig").addEventListener("click", function () { ir(actual + 1); });
+  document.addEventListener("keydown", function (e) {
+    if (!document.body.classList.contains("presentando") || e.target.closest(".pestanas")) return;
+    if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") { ir(actual + 1); e.preventDefault(); }
+    if (e.key === "ArrowLeft" || e.key === "PageUp") { ir(actual - 1); e.preventDefault(); }
+  });
+  var x0 = null, y0 = null;
+  document.addEventListener("touchstart", function (e) { if (!document.body.classList.contains("presentando")) return; x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+  document.addEventListener("touchend", function (e) {
+    if (x0 == null) return; var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+    if (Math.abs(dx) > 70 && Math.abs(dx) > 2 * Math.abs(dy)) ir(actual + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
+  /* --- tema --- */
+  document.getElementById("btn-tema").addEventListener("click", function () {
+    var t = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", t);
+    try { localStorage.setItem("rt-tema", t); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>
